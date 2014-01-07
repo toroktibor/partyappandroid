@@ -1,5 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">partyappandroid</string>
+    <string name="register">Regisztráció</string>
+    <string name="name">Név</string>
+    <string name="password">Jelszó</string>
+    <string name="login">Bejelentkezés</string>
+    <string name="password_again">Jelszó ismét</string>
+    <string name="email_address">Email cím</string>
 
 </resources>
