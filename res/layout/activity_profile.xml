@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,6 +6,69 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ProfileActivity" >
+    tools:context=".ProfileActivity" 
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/profile_textview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Név" />
+
+    <TextView
+        android:id="@+id/profile_textview_name_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/profile_textview_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email cím" />
+
+    <TextView
+        android:id="@+id/profile_textview_email_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/profile_textview_dateofbirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Születési dátum" />
+
+    <TextView
+        android:id="@+id/profile_textview_dateofbirth_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/profile_textview_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nem" />
+
+    <TextView
+        android:id="@+id/profile_textview_sex_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/profile_button_modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adataim szerkesztése" 
+        android:onClick="onClickHandler"/>
+
+    <Button
+        android:id="@+id/profile_button_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jelszó módosítása"
+        android:onClick="onClickHandler" />
+    
+</LinearLayout>

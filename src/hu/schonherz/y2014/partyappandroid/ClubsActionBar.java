@@ -3,6 +3,7 @@ package hu.schonherz.y2014.partyappandroid;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v4.view.MenuCompat;
@@ -73,6 +74,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 	    item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
 	    item.setOnMenuItemClickListener(this);
+	    item = popupmenu.getMenu().add(0, 2, 0, "Profilom");
+	    item.setOnMenuItemClickListener(this);
 
 	    popupmenu.show();
 	    break;
@@ -90,6 +93,11 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	switch (arg0.getItemId()) {
 	case 1:
 	    i = new Intent(activity, NewClubActivity.class);
+	    activity.startActivity(i);
+	    break;
+	    
+	case 2:
+	    i = new Intent(activity, ProfileActivity.class);
 	    activity.startActivity(i);
 	    break;
 	default:
