@@ -2,7 +2,6 @@ package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity;
-import hu.schonherz.y2014.partyappandroid.activities.ClubsSearchActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
