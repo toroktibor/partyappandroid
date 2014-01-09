@@ -45,8 +45,9 @@
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/club_info_textview_address"
         android:layout_below="@+id/club_info_textview_name"
-        android:rating="3" />
+        android:layout_centerHorizontal="true"
+        android:rating="3"
+        android:onClick="onClickHandler" />
 
 </RelativeLayout>

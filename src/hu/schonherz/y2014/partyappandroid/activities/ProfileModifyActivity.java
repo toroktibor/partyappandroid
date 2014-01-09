@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.R.layout;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class ProfileModifyActivity extends Activity {
 
@@ -15,5 +16,12 @@ public class ProfileModifyActivity extends Activity {
     }
 
 
+    public void onClickHandler(View v){
+    	switch (v.getId()) {
+		case R.id.profile_modify_button_save:
+			finish();
+			break;
+		}  	
+    }
 
 }

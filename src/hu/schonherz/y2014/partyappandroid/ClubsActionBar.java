@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid;
 
+import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
@@ -77,6 +79,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    item.setOnMenuItemClickListener(this);
 	    item = popupmenu.getMenu().add(0, 2, 0, "Profilom");
 	    item.setOnMenuItemClickListener(this);
+	    item = popupmenu.getMenu().add(0, 3, 0, "Egy szórakozóhely");
+	    item.setOnMenuItemClickListener(this);
 
 	    popupmenu.show();
 	    break;
@@ -99,6 +103,11 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    
 	case 2:
 	    i = new Intent(activity, ProfileActivity.class);
+	    activity.startActivity(i);
+	    break;
+	    
+	case 3:
+	    i = new Intent(activity, ClubActivity.class);
 	    activity.startActivity(i);
 	    break;
 	default:

@@ -30,5 +30,12 @@
         android:layout_height="wrap_content"
         android:text="@string/login" 
         android:onClick="onClickHandler"/>
+    
+   <Button
+        android:id="@+id/login_button_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register" 
+        android:onClick="onClickHandler"/>
 
 </LinearLayout>

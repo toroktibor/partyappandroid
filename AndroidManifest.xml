@@ -47,7 +47,7 @@
             android:label="@string/title_activity_new_club" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment"
             android:label="@string/title_activity_club_info" >
         </activity>
         <activity
@@ -99,7 +99,7 @@
             android:label="@string/title_activity_profile_modify" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.ProfilePasswordActivityordActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ProfilePasswordActivity"
             android:label="@string/title_activity_profile_password" >
         </activity>
         <activity
@@ -113,6 +113,10 @@
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsActivity"
             android:label="@string/title_activity_clubs" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubActivity"
+            android:label="@string/title_activity_club" >
         </activity>
     </application>
 
