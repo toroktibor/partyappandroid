@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ClubMyReviewActivity" 
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/club_my_review_textview_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_my_review_textview_rating" />
+
+    <RatingBar
+        android:id="@+id/club_my_review_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/club_my_review_textview_rating" />
+
+    <TextView
+        android:id="@+id/club_my_review_textview_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_my_review_textview_review"
+        android:layout_below="@+id/club_my_review_ratingbar" />
+
+    <EditText
+        android:id="@+id/club_my_review_edittext_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/club_my_review_textview_review"
+        android:layout_above="@+id/club_my_review_button_save" >
+    </EditText>
+
+    <Button
+        android:id="@+id/club_my_review_button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/club_my_review_button_save"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

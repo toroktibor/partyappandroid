@@ -8,4 +8,46 @@
     <string name="password_again">Jelszó ismét</string>
     <string name="email_address">Email cím</string>
 
+    <string-array name="register_spinner_sex">
+        <item>Férfi</item>
+        <item>Nő</item>
+    </string-array>
+    
+    <string name="app_launcher_label">PartyApp</string>
+    
+
+    <string name="title_activity_clubs_list">Szórakozóhelyek listája</string>
+    <string name="title_activity_clubs_map">Szórakozóhelyek a térképen</string>
+    <string name="title_activity_my_clubs">Saját szórakozóhelyeim</string>
+    <string name="title_activity_clubs_search">Szórakozóhelyek keresése</string>
+    <string name="title_activity_new_club">Új szórakozóhely</string>
+    <string name="title_activity_club_info">Információ</string>
+    <string name="title_activity_club_events">Események</string>
+    <string name="title_activity_club_galery">Képgaléria</string>
+    <string name="title_activity_club_event_details">Esemény részeletei</string>
+    <string name="title_activity_club_event_modify">Esemény módosítása</string>
+    <string name="title_activity_club_event_new">Új esemény</string>
+    <string name="title_activity_club_location">Itt találod</string>
+    <string name="title_activity_club_menu">Árlista</string>
+    <string name="title_activity_club_reviews">Értékelések</string>
+    <string name="title_activity_club_my_review">Saját értékelés</string>
+    <string name="title_activity_pending_list">Jóváhagyásra váró elemek</string>
+    <string name="club_review_menu_my_review">Saját értékelés</string>
+    <string name="club_event_modify_button_modify">Módosítások mentése</string>
+    <string name="club_event_description">Esemény leírása</string>
+    <string name="club_event_modify_edittext_description">Esemény leírása</string>
+    <string name="club_event_modify_edittext_date">Esemény időpontja</string>
+    <string name="club_event_modify_edittext_name">Esemény neve</string>
+    <string name="club_event_new_button_new">Esemény létrehozása</string>
+    <string name="club_event_new_edittext_description">Esemény időpontja</string>
+    <string name="club_event_new_edittext_name">Esemény neve</string>
+    <string name="club_my_review_textview_rating">Hány csillagot adsz a helynek?</string>
+    <string name="club_my_review_textview_review">Szöveges értékelésed</string>
+    <string name="club_my_review_button_save">Értékelés mentése</string>
+    <string name="title_activity_profile">Profilom</string>
+    <string name="title_activity_profile_modify">Adatok módosítása</string>
+    <string name="title_activity_profile_password">Jelszó módosítása</string>
+    <string name="title_activity_club_menu_add">Új tétel hozzáadása</string>
+    <string name="title_activity_club_menu_modify">Tétel módosítása</string>
+
 </resources>

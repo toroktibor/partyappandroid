@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item 
+        android:id="@+id/club_review_menu_my_review"
+        android:title="@string/club_review_menu_my_review"     
+        android:showAsAction="always"/>
+
+</menu>

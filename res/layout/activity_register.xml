@@ -34,7 +34,24 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress" />
+    
+     <EditText
+        android:id="@+id/register_edittext_dateofbirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Születési idő"
+        android:onClick="onClickHandler"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
+     <Spinner
+        android:id="@+id/register_spinner_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/register_spinner_sex"
+        />     
+    
+    
     <Button
         android:id="@+id/register_button_register"
         android:layout_width="match_parent"
@@ -42,4 +59,6 @@
         android:text="@string/register" 
         android:onClick="onClickHandler"/>
 
+
+    
 </LinearLayout>

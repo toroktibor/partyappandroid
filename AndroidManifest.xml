@@ -11,12 +11,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="Bejelentkezés"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_launcher_label"
+        android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.LoginActivity"
-            android:label="Bejelentkezés" >
-            <intent-filter android:label="PartyApp" >
+            android:label="@string/login" >
+            <intent-filter android:label="@string/app_launcher_label" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,6 +25,90 @@
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.RegisterActivity"
             android:label="Regisztráció" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity"
+            android:label="@string/title_activity_clubs_list" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity"
+            android:label="@string/title_activity_clubs_map" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.MyClubsActivity"
+            android:label="@string/title_activity_my_clubs" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsSearchActivity"
+            android:label="@string/title_activity_clubs_search" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.NewClubActivity"
+            android:label="@string/title_activity_new_club" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoActivity"
+            android:label="@string/title_activity_club_info" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventsActivityntsActivity"
+            android:label="@string/title_activity_club_events" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.ClubGaleryActivity"
+            android:label="@string/title_activity_club_galery" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventDetailsActivity"
+            android:label="@string/title_activity_club_event_details" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.ClubEventModifyActivity"
+            android:label="@string/title_activity_club_event_modify" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventNewActivity"
+            android:label="@string/title_activity_club_event_new" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.ClubLocationActivity"
+            android:label="@string/title_activity_club_location" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity"
+            android:label="@string/title_activity_club_menu" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubReviewsActivity"
+            android:label="@string/title_activity_club_reviews" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMyReviewActivity"
+            android:label="@string/title_activity_club_my_review" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.PendingListActivity"
+            android:label="@string/title_activity_pending_list" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ProfileModifyActivity"
+            android:label="@string/title_activity_profile_modify" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ProfilePasswordActivityordActivity"
+            android:label="@string/title_activity_profile_password" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuAddActivity"
+            android:label="@string/title_activity_club_menu_add" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuModifyActivity"
+            android:label="@string/title_activity_club_menu_modify" >
         </activity>
     </application>
 
