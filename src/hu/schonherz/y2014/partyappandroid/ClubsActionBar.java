@@ -1,7 +1,8 @@
 package hu.schonherz.y2014.partyappandroid;
 
-import hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity;
-import hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import android.app.AlertDialog;
@@ -20,10 +21,10 @@ import android.view.ViewGroup;
 
 public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener {
 
-    private ActionBarActivity activity;
+    private ClubsActivity activity;
 
-    public ClubsActionBar(ActionBarActivity activity) {
-	this.activity = activity;
+    public ClubsActionBar(ClubsActivity activity) {
+    	this.activity = activity;
     }
 
     public void setLayout() {
@@ -51,13 +52,13 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    break;
 
 	case R.id.actionbar_clubs_button_b:
-	    i = new Intent(activity, ClubsListActivity.class);
-	    activity.startActivity(i);
+		/* viewPager lapozása a lista nézetre */
+		activity.viewPager.setCurrentItem(0);
 	    break;
 
 	case R.id.actionbar_clubs_button_c:
-	    i = new Intent(activity, ClubsMapActivity.class);
-	    activity.startActivity(i);
+		/* viewPager lapozása a térkép nézetre */
+		activity.viewPager.setCurrentItem(1);
 	    break;
 	case R.id.actionbar_clubs_button_d:
 
@@ -72,7 +73,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    PopupMenu popupmenu = new PopupMenu(activity, v);
 	    MenuItem item;
 
-	    item = popupmenu.getMenu().add(0, 1, 0, "�j hely hozz�ad�sa");
+	    item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
 	    item.setOnMenuItemClickListener(this);
 	    item = popupmenu.getMenu().add(0, 2, 0, "Profilom");
 	    item.setOnMenuItemClickListener(this);

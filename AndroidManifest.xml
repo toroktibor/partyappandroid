@@ -27,11 +27,11 @@
             android:label="Regisztráció" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment"
             android:label="@string/title_activity_clubs_list" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment"
             android:label="@string/title_activity_clubs_map" >
         </activity>
         <activity
@@ -109,6 +109,10 @@
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuModifyActivity"
             android:label="@string/title_activity_club_menu_modify" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsActivity"
+            android:label="@string/title_activity_clubs" >
         </activity>
     </application>
 

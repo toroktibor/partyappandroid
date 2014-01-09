@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
 
     public void onClickHandler(View v) {
 	if (v.getId() == R.id.login_button_login) {
-	    startActivity(new Intent(this, ClubsListActivity.class));
+	    startActivity(new Intent(this, ClubsActivity.class));
 	}
     }
 

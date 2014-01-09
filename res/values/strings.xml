@@ -12,10 +12,8 @@
         <item>Férfi</item>
         <item>Nő</item>
     </string-array>
-    
-    <string name="app_launcher_label">PartyApp</string>
-    
 
+    <string name="app_launcher_label">PartyApp</string>
     <string name="title_activity_clubs_list">Szórakozóhelyek listája</string>
     <string name="title_activity_clubs_map">Szórakozóhelyek a térképen</string>
     <string name="title_activity_my_clubs">Saját szórakozóhelyeim</string>
@@ -49,5 +47,8 @@
     <string name="title_activity_profile_password">Jelszó módosítása</string>
     <string name="title_activity_club_menu_add">Új tétel hozzáadása</string>
     <string name="title_activity_club_menu_modify">Tétel módosítása</string>
+    <string name="title_activity_clubs">ClubsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

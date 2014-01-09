@@ -1,7 +1,7 @@
 package hu.schonherz.y2014.partyappandroid;
 
-import hu.schonherz.y2014.partyappandroid.activities.ClubsListActivity;
-import hu.schonherz.y2014.partyappandroid.activities.ClubsMapActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -40,12 +40,12 @@ public class ClubActionBar implements OnClickListener {
 	Intent i;
 	switch (v.getId()) {
 	case R.id.actionbar_clubs_button_b:
-	    i = new Intent(activity,ClubsListActivity.class);
+	    i = new Intent(activity,ClubsListFragment.class);
 	    activity.startActivity(i);
 	    break;
 	    
 	case R.id.actionbar_clubs_button_c:
-	    i = new Intent(activity,ClubsMapActivity.class);	    
+	    i = new Intent(activity,ClubsMapFragment.class);	    
 	    activity.startActivity(i);
 	    break;
 	case R.id.actionbar_clubs_button_d:
