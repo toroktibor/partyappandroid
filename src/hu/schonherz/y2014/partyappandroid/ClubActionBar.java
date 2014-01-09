@@ -1,18 +1,24 @@
 package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
+import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-public class ClubActionBar implements OnClickListener {
+public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 
     private ClubActivity activity;
     
@@ -52,10 +58,35 @@ public class ClubActionBar implements OnClickListener {
 		activity.viewPager.setCurrentItem(2);
 	    break;	
 
+	case R.id.actionbar_club_button_e:
+	    PopupMenu popupmenu = new PopupMenu(activity, v);
+	    MenuItem item;
+
+	    item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
+	    item.setOnMenuItemClickListener(this);
+
+	    popupmenu.show();
+	    break;
+	    
 	default:
 	    Log.e(this.getClass().getName(), "Nem kezelt onClick view");
 	    break;
 	}
 	
+    }
+    
+    @Override
+    public boolean onMenuItemClick(MenuItem arg0) {
+	Intent i;
+	switch (arg0.getItemId()) {
+	case 1:
+	    i = new Intent(activity, ClubMenuActivity.class);
+	    activity.startActivity(i);
+	    break;
+	default:
+	    Log.e(this.getClass().getName(), "Nem kezelt onMenuItemClick");
+	}
+
+	return true;
     }
 }
