@@ -1,12 +1,102 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ClubMenuAddActivity" >
+    android:paddingTop="@dimen/activity_vertical_margin" >
 
+    <TextView
+        android:id="@+id/club_menu_add_textview_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_menu_add_textview_category" />
 
-</RelativeLayout>
+    <Spinner
+        android:id="@+id/club_menu_add_spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/club_menu_add_textview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_menu_add_textview_name" />
+
+    <EditText
+        android:id="@+id/club_menu_add_edittext_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/club_menu_add_textview_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_menu_add_textview_price" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/club_menu_add_edittext_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/club_menu_add_spinner_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/club_menu_add_textview_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_menu_add_textview_quantity" />
+
+    <EditText
+        android:id="@+id/club_menu_add_edittext_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/club_menu_add_textview_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/club_menu_add_textview_discount" />
+
+    <SeekBar
+        android:id="@+id/club_menu_add_seekbar_discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:max="20"
+        android:progress="5"
+        />
+
+    <TextView
+        android:id="@+id/club_menu_add_textview_discountsummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="25%: 1000 HUF helyett 750 HUF"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/club_menu_add_button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hozzáadás" />
+
+</LinearLayout>

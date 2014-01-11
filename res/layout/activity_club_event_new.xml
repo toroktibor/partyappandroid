@@ -34,7 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/club_event_new_edittext_name"
         android:layout_below="@+id/club_event_new_edittext_name"
-        android:hint="@string/club_event_new_edittext_description"/>
+        android:hint="@string/club_event_new_edittext_date"/>
 
     <EditText
         android:id="@+id/club_event_new_edittext_description"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/club_event_new_imageview"
         android:layout_below="@+id/club_event_new_imageview"
-        android:layout_above="@+id/club_event_new_button_modify"
+        android:layout_above="@+id/club_event_new_button_new"
         android:inputType="textMultiLine"
         android:hint="@string/club_event_new_edittext_description" 
         android:gravity="top"/>

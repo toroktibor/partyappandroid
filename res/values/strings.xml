@@ -37,7 +37,7 @@
     <string name="club_event_modify_edittext_date">Esemény időpontja</string>
     <string name="club_event_modify_edittext_name">Esemény neve</string>
     <string name="club_event_new_button_new">Esemény létrehozása</string>
-    <string name="club_event_new_edittext_description">Esemény időpontja</string>
+    <string name="club_event_new_edittext_description">Esemény leírása</string>
     <string name="club_event_new_edittext_name">Esemény neve</string>
     <string name="club_my_review_textview_rating">Hány csillagot adsz a helynek?</string>
     <string name="club_my_review_textview_review">Szöveges értékelésed</string>
@@ -51,5 +51,17 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_club">ClubActivity</string>
+    <string name="club_event_new_edittext_date">Esemény időpontja</string>
+    <string name="club_menu_modify_textview_category">Kategória</string>
+    <string name="club_menu_modify_textview_name">Tétel neve</string>
+    <string name="club_menu_modify_textview_price">Ára</string>
+    <string name="club_menu_modify_textview_quantity">Mennyisége</string>
+    <string name="club_menu_modify_textview_discount">Kedvezmény</string>
+    <string name="club_menu_modify_button_add">Módosítás</string>
+    <string name="club_menu_add_textview_category">Kategória</string>
+    <string name="club_menu_add_textview_name">Tétel neve</string>
+    <string name="club_menu_add_textview_price">Ára</string>
+    <string name="club_menu_add_textview_quantity">Mennyisége</string>
+    <string name="club_menu_add_textview_discount">Kedvezmény</string>
 
 </resources>
