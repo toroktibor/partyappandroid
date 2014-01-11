@@ -1,2 +1,2 @@
 init
-nincs jo erzesem
+nagyon nincs jo erzesem
