@@ -1,1 +1,2 @@
 init
+nincs jo erzesem
