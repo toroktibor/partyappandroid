@@ -89,24 +89,79 @@ public class LocalDatabaseUtil {
 	  
 	  
 	  public ArrayList<Club> userFavouriteClubbs(int id){
-		  ArrayList<Club> list=new ArrayList();
+		  ArrayList<Club> list=new ArrayList<Club>();
 		  
 		  String selectQuery =String.format("SELECT club.* FROM user INNER JOIN favorite "
 		  		+ "ON user.id = favorite.user_id INNER JOIN club ON "
 		  		+ "favorite.club_id = club.id WHERE favorite.user_id = %s ORDER BY "
-		  		+ "club.highlight_expire DESC, club.name;",id);
+		  		+ "club.highlight_expire DESC, club.name",Integer.toString(id));
 		  
 		  Cursor cursor=database.rawQuery(selectQuery, null);
 		  
-//		  if (cursor.moveToFirst()) {
-//		        do {
-//		            Club club = new Club();
-//		            list.add(club);
-//		        } while (cursor.moveToNext());
-//		    }
+		  if (cursor.moveToFirst()) {
+		        do {
+		            Club club = new Club(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
+		            		cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
+		            		cursor.getString(6),cursor.getString(7),cursor.getString(8),Integer.parseInt(cursor.getString(9)));
+		            list.add(club);
+		        } while (cursor.moveToNext());
+		    }
 		  
 		  
 		  return list;
 	  }
+	  
+	  
+	  
+	  public ArrayList<Club> OwnClub(int id){
+ArrayList<Club> list=new ArrayList<Club>();
+		  
+		  String selectQuery =String.format("SELECT club.* FROM user INNER JOIN"
+		  		+ " owner ON user.id = owner.user_id INNER JOIN club ON "
+		  		+ "owner.club_id = club.id WHERE owner.user_id = %s ORDER "
+		  		+ "BY club.highlight_expire DESC, club.name;",Integer.toString(id));
+		  
+		  Cursor cursor=database.rawQuery(selectQuery, null);
+		  
+		  if (cursor.moveToFirst()) {
+		        do {
+		            Club club = new Club(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
+		            		cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
+		            		cursor.getString(6),cursor.getString(7),cursor.getString(8),Integer.parseInt(cursor.getString(9)));
+		            list.add(club);
+		        } while (cursor.moveToNext());
+		    }
+		  
+		  
+		  return list;
+	  }
+	  
+	  
+	  public ArrayList<Club> searchFavoriteClubb(int id,String adress,String type,String service){
+		  ArrayList<Club> list=new ArrayList<Club>();
+		  		  
+		  		  String selectQuery =String.format("SELECT DISTINCT club.* FROM user INNER JOIN "
+		  		  		+ "favorite ON user.id = favorite.user_id INNER JOIN club ON "
+		  		  		+ "favorite.club_id = club.id INNER JOIN service ON "
+		  		  		+ "club.id = service.club_id WHERE "
+		  		  		+ "favorite.user_id = %s AND "
+		  		  		+ "club.address LIKE '%%s%' AND "
+		  		  		+ "club.type = %s AND service.service_name IN (%s) ORDER "
+		  		  		+ "BY club.highlight_expire DESC, club.name;",Integer.toString(id),adress,type,service);
+		  		  
+		  		  Cursor cursor=database.rawQuery(selectQuery, null);
+		  		  
+		  		  if (cursor.moveToFirst()) {
+		  		        do {
+		  		            Club club = new Club(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
+		  		            		cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
+		  		            		cursor.getString(6),cursor.getString(7),cursor.getString(8),Integer.parseInt(cursor.getString(9)));
+		  		            list.add(club);
+		  		        } while (cursor.moveToNext());
+		  		    }
+		  		  
+		  		  
+		  		  return list;
+		  	  }
 
 }
