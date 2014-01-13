@@ -63,5 +63,6 @@
     <string name="club_menu_add_textview_price">Ára</string>
     <string name="club_menu_add_textview_quantity">Mennyisége</string>
     <string name="club_menu_add_textview_discount">Kedvezmény</string>
+    <string name="toast_login_unsuccesful_text">Sikertelen bejelentkezés! Hibás felhasználónév, vagy jelszó! Próbáld újra</string>
 
 </resources>
