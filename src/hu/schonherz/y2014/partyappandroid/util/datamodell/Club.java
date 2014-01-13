@@ -11,6 +11,7 @@ public class Club {
 	String phonenumber;
 	String email;
 	String date;
+	int approved;
 	
 	String ownerName;
 	
@@ -20,7 +21,7 @@ public class Club {
 	List<String> services;
 	
 	
-	public Club(int id, String name, String type, String description, String address, String phonenumber, String email, String date) {
+	public Club(int id, String name, String type, String description, String address, String phonenumber, String email, String date, int approved) {
 		this.id=id;
 		this.name = name;
 		this.type = type;
@@ -29,6 +30,7 @@ public class Club {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.date = date;
+		this.approved = approved;
 	}
 	
 	public Club(int id, String name, String address) {

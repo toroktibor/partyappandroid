@@ -4,4 +4,12 @@ public class Rating {
 	String userName;
 	float value;
 	String comment;
+	int approved;
+	
+	public Rating(String userName, float value, String comment, int approved) {
+		this.userName = userName;
+		this.value = value;
+		this.comment = comment;
+		this.approved = approved;
+	}
 }

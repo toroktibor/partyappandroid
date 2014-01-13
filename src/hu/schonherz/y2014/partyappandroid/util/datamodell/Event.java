@@ -6,12 +6,14 @@ public class Event {
 	String description;
 	String start_date;
 	String music_type;
+	int approved;
 	
-	public Event(int id, String name, String description, String start_date, String music_type) {
+	public Event(int id, String name, String description, String start_date, String music_type, int approved) {
 		this.id = id;
 		this.name = name;
 		this. description = description;
 		this.start_date = start_date;
 		this.music_type = music_type;
+		this.approved = approved;
 	}
 }
