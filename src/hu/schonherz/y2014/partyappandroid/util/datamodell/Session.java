@@ -18,19 +18,23 @@ public class Session {
 	   return instance;
 	}
 	
-	public User getActualUser() {
-		return actualUser;
+	public static User getActualUser() {
+		return instance.actualUser;
 	}
 	
-	public void setActualUser(User actualUser) {
-		this.actualUser = actualUser;
+	public static void setActualUser(User actualUser) {
+		instance.actualUser = actualUser;
 	}
 	
-	public List<Club> getSearchViewCLubs() {
-		return searchViewCLubs;
+	public static List<Club> getSearchViewCLubs() {
+		return instance.searchViewCLubs;
 	}
 	
-	public void setSearchViewCLubs(List<Club> searchViewCLubs) {
-		this.searchViewCLubs = searchViewCLubs;
+	public static void setSearchViewCLubs(List<Club> searchViewCLubs) {
+		instance.searchViewCLubs = searchViewCLubs;
+	}
+	
+	public static void closeSession() {
+		instance = null;
 	}
 }
