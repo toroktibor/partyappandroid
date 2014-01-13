@@ -8,6 +8,10 @@ import java.util.List;
 
 public class SillyCommunication implements CommunicationInterface {
 	
+	public SillyCommunication() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public User authenticationUser(String nick_name, String password){
 		if(nick_name == null || password == null )
 			return null;

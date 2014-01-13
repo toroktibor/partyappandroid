@@ -1,5 +1,9 @@
 package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
+import hu.schonherz.y2014.partyappandroid.util.communication.CommunicationInterface;
+import hu.schonherz.y2014.partyappandroid.util.communication.SillyCommunication;
+import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil;
+
 import java.util.List;
 
 public class Session {
@@ -7,9 +11,14 @@ public class Session {
 	
 	User actualUser;
 	List<Club> searchViewCLubs;
+	boolean isOnline;
+	
+	CommunicationInterface actualCommunicationInterface;
+	LocalDatabaseUtil databaseConnecter;
 	
 	protected Session() {
-	   // Exists only to defeat instantiation.
+	   actualCommunicationInterface = new SillyCommunication();
+	   databaseConnecter = new LocalDatabaseUtil(null);
 	}
 	public static Session getInstance() {
 	   if(instance == null) {
@@ -35,6 +44,15 @@ public class Session {
 	}
 	
 	public static void closeSession() {
-		instance = null;
+		instance.actualUser = null;
+		instance.searchViewCLubs = null;
+	}
+	
+	public CommunicationInterface getActualCommunicationInterface() {
+		return actualCommunicationInterface;
+	}
+	
+	public LocalDatabaseUtil getDatabaseConnecter() {
+		return databaseConnecter;
 	}
 }
