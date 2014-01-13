@@ -4,22 +4,22 @@ import java.util.List;
 
 public class Club {
 	int id;
-	String name;
-	String type;
-	String description;
-	String address;
-	String phonenumber;
-	String email;
-	String date;
-	String highlite_expire;
-	int approved;
+	public String name;
+	public String type;
+	public String description;
+	public String address;
+	public String phonenumber;
+	public String email;
+	public String date;
+	public String highlite_expire;
+	public int approved;
 	
-	String ownerName;
+	public String ownerName;
 	
-	List<MenuItem> menuItems;
-	List<Rating> ratings;
-	List<Event> events;
-	List<String> services;
+	public List<MenuItem> menuItems;
+	public List<Rating> ratings;
+	public List<Event> events;
+	public List<String> services;
 	
 	
 	public Club(int id, String name, String type, String description, String address, String phonenumber, String email, String date, String highlite_expire, int approved) {

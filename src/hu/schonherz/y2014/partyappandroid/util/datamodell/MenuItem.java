@@ -1,14 +1,14 @@
 package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
 public class MenuItem {
-	int id;
-	String name;
-	int price;
-	String currency;
-	String unit;
-	int discount;
-	String menu_category;
-	int menu_sort;
+	public int id;
+	public String name;
+	public int price;
+	public String currency;
+	public String unit;
+	public int discount;
+	public String menu_category;
+	public int menu_sort;
 	
 	public MenuItem(int id, String name, int price, String currency, String unit, int discount, String menu_category, int menu_sort) {
 		this.id = id;
