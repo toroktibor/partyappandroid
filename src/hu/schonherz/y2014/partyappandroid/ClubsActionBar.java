@@ -5,8 +5,10 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
+import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v4.view.MenuCompat;
@@ -51,6 +53,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	switch (v.getId()) {
 	case R.id.actionbar_clubs_button_a:
 	    // TODO: Logout
+		Session.closeSession();
+		Intent la = new Intent(activity, NewClubActivity.class);
+	    activity.startActivity(la);
 	    break;
 
 	case R.id.actionbar_clubs_button_b:
