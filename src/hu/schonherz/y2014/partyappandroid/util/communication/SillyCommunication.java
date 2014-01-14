@@ -33,4 +33,11 @@ public class SillyCommunication implements CommunicationInterface {
 		
 		return favoriteClubs;
 	}
+
+	@Override
+	public void sendANewClubRequest(String newClubName, String newClubAddress,
+			String newClubType, int owner_user_id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
