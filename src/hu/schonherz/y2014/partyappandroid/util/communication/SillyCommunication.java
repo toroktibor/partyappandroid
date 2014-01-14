@@ -15,8 +15,8 @@ public class SillyCommunication implements CommunicationInterface {
 	public User authenticationUser(String nick_name, String password){
 		if(nick_name == null || password == null )
 			return null;
-		else if(nick_name.equals("Gábor") && password.equals("bcsapat")){
-			return new User(1,"Gábor","bcsapat","g@g.com",1,"1990.01.01",0);
+		else if(nick_name.equals("a") && password.equals("a")){
+			return new User(1,"a","a","g@g.com",1,"1990.01.01",0);
 		}
 		return null;
 	}

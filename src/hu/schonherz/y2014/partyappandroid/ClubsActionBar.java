@@ -55,7 +55,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    // TODO: Logout
 		Session.closeSession();
 		Intent la = new Intent(activity, LoginActivity.class);
-		//KI KELL VENNI A HISTORY-BÓL AZ ACTIVITY-T, HOGY A BACK GOMBBAL NE LEHESSEN BEJELENTKEZÉS NÉLKÜL VISSZALÉPNI.
+		la.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | 
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
 	    activity.startActivity(la);
 	    break;
 
