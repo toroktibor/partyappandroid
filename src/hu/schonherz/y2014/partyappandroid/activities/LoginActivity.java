@@ -25,13 +25,14 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	this.getIntent().setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 	setContentView(R.layout.activity_login);
 	Session.getInstance();
 	if(Session.getInstance().getActualUser() != null){
 		loginSynchronize(getApplicationContext(),Session.getInstance().getActualUser());
 		startActivity(new Intent(this, ClubsActivity.class));
 	}
-
+	
     }
 
 
