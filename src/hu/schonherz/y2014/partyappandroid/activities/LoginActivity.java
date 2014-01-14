@@ -31,9 +31,9 @@ public class LoginActivity extends Activity {
 		this.setIntent(newIntent);
 		
 		setContentView(R.layout.activity_login);
-		Session.getInstance();
-		if(Session.getInstance().getActualUser() != null){
-			loginSynchronize(getApplicationContext(),Session.getInstance().getActualUser());
+		
+		if(Session.getInstance().getActualUser() != null) {
+			loginSynchronize(Session.getInstance().getActualUser());
 			startActivity(new Intent(this, ClubsActivity.class));
 		}
     }
@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
 				unsuccesfullLogin.show();
 			}
 			else{
-				loginSynchronize(getApplicationContext(),actualUser);
+				loginSynchronize(actualUser);
 				startActivity(new Intent(this, ClubsActivity.class));
 			}
 			break;
@@ -70,11 +70,21 @@ public class LoginActivity extends Activity {
 
     }
     
-    void loginSynchronize(Context context, User actualUser){
+    void loginSynchronize(User actualUser){
     	Session.setActualUser(actualUser);
     	String cityname = "Pl";  // itt kell lokális adatok beszerzése
     	actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface().getFavoriteClubsFromUserId(actualUser.id);
     	Session.setSearchViewCLubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
+    }
+    
+    User loginOnline(Context context, User actualUser) {
+    	User result = null ;
+    	return result;
+    }
+    
+    User loginOffline(Context context, User actualUser) {
+    	User result = null;
+    	return result;
     }
 
 }
