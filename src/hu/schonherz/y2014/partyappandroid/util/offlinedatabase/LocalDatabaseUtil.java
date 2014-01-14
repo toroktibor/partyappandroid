@@ -113,7 +113,7 @@ public class LocalDatabaseUtil {
 	  
 	  
 	  public ArrayList<Club> userOwnClubs(int id){
-ArrayList<Club> list=new ArrayList<Club>();
+		  ArrayList<Club> list=new ArrayList<Club>();
 		  
 		  String selectQuery =String.format("SELECT club.* FROM user INNER JOIN"
 		  		+ " owner ON user.id = owner.user_id INNER JOIN club ON "
@@ -129,7 +129,7 @@ ArrayList<Club> list=new ArrayList<Club>();
 		            		cursor.getString(6),cursor.getString(7),cursor.getString(8),Integer.parseInt(cursor.getString(9)));
 		            list.add(club);
 		        } while (cursor.moveToNext());
-		    }
+		   }
 		  
 		  
 		  return list;
@@ -240,6 +240,193 @@ ArrayList<Club> list=new ArrayList<Club>();
 	  }
 	  
 	  
+	//események listája
+	  public Event eventInformationFromEventId(int event_id){
+		  Event out;
+		  
+		  String selectQuery =String.format("SELECT * FROM event WHERE id = %d;",Integer.toString(event_id));
+		  
+		  Cursor cursor=database.rawQuery(selectQuery, null);
+		  
+		  out = new Event(event_id, cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(6), Integer.parseInt(cursor.getString(7)));
+		  
+		  return out;
+	  }
 	  
-
+	  //új esemény
+	  public void insertNewEvent(int id, int club_id, String name, String description, String start_date, String music_type){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("club_id", club_id);
+		  values.put("name", name);
+		  values.put("description", description);
+		  values.put("start_date", start_date);
+		  values.put("music_type", music_type);
+		  
+		  database.insert("event", null, values);
+	  }
+	  
+	  //esemény frissítése
+	  public void updateEvent(int id, int club_id, String name, String description, String start_date, String music_type){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("club_id", club_id);
+		  values.put("name", name);
+		  values.put("description", description);
+		  values.put("start_date", start_date);
+		  values.put("music_type", music_type);
+		  
+		  database.update("event", values, "id = ?", new String[] { Integer.toString(id) });
+		  
+	  }
+	  
+	  //esemény törlése
+	  public void deleteEvent(int id){
+		  
+		  database.delete("event", "id = ?", new String[] { String.valueOf(id)});
+		  
+	  }
+	  
+	  //kedvenc hely beszúrása
+	  public void insertNewFavoriteClub(int id, int user_id, int club_id){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("user_id", user_id);
+		  values.put("club_id", club_id);
+		  
+		  database.insert("favorite", null, values);
+	  }
+	  
+	  //kedvenc hely frissítése
+	  public void updateFavoriteClub(int id, int user_id, int club_id){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("user_id", user_id);
+		  values.put("club_id", club_id);
+		  
+		  database.update("favorite", values, "id = ?", new String[] { Integer.toString(id) });
+		  
+	  }
+	  
+	  //kedvenc hely törlése
+	  public void deleteFavoriteClub(int id){
+		  
+		  database.delete("favorite", "id = ?", new String[] { String.valueOf(id)});
+		  
+	  }
+	  
+	  //saját hely beszúrása
+	  public void insertNewOwnClub(int user_id, int club_id, int approved){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("user_id", user_id);
+		  values.put("club_id", club_id);
+		  values.put("approved", approved);
+		  
+		  database.insert("owner", null, values);
+	  }
+	  
+	  //saját hely frissítése(jóváhagyás)
+	  public void updateOwnClub(int user_id, int club_id, int approved){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("user_id", user_id);
+		  values.put("club_id", club_id);
+		  values.put("approved", approved);
+		  
+		  database.update("owner", values, "club_id = ? AND user_id = ?", new String[] { Integer.toString(club_id), Integer.toString(user_id)});
+	  }
+	  
+	  //saját hely törlése
+	  public void deleteOwnClub(int user_id, int club_id, int approved){
+		  
+		  database.delete("owner", "club_id = ? AND user_id = ?", new String[] { Integer.toString(club_id), Integer.toString(user_id)});
+		  
+	  }
+	  
+	  //kedvencek eseményeinek listája
+	  public ArrayList<Event> favoritesEventInformation(int user_id){
+		  ArrayList<Event> out = new ArrayList<Event>();
+		  
+		  String selectQuery =String.format("SELECT event.*"+
+				  							"FROM user"+
+				  							"INNER JOIN favorite ON user.id = favorite.user_id"+
+				  								"INNER JOIN club ON favorite.club_id = club.id"+
+				  								"INNER JOIN event ON club.id = event.club_id"+
+				  							"WHERE favorite.user_id = %d;",Integer.toString(user_id));
+		  
+		  Cursor cursor=database.rawQuery(selectQuery, null);
+		  
+		  if (cursor.moveToFirst()) {
+		        do {
+		            Event actual_event = new Event(Integer.parseInt(cursor.getString(0)), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), 1);
+		            out.add(actual_event);
+		        } while (cursor.moveToNext());
+		   }
+		  
+		  return out;
+	  }
+	 
+	  //árlista megjelenítése
+	  public ArrayList<MenuItem> menuItemsPrice(int club_id){
+		  ArrayList<MenuItem> out = new ArrayList<MenuItem>();
+		  
+		  String selectQuery =String.format("SELECT menu_item.* FROM club INNER JOIN menu_item ON club.id = menu_item.club_id  WHERE menu_item.club_id = %d;",Integer.toString(club_id));
+		  
+		  Cursor cursor=database.rawQuery(selectQuery, null);
+		  
+		  if (cursor.moveToFirst()) {
+		        do {
+		            MenuItem actual_menuItem = new MenuItem(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(3)), cursor.getString(7), cursor.getString(8), Integer.parseInt(cursor.getString(4)), cursor.getString(5), Integer.parseInt(cursor.getString(6)));
+		            out.add(actual_menuItem);
+		        } while (cursor.moveToNext());
+		   }
+		  
+		  return out;
+	  }
+	  
+	  //árlista elem beszúrása
+	  public void insertNewMenuItemsPrice(int id, int club_id, String name, int price, int discount, String menu_category, int menu_sort, String currency, String unit){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("club_id", club_id);
+		  values.put("name", name);
+		  values.put("price", price);
+		  values.put("discount", discount);
+		  values.put("menu_category", menu_category);
+		  values.put("menu_sort", menu_sort);
+		  values.put("currency", currency);
+		  values.put("unit", unit);
+		  
+		  database.insert("menu_item", null, values);
+	  }
+	  
+	  //árlista elem frissítése
+	  public void updateMenuItemsPrice(int id, int club_id, String name, int price, int discount, String menu_category, int menu_sort, String currency, String unit){
+		  ContentValues values=new ContentValues();
+		  
+		  values.put("id", id);
+		  values.put("club_id", club_id);
+		  values.put("name", name);
+		  values.put("price", price);
+		  values.put("discount", discount);
+		  values.put("menu_category", menu_category);
+		  values.put("menu_sort", menu_sort);
+		  values.put("currency", currency);
+		  values.put("unit", unit);
+		  
+		  database.update("menu_item", values, "id = ?", new String[] { Integer.toString(id)});
+	  }
+	  
+	  //árlista elem törlése
+	  public void deleteMenuItemsPrice(int id){
+		  ContentValues values=new ContentValues();
+		  
+		  database.delete("menu_item", "id = ?", new String[] { Integer.toString(id)});
+	  }
 }
