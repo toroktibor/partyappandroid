@@ -27,6 +27,10 @@ public class LoginActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_login);
 	Session.getInstance();
+	if(Session.getInstance().getActualUser() != null){
+		loginSynchronize(getApplicationContext(),Session.getInstance().getActualUser());
+		startActivity(new Intent(this, ClubsActivity.class));
+	}
 
     }
 
