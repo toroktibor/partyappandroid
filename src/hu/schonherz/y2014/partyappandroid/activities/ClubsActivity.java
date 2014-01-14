@@ -46,6 +46,4 @@ public class ClubsActivity extends ActionBarActivity {
         viewPager.setAdapter(mPagerAdapter);
         
 	}
-
-
 }

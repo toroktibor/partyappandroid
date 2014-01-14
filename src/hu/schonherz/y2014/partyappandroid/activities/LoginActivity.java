@@ -24,17 +24,16 @@ public class LoginActivity extends Activity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		Intent newIntent = this.getIntent();
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-		this.setIntent(newIntent);
+    	super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_login);
 		
 		if(Session.getInstance().getActualUser() != null) {
 			loginSynchronize(Session.getInstance().getActualUser());
-			startActivity(new Intent(this, ClubsActivity.class));
+			Intent newIntent = new Intent(this, ClubsActivity.class);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+			
+			startActivity(newIntent);
 		}
     }
 
@@ -60,7 +59,9 @@ public class LoginActivity extends Activity {
 			}
 			else{
 				loginSynchronize(actualUser);
-				startActivity(new Intent(this, ClubsActivity.class));
+				Intent newIntent = new Intent(this, ClubsActivity.class);
+				newIntent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(newIntent);
 			}
 			break;
 
