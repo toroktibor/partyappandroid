@@ -66,13 +66,13 @@
     <string name="toast_login_unsuccesful_text">Sikertelen bejelentkezés! Hibás felhasználónév, vagy jelszó! Próbáld újra</string>
 	<string name="clubs_type_spinner_prompt">Vegyes</string>
     <string-array name="clubs_types">
+        <item>Vegyes</item>
         <item>Kocsma</item>
         <item>Pub</item>
         <item>Club</item>
         <item>Étterem</item>
         <item>Sport központ</item>
         <item>Disco</item>
-        <item>Vegyes</item>
     </string-array>
     
 </resources>
