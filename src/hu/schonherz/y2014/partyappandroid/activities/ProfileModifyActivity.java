@@ -49,9 +49,9 @@ public class ProfileModifyActivity extends Activity {
 		    
 		    	try{
 		    	    user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(), spinnerSex.getSelectedItemPosition());
-		    	    Toast.makeText(this, "Adatok sikeresen módosítva", Toast.LENGTH_SHORT);
+		    	    Toast.makeText(this, "Adatok sikeresen módosítva", Toast.LENGTH_SHORT).show();
 		    	}catch (Exception e) {
-			    Toast.makeText(this, "Az adatok módosítása nem sikerült!", Toast.LENGTH_LONG);
+			    Toast.makeText(this, "Az adatok módosítása nem sikerült!", Toast.LENGTH_LONG).show();
 			}
 		    
 			finish();

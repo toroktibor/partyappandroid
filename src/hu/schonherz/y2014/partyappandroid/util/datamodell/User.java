@@ -60,6 +60,11 @@ public class User {
 	    this.sex=sex;
 	}
 	
+	public void modifyPassword(String newPassword) throws Exception{
+	    Session.getInstance().getActualCommunicationInterface().modifyPassword(id, newPassword);
+	    this.password=newPassword;
+	}
+	
 	
 	
 }
