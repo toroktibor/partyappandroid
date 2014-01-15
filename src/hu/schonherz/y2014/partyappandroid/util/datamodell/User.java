@@ -3,14 +3,15 @@ package hu.schonherz.y2014.partyappandroid.util.datamodell;
 import java.util.List;
 
 public class User {
-	public int id;
-	public String nickname;
-	public String password;
-	public String email;
-	public int sex;
-	public String birthday;
-	public int type;
+	private int id;
+	private String nickname;
+	private String password;
+	private String email;
+	private int sex;
+	private String birthday;
+	private int type;
 	
+
 	public List<Club> favoriteClubs;
 	public List<Club> usersClubs;
 	
@@ -23,4 +24,35 @@ public class User {
 		this.birthday = birthday;
 		this.type = type;
 	}
+
+	public int getId() {
+	    return id;
+	}
+
+	public String getNickname() {
+	    return nickname;
+	}
+
+	public String getPassword() {
+	    return password;
+	}
+
+	public String getEmail() {
+	    return email;
+	}
+
+	public int getSex() {
+	    return sex;
+	}
+
+	public String getBirthday() {
+	    return birthday;
+	}
+
+	public int getType() {
+	    return type;
+	}
+	
+	
+	
 }

@@ -55,7 +55,7 @@ public class NewClubActivity extends Activity {
 				return;
 			}
 			
-			int owner_user_id = isOwner ? Session.getInstance().getActualUser().id : -1;
+			int owner_user_id = isOwner ? Session.getInstance().getActualUser().getId() : -1;
 			
 			Session.getInstance().getActualCommunicationInterface().sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id);
 			
