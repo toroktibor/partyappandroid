@@ -40,4 +40,5 @@ public class Club {
 		this.name = name;
 		this.address = address;
 	}
+		
 }
