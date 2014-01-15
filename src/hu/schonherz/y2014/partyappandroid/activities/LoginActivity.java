@@ -102,8 +102,8 @@ public class LoginActivity 	extends 	Activity
     	String cityname = "Pl";  // itt kell lokális adatok beszerzése
     	//String cityname = getMyCityName();
     	actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface().getFavoriteClubsFromUserId(actualUser.id);
-    	Session.setSearchViewCLubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
-    	Session.getInstance().setSearchViewCLubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
+    	Session.setSearchViewClubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
+    	Session.getInstance().setSearchViewClubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
     }
     
     User loginOnline(Context context, User actualUser) {

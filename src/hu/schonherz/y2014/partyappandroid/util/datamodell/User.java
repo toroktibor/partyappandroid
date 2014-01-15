@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 	public int id;
-	public String nick_name;
+	public String nickname;
 	public String password;
 	public String email;
 	public int sex;
@@ -14,9 +14,9 @@ public class User {
 	public List<Club> favoriteClubs;
 	public List<Club> usersClubs;
 	
-	public User(int id, String nick_name, String password, String email, int sex, String birthday, int type) {
+	public User(int id, String nickname, String password, String email, int sex, String birthday, int type) {
 		this.id = id;
-		this.nick_name = nick_name;
+		this.nickname = nickname;
 		this.password = password;
 		this.email = email;
 		this.sex = sex;

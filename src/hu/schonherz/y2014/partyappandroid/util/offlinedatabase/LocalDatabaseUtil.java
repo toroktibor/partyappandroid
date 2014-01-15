@@ -26,7 +26,7 @@ public class LocalDatabaseUtil {
 	  }
 	  
 	  
-	  public User loginWintNickName(String nickName, String password){
+	  public User loginWithNickName(String nickName, String password){
 		  String selectQuery =String.format("SELECT * FROM user WHERE nick_name = %s AND password = %s",nickName,password);
 		  Cursor cursor=database.rawQuery(selectQuery, null);
 		  

@@ -10,7 +10,7 @@ public class Session {
 	private static Session instance = null;
 	
 	User actualUser;
-	List<Club> searchViewCLubs;
+	List<Club> searchViewClubs;
 	boolean isOnline;
 	
 	CommunicationInterface actualCommunicationInterface;
@@ -35,17 +35,17 @@ public class Session {
 		instance.actualUser = actualUser;
 	}
 	
-	public static List<Club> getSearchViewCLubs() {
-		return instance.searchViewCLubs;
+	public static List<Club> getSearchViewClubs() {
+		return instance.searchViewClubs;
 	}
 	
-	public static void setSearchViewCLubs(List<Club> searchViewCLubs) {
-		instance.searchViewCLubs = searchViewCLubs;
+	public static void setSearchViewClubs(List<Club> searchViewClubs) {
+		instance.searchViewClubs = searchViewClubs;
 	}
 	
 	public static void closeSession() {
 		instance.actualUser = null;
-		instance.searchViewCLubs = null;
+		instance.searchViewClubs = null;
 	}
 	
 	public CommunicationInterface getActualCommunicationInterface() {
