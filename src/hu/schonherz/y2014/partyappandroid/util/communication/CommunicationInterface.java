@@ -44,9 +44,9 @@ public interface CommunicationInterface {
 	 * @param id kiválasztott felhasználó ID-je
 	 * @param email az új email cím
 	 * @param birthday az új születési dátum
-	 * @param sex az új neme
+	 * @param sex az új neme ( férfi=0, nő=1 )
 	 * 
 	 * @throws a módosítás sikertelenségét jelző kivétel
 	 */
-	public void modifyUserData(int id, String email, String birthday, String sex) throws Exception;
+	public void modifyUserData(int id, String email, String birthday, int sex) throws Exception;
 }

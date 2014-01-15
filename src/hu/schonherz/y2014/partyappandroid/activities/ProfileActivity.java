@@ -1,23 +1,30 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
+    
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_profile);
 	
-	/* Példa felhasználó */
-	User user = new User(1,"a","a","g@g.com",1,"1990.01.01",0);
+	user = Session.getActualUser();
+    }
+    
+    @Override
+    protected void onResume() {
 	
 	TextView te;
 	
@@ -33,7 +40,7 @@ public class ProfileActivity extends Activity {
 	te=(TextView) findViewById(R.id.profile_textview_sex_value);
 	te.setText( String.valueOf( user.getSex() == 0 ? "Férfi" : "Nő" ));
 	
-	
+        super.onResume();
     }
 
     public void onClickHandler(View v) {

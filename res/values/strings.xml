@@ -12,6 +12,11 @@
         <item>Férfi</item>
         <item>Nő</item>
     </string-array>
+    
+    <string-array name="array_sex">
+        <item>Férfi</item>
+        <item>Nő</item>
+    </string-array>
 
     <string name="app_launcher_label">PartyApp</string>
     <string name="title_activity_clubs_list">Szórakozóhelyek listája</string>

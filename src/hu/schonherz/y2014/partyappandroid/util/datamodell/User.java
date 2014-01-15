@@ -53,6 +53,13 @@ public class User {
 	    return type;
 	}
 	
+	public void modifyUserData(String email, String birthday, int sex) throws Exception{
+	    Session.getInstance().getActualCommunicationInterface().modifyUserData(id, email, birthday, sex);
+	    this.email=email;
+	    this.birthday=birthday;
+	    this.sex=sex;
+	}
+	
 	
 	
 }

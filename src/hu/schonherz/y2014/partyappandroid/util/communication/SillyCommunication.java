@@ -16,7 +16,7 @@ public class SillyCommunication implements CommunicationInterface {
 		if(nick_name == null || password == null )
 			return null;
 		else if(nick_name.equals("a") && password.equals("a")){
-			return new User(1,"a","a","g@g.com",1,"1990.01.01",0);
+			return new User(1,"a","a","teszt@emailcim.com",0,"1990.03.21",0);
 		}
 		return null;
 	}
@@ -68,7 +68,7 @@ public class SillyCommunication implements CommunicationInterface {
 	}
 
 	@Override
-	public void modifyUserData(int id, String email, String birthday, String sex) throws Exception{
+	public void modifyUserData(int id, String email, String birthday, int sex) throws Exception{
 	    // TODO: módosítás az adatbázisban	    
 	}
 }
