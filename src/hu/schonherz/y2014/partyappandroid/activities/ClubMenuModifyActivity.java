@@ -1,10 +1,8 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
-import hu.schonherz.y2014.partyappandroid.R.layout;
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
 
 public class ClubMenuModifyActivity extends Activity {
 

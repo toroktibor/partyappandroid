@@ -38,20 +38,20 @@ public class ProfilePasswordActivity extends Activity {
 		Toast.makeText(this, "A megadott régi jelszó nem megfelelő!", Toast.LENGTH_LONG).show();
 		return;
 	    }
-	    
-	    if( ! newPassword.getText().toString().equals( newPasswordAgain.getText().toString() ) ){
+
+	    if (!newPassword.getText().toString().equals(newPasswordAgain.getText().toString())) {
 		Toast.makeText(this, "A megadott új jelszavak nem egyeznek!", Toast.LENGTH_LONG).show();
 		return;
 	    }
-	    
+
 	    try {
-		user.modifyPassword(newPassword.getText().toString());		
+		user.modifyPassword(newPassword.getText().toString());
 	    } catch (Exception e) {
 		Toast.makeText(this, "A jelszómódosítás sikertelen!", Toast.LENGTH_LONG).show();
 	    }
-	    
+
 	    Toast.makeText(this, "Sikeres jelszómódosítás", Toast.LENGTH_LONG).show();
-	    
+
 	    finish();
 	    break;
 	}

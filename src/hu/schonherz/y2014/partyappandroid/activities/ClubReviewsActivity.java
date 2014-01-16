@@ -15,7 +15,7 @@ public class ClubReviewsActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_club_reviews);
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	MenuInflater inflater = getMenuInflater();

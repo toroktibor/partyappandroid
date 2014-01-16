@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 
 public class ClubsMapFragment extends Fragment {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-    	ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_clubs_map, container, false);
-    	return rootView;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_clubs_map, container, false);
+	return rootView;
+    }
 
 }

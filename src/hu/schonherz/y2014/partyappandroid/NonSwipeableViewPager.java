@@ -7,23 +7,22 @@ import android.view.MotionEvent;
 
 public class NonSwipeableViewPager extends ViewPager {
 
-	public NonSwipeableViewPager(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public NonSwipeableViewPager(Context context, AttributeSet attrs) {
+	super(context, attrs);
+    }
 
-	public NonSwipeableViewPager(Context context) {
-		super(context);
-	}
+    public NonSwipeableViewPager(Context context) {
+	super(context);
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent arg0) {
+	return false;
+    }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent arg0) {
-		return false;
-	}
-	
-	@Override
-	public boolean onInterceptTouchEvent(MotionEvent arg0) {
-		return false;
-	}
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent arg0) {
+	return false;
+    }
 
 }
