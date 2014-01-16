@@ -33,9 +33,8 @@ public class LoginActivity 	extends 	Activity
 		if(Session.getInstance().getActualUser() != null) {
 			loginSynchronize(Session.getInstance().getActualUser());
 			Intent newIntent = new Intent(this, ClubsActivity.class);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-			
 			startActivity(newIntent);
+			finish();
 		}
 		
 		//mLocationClient = new LocationClient(this, this, this);
