@@ -41,7 +41,7 @@ public class ClubActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_club);
+		setContentView(R.layout.activity_clubs);
 		
 		
 		ClubActionBar ab = new ClubActionBar(this);
