@@ -99,11 +99,11 @@ public class LoginActivity 	extends 	Activity
     
     void loginSynchronize(User actualUser){
     	Session.setActualUser(actualUser);
-    	String cityname = "Pl";  // itt kell lokális adatok beszerzése
+    	String cityname = "Debrecen";  // itt kell lokális adatok beszerzése
     	//String cityname = getMyCityName();
     	actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface().getFavoriteClubsFromUserId(actualUser.getId());
     	Session.setSearchViewClubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
-    	Session.getInstance().setSearchViewClubs(Session.getInstance().getActualCommunicationInterface().getClubsFromCityName(cityname));
+    	Session.getActualUser().usersClubs = Session.getInstance().getActualCommunicationInterface().getOwnedClubsFromUserId(actualUser.getId());
     }
     
     User loginOnline(Context context, User actualUser) {
