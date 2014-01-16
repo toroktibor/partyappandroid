@@ -3,10 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
 
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Váltás offline módra" />
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Próbáld újra, van netem!!!" />
+    
+    
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Nincs internet kapcsolat :("/>
+
+
 </LinearLayout>

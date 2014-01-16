@@ -9,6 +9,7 @@ import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
+import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -26,7 +27,7 @@ import android.view.ViewGroup;
 
 public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener {
 
-    private ClubsActivity activity;
+    private final ClubsActivity activity;
 
     public ClubsActionBar(ClubsActivity activity) {
     	this.activity = activity;
@@ -62,16 +63,23 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 	case R.id.actionbar_clubs_button_b:
 		/* viewPager lapozása a lista nézetre */
-		InternetConnection.checkConnection(activity);
+		//InternetConnection.checkConnection(activity);
 		
 		activity.viewPager.setCurrentItem(0);
 	    break;
 
 	case R.id.actionbar_clubs_button_c:
 		/* viewPager lapozása a térkép nézetre */
-		InternetConnection.checkConnection(activity);
+		InternetConnection.checkConnection(activity,new InternetConnectionContinue() {
+			
+			@Override
+			public void onResume() {
+				activity.viewPager.setCurrentItem(1);
+			}
+		});
 		
-		activity.viewPager.setCurrentItem(1);
+		
+		
 	    break;
 	case R.id.actionbar_clubs_button_d:
 
