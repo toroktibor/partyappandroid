@@ -8,6 +8,7 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment;
 import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
+import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -61,11 +62,15 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 	case R.id.actionbar_clubs_button_b:
 		/* viewPager lapozása a lista nézetre */
+		InternetConnection.checkConnection(activity);
+		
 		activity.viewPager.setCurrentItem(0);
 	    break;
 
 	case R.id.actionbar_clubs_button_c:
 		/* viewPager lapozása a térkép nézetre */
+		InternetConnection.checkConnection(activity);
+		
 		activity.viewPager.setCurrentItem(1);
 	    break;
 	case R.id.actionbar_clubs_button_d:
