@@ -7,8 +7,18 @@ public class User {
 	private String nickname;
 	private String password;
 	private String email;
+	/**
+	 * 0 = Férfi
+	 * 1 = Nő
+	 */
 	private int sex;
 	private String birthday;
+	/**
+	 * A
+	 * 0 = vendég
+	 * 1 = tulaj
+	 * 2 = admin
+	 */
 	private int type;
 	
 
@@ -25,6 +35,8 @@ public class User {
 		this.type = type;
 	}
 
+	public 
+	
 	public int getId() {
 	    return id;
 	}
