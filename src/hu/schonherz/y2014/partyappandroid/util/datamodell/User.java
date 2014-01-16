@@ -15,9 +15,8 @@ public class User {
 	private String birthday;
 	/**
 	 * A
-	 * 0 = vendég
-	 * 1 = tulaj
-	 * 2 = admin
+	 * 0 = vendég vagy tulaj
+	 * 1 = admin
 	 */
 	private int type;
 	
@@ -35,6 +34,14 @@ public class User {
 		this.type = type;
 	}
 
+	public boolean isThisUserOwnerOfClub( int clubID ) {
+		for (Club actualClub : usersClubs) {
+			if(actualClub.id==clubID)
+				return true;
+		}
+		return false;
+	}
+	
 	public int getId() {
 	    return id;
 	}
