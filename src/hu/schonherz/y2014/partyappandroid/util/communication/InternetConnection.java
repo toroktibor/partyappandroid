@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.dialogs.InternetConnectionDialog;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,32 +21,15 @@ public class InternetConnection {
 		return false;
 	}
 	
-	public static void checkConnection(Context context){
+	public static void checkConnection(Context context, InternetConnectionContinue ICContinue){
 		boolean isOnline = isOnline(context);
 		if( isOnline ) return;
 		
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.dialog_internetconnection_offline, null);
 		
-		AlertDialog.Builder adb = new AlertDialog.Builder(context);
-		adb.setView(view);
-		adb.setPositiveButton( "Váltás Offline módra", new OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+
+		new InternetConnectionDialog(context,ICContinue).show();
 		
-		adb.setNegativeButton( "Újrapróbál", new OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		adb.setCancelable(false);
-		adb.show();
 	}
 }
