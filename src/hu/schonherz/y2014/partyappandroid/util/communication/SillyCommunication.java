@@ -39,8 +39,8 @@ public class SillyCommunication implements CommunicationInterface {
 			cityClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
 		}
 		if (cityname.equals("Budapest")){
-			cityClubs.add(new Club(0, "Táncolj", "Budapest, Kishegyesi utca 48"));
-			cityClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+			cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+			cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 		}
 		return cityClubs;
 	}
@@ -74,13 +74,13 @@ public class SillyCommunication implements CommunicationInterface {
 	    	ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
 			ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
 	    } else if(cityname.equals("Budapest")){
-	    	ret.add(new Club(0, "Táncolj", "Budapest, Kishegyesi utca 48"));
-			ret.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+	    	ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+			ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 	    } else {
 	    	ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
 			ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
-			ret.add(new Club(0, "Táncolj", "Budapest, Kishegyesi utca 48"));
-			ret.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+			ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+			ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 	    }
 	    
 	    
@@ -106,7 +106,7 @@ public class SillyCommunication implements CommunicationInterface {
 		
 		if(user_id == 2){
 			ownedClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
-			ownedClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+			ownedClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 		}
 	
 		return ownedClubs;
