@@ -1,9 +1,13 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Vibrator;
@@ -41,7 +45,11 @@ public class InternetConnection {
 		builder.setNegativeButton("Váltás offline módra", new android.content.DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
+				/*NEM BIZTOS, HOGY JÓ! :).*/
+				Context c = context.getApplicationContext();;
+				Intent i = new Intent(c, ClubsActivity.class);
+				Session.setSearchViewClubs(Session.getActualUser().favoriteClubs);
+				c.startActivity(i);
 				
 			}
 		});

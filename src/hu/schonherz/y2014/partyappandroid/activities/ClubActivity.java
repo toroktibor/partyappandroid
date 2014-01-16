@@ -43,13 +43,13 @@ public class ClubActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_clubs);
+		setContentView(R.layout.activity_club);
 		intent = getIntent();
 		
 		ClubActionBar ab = new ClubActionBar(this);
 		ab.setLayout();
 		
-		viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
+		viewPager = (ViewPager) findViewById(R.id.club_viewpager);
         ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
         

@@ -18,7 +18,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:focusable="false"
-        android:text="Button" />
+        android:text="     "
+        android:background="@drawable/ic_launcher"/>
 
     <TextView
         android:id="@+id/club_list_item_address"

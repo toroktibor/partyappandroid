@@ -135,11 +135,13 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 		case 2:		//KEDVENCEK
 			i = new Intent(activity, ClubsActivity.class);
+			Session.setSearchViewClubs(Session.getActualUser().favoriteClubs);
 			activity.startActivity(i);
 			break;
 
 		case 3:		//HELYEIM
-			i = new Intent(activity, MyClubsActivity.class);
+			i = new Intent(activity, ClubsActivity.class);
+			Session.setSearchViewClubs(Session.getActualUser().usersClubs);
 			activity.startActivity(i);
 			break;
 		case 4:		//PROFILOM
@@ -152,7 +154,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 			activity.startActivity(i);
 			activity.finish();
 			break;
-		case 6:		//EGY ÚJ HELY (IDEIGLENES OPCIÓ, AMÍG A LISTA ÉS A TÉRKÉP NÉZET ELEMEI NEM KATTINTHATÓAK)
+		case 6:		//EGY SZÓRAKOZÓHELY (IDEIGLENES OPCIÓ, AMÍG A LISTA ÉS A TÉRKÉP NÉZET ELEMEI NEM KATTINTHATÓAK)
 			i = new Intent(activity, ClubActivity.class);
 			activity.startActivity(i);
 			break;
