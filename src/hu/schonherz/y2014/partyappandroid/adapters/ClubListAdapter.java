@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ClubListAdapter extends ArrayAdapter {
+public class ClubListAdapter extends ArrayAdapter<Club> {
 
-	public ClubListAdapter(Context context, Object[] objects) {
+	public ClubListAdapter(Context context, Club[] objects) {
 		super(context, R.layout.club_list_item, objects);
 		// TODO Auto-generated constructor stub
 	}

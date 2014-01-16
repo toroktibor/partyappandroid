@@ -6,6 +6,8 @@ import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil
 
 import java.util.List;
 
+import android.util.Log;
+
 public class Session {
 	private static Session instance = null;
 	
@@ -41,6 +43,9 @@ public class Session {
 	
 	public static void setSearchViewClubs(List<Club> searchViewClubs) {
 		instance.searchViewClubs = searchViewClubs;
+		for(int i = 0; i < searchViewClubs.size(); ++i) {
+			Log.d("LISTAELEMEK", searchViewClubs.get(i).toString());
+		}
 	}
 	
 	public static void closeSession() {
