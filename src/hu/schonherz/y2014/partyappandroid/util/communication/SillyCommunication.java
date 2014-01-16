@@ -18,29 +18,31 @@ public class SillyCommunication implements CommunicationInterface {
 		else if(nick_name.equals("a") && password.equals("a")){
 			return new User(1,"a","a","teszta@emailcim.com",0,"1990.03.21",0);
 		} else if(nick_name.equals("b") && password.equals("b")){
-			return new User(1,"b","b","tesztb@emailcim.com",0,"1990.03.21",0);
+			return new User(2,"b","b","tesztb@emailcim.com",0,"1990.03.21",0);
 		} else if(nick_name.equals("c") && password.equals("c")){
-			return new User(1,"c","c","tesztc@emailcim.com",0,"1990.03.21",1);
+			return new User(3,"c","c","tesztc@emailcim.com",0,"1990.03.21",1);
 		}
 		return null;
 	}
 	
 	public List<Club> getFavoriteClubsFromUserId(int user_id){
-		return null;
+		ArrayList<Club> favoriteClubs = new ArrayList<Club>();
+		favoriteClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+		return favoriteClubs;
 	}
 	public List<Club> getClubsFromCityName(String cityname){
 		
-		ArrayList<Club> favoriteClubs = new ArrayList<Club>();
+		ArrayList<Club> cityClubs = new ArrayList<Club>();
 		
 		if (cityname.equals("Debrecen")){
-			favoriteClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
-			favoriteClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
+			cityClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+			cityClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
 		}
 		if (cityname.equals("Budapest")){
-			favoriteClubs.add(new Club(0, "Táncolj", "Budapest, Kishegyesi utca 48"));
-			favoriteClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+			cityClubs.add(new Club(0, "Táncolj", "Budapest, Kishegyesi utca 48"));
+			cityClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
 		}
-		return favoriteClubs;
+		return cityClubs;
 	}
 
 	@Override
@@ -95,5 +97,18 @@ public class SillyCommunication implements CommunicationInterface {
 	@Override
 	public void modifyUserData(int id, String email, String birthday, int sex) throws Exception{
 	    // TODO: mĂłdosĂ­tĂˇs az adatbĂˇzisban	    
+	}
+	
+	@Override
+	public List<Club> getOwnedClubsFromUserId(int user_id) {
+		
+		ArrayList<Club> ownedClubs = new ArrayList<Club>();
+		
+		if(user_id == 2){
+			ownedClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+			ownedClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+		}
+	
+		return ownedClubs;
 	}
 }
