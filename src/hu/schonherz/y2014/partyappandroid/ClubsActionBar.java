@@ -71,7 +71,13 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		case R.id.actionbar_clubs_button_c:
 			/* viewPager lapozása a térkép nézetre */
 
-			activity.viewPager.setCurrentItem(1);
+			InternetConnection.checkConnection(activity,
+					new InternetConnectionContinue() {
+						@Override
+						public void onResume() {
+							activity.viewPager.setCurrentItem(1);
+						}
+					});
 
 			break;
 		case R.id.actionbar_clubs_button_d:
