@@ -64,10 +64,11 @@ public class LoginActivity 	extends 	Activity
 				unsuccesfullLogin.show();
 			}
 			else{
+				// Ha a név és jelszó páros helyes
 				loginSynchronize(actualUser);
 				Intent newIntent = new Intent(this, ClubsActivity.class);
-				newIntent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(newIntent);
+				finish();
 			}
 			break;
 

@@ -55,10 +55,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    // TODO: Logout
 		Session.closeSession();
 		Intent la = new Intent(activity, LoginActivity.class);
-		la.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | 
-                Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                Intent.FLAG_ACTIVITY_NEW_TASK);
 	    activity.startActivity(la);
+	    activity.finish();
 	    break;
 
 	case R.id.actionbar_clubs_button_b:
