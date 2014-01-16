@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
@@ -55,19 +54,20 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		switch (v.getId()) {
 			case R.id.actionbar_clubs_button_b:
 				/* viewPager lapozása a lista nézetre */
-	
 				activity.viewPager.setCurrentItem(0);
-	
 				break;
-	
 			case R.id.actionbar_clubs_button_c:
 				/* viewPager lapozása a térkép nézetre */
-	
-				activity.viewPager.setCurrentItem(1);
-	
+				InternetConnection.checkConnection(activity,
+						new InternetConnectionContinue() {
+							@Override
+							public void onResume() {
+								activity.viewPager.setCurrentItem(1);
+							}
+						});
 				break;
 			case R.id.actionbar_clubs_button_d:
-	
+
 				InternetConnection.checkConnection(activity,
 						new InternetConnectionContinue() {
 							@Override
@@ -81,9 +81,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 								adb.show();
 							}
 						});
-	
+
 				break;
-	
 			case R.id.actionbar_clubs_button_e:
 				PopupMenu popupmenu = new PopupMenu(activity, v);
 				MenuItem item;
