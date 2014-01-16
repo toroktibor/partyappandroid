@@ -35,8 +35,6 @@ public class User {
 		this.type = type;
 	}
 
-	public 
-	
 	public int getId() {
 	    return id;
 	}
