@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 public class ClubActivity extends ActionBarActivity {
 
     public ViewPager viewPager;
+    static public Intent intent;
 
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -42,7 +44,7 @@ public class ClubActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_clubs);
-		
+		intent = getIntent();
 		
 		ClubActionBar ab = new ClubActionBar(this);
 		ab.setLayout();
