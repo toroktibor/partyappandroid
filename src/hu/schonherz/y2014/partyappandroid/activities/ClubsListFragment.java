@@ -1,17 +1,21 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import java.util.List;
-
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.ClubListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+
+import java.util.List;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ClubsListFragment extends Fragment {	
@@ -28,6 +32,17 @@ public class ClubsListFragment extends Fragment {
     	Club[] clubArray = getClubArrayFromClubsList(Session.getSearchViewClubs());
     	//Log.i("jojo",clubArray[0].address);
     	clubsListView.setAdapter(new ClubListAdapter(getActivity(), clubArray));
+    	clubsListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(getActivity(), ClubActivity.class);
+				intent.putExtra("listPosition", arg2);
+				startActivity(intent);
+			}
+    	
+    	});
     	rootView.addView(clubsListView);
     	return rootView;
     }
