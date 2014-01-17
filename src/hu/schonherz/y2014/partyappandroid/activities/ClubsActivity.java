@@ -45,4 +45,30 @@ public class ClubsActivity extends ActionBarActivity {
 	viewPager.setAdapter(mPagerAdapter);
 
     }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	setContentView(R.layout.activity_clubs);
+
+    	ClubsActionBar ab = new ClubsActionBar(this);
+    	ab.setLayout();
+
+    	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
+    	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+    	viewPager.setAdapter(mPagerAdapter);
+    }
+    
+    @Override
+    protected void onRestart() {
+    	super.onRestart();
+    	setContentView(R.layout.activity_clubs);
+
+    	ClubsActionBar ab = new ClubsActionBar(this);
+    	ab.setLayout();
+
+    	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
+    	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+    	viewPager.setAdapter(mPagerAdapter);
+    }
 }

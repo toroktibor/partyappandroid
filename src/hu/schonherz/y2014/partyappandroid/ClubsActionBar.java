@@ -77,33 +77,30 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    PopupMenu popupmenu = new PopupMenu(activity, v);
 	    MenuItem item;
 	    if (Session.getActualUser().getType() == 0) {
-		item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 6, 0, "Egy szórakozóhely");
-		item.setOnMenuItemClickListener(this);
-	    } else if (Session.getActualUser().getType() == 1) {
-		item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 6, 0, "Egy szórakozóhely");
-		item.setOnMenuItemClickListener(this);
-		item = popupmenu.getMenu().add(0, 7, 0, "Jóváhagyások");
-		item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
+			item.setOnMenuItemClickListener(this);
+	    } 
+	    else if (Session.getActualUser().getType() == 1) {
+			item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
+			item.setOnMenuItemClickListener(this);
+			item = popupmenu.getMenu().add(0, 6, 0, "Jóváhagyások");
+			item.setOnMenuItemClickListener(this);
 	    }
 	    popupmenu.show();
 	    break;
@@ -143,12 +140,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    activity.startActivity(i);
 	    activity.finish();
 	    break;
-	case 6: // EGY SZÓRAKOZÓHELY (IDEIGLENES OPCIÓ, AMÍG A LISTA ÉS A TÉRKÉP
-		// NÉZET ELEMEI NEM KATTINTHATÓAK)
-	    i = new Intent(activity, ClubActivity.class);
-	    activity.startActivity(i);
-	    break;
-	case 7: // JÓVÁHAGYÁSOK (CSAK ADMINNAK)
+	case 6: // JÓVÁHAGYÁSOK (CSAK ADMINNAK)
 	    i = new Intent(activity, PendingListActivity.class);
 	    activity.startActivity(i);
 	    break;

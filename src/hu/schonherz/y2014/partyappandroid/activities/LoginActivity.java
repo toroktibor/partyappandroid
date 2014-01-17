@@ -129,7 +129,7 @@ public class LoginActivity extends Activity
 			    User actualUser = Session.getInstance().getActualCommunicationInterface()
 				    .authenticationUser(usernameFromEditText, passwordFromEditText);
 			    if (actualUser == null) {
-			    	Log.e("AUTHENTICATION FAILURE", "WRONG NAME OR PASSWORD, TOAST WILL BE SHOWED");
+			    	Log.e("LOGIN SCREEN", "WRONG NAME-PASSWORD PAIR, TOAST WILL BE SHOWED");
 					LayoutInflater inflater = getLayoutInflater();
 					View toastView = inflater.inflate(R.layout.toast_login_unsuccessful,
 						(ViewGroup) findViewById(R.id.toast_login_unsuccessful_root));
@@ -139,14 +139,17 @@ public class LoginActivity extends Activity
 					unsuccesfullLogin.setDuration(Toast.LENGTH_LONG);
 					unsuccesfullLogin.setView(toastView);
 					unsuccesfullLogin.show();
-					Log.e("AUTHENTICATION FAILURE", "TOAST SHOWN SUCCESSFULLY" );
+					Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY" );
 			    } else {
 				// Ha a név és jelszó páros helyes
-			    	Log.e("AUTHENTICATION SUCCESS", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
+			    	Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
+			    	//A KÖVETKEZŐ SORT LECSERÉLJÜK A getMyCityName METÓDUSRA!!!!!!
+			    	cityname = "Debrecen";
+			    	//getMyCityName();
 					loginSynchronize(actualUser);
 					Intent newIntent = new Intent(this, ClubsActivity.class);
 					startActivity(newIntent);
-					Log.e("MAIN SCREEN", "CLUBSACTIVITY STARTED");
+					Log.e("LOGIN SCREEN", "CLUBSACTIVITY STARTED");
 					finish();
 			    }
 			    break;
@@ -159,14 +162,22 @@ public class LoginActivity extends Activity
     }
 
     /*
-     * String getMyCityName() { List<Address> resultArray = null; Geocoder geoc
-     * = new Geocoder(getApplicationContext()); try { resultArray =
-     * geoc.getFromLocation(clubArray.get(i).getLatlng().latitude,
-     * clubArray.get(i).getLatlng().longitude, 1); } catch (IOException e) {
-     * e.printStackTrace(); } String resultAddress = ""; if(resultArray.size() >
-     * 0) { resultAddress = resultArray.get(0).toString(); for(int j = 1; j <
-     * resultArray.size(); ++j) { resultAddress += (" " +
-     * resultArray.get(i).toString()); } }
+    //EZ ÍGY SZAR!!!! NE HASZNÁLJA SENKI SEM! :)
+    private String getMyCityName() { 
+    	List<Address> resultArray = null; 
+    	Geocoder geoc = new Geocoder(getApplicationContext()); 
+    	try { 
+    		resultArray = geoc.getFromLocation(clubArray.get(i).getLatlng().latitude, clubArray.get(i).getLatlng().longitude, 1); 
+    	} catch (IOException e) {
+    		e.printStackTrace(); } String resultAddress = ""; 
+    		if(resultArray.size() > 0) { 
+    			resultAddress = resultArray.get(0).toString(); 
+    			Log.e("GETMYCITYNAME", "ADDRESS ELEMENT 0 " + resultAddress[0]);
+    			for(int j = 1; j < resultArray.get(i).toString()); 
+    			Log.e("GETMYCITYNAME", "ADDRESS ELEMENT " + j + ": " + resultAddress[j]);
+    		}
+    		return resultAddress[0];
+    	}
      */
 
     void loginSynchronize(User actualUser) {
