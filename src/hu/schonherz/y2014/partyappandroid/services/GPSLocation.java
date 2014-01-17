@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.services;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -136,9 +137,7 @@ public class GPSLocation extends Service{
 	private void initializeLocationManager() {
 	    Log.e(TAG, "initializeLocationManager");
 	    if (mLocationManager == null) {
-	        mLocationManager = (LocationManager) getApplicationContext().getSystemService
-
-(Context.LOCATION_SERVICE);
+	        mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 	    }
 	}
 	
@@ -156,9 +155,31 @@ public class GPSLocation extends Service{
 //					sb.append(address.getCountryName());
 				}
 			}
-		}finally{
-		return sb.toString();
+		} finally {
+			return sb.toString();
 		}
+	}
+	
+	public String getCityName(){
+		Log.e("GPS - GETCITYNAME", "METHOD STARTED");
+		Geocoder gc = new Geocoder(this, Locale.getDefault());
+		Log.e("GPS - GETCITYNAME", "GEOCODER INSTANTIATED");
+		StringBuilder sb = new StringBuilder();
+		List<Address> addresses;
+			try {
+				addresses = gc.getFromLocation(latitude, longitude, 1);
+				Log.e("GPS - GETCITYNAME", "POSSIBLE ADRESSES FROM LOCATION CATCHED");
+				if (addresses.size() > 0) {
+					Address address = addresses.get(0);
+					Log.e("GPS - GETCITYNAME", "FIRST ITEM OF LIST CATCHED");
+					sb.append(address.getLocality());
+					Log.e("GPS - GETCITYNAME", "NAME OF ACTUAL CITY CATCHED");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		Log.e(TAG, sb.toString());
+		return sb.toString();
 	}
 	
 	public boolean gotLocation(){

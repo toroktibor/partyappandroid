@@ -143,9 +143,7 @@ public class LoginActivity extends Activity
 			    } else {
 				// Ha a név és jelszó páros helyes
 			    	Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
-			    	//A KÖVETKEZŐ SORT LECSERÉLJÜK A getMyCityName METÓDUSRA!!!!!!
-			    	cityname = "Debrecen";
-			    	//getMyCityName();
+			    	//cityname = "Debrecen";
 					loginSynchronize(actualUser);
 					Intent newIntent = new Intent(this, ClubsActivity.class);
 					startActivity(newIntent);
@@ -182,9 +180,12 @@ public class LoginActivity extends Activity
 
     void loginSynchronize(User actualUser) {
 		Session.setActualUser(actualUser);
+		//String cityname = "Debrecen";
+		GPSLocation locator = new GPSLocation();
+		while( ! locator.gotLocation() ) {
+		}
+		cityname = locator.getCityName();
 		Log.e("LOGIN SYNCHRONIZE", "LOGIN IN PROGRESS, NAME OF ACTUAL CITY: " + cityname);
-		//String cityname = "Debrecen"; // itt kell lokális adatok beszerzése
-		// String cityname = getMyCityName();
 		actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface()
 			.getFavoriteClubsFromUserId(actualUser.getId());
 		Log.e("LOGIN SYNCHRONIZE","FAVOURITE CLUBS CATCHED");
