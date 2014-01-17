@@ -1,12 +1,19 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.services.GPSLocation;
+import hu.schonherz.y2014.partyappandroid.services.GPSLocation.LocalBinder;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +32,10 @@ public class LoginActivity extends Activity
     // private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     // LocationClient mLocationClient;
 
+	boolean mBounded;
+	GPSLocation mGpsLocation;
+	String cityname;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -45,6 +56,66 @@ public class LoginActivity extends Activity
 	// mCurrentLocation.toString();
     }
 
+    @Override
+	protected void onStart() {
+	    super.onStart();
+	    Intent mIntent = new Intent(this, GPSLocation.class);
+	    bindService(mIntent, mConnection, BIND_AUTO_CREATE);
+	};
+
+	ServiceConnection mConnection = new ServiceConnection() {
+
+	    public void onServiceDisconnected(ComponentName name) {
+	        Toast.makeText(LoginActivity.this, "Service is disconnected", 1000).show();
+	        mBounded = false;
+	        mGpsLocation = null;
+	    }
+
+	    public void onServiceConnected(ComponentName name, IBinder service) {
+	        Toast.makeText(LoginActivity.this, "Service is connected", 1000).show();
+	        mBounded = true;
+	        LocalBinder mLocalBinder = (LocalBinder)service;
+	        mGpsLocation = mLocalBinder.getServerInstance();
+
+	        class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
+	            
+	            @Override
+	            protected void onPreExecute() {}       
+	           
+	            @Override
+	            protected void onPostExecute(Boolean result) {
+	                    /* Here you can call myLocationHelper.getLat() and
+	                    myLocationHelper.getLong() to get the location data.*/
+	            }
+	           
+	            @Override
+	            protected Boolean doInBackground(Boolean... params) {
+	                   
+	                    //while the location helper has not got a lock
+	            	while (mGpsLocation.gotLocation() == false){
+	                            //do nothing, just wait
+	                    }
+	                    //once done return true
+	            	cityname = mGpsLocation.getAddress();
+	                    return true;
+	            }
+	    }
+	      //create new async task for fetching location and execute it
+	        LocationWorker locationTask = new LocationWorker();
+	        locationTask.execute(new Boolean[] {true});
+	    }
+	};
+
+	@Override
+	protected void onStop() {
+	    super.onStop();
+	    if(mBounded) {
+	        unbindService(mConnection);
+	        mBounded = false;
+	    }
+	};
+    
+    
     public void onClickHandler(View v) {
 	switch (v.getId()) {
 	case R.id.login_button_login:
@@ -94,7 +165,8 @@ public class LoginActivity extends Activity
 
     void loginSynchronize(User actualUser) {
 	Session.setActualUser(actualUser);
-	String cityname = "Debrecen"; // itt kell lokális adatok beszerzése
+	Log.e("login cityname: ", cityname);
+	//String cityname = "Debrecen"; // itt kell lokális adatok beszerzése
 	// String cityname = getMyCityName();
 	actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface()
 		.getFavoriteClubsFromUserId(actualUser.getId());
