@@ -46,106 +46,129 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
     public void onClick(View v) {
 	Intent i;
 	switch (v.getId()) {
-	case R.id.actionbar_clubs_button_b:
-	    /* viewPager lapozása a lista nézetre */
-	    activity.viewPager.setCurrentItem(0);
-	    break;
-	case R.id.actionbar_clubs_button_c:
-	    /* viewPager lapozása a térkép nézetre */
-	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
-		@Override
-		public void onResume() {
-		    activity.viewPager.setCurrentItem(1);
+		case R.id.actionbar_clubs_button_b:
+		    /* viewPager lapozása a lista nézetre */
+		    activity.viewPager.setCurrentItem(0);
+		    break;
+		case R.id.actionbar_clubs_button_c:
+		    /* viewPager lapozása a térkép nézetre */
+		    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
+			@Override
+			public void onResume() {
+			    activity.viewPager.setCurrentItem(1);
+			}
+		    });
+		    break;
+		case R.id.actionbar_clubs_button_d:
+	
+		    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
+			@Override
+			public void onResume() {
+			    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
+			    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
+				    null);
+			    adb.setView(view);
+			    adb.show();
+			}
+		    });
+	
+		    break;
+		case R.id.actionbar_clubs_button_e:
+		    PopupMenu popupmenu = new PopupMenu(activity, v);
+		    MenuItem item;
+		    if (Session.getActualUser().getType() == 0) {
+				item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
+				item.setOnMenuItemClickListener(this);
+		    } 
+		    else if (Session.getActualUser().getType() == 1) {
+				item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
+				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 6, 0, "Jóváhagyások");
+				item.setOnMenuItemClickListener(this);
+		    }
+		    popupmenu.show();
+		    break;
+		default:
+		    Log.e(this.getClass().getName(), "Nem kezelt onClick view");
+		    break;
 		}
-	    });
-	    break;
-	case R.id.actionbar_clubs_button_d:
-
-	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
-		@Override
-		public void onResume() {
-		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
-			    null);
-		    adb.setView(view);
-		    adb.show();
-		}
-	    });
-
-	    break;
-	case R.id.actionbar_clubs_button_e:
-	    PopupMenu popupmenu = new PopupMenu(activity, v);
-	    MenuItem item;
-	    if (Session.getActualUser().getType() == 0) {
-			item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
-			item.setOnMenuItemClickListener(this);
-	    } 
-	    else if (Session.getActualUser().getType() == 1) {
-			item = popupmenu.getMenu().add(0, 1, 0, "Új hely hozzáadása");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 4, 0, "Profilom");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 5, 0, "Kijelentkezés");
-			item.setOnMenuItemClickListener(this);
-			item = popupmenu.getMenu().add(0, 6, 0, "Jóváhagyások");
-			item.setOnMenuItemClickListener(this);
-	    }
-	    popupmenu.show();
-	    break;
-	default:
-	    Log.e(this.getClass().getName(), "Nem kezelt onClick view");
-	    break;
-	}
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem arg0) {
 	Intent i;
-	switch (arg0.getItemId()) {
-	case 1: // ÚJ HELY HOZZÁADÁSA
-	    i = new Intent(activity, NewClubActivity.class);
-	    activity.startActivity(i);
-	    break;
-
-	case 2: // KEDVENCEK
-	    i = new Intent(activity, ClubsActivity.class);
-	    Session.setSearchViewClubs(Session.getActualUser().favoriteClubs);
-	    activity.startActivity(i);
-	    break;
-
-	case 3: // HELYEIM
-	    i = new Intent(activity, ClubsActivity.class);
-	    Session.setSearchViewClubs(Session.getActualUser().usersClubs);
-	    activity.startActivity(i);
-	    break;
-	case 4: // PROFILOM
-	    i = new Intent(activity, ProfileActivity.class);
-	    activity.startActivity(i);
-	    break;
-	case 5: // KIJELENTKEZÉS
-	    Session.closeSession();
-	    i = new Intent(activity, LoginActivity.class);
-	    activity.startActivity(i);
-	    activity.finish();
-	    break;
-	case 6: // JÓVÁHAGYÁSOK (CSAK ADMINNAK)
-	    i = new Intent(activity, PendingListActivity.class);
-	    activity.startActivity(i);
-	    break;
-	default:
-	    Log.e(this.getClass().getName(), "Nem kezelt onMenuItemClick");
+	int clickedItemId = arg0.getItemId();
+	switch (clickedItemId) {
+		case 1: // ÚJ HELY HOZZÁADÁSA
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> KEDVENCEK");
+		    i = new Intent(activity, NewClubActivity.class);
+		    Log.e("MAIN SCREEN", "STARTING NEWCLUBACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "NEWCLUBACTIVITY STARTED");
+		    break;
+	
+		case 2: // KEDVENCEK
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> KEDVENCEK");
+		    i = new Intent(activity, ClubsActivity.class);
+		    Log.e("MAIN SCREEN", "USER'S FAVORITE CLUBS LOADING");
+		    Session.setSearchViewClubs(Session.getActualUser().favoriteClubs);
+		    Log.e("MAIN SCREEN", "STARTING CLUBSACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "CLUBSACTIVITY STARTED");
+		    break;
+	
+		case 3: // HELYEIM
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> HELYEIM");
+		    i = new Intent(activity, ClubsActivity.class);
+		    Log.e("MAIN SCREEN", "USER'S OWN CLUBS LOADING");
+		    Session.setSearchViewClubs(Session.getActualUser().usersClubs);
+		    Log.e("MAIN SCREEN", "USER'S OWN CLUBS LOADED");
+		    Log.e("MAIN SCREEN", "STARTING CLUBSACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "CLUBSACTIVITY STARTED");
+		    break;
+		case 4: // PROFILOM
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> PROFILOM");
+		    i = new Intent(activity, ProfileActivity.class);
+		    Log.e("MAIN SCREEN", "STARTING PROFILEACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "PROFILEACTIVITY STARTED");
+		    break;
+		case 5: // KIJELENTKEZÉS
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> KIJELENTKEZÉS");
+		    Session.closeSession();
+		    Log.e("MAIN SCREEN", "SESSION CLOSED");
+		    i = new Intent(activity, LoginActivity.class);
+		    Log.e("MAIN SCREEN", "STARTING LOGINACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "LOGINACTIVITY STARTED");
+		    activity.finish();
+		    break;
+		case 6: // JÓVÁHAGYÁSOK (CSAK ADMINNAK)
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> JÓVÁHAGYÁSOK");
+		    i = new Intent(activity, PendingListActivity.class);
+		    Log.e("MAIN SCREEN", "STARTING PENDINGLISTACTIVITY");
+		    activity.startActivity(i);
+		    Log.e("MAIN SCREEN", "PENDINGLISTACTIVITY STARTED");
+		    break;
+		default:
+		    Log.e("MAIN SCREEN", "POPUP MENU: NOT HANDLED onMenuItemClick");
 	}
 
 	return true;
