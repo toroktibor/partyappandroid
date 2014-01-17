@@ -6,6 +6,8 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 public class SillyCommunication implements CommunicationInterface {
 
     public SillyCommunication() {
@@ -13,37 +15,54 @@ public class SillyCommunication implements CommunicationInterface {
     }
 
     public User authenticationUser(String nick_name, String password) {
-	if (nick_name == null || password == null)
-	    return null;
-	else if (nick_name.equals("a") && password.equals("a")) {
-	    return new User(1, "a", "a", "teszta@emailcim.com", 0, "1990.03.21", 0);
-	} else if (nick_name.equals("b") && password.equals("b")) {
-	    return new User(2, "b", "b", "tesztb@emailcim.com", 0, "1990.03.21", 0);
-	} else if (nick_name.equals("c") && password.equals("c")) {
-	    return new User(3, "c", "c", "tesztc@emailcim.com", 0, "1990.03.21", 1);
-	}
+		if (nick_name == null || password == null) {
+			Log.e("AUTHENTICATIONUSER","SOMETHING IS NULL");
+		    return null;
+		}
+		else if (nick_name.equals("a") && password.equals("a")) {
+			Log.e("AUTHENTICATIONUSER","GUEST USER 1 LOADED");
+		    return new User(1, "a", "a", "teszta@emailcim.com", 0, "1990.03.21", 0);
+		    }
+		else if (nick_name.equals("b") && password.equals("b")) {
+			Log.e("AUTHENTICATIONUSER","GUEST USER 2 LOADED");
+		    return new User(2, "b", "b", "tesztb@emailcim.com", 0, "1990.03.21", 0);
+		    }
+		else if (nick_name.equals("c") && password.equals("c")) {
+			Log.e("AUTHENTICATIONUSER","ADMIN USER LOADED");
+		    return new User(3, "c", "c", "tesztc@emailcim.com", 0, "1990.03.21", 1);
+		}
+		Log.e("AUTHENTICATIONUSER","NO USER (NULL) LOADED");
 	return null;
     }
 
     public List<Club> getFavoriteClubsFromUserId(int user_id) {
-	ArrayList<Club> favoriteClubs = new ArrayList<Club>();
-	favoriteClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+		ArrayList<Club> favoriteClubs = new ArrayList<Club>();
+		favoriteClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+		Log.e("GETFAVORITECLUBS","FAVOURITE PLACES CATCHED");
+		Log.e("GETFAVORITECLUBS","NOW THE FAVORITE PLACES ARE GIVEN BACK");
 	return favoriteClubs;
     }
 
     public List<Club> getClubsFromCityName(String cityname) {
-
-	ArrayList<Club> cityClubs = new ArrayList<Club>();
-
-	if (cityname.equals("Debrecen")) {
-	    cityClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
-	    cityClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
-	}
-	if (cityname.equals("Budapest")) {
-	    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
-	    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
-	}
-	
+		ArrayList<Club> cityClubs = new ArrayList<Club>();
+		if (cityname.equals("Debrecen")) {
+		    cityClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+		    cityClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
+		    Log.e("GETCLUBSFROMCITYNAME","PLACES OF " + cityname + " CITY CATCHED");
+		}
+		else if (cityname.equals("Budapest")) {
+		    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+		    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
+		    Log.e("GETCLUBSFROMCITYNAME","PLACES OF " + cityname + " CITY CATCHED");
+		}
+		else {
+			cityClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+		    cityClubs.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
+		    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+		    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
+		    Log.e("GETCLUBSFROMCITYNAME","PLACES OF UNKNOWN CITY CATCHED");
+		}
+		Log.e("GETCLUBSFROMCITYNAME","NOW THE RESULT PLACES ARE GIVEN BACK");
 	return cityClubs;
     }
 
@@ -70,18 +89,23 @@ public class SillyCommunication implements CommunicationInterface {
 	 * ){ ret.remove(club); } }
 	 */
 
-	if (cityname.equals("Debrecen")) {
-	    ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
-	    ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
-	} else if (cityname.equals("Budapest")) {
-	    ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
-	    ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
-	} else {
-	    ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
-	    ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
-	    ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
-	    ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
-	}
+		if (cityname.equals("Debrecen")) {
+			Log.e("SEARCHCLUBS","PLACES OF " + cityname + " CITY CATCHED");
+		    ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+		    ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
+		} 
+		else if (cityname.equals("Budapest")) {
+			Log.e("SEARCHCLUBS","PLACES OF " + cityname + " CITY CATCHED");
+		    ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+		    ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
+		} 
+		else {
+			Log.e("SEARCHCLUBS","PLACES OF UNKNOWN CITY CATCHED");
+		    ret.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
+		    ret.add(new Club(1, "Le'Programoz-Lak-Koppintás", "Debrecen, Kishegyesi utca 49"));
+		    ret.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
+		    ret.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
+		}
 
 	return ret;
 
@@ -103,10 +127,14 @@ public class SillyCommunication implements CommunicationInterface {
 	ArrayList<Club> ownedClubs = new ArrayList<Club>();
 
 	if (user_id == 2) {
+		Log.e("GETOWNEDCLUBS","USER'S OWN PLACES LOADED");
 	    ownedClubs.add(new Club(0, "Le'Programoz-Lak", "Debrecen, Kishegyesi utca 48"));
 	    ownedClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 	}
-
+	else {
+		Log.e("GETOWNEDCLUBS", "THIS USER DOESN'T HAVE OWN PLACES");
+	}
+	Log.e("GETOWNEDCLUBS","NOW THE RESULT PLACES ARE GIVEN BACK");
 	return ownedClubs;
     }
 }
