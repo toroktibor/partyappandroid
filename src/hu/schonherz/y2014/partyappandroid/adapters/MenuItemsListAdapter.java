@@ -21,18 +21,13 @@ public class MenuItemsListAdapter extends ArrayAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View item = convertView;
 		if (item == null) {
-			LayoutInflater inflater = ((Activity) getContext())
-					.getLayoutInflater();
+			LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
 			item = inflater.inflate(R.layout.menuitem_list_item, parent, false);
 		}
-		((TextView) item.findViewById(R.id.menuitem_list_item_name))
-				.setText(((MenuItem) getItem(position)).name);
-		((TextView) item.findViewById(R.id.menuitem_list_item_price))
-				.setText(((MenuItem) getItem(position)).price);
-		((TextView) item.findViewById(R.id.menuitem_list_item_currency))
-				.setText(((MenuItem) getItem(position)).currency);
-		((TextView) item.findViewById(R.id.menuitem_list_item_unit))
-		.setText(((MenuItem) getItem(position)).unit);
+		((TextView) item.findViewById(R.id.menuitem_list_item_name)).setText(((MenuItem) getItem(position)).name);
+		((TextView) item.findViewById(R.id.menuitem_list_item_price)).setText((new Integer(((MenuItem) getItem(position)).price)).toString());
+		((TextView) item.findViewById(R.id.menuitem_list_item_currency)).setText(((MenuItem) getItem(position)).currency);
+		((TextView) item.findViewById(R.id.menuitem_list_item_unit)).setText("/"+((MenuItem) getItem(position)).unit);
 		
 		if(((MenuItem) getItem(position)).discount > 0){
 			TextView discountDetector = (TextView) item.findViewById(R.id.menuitem_list_item_discount);
@@ -41,8 +36,7 @@ public class MenuItemsListAdapter extends ArrayAdapter {
 			int newPrice = (int) ((int) actualPrice*actualDiscount);
 			discountDetector.setText("AKCIÓ");
 			item.setBackgroundColor(Color.YELLOW);
-			((TextView) item.findViewById(R.id.menuitem_list_item_price))
-			.setText(newPrice);
+			((TextView) item.findViewById(R.id.menuitem_list_item_price)).setText((new Integer(newPrice)).toString());
 		}
 		
 		item.setTag((MenuItem) getItem(position));

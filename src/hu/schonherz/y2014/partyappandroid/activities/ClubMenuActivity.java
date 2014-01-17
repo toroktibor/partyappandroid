@@ -21,7 +21,7 @@ public class ClubMenuActivity extends Activity {
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	ListView menuItemListView = (ListView) findViewById(R.id.club_menu_listview);
 	MenuItem[] menuItemArray = getMenuItemArrayFromList((Session.getSearchViewClubs().get(clubListPosition)).menuItems);
-	menuItemListView.setAdapter(new MenuItemsListAdapter(getApplicationContext(), menuItemArray));
+	menuItemListView.setAdapter(new MenuItemsListAdapter(this, menuItemArray));
 	
     }
 

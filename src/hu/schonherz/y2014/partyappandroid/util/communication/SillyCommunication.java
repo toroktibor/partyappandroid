@@ -152,9 +152,15 @@ public class SillyCommunication implements CommunicationInterface {
 			fullClub.ratings = new ArrayList<Rating>();
 			fullClub.events = new ArrayList<Event>();
 			fullClub.services = new ArrayList<String>();
+			
 			fullClub.events.add(new Event(0, "Programozunk!!", "Hardcore programozás lesz éjjel nappal!!", "2014.01.20", "Metal", 1));
 			fullClub.events.add(new Event(1, "Bajba leszünk", "Én nem tudom mit fogunk bemutatni :S", "2014.01.24", "Mulatós", 1));
 			fullClub.events.add(new Event(2, "Alvás", "Szarni nem lesz energiád, garantált!", "2014.02.01", "Vegyes", 1));
+			
+			fullClub.menuItems.add(new MenuItem(0, "Kőbányai", 180, "Ft", "üveg", 0, "Ital", 0));
+			fullClub.menuItems.add(new MenuItem(0, "MAC", 1000, "Ft", "darab", 0, "Rezsó", 0));
+			fullClub.menuItems.add(new MenuItem(0, "Panellakás", 100000, "Ft", "darab", 20, "Rezsó", 0));
+			
 		} else if(club_id == 1){
 			fullClub = new Club(1, "Le'Programoz-Lak-Koppintás", "Kocsma", "Nagyon kellemes hely ahol akciós a mac és ahol a kockák el vannak vetve.", "Debrecen, Kishegyesi utca 49", "06306665551", "le@programoz.com", "2014.10.10", "2014.10.10", 1);
 			fullClub.menuItems = new ArrayList<MenuItem>();
