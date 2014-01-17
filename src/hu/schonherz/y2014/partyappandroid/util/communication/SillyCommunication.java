@@ -1,6 +1,9 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class SillyCommunication implements CommunicationInterface {
 
     public List<Club> getFavoriteClubsFromUserId(int user_id) {
 		ArrayList<Club> favoriteClubs = new ArrayList<Club>();
-		favoriteClubs.add(new Club(1, "Dance", "Budapest, Váci utca 49"));
+		favoriteClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 		Log.e("GETFAVORITECLUBS","FAVOURITE PLACES CATCHED");
 		Log.e("GETFAVORITECLUBS","NOW THE FAVORITE PLACES ARE GIVEN BACK");
 	return favoriteClubs;
@@ -137,4 +140,41 @@ public class SillyCommunication implements CommunicationInterface {
 	Log.e("GETOWNEDCLUBS","NOW THE RESULT PLACES ARE GIVEN BACK");
 	return ownedClubs;
     }
+
+	@Override
+	public Club getEverythingFromClub(int club_id) {
+		
+		Club fullClub;
+		
+		if(club_id == 0){
+			fullClub = new Club(0, "Le'Programoz-Lak", "Kocsma", "Nagyon kellemes hely ahol akciós a mac és ahol a kockák el vannak vetve.", "Debrecen, Kishegyesi utca 48", "06306665551", "le@programoz.com", "2014.10.10", "2014.10.10", 1);
+			fullClub.menuItems = new ArrayList<MenuItem>();
+			fullClub.ratings = new ArrayList<Rating>();
+			fullClub.events = new ArrayList<Event>();
+			fullClub.services = new ArrayList<String>();
+		} else if(club_id == 1){
+			fullClub = new Club(1, "Le'Programoz-Lak-Koppintás", "Kocsma", "Nagyon kellemes hely ahol akciós a mac és ahol a kockák el vannak vetve.", "Debrecen, Kishegyesi utca 49", "06306665551", "le@programoz.com", "2014.10.10", "2014.10.10", 1);
+			fullClub.menuItems = new ArrayList<MenuItem>();
+			fullClub.ratings = new ArrayList<Rating>();
+			fullClub.events = new ArrayList<Event>();
+			fullClub.services = new ArrayList<String>();
+		}else if(club_id == 2){
+			fullClub = new Club(2, "Táncolj", "Sport-csarnok", "Nagyon kellemes hely ahol akciós a mac és ahol a kockák el vannak vetve.", "Budapest, Kishegyesi utca 48", "06306665551", "le@programoz.com", "2014.10.10", "2014.10.10", 1);
+			fullClub.menuItems = new ArrayList<MenuItem>();
+			fullClub.ratings = new ArrayList<Rating>();
+			fullClub.events = new ArrayList<Event>();
+			fullClub.services = new ArrayList<String>();
+		}else if(club_id == 3){
+			fullClub = new Club(3, "Dance", "Disco", "Nagyon kellemes hely ahol akciós a mac és ahol a kockák el vannak vetve.", "Budapest, Váci utca 49", "06306665551", "le@programoz.com", "2014.10.10", "2014.10.10", 1);
+			fullClub.menuItems = new ArrayList<MenuItem>();
+			fullClub.ratings = new ArrayList<Rating>();
+			fullClub.events = new ArrayList<Event>();
+			fullClub.services = new ArrayList<String>();
+		} else {
+			fullClub = null;
+			Log.i("itt",(new Integer(club_id)).toString());
+		}
+		
+		return fullClub;
+	}
 }

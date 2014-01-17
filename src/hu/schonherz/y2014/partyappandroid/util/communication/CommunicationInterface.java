@@ -13,6 +13,8 @@ public interface CommunicationInterface {
     public List<Club> getClubsFromCityName(String cityname);
 
     public List<Club> getOwnedClubsFromUserId(int user_id);
+    
+    public Club getEverythingFromClub(int club_id);
 
     // Elküld egy új hely kérelmet a szervernek, ha a owner_user_id -1 akkor
     // nincs neki tulaj jelöltje

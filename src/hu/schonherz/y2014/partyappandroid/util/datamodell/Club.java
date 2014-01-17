@@ -3,7 +3,7 @@ package hu.schonherz.y2014.partyappandroid.util.datamodell;
 import java.util.List;
 
 public class Club {
-    int id;
+    public int id;
     public String name;
     public String type;
     public String description;
@@ -39,6 +39,10 @@ public class Club {
 	this.id = id;
 	this.name = name;
 	this.address = address;
+    }
+    
+    public boolean isNotFullDownloaded(){
+    	return (this.email == null) && (this.date == null) && (this.description == null) && (this.events == null);
     }
 
 }
