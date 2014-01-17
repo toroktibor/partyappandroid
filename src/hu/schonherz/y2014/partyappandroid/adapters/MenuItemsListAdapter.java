@@ -32,9 +32,9 @@ public class MenuItemsListAdapter extends ArrayAdapter {
 		if(((MenuItem) getItem(position)).discount > 0){
 			TextView discountDetector = (TextView) item.findViewById(R.id.menuitem_list_item_discount);
 			int actualPrice = ((MenuItem) getItem(position)).price; 
-			float actualDiscount = (float) ((((MenuItem) getItem(position)).discount) / 100.0);
+			float actualDiscount = (float) ((100 - ((MenuItem) getItem(position)).discount) / 100.0);
 			int newPrice = (int) ((int) actualPrice*actualDiscount);
-			discountDetector.setText("AKCIÓ");
+			discountDetector.setText((new Integer(((MenuItem) getItem(position)).discount)).toString()+"%-os "+"AKCIÓ!");
 			item.setBackgroundColor(Color.YELLOW);
 			((TextView) item.findViewById(R.id.menuitem_list_item_price)).setText((new Integer(newPrice)).toString());
 		}
