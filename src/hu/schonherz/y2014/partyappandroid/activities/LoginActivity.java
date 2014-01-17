@@ -117,39 +117,45 @@ public class LoginActivity extends Activity
     
     
     public void onClickHandler(View v) {
-	switch (v.getId()) {
-	case R.id.login_button_login:
-	    String usernameFromEditText = ((EditText) findViewById(R.id.login_edittext_name)).getEditableText()
-		    .toString();
-	    // Log.i("Login screen - username: ", usernameFromEditText);
-	    String passwordFromEditText = ((EditText) findViewById(R.id.login_edittext_password)).getEditableText()
-		    .toString();
-	    // Log.i("Login screen - password: ", passwordFromEditText);
-	    User actualUser = Session.getInstance().getActualCommunicationInterface()
-		    .authenticationUser(usernameFromEditText, passwordFromEditText);
-	    if (actualUser == null) {
-		LayoutInflater inflater = getLayoutInflater();
-		View toastView = inflater.inflate(R.layout.toast_login_unsuccessful,
-			(ViewGroup) findViewById(R.id.toast_login_unsuccessful_root));
-
-		Toast unsuccesfullLogin = new Toast(getApplicationContext());
-		unsuccesfullLogin.setGravity(Gravity.CENTER, 0, 0);
-		unsuccesfullLogin.setDuration(Toast.LENGTH_LONG);
-		unsuccesfullLogin.setView(toastView);
-		unsuccesfullLogin.show();
-	    } else {
-		// Ha a név és jelszó páros helyes
-		loginSynchronize(actualUser);
-		Intent newIntent = new Intent(this, ClubsActivity.class);
-		startActivity(newIntent);
-		finish();
-	    }
-	    break;
-
-	case R.id.login_button_register:
-	    startActivity(new Intent(this, RegisterActivity.class));
-	}
-
+		switch (v.getId()) {
+			case R.id.login_button_login:
+			    String usernameFromEditText = ((EditText) findViewById(R.id.login_edittext_name)).getEditableText()
+				    .toString();
+		
+			    Log.e("LOGIN SCREEN - CATCHED USERNAME", usernameFromEditText);
+			    String passwordFromEditText = ((EditText) findViewById(R.id.login_edittext_password)).getEditableText()
+				    .toString();
+			    Log.e("LOGIN SCREEN - CATCHED PASSWORD: ", passwordFromEditText);
+			    User actualUser = Session.getInstance().getActualCommunicationInterface()
+				    .authenticationUser(usernameFromEditText, passwordFromEditText);
+			    if (actualUser == null) {
+			    	Log.e("AUTHENTICATION FAILURE", "WRONG NAME OR PASSWORD, TOAST WILL BE SHOWED");
+					LayoutInflater inflater = getLayoutInflater();
+					View toastView = inflater.inflate(R.layout.toast_login_unsuccessful,
+						(ViewGroup) findViewById(R.id.toast_login_unsuccessful_root));
+			
+					Toast unsuccesfullLogin = new Toast(getApplicationContext());
+					unsuccesfullLogin.setGravity(Gravity.CENTER, 0, 0);
+					unsuccesfullLogin.setDuration(Toast.LENGTH_LONG);
+					unsuccesfullLogin.setView(toastView);
+					unsuccesfullLogin.show();
+					Log.e("AUTHENTICATION FAILURE", "TOAST SHOWN SUCCESSFULLY" );
+			    } else {
+				// Ha a név és jelszó páros helyes
+			    	Log.e("AUTHENTICATION SUCCESS", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
+					loginSynchronize(actualUser);
+					Intent newIntent = new Intent(this, ClubsActivity.class);
+					startActivity(newIntent);
+					Log.e("MAIN SCREEN", "CLUBSACTIVITY STARTED");
+					finish();
+			    }
+			    break;
+		
+			case R.id.login_button_register:
+				Log.e("REGISTER", "REGISTER BUTTON PRESSED, REGISTERACTIVITY STARTING");
+			    startActivity(new Intent(this, RegisterActivity.class));
+			    Log.e("REGISTER", "REGISTERACTIVITY STARTED");
+		}
     }
 
     /*
@@ -164,25 +170,32 @@ public class LoginActivity extends Activity
      */
 
     void loginSynchronize(User actualUser) {
-	Session.setActualUser(actualUser);
-	Log.e("login cityname: ", cityname);
-	//String cityname = "Debrecen"; // itt kell lokális adatok beszerzése
-	// String cityname = getMyCityName();
-	actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface()
-		.getFavoriteClubsFromUserId(actualUser.getId());
-	Session.setSearchViewClubs(Session.getInstance().getActualCommunicationInterface()
-		.getClubsFromCityName(cityname));
-	Session.getActualUser().usersClubs = Session.getInstance().getActualCommunicationInterface()
-		.getOwnedClubsFromUserId(actualUser.getId());
+		Session.setActualUser(actualUser);
+		Log.e("LOGIN SYNCHRONIZE", "LOGIN IN PROGRESS, NAME OF ACTUAL CITY: " + cityname);
+		//String cityname = "Debrecen"; // itt kell lokális adatok beszerzése
+		// String cityname = getMyCityName();
+		actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface()
+			.getFavoriteClubsFromUserId(actualUser.getId());
+		Log.e("LOGIN SYNCHRONIZE","FAVOURITE CLUBS CATCHED");
+		Session.setSearchViewClubs(Session.getInstance().getActualCommunicationInterface()
+			.getClubsFromCityName(cityname));
+		Log.e("LOGIN SYNCHRONIZE", "CLUBS IN THE ACTUAL CITY (" + cityname + ") CATCHED");
+		Session.getActualUser().usersClubs = Session.getInstance().getActualCommunicationInterface()
+			.getOwnedClubsFromUserId(actualUser.getId());
+		Log.e("LOGIN SYNCHRONIZE", "USER'S OWN CLUBS CATCHED");
     }
 
     User loginOnline(Context context, User actualUser) {
-	User result = null;
+    	Log.e("LOGIN ONLINE", "STARTED");
+    	User result = null;
+    	Log.e("LOGIN ONLINE", "FINISHED");
 	return result;
     }
 
     User loginOffline(Context context, User actualUser) {
-	User result = null;
+    	Log.e("LOGIN OFFLINE", "STARTED");
+    	User result = null;
+    	Log.e("LOGIN OFFLINE", "FINISHED");
 	return result;
     }
 

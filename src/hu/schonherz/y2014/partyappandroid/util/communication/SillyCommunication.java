@@ -43,6 +43,7 @@ public class SillyCommunication implements CommunicationInterface {
 	    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
 	    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
 	}
+	
 	return cityClubs;
     }
 
@@ -88,12 +89,12 @@ public class SillyCommunication implements CommunicationInterface {
 
     @Override
     public void modifyPassword(int id, String password) throws Exception {
-	// TODO: mĂłdosĂ­tĂˇs az adatbĂˇzisban
+	// TODO: módosítás az adatbázisban
     }
 
     @Override
     public void modifyUserData(int id, String email, String birthday, int sex) throws Exception {
-	// TODO: mĂłdosĂ­tĂˇs az adatbĂˇzisban
+	// TODO: módosítás az adatbázisban
     }
 
     @Override
