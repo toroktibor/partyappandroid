@@ -34,7 +34,7 @@ public class LoginActivity extends Activity
 
 	boolean mBounded;
 	GPSLocation mGpsLocation;
-	String cityname;
+	String cityname = "Debrecen";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class LoginActivity extends Activity
 	// mLocationClient = new LocationClient(this, this, this);
 	// Location mCurrentLocation;
 	// mCurrentLocation = mLocationClient.getLastLocation();
-	// System.out.print("ITT VAGYUNK HÉÉÉJ!!!!!!!!!!!!!!: ");
+	// System.out.print("ITT VAGYUNK HĂ‰Ă‰Ă‰J!!!!!!!!!!!!!!: ");
 	// mCurrentLocation.toString();
     }
 
@@ -96,7 +96,7 @@ public class LoginActivity extends Activity
 	                            //do nothing, just wait
 	                    }
 	                    //once done return true
-	            	cityname = mGpsLocation.getAddress();
+	            	cityname = mGpsLocation.getCityName();
 	                    return true;
 	            }
 	    }
@@ -141,7 +141,7 @@ public class LoginActivity extends Activity
 					unsuccesfullLogin.show();
 					Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY" );
 			    } else {
-				// Ha a név és jelszó páros helyes
+				// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
 			    	Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
 			    	//cityname = "Debrecen";
 					loginSynchronize(actualUser);
@@ -160,7 +160,7 @@ public class LoginActivity extends Activity
     }
 
     /*
-    //EZ ÍGY SZAR!!!! NE HASZNÁLJA SENKI SEM! :)
+    //EZ ĂŤGY SZAR!!!! NE HASZNĂ�LJA SENKI SEM! :)
     private String getMyCityName() { 
     	List<Address> resultArray = null; 
     	Geocoder geoc = new Geocoder(getApplicationContext()); 
@@ -181,10 +181,10 @@ public class LoginActivity extends Activity
     void loginSynchronize(User actualUser) {
 		Session.setActualUser(actualUser);
 		//String cityname = "Debrecen";
-		GPSLocation locator = new GPSLocation();
-		while( ! locator.gotLocation() ) {
-		}
-		cityname = locator.getCityName();
+//		GPSLocation locator = new GPSLocation();
+//		while( ! locator.gotLocation() ) {
+//		}
+//		cityname = locator.getCityName();
 		Log.e("LOGIN SYNCHRONIZE", "LOGIN IN PROGRESS, NAME OF ACTUAL CITY: " + cityname);
 		actualUser.favoriteClubs = Session.getInstance().getActualCommunicationInterface()
 			.getFavoriteClubsFromUserId(actualUser.getId());
