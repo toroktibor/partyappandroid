@@ -77,5 +77,11 @@ public class User {
 	Session.getInstance().getActualCommunicationInterface().modifyPassword(id, newPassword);
 	this.password = newPassword;
     }
+    
+    public String toString()
+    {
+    	return String.format("id: %d nickname: %s password: %s email: %s " +
+    			"sex: %d birhtday: %s type: %d", id,nickname,password,email,sex,birthday,type);
+    }
 
 }
