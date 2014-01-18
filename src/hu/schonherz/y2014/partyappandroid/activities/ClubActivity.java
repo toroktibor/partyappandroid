@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.VisitorEmail;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
@@ -70,7 +71,6 @@ public class ClubActivity extends ActionBarActivity {
 
 		int clubListPosition = ClubActivity.intent.getExtras().getInt(
 				"listPosition");
-		Log.i("átjött", (new Integer(clubListPosition)).toString());
 		clubFullDownload(clubListPosition);
 		Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 		String num = actualClub.phonenumber;
@@ -79,6 +79,11 @@ public class ClubActivity extends ActionBarActivity {
 		Intent callIntent = new Intent(Intent.ACTION_DIAL);
 		callIntent.setData(Uri.parse(number));
 		startActivity(callIntent);
+	}
+	
+	public void message(View v){
+		Intent messageIntent = new Intent(getApplicationContext(),VisitorEmail.class);
+		startActivity(messageIntent);
 	}
 
 	protected void clubFullDownload(int actualClubPosition) {
