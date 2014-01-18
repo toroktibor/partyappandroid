@@ -5,8 +5,12 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +25,7 @@ public class ClubMenuModifyActivity extends Activity {
 	SeekBar discountSeekBar;
 	TextView discountSummaryTextView;
 	MenuItem actualMenuItem;
+	Button addButton;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class ClubMenuModifyActivity extends Activity {
 		quantityEditText = (EditText) findViewById(R.id.club_menu_modify_edittext_quantity);
 		discountSeekBar = (SeekBar) findViewById(R.id.club_menu_modify_seekbar_discount);
 		discountSummaryTextView = (TextView) findViewById(R.id.club_menu_modify_textview_discountsummary);
+		addButton = (Button) findViewById(R.id.club_menu_modify_button_add);
 		
 		nameEditText.setText(actualMenuItem.name);
 		priceEditText.setText((new Integer(actualMenuItem.price)).toString());
@@ -70,6 +76,42 @@ public class ClubMenuModifyActivity extends Activity {
 				float actualDiscount = (float) ((100 - seekBar.getProgress()) / 100.0);
 				int newPrice = (int) ((int) actualMenuItem.price*actualDiscount);
 				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualMenuItem.price+actualMenuItem.currency+" helyett "+newPrice+actualMenuItem.currency);
+			}
+		});
+		
+		addButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				String category = String.valueOf(categorySpinner.getSelectedItem());
+				String name = nameEditText.getText().toString();
+				int price = Integer.parseInt(priceEditText.getText().toString().isEmpty()?"0":priceEditText.getText().toString());
+				String currency = String.valueOf(currencySpinner.getSelectedItem());
+				String unit = quantityEditText.getText().toString();
+				int discount = discountSeekBar.getProgress();
+				
+				if(name.isEmpty()){
+					Toast.makeText(getApplicationContext(), "Nem adta meg a termék nevét!", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				if(price == 0){
+					Toast.makeText(getApplicationContext(), "Nem adta meg a termék árát!", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				if(unit.isEmpty()){
+					Toast.makeText(getApplicationContext(), "Nem adta meg a termék egységét!", Toast.LENGTH_LONG).show();
+					return;
+				}
+				//itt kuldunk egy uzenetet a szervernek a valtoztatasokrol
+				actualMenuItem.name = name;
+				actualMenuItem.menu_category = category;
+				actualMenuItem.price = price;
+				actualMenuItem.currency = currency;
+				actualMenuItem.unit = unit;
+				actualMenuItem.discount = discount;
+				finish();
 			}
 		});
     }
