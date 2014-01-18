@@ -31,6 +31,11 @@ public class LocalDatabaseUtil {
 	dbHelper.close();
     }
 
+    public void testMethod(){
+    	String guery="INSERT INTO user VALUES('0','Csaba','kiralygyerek','1',datetime('now'))";
+    	database.execSQL(guery);
+    };
+    
     public User loginWithNickName(String nickName, String password) {
 	String selectQuery = String.format("SELECT * FROM user WHERE nick_name = %s AND password = %s", nickName,
 		password);
