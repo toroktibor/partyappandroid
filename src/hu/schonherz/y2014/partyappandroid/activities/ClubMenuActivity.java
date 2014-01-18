@@ -16,9 +16,10 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ClubMenuActivity extends ActionBarActivity {
 	
@@ -28,14 +29,16 @@ public class ClubMenuActivity extends ActionBarActivity {
 	@Override
 	public boolean onContextItemSelected(android.view.MenuItem item) {
 		// TODO Auto-generated method stub
-		Log.i("kerdes", ((AdapterContextMenuInfo)item.getMenuInfo()).position+"");
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int index = info.position;
 		switch(item.getItemId()) {
 		case R.id.delete_club_menu_item:
 			//kuldunk majd egy delete uzcsit
+			int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+			Session.getSearchViewClubs().get(clubListPosition).menuItems.remove(index);
+			onResume();
 			return true;
-		case R.id.modify_club_menu_item:
-			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		    int index = info.position;
+		case R.id.modify_club_menu_item:					    
 			Intent i = new Intent(getApplicationContext(),ClubMenuModifyActivity.class);
 			i.putExtra("menuItemListPosition", index);
 			startActivity(i);
@@ -72,17 +75,17 @@ public class ClubMenuActivity extends ActionBarActivity {
 		//buttonok lekerese
 		addButton = (Button) findViewById(R.id.club_menu_item_actionbar_add_button);
 		importButton = (Button) findViewById(R.id.club_menu_item_actionbar_import_button);
-		
-		//lista felfujasa
-		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-		ListView menuItemListView = (ListView) findViewById(R.id.club_menu_listview);
-		MenuItem[] menuItemArray = getMenuItemArrayFromList((Session.getSearchViewClubs().get(clubListPosition)).menuItems);
-		menuItemListView.setAdapter(new MenuItemsListAdapter(this, menuItemArray));
+		addButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(),ClubMenuAddActivity.class);
+				startActivity(i);
+			}
+		});
 		
 		//tulajextra funkcioi
-		if(ClubActivity.isClubOfActualUser){
-			registerForContextMenu(menuItemListView);
-		}else{
+		if(!ClubActivity.isClubOfActualUser){
 			addButton.setVisibility(View.INVISIBLE);
 			importButton.setVisibility(View.INVISIBLE);
 		}
@@ -96,4 +99,18 @@ public class ClubMenuActivity extends ActionBarActivity {
     	return menuItemArray;
     }
     
+    @Override
+    protected void onResume() {
+    	//lista felfujasa
+    	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+    	ListView menuItemListView = (ListView) findViewById(R.id.club_menu_listview);
+    	MenuItem[] menuItemArray = getMenuItemArrayFromList((Session.getSearchViewClubs().get(clubListPosition)).menuItems);
+    	menuItemListView.setAdapter(new MenuItemsListAdapter(this, menuItemArray));
+    			
+    	//tulajextra funkcioi
+    	if(ClubActivity.isClubOfActualUser){
+    		registerForContextMenu(menuItemListView);
+    	}
+    	super.onResume();
+    }
 }
