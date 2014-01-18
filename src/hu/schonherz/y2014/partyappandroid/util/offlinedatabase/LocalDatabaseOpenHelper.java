@@ -14,6 +14,9 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 	        "id integer  NOT NULL,"+
 	        "nick_name varchar2(255)  NOT NULL,"+
 	        "password varchar2(50)  NOT NULL,"+
+	        "email varchar2(255)  NOT NULL,"+
+	        "sex smallint  NOT NULL,"+
+	        "birthday date  NOT NULL,"+
 	        "type smallint NOT NULL,"+
 	        "last_update datetime NOT NULL,"+
 	        "PRIMARY KEY (id)"+
