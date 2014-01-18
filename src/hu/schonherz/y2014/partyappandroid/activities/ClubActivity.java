@@ -2,6 +2,8 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +11,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 public class ClubActivity extends ActionBarActivity {
 
     public ViewPager viewPager;
     static public Intent intent;
+    static public boolean isClubOfActualUser;
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 	public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -45,6 +49,8 @@ public class ClubActivity extends ActionBarActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_club);
 	intent = getIntent();
+	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	isClubOfActualUser = Session.getActualUser().isMine( Session.getSearchViewClubs().get(clubListPosition).id);
 
 	ClubActionBar ab = new ClubActionBar(this);
 	ab.setLayout();

@@ -84,4 +84,12 @@ public class User {
     			"sex: %d birhtday: %s type: %d", id,nickname,password,email,sex,birthday,type);
     }
 
+    public boolean isMine(int clubId){
+    	for(Club actualClub : this.usersClubs){
+    		if(actualClub.id == clubId)
+    			return true;
+    	}
+    	return false;
+    }
+    
 }
