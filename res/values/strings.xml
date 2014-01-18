@@ -12,7 +12,6 @@
         <item>Férfi</item>
         <item>Nő</item>
     </string-array>
-    
     <string-array name="array_sex">
         <item>Férfi</item>
         <item>Nő</item>
@@ -69,7 +68,8 @@
     <string name="club_menu_add_textview_quantity">Mennyisége</string>
     <string name="club_menu_add_textview_discount">Kedvezmény</string>
     <string name="toast_login_unsuccesful_text">Sikertelen bejelentkezés! Hibás felhasználónév, vagy jelszó! Próbáld újra</string>
-	<string name="clubs_type_spinner_prompt">Vegyes</string>
+    <string name="clubs_type_spinner_prompt">Vegyes</string>
+
     <string-array name="clubs_types">
         <item>Vegyes</item>
         <item>Kocsma</item>
@@ -79,5 +79,7 @@
         <item>Sport központ</item>
         <item>Disco</item>
     </string-array>
-    
+
+    <string name="title_activity_visitor_email">VisitorEmail</string>
+
 </resources>
