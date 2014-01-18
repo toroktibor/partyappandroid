@@ -5,15 +5,19 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClubMenuModifyActivity extends Activity {
 	
@@ -25,6 +29,9 @@ public class ClubMenuModifyActivity extends Activity {
 	SeekBar discountSeekBar;
 	TextView discountSummaryTextView;
 	MenuItem actualMenuItem;
+	int actualPrice;
+	String actualCurrency;
+	int actualDiscountInt;
 	Button addButton;
 	
     @Override
@@ -35,6 +42,9 @@ public class ClubMenuModifyActivity extends Activity {
 		int menuItemListPosition = getIntent().getExtras().getInt("menuItemListPosition");
 		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 		actualMenuItem = Session.getSearchViewClubs().get(clubListPosition).menuItems.get(menuItemListPosition);
+		actualPrice = actualMenuItem.price;
+		actualCurrency = actualMenuItem.currency;
+		actualDiscountInt = actualMenuItem.discount;
 		
 		categorySpinner = (Spinner) findViewById(R.id.club_menu_modify_spinner_category);
 		nameEditText = (EditText) findViewById(R.id.club_menu_modify_edittext_name);
@@ -50,32 +60,35 @@ public class ClubMenuModifyActivity extends Activity {
 		quantityEditText.setText(actualMenuItem.unit);
 		discountSeekBar.setProgress(actualMenuItem.discount);
 		
-		float actualDiscount = (float) ((100 - actualMenuItem.discount) / 100.0);
-		int newPrice = (int) ((int) actualMenuItem.price*actualDiscount);
-		discountSummaryTextView.setText(actualMenuItem.discount+"%: "+actualMenuItem.price+actualMenuItem.currency+" helyett "+newPrice+actualMenuItem.currency);
+		float actualDiscount = (float) ((100 - actualDiscountInt) / 100.0);
+		int newPrice = (int) ((int) actualPrice*actualDiscount);
+		discountSummaryTextView.setText(actualDiscountInt+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);
 		
 		discountSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				float actualDiscount = (float) ((100 - seekBar.getProgress()) / 100.0);
-				int newPrice = (int) ((int) actualMenuItem.price*actualDiscount);
-				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualMenuItem.price+actualMenuItem.currency+" helyett "+newPrice+actualMenuItem.currency);				
+				int newPrice = (int) ((int) actualPrice*actualDiscount);
+				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);
+				actualDiscountInt = seekBar.getProgress();
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				float actualDiscount = (float) ((100 - seekBar.getProgress()) / 100.0);
-				int newPrice = (int) ((int) actualMenuItem.price*actualDiscount);
-				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualMenuItem.price+actualMenuItem.currency+" helyett "+newPrice+actualMenuItem.currency);				
+				int newPrice = (int) ((int) actualPrice*actualDiscount);
+				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);
+				actualDiscountInt = seekBar.getProgress();
 			}
 			
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				float actualDiscount = (float) ((100 - seekBar.getProgress()) / 100.0);
-				int newPrice = (int) ((int) actualMenuItem.price*actualDiscount);
-				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualMenuItem.price+actualMenuItem.currency+" helyett "+newPrice+actualMenuItem.currency);
+				int newPrice = (int) ((int) actualPrice*actualDiscount);
+				discountSummaryTextView.setText(seekBar.getProgress()+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);
+				actualDiscountInt = seekBar.getProgress();
 			}
 		});
 		
@@ -112,6 +125,48 @@ public class ClubMenuModifyActivity extends Activity {
 				actualMenuItem.unit = unit;
 				actualMenuItem.discount = discount;
 				finish();
+			}
+		});
+		
+		priceEditText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				actualPrice = Integer.parseInt(s.toString());
+				float actualDiscount = (float) ((100 - actualDiscountInt) / 100.0);
+				int newPrice = (int) ((int) actualPrice*actualDiscount);
+				discountSummaryTextView.setText(actualDiscountInt+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);				
+			}
+		});
+    
+		currencySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				actualCurrency = currencySpinner.getItemAtPosition(arg2).toString();
+				float actualDiscount = (float) ((100 - actualDiscountInt) / 100.0);
+				int newPrice = (int) ((int) actualPrice*actualDiscount);
+				discountSummaryTextView.setText(actualDiscountInt+"%: "+actualPrice+actualCurrency+" helyett "+newPrice+actualCurrency);	
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
     }
