@@ -1,6 +1,8 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -35,7 +37,6 @@ public class ClubMenuAddActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_club_menu_add);
-		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 		
 		categorySpinner = (Spinner) findViewById(R.id.club_menu_add_spinner_category);
 		nameEditText = (EditText) findViewById(R.id.club_menu_add_edittext_name);
@@ -145,7 +146,14 @@ public class ClubMenuAddActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "Nem adta meg a termék egységét!", Toast.LENGTH_LONG).show();
 					return;
 				}
-				//itt kuldunk egy uzenetet a szervernek a valtoztatasokrol
+				
+				//Uzenet a servernek h uj menuitem van
+				
+				MenuItem newMenuItem = new MenuItem(0, name, price, currency, unit, discount, category, 1);
+				
+				int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+				Session.getSearchViewClubs().get(clubListPosition).menuItems.add(newMenuItem);
+				
 				finish();
 			}
 		});
