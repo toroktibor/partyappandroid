@@ -1,6 +1,9 @@
-package hu.schonherz.y2014.partyappandroid;
+package hu.schonherz.y2014.partyappandroid.activities;
 
-import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.R.id;
+import hu.schonherz.y2014.partyappandroid.R.layout;
+import hu.schonherz.y2014.partyappandroid.R.menu;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
@@ -41,7 +44,7 @@ public class VisitorEmail extends Activity {
 				String subject = et_subject.getText().toString().trim();
 
 				EditText et_body=(EditText)findViewById(R.id.visitor_message); 
-				String body = et_subject.getText().toString().trim();
+				String body = et_body.getText().toString().trim();
 
 				Log.e("email", "cím: " + email);
 				Log.e("email", "tárgy: " + subject);
