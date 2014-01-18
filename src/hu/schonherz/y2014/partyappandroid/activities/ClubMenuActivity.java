@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ClubMenuActivity extends ActionBarActivity {
 	
@@ -27,13 +28,16 @@ public class ClubMenuActivity extends ActionBarActivity {
 	@Override
 	public boolean onContextItemSelected(android.view.MenuItem item) {
 		// TODO Auto-generated method stub
-	
+		Log.i("kerdes", ((AdapterContextMenuInfo)item.getMenuInfo()).position+"");
 		switch(item.getItemId()) {
 		case R.id.delete_club_menu_item:
 			//kuldunk majd egy delete uzcsit
 			return true;
 		case R.id.modify_club_menu_item:
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		    int index = info.position;
 			Intent i = new Intent(getApplicationContext(),ClubMenuModifyActivity.class);
+			i.putExtra("menuItemListPosition", index);
 			startActivity(i);
 			return true;
 		default:
