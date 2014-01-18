@@ -49,5 +49,14 @@
         android:layout_centerHorizontal="true"
         android:rating="3"
         android:onClick="onClickHandler" />
+    
+        <Button
+            android:id="@+id/phone_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="phoneCall"
+            android:text="hívás" />
 
 </RelativeLayout>
