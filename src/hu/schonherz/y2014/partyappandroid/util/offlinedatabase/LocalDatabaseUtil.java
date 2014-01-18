@@ -12,6 +12,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class LocalDatabaseUtil {
 
@@ -47,10 +48,10 @@ public class LocalDatabaseUtil {
     }
 
     public void insertUser(String nickName, String password, String email, int sex, String birthday, int type) {
-
+    
 	ContentValues values = new ContentValues();
 
-	// values.put("id", id);
+	//values.put("id", id);
 	values.put("nick_name", nickName);
 	values.put("password", password);
 	values.put("email", email);

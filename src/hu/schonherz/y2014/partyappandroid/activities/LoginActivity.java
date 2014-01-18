@@ -42,6 +42,14 @@ public class LoginActivity extends Activity
 
 	setContentView(R.layout.activity_login);
 
+	Session.getInstance().makeLocalDatabaseConnection(getApplicationContext());
+
+	//gyors teszt
+	//Session.getInstance().getDatabaseConnecter().insertUser(0,"Csaba", "kiralygyerek", "elvis@jojo.com", 1, "2014.01.18", 1);
+	//User testUser = Session.getInstance().getDatabaseConnecter().loginWithNickName("Csaba", "királygyerek");
+	//Log.i("Persze hogy mukodik", testUser.getNickname()+" "+testUser.getPassword());
+	//gyors teszt vege
+	
 	if (Session.getInstance().getActualUser() != null) {
 	    loginSynchronize(Session.getInstance().getActualUser());
 	    Intent newIntent = new Intent(this, ClubsActivity.class);

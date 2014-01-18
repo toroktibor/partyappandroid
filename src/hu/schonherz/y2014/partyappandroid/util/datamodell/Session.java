@@ -6,6 +6,7 @@ import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil
 
 import java.util.List;
 
+import android.content.Context;
 import android.util.Log;
 
 public class Session {
@@ -19,10 +20,13 @@ public class Session {
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
-	actualCommunicationInterface = new SillyCommunication();
-	databaseConnecter = new LocalDatabaseUtil(null);
+    	actualCommunicationInterface = new SillyCommunication();
     }
-
+    
+    public void makeLocalDatabaseConnection(Context context){
+    	databaseConnecter = new LocalDatabaseUtil(context);
+    }
+    
     public static Session getInstance() {
 	if (instance == null) {
 	    instance = new Session();
