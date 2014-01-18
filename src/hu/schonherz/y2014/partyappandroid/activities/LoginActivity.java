@@ -46,7 +46,7 @@ public class LoginActivity extends Activity
 	Session.getInstance().getDatabaseConnecter().open();
 
 	//gyors teszt
-	Session.getInstance().getDatabaseConnecter().testMethod();
+	//Session.getInstance().getDatabaseConnecter().testMethod();
 	//gyors teszt vege
 	
 	if (Session.getInstance().getActualUser() != null) {
