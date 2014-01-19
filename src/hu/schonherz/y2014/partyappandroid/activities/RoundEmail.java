@@ -22,6 +22,7 @@ public class RoundEmail extends Activity {
 	
 	SeekBar emailSeekbar;
 	TextView minRating;
+	float rating;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +35,30 @@ public class RoundEmail extends Activity {
 		
 		emailSeekbar.setProgress(0);
 		minRating.setText("0.0");
+		rating = 0.0f;
 		emailSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				float actualRating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-				minRating.setText(Float.toString(actualRating));				
+				rating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
+				minRating.setText(Float.toString(rating));				
 				
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				float actualRating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-				minRating.setText(Float.toString(actualRating));
+				rating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
+				minRating.setText(Float.toString(rating));
 			}
 			
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-				float actualRating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-				minRating.setText(Float.toString(actualRating));
+				rating = (float)Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
+				minRating.setText(Float.toString(rating));
 			}
 		});
 		

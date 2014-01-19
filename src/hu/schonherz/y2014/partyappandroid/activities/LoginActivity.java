@@ -93,6 +93,8 @@ public class LoginActivity extends Activity
 	            protected void onPostExecute(Boolean result) {
 	                    /* Here you can call myLocationHelper.getLat() and
 	                    myLocationHelper.getLong() to get the location data.*/
+	            	cityname = mGpsLocation.getCityName();
+	            	mGpsLocation.onDestroy();
 	            }
 	           
 	            @Override
@@ -103,7 +105,7 @@ public class LoginActivity extends Activity
 	                            //do nothing, just wait
 	                    }
 	                    //once done return true
-	            	cityname = mGpsLocation.getCityName();
+	            	
 	                    return true;
 	            }
 	    }
@@ -151,6 +153,7 @@ public class LoginActivity extends Activity
 				// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
 			    	Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
 			    	//cityname = "Debrecen";
+			    	mGpsLocation.onDestroy();
 					loginSynchronize(actualUser);
 					Intent newIntent = new Intent(this, ClubsActivity.class);
 					startActivity(newIntent);
