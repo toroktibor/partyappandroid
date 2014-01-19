@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <TextView
+        android:id="@+id/round_targy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/round_subject"
+        android:layout_alignParentTop="true"
+        android:text="Üzenet tárgya:" />
+
+    <EditText
+        android:id="@+id/round_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/round_targy"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/round_uzenet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/round_subject"
+        android:text="Üzenet:" />
+
+    <EditText
+        android:id="@+id/round_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/round_uzenet"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:scrollHorizontally="false" />
+
+    <Button
+        android:id="@+id/round_email_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Elküld" />
+
+    <SeekBar
+        android:id="@+id/email_seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/min_title"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:id="@+id/min_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/round_message"
+        android:layout_below="@+id/round_message"
+        android:layout_marginTop="16dp"
+        android:text="Minimális értékelés:" />
+
+    <TextView
+        android:id="@+id/min_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/email_seekBar"
+        android:layout_toRightOf="@+id/round_email_send"/>
+
+</RelativeLayout>

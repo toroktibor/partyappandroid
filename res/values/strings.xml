@@ -79,7 +79,6 @@
         <item>Sport központ</item>
         <item>Disco</item>
     </string-array>
-
     <string-array name="menu_item_category">
         <item>Ital</item>
         <item>Étel</item>
@@ -89,13 +88,13 @@
         <item>Egyéb</item>
         <item>Virág</item>
     </string-array>
-    
     <string-array name="menu_item_currency">
         <item>HUF</item>
         <item>EUR</item>
         <item>USD</item>
     </string-array>
-    
+
     <string name="title_activity_visitor_email">VisitorEmail</string>
+    <string name="title_activity_round_email">RoundEmail</string>
 
 </resources>

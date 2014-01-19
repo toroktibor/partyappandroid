@@ -80,9 +80,15 @@ public class ClubActivity extends ActionBarActivity {
 		startActivity(callIntent);
 	}
 	
-	public void message(View v){
-		Intent messageIntent = new Intent(getApplicationContext(),VisitorEmail.class);
-		startActivity(messageIntent);
+	public void message(View v) {
+		if (isClubOfActualUser) {
+			Intent messageIntent = new Intent(getApplicationContext(),RoundEmail.class);
+			startActivity(messageIntent);
+		} else {
+			Intent messageIntent = new Intent(getApplicationContext(),VisitorEmail.class);
+			startActivity(messageIntent);
+		}
+
 	}
 
 	protected void clubFullDownload(int actualClubPosition) {

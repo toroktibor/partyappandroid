@@ -133,6 +133,10 @@
             android:name="hu.schonherz.y2014.partyappandroid.activities.VisitorEmail"
             android:label="@string/title_activity_visitor_email" >
         </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.RoundEmail"
+            android:label="@string/title_activity_round_email" >
+        </activity>
     </application>
 
 </manifest>
