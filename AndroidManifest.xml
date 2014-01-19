@@ -13,7 +13,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -137,6 +138,10 @@
             android:name="hu.schonherz.y2014.partyappandroid.activities.RoundEmail"
             android:label="@string/title_activity_round_email" >
         </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser" >
+        </activity>
+        
     </application>
 
 </manifest>

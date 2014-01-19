@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.MenuItemsListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import hu.schonherz.y2014.partyappandroid.xls.FileChooser;
 
 import java.util.List;
 
@@ -81,6 +82,18 @@ public class ClubMenuActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(),ClubMenuAddActivity.class);
 				startActivity(i);
+			}
+		});
+		importButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// Excel fájl beolvasása
+				Intent i = new Intent(getApplicationContext(),FileChooser.class);
+				startActivity(i);
+				
+				
+				
 			}
 		});
 		
