@@ -150,6 +150,7 @@ public class LoginActivity extends Activity
 			unbindService(mConnection);
 			mBounded = false;
 		}
+		
 	};
 
 	public void onClickHandler(View v) {
