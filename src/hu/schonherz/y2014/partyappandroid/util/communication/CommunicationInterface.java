@@ -72,4 +72,7 @@ public interface CommunicationInterface {
      *             módosítás sikertelenségét jelző kivétel
      */
     public void modifyUserData(int id, String email, String birthday, int sex) throws Exception;
+    
+    public User registerANewUser(String nick_name, String password, String email, int sex, String birthday);
+    
 }
