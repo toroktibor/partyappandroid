@@ -186,4 +186,11 @@ public class SillyCommunication implements CommunicationInterface {
 		
 		return fullClub;
 	}
+
+	@Override
+	public User registerANewUser(String nick_name, String password,
+			String email, int sex, String birthday) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
