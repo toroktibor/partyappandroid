@@ -1,14 +1,18 @@
 package hu.schonherz.y2014.partyappandroid.xls;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -71,5 +75,19 @@ public class FileChooser extends ListActivity {
     private void onFileClick(Option o)
     {
     	Toast.makeText(this, "File Clicked: "+o.getName(), Toast.LENGTH_SHORT).show();
+    	//TODO: xls beolvasása
+    	Log.e("menuItem", "fálj kiválasztva " + o.getPath().toString());
+    	ReadExcel re = new ReadExcel();
+    	re.setInputFile(o.getPath());
+    	try {
+    		Log.e("menuItem", "olvasás eleje");
+			re.read();
+			Log.e("menuItem", "olvasás vége");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	Intent i = new Intent(getApplicationContext(),ClubMenuActivity.class);
+		startActivity(i);
     } 
 }
