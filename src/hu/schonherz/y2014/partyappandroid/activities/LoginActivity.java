@@ -86,9 +86,9 @@ public class LoginActivity extends Activity
 				getApplicationContext());
 		Session.getInstance().getDatabaseConnecter().open();
 
-		// gyors teszt
-		// Session.getInstance().getDatabaseConnecter().testMethod();
-		// gyors teszt vege
+//		 gyors teszt
+//		 Session.getInstance().getDatabaseConnecter().testMethod();
+//		 gyors teszt vege
 
 		if (Session.getInstance().getActualUser() != null) {
 			loginSynchronize(Session.getInstance().getActualUser());
