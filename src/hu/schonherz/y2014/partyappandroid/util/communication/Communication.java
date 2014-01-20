@@ -153,8 +153,35 @@ public class Communication implements CommunicationInterface{
 	@Override
 	public void modifyUserData(int id, String email, String birthday, int sex)
 			throws Exception {
-		// TODO Auto-generated method stub
-		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "UPDATEUSER"));
+	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(id)).toString()));
+	    nameValuePairs.add(new BasicNameValuePair("Email", email));
+	    nameValuePairs.add(new BasicNameValuePair("Sex", (new Integer(sex)).toString()));
+	    nameValuePairs.add(new BasicNameValuePair("Birthday", birthday));
+
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
+	    try {
+	    	
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+			if(!data.equals("OK")){
+				throw new Exception();
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
