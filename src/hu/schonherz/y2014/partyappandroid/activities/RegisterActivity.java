@@ -3,10 +3,10 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -64,7 +64,10 @@ public class RegisterActivity extends FragmentActivity implements hu.schonherz.y
     			return;
     		}
     		int userSexInt = userSex.equals("Férfi")?0:1;
-    		Session.getInstance().getActualCommunicationInterface().registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
+    		User newUser = Session.getInstance().getActualCommunicationInterface().registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
+    		if(newUser == null){
+    			return;
+    		}
     		Session.closeSession();
     		finish();
     	}
