@@ -75,4 +75,11 @@ public interface CommunicationInterface {
     
     public User registerANewUser(String nick_name, String password, String email, int sex, String birthday);
     
+    public void setServices(int club_id, String[] services);
+    
+    public void setOwnerForClub(int user_id, int club_id);
+    
+    public void setFavoriteClubForUser(int user_id, int club_id);
+    
+    public void deleteFavoriteClubForUser(int fav_id);
 }

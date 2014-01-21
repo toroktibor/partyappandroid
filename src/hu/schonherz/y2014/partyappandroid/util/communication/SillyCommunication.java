@@ -193,4 +193,28 @@ public class SillyCommunication implements CommunicationInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void setServices(int club_id, String[] services) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOwnerForClub(int user_id, int club_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setFavoriteClubForUser(int user_id, int club_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteFavoriteClubForUser(int fav_id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
