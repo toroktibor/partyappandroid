@@ -18,7 +18,7 @@ public interface CommunicationInterface {
 
     // Elküld egy új hely kérelmet a szervernek, ha a owner_user_id -1 akkor
     // nincs neki tulaj jelöltje
-    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id);
+    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, String[] services);
 
     /**
      * Adatbázissal kommunikáló metódus a klubbok kereséshez, melynek
