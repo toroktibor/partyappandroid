@@ -70,7 +70,7 @@
             android:label="@string/title_activity_club_event_details" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.ClubEventModifyActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventModifyActivity"
             android:label="@string/title_activity_club_event_modify" >
         </activity>
         <activity
@@ -94,7 +94,7 @@
             android:label="@string/title_activity_club_my_review" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.PendingListActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PendingListActivity"
             android:label="@string/title_activity_pending_list" >
         </activity>
         <activity

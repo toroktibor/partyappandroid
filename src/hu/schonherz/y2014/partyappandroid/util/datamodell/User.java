@@ -92,4 +92,11 @@ public class User {
     	return false;
     }
     
+    public boolean isLike(int clubId){
+    	for(Club actualClub : this.favoriteClubs){
+    		if(actualClub.id == clubId)
+    			return true;
+    	}
+    	return false;
+    }
 }
