@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -33,7 +34,38 @@ public class RegisterActivity extends FragmentActivity implements hu.schonherz.y
 
     public void onClickHandler(View v) {
     	if (v.getId() == R.id.register_button_register) {
+    		String userName = nameEditText.getText().toString();
+    		String userPassword = passwordEditText.getText().toString();
+    		String userPassword2 = password2EditText.getText().toString();
+    		String userEmail = emailEditText.getText().toString();
+    		String userBirthday = dateOfBirthEditText.getText().toString();
+    		String userSex = spinnerSexSpinner.getSelectedItem().toString();
     		
+    		if(userName.isEmpty()){
+    			return;
+    		}
+    		if(userPassword.isEmpty()){
+    			return;
+    		}
+    		if(!userPassword2.isEmpty()){
+    			if(!userPassword.equals(userPassword2)){
+    				return;
+    			}
+    		} else {
+    			return;
+    		}
+    		if(userEmail.isEmpty()){
+    			return;
+    		}
+    		if(userBirthday.isEmpty()){
+    			return;
+    		}
+    		if(userSex.isEmpty()){
+    			return;
+    		}
+    		int userSexInt = userSex.equals("Férfi")?0:1;
+    		Session.getInstance().getActualCommunicationInterface().registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
+    		Session.closeSession();
     		finish();
     	}
     	if (v.getId() == R.id.register_edittext_dateofbirth) {

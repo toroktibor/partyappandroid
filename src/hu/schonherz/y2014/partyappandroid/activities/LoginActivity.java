@@ -137,7 +137,7 @@ public class LoginActivity extends Activity
 			// }
 			// });
 			if (InternetConnection.isOnline(getApplicationContext())) {
-				locationTask.execute(new Boolean[] { true });
+				//locationTask.execute(new Boolean[] { true });
 			}
 
 		}
