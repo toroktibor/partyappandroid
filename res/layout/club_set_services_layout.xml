@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <CheckBox
+        android:id="@+id/checkBoxCoctailBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/club_service_coctailbar" />
+
+    <CheckBox
+        android:id="@+id/checkBoxDance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/checkBoxCoctailBar"
+        android:layout_below="@id/checkBoxBeerGarden"
+        android:text="@string/club_service_dance" />
+
+    <CheckBox
+        android:id="@+id/checkBoxDJ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/checkBoxCoctailBar"
+        android:layout_below="@id/checkBoxDance"
+        android:text="@string/club_service_dj" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxMenu"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_below="@+id/checkBoxBeerGarden"
+	       android:layout_toRightOf="@+id/checkBoxSportTV"
+	       android:text="@string/club_service_menu" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxBeerGarden"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignBaseline="@+id/checkBoxCoctailBar"
+	       android:layout_alignBottom="@+id/checkBoxCoctailBar"
+	       android:layout_alignLeft="@+id/checkBoxMenu"
+	       android:text="@string/club_service_beergarden" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxLiveMusic"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignLeft="@+id/checkBoxMenu"
+	       android:layout_below="@+id/checkBoxMenu"
+	       android:text="@string/club_service_liveMusic" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxWiFi"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignLeft="@+id/checkBoxDJ"
+	       android:layout_below="@+id/checkBoxDJ"
+	       android:text="@string/club_service_wifi" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxPubSports"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_below="@+id/checkBoxLiveMusic"
+	       android:layout_toRightOf="@+id/checkBoxSportTV"
+	       android:text="@string/club_service_pubsports" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxSportTV"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignLeft="@+id/checkBoxWiFi"
+	       android:layout_below="@+id/checkBoxWiFi"
+	       android:text="@string/club_service_sportTV" />
+
+	   <CheckBox
+	       android:id="@+id/checkBoxFaceAndDressControl"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignLeft="@+id/checkBoxSportTV"
+	       android:layout_below="@+id/checkBoxSportTV"
+	       android:text="@string/club_service_face_and_dress_control" />
+
+	   <Button
+	       android:id="@+id/buttonCoctailBar"
+	       android:layout_width="100dp"
+	       android:layout_height="100dp"
+	       android:layout_alignLeft="@+id/checkBoxFaceAndDressControl"
+	       android:layout_alignParentBottom="true"
+	       android:layout_marginBottom="32dp"
+	       android:background="@drawable/club_service_coctailbar_icon_b"
+	       android:clickable="true"
+	       />
+
+</RelativeLayout>
