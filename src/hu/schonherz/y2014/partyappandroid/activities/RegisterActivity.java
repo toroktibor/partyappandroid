@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class RegisterActivity extends FragmentActivity {
+public class RegisterActivity extends FragmentActivity implements hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator {
 
 	EditText nameEditText;
 	EditText passwordEditText;
@@ -23,7 +23,12 @@ public class RegisterActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_register);
-    	
+    	nameEditText = (EditText) findViewById(R.id.register_edittext_name);
+    	passwordEditText = (EditText) findViewById(R.id.register_edittext_password);
+    	password2EditText = (EditText) findViewById(R.id.register_edittext_password2);
+    	emailEditText = (EditText) findViewById(R.id.register_edittext_email);
+    	dateOfBirthEditText = (EditText) findViewById(R.id.register_edittext_dateofbirth);
+    	spinnerSexSpinner = (Spinner) findViewById(R.id.register_spinner_sex);
     }
 
     public void onClickHandler(View v) {
@@ -35,8 +40,13 @@ public class RegisterActivity extends FragmentActivity {
 
     		DialogFragment datepicker = new DatePickerFragment();
     		datepicker.show(getSupportFragmentManager(), "timePicker");
-
+    		
     	}
     }
 
+    @Override
+    public void onDatePicked(String date) {
+    	dateOfBirthEditText.setText(date);
+    }
+    
 }

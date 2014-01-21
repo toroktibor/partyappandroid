@@ -1,8 +1,9 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewClubActivity extends Activity {
+public class NewClubActivity extends FragmentActivity {
 
     EditText newClubNameEditText;
     EditText newClubAddressEditText;
@@ -65,6 +66,15 @@ public class NewClubActivity extends Activity {
 	    }
 	});
 
+	Button setServicesButton = (Button) findViewById(R.id.new_club_button_set_services);
+	setServicesButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+			serviceSetterFragment.show(getSupportFragmentManager(), "SetServicesOfClub");
+			
+		}
+	});
     }
-
 }

@@ -49,6 +49,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Szolgáltatások" />
+
+    <Button
+        android:id="@+id/new_club_button_set_services"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setServicesOfClub"
+        android:text="Beállítom a hely szolgáltatásait" />
     
     <CheckBox
         android:id="@+id/new_club_checkbox_add"
