@@ -70,7 +70,7 @@ public class SillyCommunication implements CommunicationInterface {
     }
 
     @Override
-    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id) {
+    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, String[] services) {
 	// TODO Auto-generated method stub
 
     }

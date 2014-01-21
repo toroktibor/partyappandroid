@@ -59,7 +59,7 @@ public class NewClubActivity extends Activity {
 		int owner_user_id = isOwner ? Session.getInstance().getActualUser().getId() : -1;
 
 		Session.getInstance().getActualCommunicationInterface()
-			.sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id);
+			.sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id, new String[]{"a","b"});
 
 		onBackPressed();
 	    }
