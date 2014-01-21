@@ -13,19 +13,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ListView;
 
 public class ClubEventsFragment extends Fragment {
 	
 	ListView eventsListView;
+	Button addButton;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class ClubEventsFragment extends Fragment {
 	eventsListView = new ListView(getActivity().getApplicationContext());
 	Event[] eventArray = getEventArrayFromList(Session.getSearchViewClubs().get(clubListPosition).events);
 	eventsListView.setAdapter(new EventsListAdapter(getActivity(), eventArray));
+	addButton = (Button) rootView.findViewById(R.id.club_events_add_button);
 	
 	eventsListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -48,11 +52,25 @@ public class ClubEventsFragment extends Fragment {
 
 	});
 	
+	addButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			
+			Activity activity = getActivity();
+			Intent i = new Intent(activity, ClubEventNewActivity.class);
+			activity.startActivity(i);
+			
+		}
+	});
+	
 	rootView.addView(eventsListView);
 	
 	//tulajextra funkcioi
 	if(ClubActivity.isClubOfActualUser){
 		registerForContextMenu(eventsListView);
+	} else {
+		addButton.setVisibility(View.INVISIBLE);
 	}
 	
 	return rootView;
