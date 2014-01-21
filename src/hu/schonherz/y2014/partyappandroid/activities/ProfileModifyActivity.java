@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
@@ -8,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class ProfileModifyActivity extends Activity {
 
@@ -45,9 +46,9 @@ public class ProfileModifyActivity extends Activity {
 	    try {
 		user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(),
 			spinnerSex.getSelectedItemPosition());
-		Toast.makeText(this, "Adatok sikeresen módosítva", Toast.LENGTH_SHORT).show();
+		new DoneToast(this, "Adatok sikeresen módosítva").show();
 	    } catch (Exception e) {
-		Toast.makeText(this, "Az adatok módosítása nem sikerült!", Toast.LENGTH_LONG).show();
+		new ErrorToast(this, "Az adatok módosítása nem sikerült!").show();
 	    }
 
 	    finish();

@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation.LocalBinder;
@@ -171,17 +172,7 @@ public class LoginActivity extends Activity
 			if (actualUser == null) {
 				Log.e("LOGIN SCREEN",
 						"WRONG NAME-PASSWORD PAIR, TOAST WILL BE SHOWED");
-				LayoutInflater inflater = getLayoutInflater();
-				View toastView = inflater
-						.inflate(
-								R.layout.toast_login_unsuccessful,
-								(ViewGroup) findViewById(R.id.toast_login_unsuccessful_root));
-
-				Toast unsuccesfullLogin = new Toast(getApplicationContext());
-				unsuccesfullLogin.setGravity(Gravity.CENTER, 0, 0);
-				unsuccesfullLogin.setDuration(Toast.LENGTH_LONG);
-				unsuccesfullLogin.setView(toastView);
-				unsuccesfullLogin.show();
+				new ErrorToast(this,"Sikertelen bejelentkezés! Hibásfelhasználónév vagy jelszó! Próbáld újra!").show();
 				Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY");
 			} else {
 				// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
