@@ -21,8 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class Communication implements CommunicationInterface{
 	
 	HttpClient httpclient;
@@ -35,8 +33,8 @@ public class Communication implements CommunicationInterface{
 	public User authenticationUser(String nickname, String password) {
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
 	    nameValuePairs.add(new BasicNameValuePair("action", "GET"));
-	    nameValuePairs.add(new BasicNameValuePair("NickName", "Titkos"));
-	    nameValuePairs.add(new BasicNameValuePair("Password", "titkos"));
+	    nameValuePairs.add(new BasicNameValuePair("NickName", nickname));
+	    nameValuePairs.add(new BasicNameValuePair("Password", password));
 	    
 	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
 	    try {
@@ -89,14 +87,92 @@ public class Communication implements CommunicationInterface{
 
 	@Override
 	public List<Club> getClubsFromCityName(String cityname) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Club> outList = new ArrayList<Club>();
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "GETFROMCITYNAME"));
+	    nameValuePairs.add(new BasicNameValuePair("CityName", cityname));
+	    
+	    HttpClient httpclient = new DefaultHttpClient();  
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");  
+		
+	    try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+			if(data.equals("FAILED")){
+				return null;
+			} else {
+				JSONArray jsonArray = new JSONArray(data);
+				for(int i=0; i<jsonArray.length(); ++i){
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					int clubId = jsonObject.getInt("id");
+					String clubName = jsonObject.getString("name");
+					String clubAddress = jsonObject.getString("address");
+					Club newClub = new Club(clubId, clubName, clubAddress);
+					outList.add(newClub);
+				}
+    			
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		return outList;
 	}
 
 	@Override
 	public List<Club> getOwnedClubsFromUserId(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Club> outList = new ArrayList<Club>();
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "GETUSERCLUBS"));
+	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(user_id)).toString()));
+	    
+	    HttpClient httpclient = new DefaultHttpClient();  
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");  
+		
+	    try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+			if(data.equals("FAILED")){
+				return null;
+			} else {
+				JSONArray jsonArray = new JSONArray(data);
+				for(int i=0; i<jsonArray.length(); ++i){
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					int clubId = jsonObject.getInt("id");
+					String clubName = jsonObject.getString("name");
+					String clubAddress = jsonObject.getString("address");
+					Club newClub = new Club(clubId, clubName, clubAddress);
+					outList.add(newClub);
+				}
+    			
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		return outList;
 	}
 
 	@Override
@@ -108,8 +184,41 @@ public class Communication implements CommunicationInterface{
 	@Override
 	public void sendANewClubRequest(String newClubName, String newClubAddress,
 			String newClubType, int owner_user_id, String[] services) {
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
+	    nameValuePairs.add(new BasicNameValuePair("Name", newClubName));
+	    nameValuePairs.add(new BasicNameValuePair("Type", newClubType));
+	    nameValuePairs.add(new BasicNameValuePair("Address", newClubAddress));
 		
-		
+	    HttpClient httpclient = new DefaultHttpClient();  
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");   
+
+	    try {
+	    	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+	        try {
+	            if(data.equals("FAILED")){
+	    			//itt baj lesz
+	    		} else {
+	    			JSONObject jsonObject = new JSONObject(data);
+	            	int club_id = Integer.parseInt(jsonObject.getString("NewID"));
+	    			setServices(club_id, services);
+	    			if(owner_user_id != -1){
+	    				setOwnerForClub(owner_user_id, club_id);
+	    			}
+	    		}
+	          } catch (Exception e) {
+	            e.printStackTrace();
+	          }
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 	}
 
 	@Override
@@ -222,6 +331,128 @@ public class Communication implements CommunicationInterface{
 			e.printStackTrace();
 		}
 	    return null;
+	}
+
+	@Override
+	public void setServices(int club_id, String[] services) {
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+		
+		for(String actualService: services){
+		
+			nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
+	    	nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
+	    	nameValuePairs.add(new BasicNameValuePair("Type", actualService));
+		
+	    	HttpClient httpclient = new DefaultHttpClient();  
+	    	HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/service.php");   
+
+	    	try {
+	    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+				HttpResponse response = httpclient.execute(httppost);
+				String data = new BasicResponseHandler().handleResponse(response);
+	        	try {
+	            	if(data.equals("FAILED")){
+	    				//itt baj lesz
+	    			}
+	          	} catch (Exception e) {
+	        	  e.printStackTrace();
+	          	}
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+	}
+
+	@Override
+	public void setOwnerForClub(int user_id, int club_id) {
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
+	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(user_id)).toString()));
+	    nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
+	    HttpClient httpclient = new DefaultHttpClient();  
+    	HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/owner.php");   
+
+    	try {
+    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+        	try {
+            	if(data.equals("FAILED")){
+    				//itt baj lesz
+    			}
+          	} catch (Exception e) {
+        	  e.printStackTrace();
+          	}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void setFavoriteClubForUser(int user_id, int club_id) {
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
+	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(user_id)).toString()));
+	    nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
+	  
+	    HttpClient httpclient = new DefaultHttpClient();  
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/favorite.php");
+	    try {
+    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+        	try {
+            	if(data.equals("FAILED")){
+    				//itt baj lesz
+    			}
+          	} catch (Exception e) {
+        	  e.printStackTrace();
+          	}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteFavoriteClubForUser(int fav_id) {
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    nameValuePairs.add(new BasicNameValuePair("action", "DELETE"));
+	    nameValuePairs.add(new BasicNameValuePair("FavID", (new Integer(fav_id)).toString()));
+	  
+	    HttpClient httpclient = new DefaultHttpClient();  
+	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/favorite.php");
+	    try {
+	    	
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			String data = new BasicResponseHandler().handleResponse(response);
+			if(!data.equals("OK")){
+				//bajvan
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
