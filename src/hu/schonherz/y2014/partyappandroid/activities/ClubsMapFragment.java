@@ -18,7 +18,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
     @Override
     public void updateResults() {
-	Log.i("asdasd","Térkép találatok frissítése");
+	Log.i(this.getClass().getName(),"Térkép találatok frissítése");
 	
     }
 

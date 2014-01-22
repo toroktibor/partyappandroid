@@ -89,9 +89,15 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 			            	EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
 			            	EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
 			            	
-			            	Session.setSearchViewClubs(Session.getInstance()
+			            	Log.i(this.getClass().getName(),"Eddigi találatok száma: "+Session.getSearchViewClubs().size());
+			            	Log.i(this.getClass().getName(),"Keresés: név:["+name.getText().toString()+"] típus:["+type.getText().toString()+"] város:["+city.getText().toString()+"]");
+			            			
+			            	Session.getSearchViewClubs().clear();
+			            	Session.getSearchViewClubs().addAll(Session.getInstance()
 						.getActualCommunicationInterface()
 						.getClubsFromCityName(city.getText().toString()));
+			            	
+			            	Log.i(this.getClass().getName(),"Keresési találatok száma: "+Session.getSearchViewClubs().size());
 			            	
 			            	ClubsUpdateableFragment cuf = (ClubsUpdateableFragment) ((ClubsActivity)activity).currentFragment;
 			            	cuf.updateResults();
