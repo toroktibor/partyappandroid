@@ -19,13 +19,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ClubsListFragment extends Fragment {
+public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment{
+
+    private ListView clubsListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_clubs_list, container, false);
 
-	ListView clubsListView = new ListView(getActivity().getApplicationContext());
+	clubsListView = new ListView(getActivity().getApplicationContext());
 	Log.d("FELSOROLÁS ELEJE", "HURRÁ BÉBI! :D");
 	Club[] clubArray = getClubArrayFromClubsList(Session.getSearchViewClubs());
 	// Log.i("jojo",clubArray[0].address);
@@ -57,6 +59,30 @@ public class ClubsListFragment extends Fragment {
 	    clubArray[i] = clubList.get(i);
 	}
 	return clubArray;
+    }
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	Log.i("asdasd","onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+        
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((ClubsActivity)activity).currentFragment=this;
+    }
+
+    @Override
+    public void updateResults() {
+	clubsListView.setAdapter(new ClubListAdapter(getActivity(), getClubArrayFromClubsList(Session.getSearchViewClubs())));
+	
+	ListView lv = (ListView) getView().findViewById(R.id.clubs_list_listview);
+	//ClubListAdapter cla = (ClubListAdapter) lv.getAdapter();
+	lv.invalidateViews();
+	
+	
     }
 
 }

@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class Communication implements CommunicationInterface{
 	
 	HttpClient httpclient;
@@ -47,20 +49,15 @@ public class Communication implements CommunicationInterface{
 			}
 			JSONArray jsonArray = new JSONArray(data);
 			JSONObject jsonObject = jsonArray.getJSONObject(0);
-        	int user_id = Integer.parseInt(jsonObject.getString("id"));
-        	jsonObject = jsonArray.getJSONObject(1);
-        	String nick_name = jsonObject.getString("nick_name");
-        	jsonObject = jsonArray.getJSONObject(2);
+			int user_id = Integer.parseInt(jsonObject.getString("id"));
+			String nick_name2 = jsonObject.getString("nick_name");
+			String nick_name = jsonObject.getString("nick_name");
         	String password2 = jsonObject.getString("password");
-        	jsonObject = jsonArray.getJSONObject(3);
         	String email = jsonObject.getString("email");
-        	jsonObject = jsonArray.getJSONObject(4);
         	int sex = Integer.parseInt(jsonObject.getString("sex"));
-        	jsonObject = jsonArray.getJSONObject(5);
         	String birthday = jsonObject.getString("birthday");
-        	jsonObject = jsonArray.getJSONObject(6);
         	int type = Integer.parseInt(jsonObject.getString("type"));
-        	
+
         	User newUser = new User(user_id, nick_name, password2, email, sex, birthday, type);
         	return newUser;
 		} catch (UnsupportedEncodingException e) {
@@ -81,8 +78,8 @@ public class Communication implements CommunicationInterface{
 
 	@Override
 	public List<Club> getFavoriteClubsFromUserId(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Club> outList = new ArrayList<Club>();
+		return outList;
 	}
 
 	@Override
@@ -100,7 +97,7 @@ public class Communication implements CommunicationInterface{
 			HttpResponse response = httpclient.execute(httppost);
 			String data = new BasicResponseHandler().handleResponse(response);
 			if(data.equals("FAILED")){
-				return null;
+				return outList;
 			} else {
 				JSONArray jsonArray = new JSONArray(data);
 				for(int i=0; i<jsonArray.length(); ++i){
@@ -145,7 +142,7 @@ public class Communication implements CommunicationInterface{
 			HttpResponse response = httpclient.execute(httppost);
 			String data = new BasicResponseHandler().handleResponse(response);
 			if(data.equals("FAILED")){
-				return null;
+				return outList;
 			} else {
 				JSONArray jsonArray = new JSONArray(data);
 				for(int i=0; i<jsonArray.length(); ++i){

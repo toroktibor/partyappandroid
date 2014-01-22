@@ -73,6 +73,13 @@ public class Club {
 		this.name = name;
 		this.address = address;
 	}
+	
+	public Club(int id, String name, String address, int approved) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.approved = approved;
+	}
 
 	public boolean isNotFullDownloaded() {
 		return (this.email == null) && (this.date == null)

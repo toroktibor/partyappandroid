@@ -54,8 +54,8 @@ public class SillyCommunication implements CommunicationInterface {
 		    Log.e("GETCLUBSFROMCITYNAME","PLACES OF " + cityname + " CITY CATCHED");
 		}
 		else if (cityname.equals("Budapest")) {
-		    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48"));
-		    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49"));
+		    cityClubs.add(new Club(2, "Táncolj", "Budapest, Kishegyesi utca 48",0));
+		    cityClubs.add(new Club(3, "Dance", "Budapest, Váci utca 49",1));
 		    Log.e("GETCLUBSFROMCITYNAME","PLACES OF " + cityname + " CITY CATCHED");
 		}
 		else {

@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsUpdateableFragment;
 import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.PendingListActivity;
@@ -10,6 +11,7 @@ import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
@@ -19,6 +21,8 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
+import android.widget.EditText;
 
 public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener {
 
@@ -46,6 +50,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
     public void onClick(View v) {
 	Intent i;
 	switch (v.getId()) {
+	
+	
 		case R.id.actionbar_clubs_button_b:
 		    /* viewPager lapozása a lista nézetre */
 		    activity.viewPager.setCurrentItem(0);
@@ -68,7 +74,38 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 			    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 				    null);
 			    adb.setView(view);
-			    adb.show();
+			    
+
+			    
+			    final Dialog d = adb.create();			    
+			    d.show();
+			    
+			    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {
+			        
+			        @Override
+			        public void onClick(View v) {
+			            
+			            	EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
+			            	EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
+			            	EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
+			            	
+			            	Log.i(this.getClass().getName(),"Eddigi találatok száma: "+Session.getSearchViewClubs().size());
+			            	Log.i(this.getClass().getName(),"Keresés: név:["+name.getText().toString()+"] típus:["+type.getText().toString()+"] város:["+city.getText().toString()+"]");
+			            			
+			            	Session.getSearchViewClubs().clear();
+			            	Session.getSearchViewClubs().addAll(Session.getInstance()
+						.getActualCommunicationInterface()
+						.getClubsFromCityName(city.getText().toString()));
+			            	
+			            	Log.i(this.getClass().getName(),"Keresési találatok száma: "+Session.getSearchViewClubs().size());
+			            	
+			            	ClubsUpdateableFragment cuf = (ClubsUpdateableFragment) ((ClubsActivity)activity).currentFragment;
+			            	cuf.updateResults();
+			            	
+			    		d.cancel();
+			    	
+			        }
+			    });
 			}
 		    });
 	

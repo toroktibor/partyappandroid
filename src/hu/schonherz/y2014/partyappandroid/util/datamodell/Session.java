@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
+import hu.schonherz.y2014.partyappandroid.util.communication.Communication;
 import hu.schonherz.y2014.partyappandroid.util.communication.CommunicationInterface;
 import hu.schonherz.y2014.partyappandroid.util.communication.SillyCommunication;
 import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil;
@@ -20,6 +21,7 @@ public class Session {
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
+    	//actualCommunicationInterface = new Communication(); //meg nem all teljesen keszen
     	actualCommunicationInterface = new SillyCommunication();
     }
     

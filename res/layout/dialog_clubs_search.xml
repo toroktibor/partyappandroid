@@ -15,6 +15,7 @@
         android:text="Név alapján"/>
     
     <EditText 
+        android:id="@+id/dialog_clubs_search_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
@@ -24,6 +25,7 @@
         android:text="Típus alapján"/>
     
     <EditText 
+        android:id="@+id/dialog_clubs_search_edittext_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
@@ -33,10 +35,12 @@
         android:text="Város alapján"/>
     
     <EditText 
+        android:id="@+id/dialog_clubs_search_edittext_cityname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
     <Button 
+        android:id="@+id/dialog_clubs_search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Keresés"/>

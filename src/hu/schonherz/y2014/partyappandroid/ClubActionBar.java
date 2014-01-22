@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
@@ -58,7 +59,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 
 	    item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
 	    item.setOnMenuItemClickListener(this);
-
+	    
 	    popupmenu.show();
 	    break;
 

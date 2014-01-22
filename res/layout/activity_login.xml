@@ -12,14 +12,16 @@
         android:id="@+id/login_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name"/>
+        android:hint="@string/name"
+        android:text="a"/>
 
     <EditText
         android:id="@+id/login_edittext_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="@string/password">
+        android:hint="@string/password"
+        android:text="a">
 
         <requestFocus />
     </EditText>

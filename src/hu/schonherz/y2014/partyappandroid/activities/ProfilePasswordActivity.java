@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
@@ -30,27 +32,27 @@ public class ProfilePasswordActivity extends Activity {
 
 	    if (oldPassword.getText().toString().isEmpty() || newPassword.getText().toString().isEmpty()
 		    || newPasswordAgain.getText().toString().isEmpty()) {
-		Toast.makeText(this, "Minden mező kitöltése kötelező", Toast.LENGTH_LONG).show();
+		new ErrorToast(this, "Minden mező kitöltése kötelező").show();
 		return;
 	    }
 
 	    if (!oldPassword.getText().toString().equals(user.getPassword())) {
-		Toast.makeText(this, "A megadott régi jelszó nem megfelelő!", Toast.LENGTH_LONG).show();
+		new ErrorToast(this, "A megadott régi jelszó nem megfelelő!").show();
 		return;
 	    }
 
 	    if (!newPassword.getText().toString().equals(newPasswordAgain.getText().toString())) {
-		Toast.makeText(this, "A megadott új jelszavak nem egyeznek!", Toast.LENGTH_LONG).show();
+		new ErrorToast(this, "A megadott új jelszavak nem egyeznek!").show();
 		return;
 	    }
 
 	    try {
 		user.modifyPassword(newPassword.getText().toString());
 	    } catch (Exception e) {
-		Toast.makeText(this, "A jelszómódosítás sikertelen!", Toast.LENGTH_LONG).show();
+		new ErrorToast(this, "A jelszómódosítás sikertelen!").show();
 	    }
 
-	    Toast.makeText(this, "Sikeres jelszómódosítás", Toast.LENGTH_LONG).show();
+	    new DoneToast(this, "Sikeres jelszómódosítás").show();
 
 	    finish();
 	    break;
