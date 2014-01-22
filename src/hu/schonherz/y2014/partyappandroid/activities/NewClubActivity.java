@@ -3,9 +3,12 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.support.v4.app.FragmentActivity;
+
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,7 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewClubActivity extends FragmentActivity {
+public class NewClubActivity extends FragmentActivity implements SetServicesCommunicator{
 
     EditText newClubNameEditText;
     EditText newClubAddressEditText;
@@ -22,7 +25,13 @@ public class NewClubActivity extends FragmentActivity {
     CheckBox newClubOwnerCheckBox;
     Button addButton;
     Context thisContext;
+    String[] services;
 
+    @Override	// EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
+    public void onServicesSetted(List<String> services) {
+    	   	this.services = (String[]) services.toArray();
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -60,7 +69,7 @@ public class NewClubActivity extends FragmentActivity {
 		int owner_user_id = isOwner ? Session.getInstance().getActualUser().getId() : -1;
 
 		Session.getInstance().getActualCommunicationInterface()
-			.sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id, new String[]{"a","b"});
+			.sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id, services);
 
 		onBackPressed();
 	    }

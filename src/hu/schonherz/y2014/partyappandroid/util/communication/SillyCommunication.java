@@ -69,6 +69,10 @@ public class SillyCommunication implements CommunicationInterface {
 	return cityClubs;
     }
 
+    /*Lehetne esetleg a services nem tömb, hanem List<String>??? Aki ezt az osztály írja (Csaba!?), 
+     * válaszoljon erre nekem, Tibinek szóban! :D
+     * Mármint nem csak itt, hanem az Interface-ben is... nem kellene egy toArray-t használnom. 
+     * Fölösleges kasztolásokat kerülnék el => egyel kevesebb hibalehetőség lenne!*/
     @Override
     public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, String[] services) {
 	// TODO Auto-generated method stub
