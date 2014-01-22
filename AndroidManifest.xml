@@ -141,6 +141,9 @@
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser" >
         </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.FullImageActivity" >
+        </activity>
         
     </application>
 
