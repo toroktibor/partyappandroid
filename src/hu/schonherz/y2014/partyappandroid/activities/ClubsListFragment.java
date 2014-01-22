@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ClubsListFragment extends Fragment {
+public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +57,25 @@ public class ClubsListFragment extends Fragment {
 	    clubArray[i] = clubList.get(i);
 	}
 	return clubArray;
+    }
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	Log.i("asdasd","onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+        
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((ClubsActivity)activity).currentFragment=this;
+    }
+
+    @Override
+    public void updateResults() {
+	Log.i("asdasd","Lista frissítése");
+	
     }
 
 }
