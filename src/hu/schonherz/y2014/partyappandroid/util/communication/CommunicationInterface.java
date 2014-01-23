@@ -3,7 +3,11 @@ package hu.schonherz.y2014.partyappandroid.util.communication;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
 
 public interface CommunicationInterface {
     public User authenticationUser(String nickname, String password);
@@ -15,6 +19,8 @@ public interface CommunicationInterface {
     public List<Club> getOwnedClubsFromUserId(int user_id);
     
     public Club getEverythingFromClub(int club_id);
+    
+    public String httpPost(String url,HashMap<String, String> post) throws ClientProtocolException, IOException;
 
     // Elküld egy új hely kérelmet a szervernek, ha a owner_user_id -1 akkor
     // nincs neki tulaj jelöltje

@@ -21,8 +21,8 @@ public class Session {
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
-    	//actualCommunicationInterface = new Communication(); //meg nem all teljesen keszen
-    	actualCommunicationInterface = new SillyCommunication();
+    	actualCommunicationInterface = new Communication(); //meg nem all teljesen keszen
+    	//actualCommunicationInterface = new SillyCommunication();
     }
     
     public void makeLocalDatabaseConnection(Context context){

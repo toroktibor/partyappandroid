@@ -1,5 +1,10 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.apache.http.client.ClientProtocolException;
+
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation;
@@ -87,6 +92,8 @@ public class LoginActivity extends Activity
 			startActivity(newIntent);
 			finish();
 		}
+				
+		
 
 	}
 

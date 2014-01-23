@@ -6,8 +6,12 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
 
 import android.util.Log;
 
@@ -220,5 +224,12 @@ public class SillyCommunication implements CommunicationInterface {
 	public void deleteFavoriteClubForUser(int fav_id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public String httpPost(String url,HashMap<String, String> post) throws ClientProtocolException, IOException {
+	    // TODO Auto-generated method stub
+	    return null;
 	}
 }

@@ -6,7 +6,11 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -21,58 +25,62 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
+import android.os.StrictMode;
 
 public class Communication implements CommunicationInterface{
 	
 	HttpClient httpclient;
 	
+	final String MainURL= "http://partyapp.bugs3.com/";
+	
 	public Communication() {
 		httpclient = new DefaultHttpClient();
+	}	
+	
+	public String httpPost(String file,HashMap<String, String> post) throws ClientProtocolException, IOException{
+	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	    StrictMode.setThreadPolicy(policy); 
+	    
+	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+	    
+	    Iterator it = post.entrySet().iterator();
+	    while( it.hasNext() ){
+		Map.Entry pairs = (Map.Entry)it.next();
+		nameValuePairs.add(new BasicNameValuePair((String)pairs.getKey(), (String)pairs.getValue()));
+	    }	    
+	    
+	    HttpPost httppost = new HttpPost(MainURL+file);
+	    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	    HttpResponse response = httpclient.execute(httppost);
+	    String data = new BasicResponseHandler().handleResponse(response);
+	    return data;
 	}
 	
 	@Override
 	public User authenticationUser(String nickname, String password) {
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
-	    nameValuePairs.add(new BasicNameValuePair("action", "GET"));
-	    nameValuePairs.add(new BasicNameValuePair("NickName", nickname));
-	    nameValuePairs.add(new BasicNameValuePair("Password", password));
+	    HashMap<String, String> post = new HashMap<String,String>();
+	    post.put("action", "GET");
+	    post.put("NickName", nickname);
+	    post.put("Password", password);
 	    
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
-	    try {
-	    	
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			HttpResponse response = httpclient.execute(httppost);
-			String data = new BasicResponseHandler().handleResponse(response);
-			if(data.equals("FAILED")){
-				return null;
-			}
-			JSONArray jsonArray = new JSONArray(data);
-			JSONObject jsonObject = jsonArray.getJSONObject(0);
-			int user_id = Integer.parseInt(jsonObject.getString("id"));
-			String nick_name2 = jsonObject.getString("nick_name");
-			String nick_name = jsonObject.getString("nick_name");
+	    try{
+		String data = httpPost("user.php", post);
+		JSONArray jsonArray = new JSONArray(data);
+		JSONObject jsonObject = jsonArray.getJSONObject(0);
+		int user_id = Integer.parseInt(jsonObject.getString("id"));
+		String nick_name2 = jsonObject.getString("nick_name");
         	String password2 = jsonObject.getString("password");
         	String email = jsonObject.getString("email");
         	int sex = Integer.parseInt(jsonObject.getString("sex"));
         	String birthday = jsonObject.getString("birthday");
         	int type = Integer.parseInt(jsonObject.getString("type"));
-
-        	User newUser = new User(user_id, nick_name, password2, email, sex, birthday, type);
+        
+        	User newUser = new User(user_id, nick_name2, password2, email, sex, birthday, type);
         	return newUser;
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    }catch(Exception e){
+		
+	    }
+	    
 	    return null;
 	}
 
@@ -90,7 +98,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("CityName", cityname));
 	    
 	    HttpClient httpclient = new DefaultHttpClient();  
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");  
+	    HttpPost httppost = new HttpPost(MainURL+"club.php");  
 		
 	    try {
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -135,7 +143,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(user_id)).toString()));
 	    
 	    HttpClient httpclient = new DefaultHttpClient();  
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");  
+	    HttpPost httppost = new HttpPost(MainURL+"club.php");  
 		
 	    try {
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -188,7 +196,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("Address", newClubAddress));
 		
 	    HttpClient httpclient = new DefaultHttpClient();  
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/club.php");   
+	    HttpPost httppost = new HttpPost(MainURL+"club.php");   
 
 	    try {
 	    	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -232,7 +240,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(id)).toString()));
 	    nameValuePairs.add(new BasicNameValuePair("Password", password));
 	    
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
+	    HttpPost httppost = new HttpPost(MainURL+"user.php");  
 	    try {
 	    	
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -266,7 +274,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("Sex", (new Integer(sex)).toString()));
 	    nameValuePairs.add(new BasicNameValuePair("Birthday", birthday));
 
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
+	    HttpPost httppost = new HttpPost(MainURL+"user.php");  
 	    try {
 	    	
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -301,7 +309,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("Sex", (new Integer(sex)).toString()));
 	    nameValuePairs.add(new BasicNameValuePair("Birthday", birthday));
 
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/user.php");  
+	    HttpPost httppost = new HttpPost(MainURL+"user.php");  
 	    try {
 	    	
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -341,7 +349,7 @@ public class Communication implements CommunicationInterface{
 	    	nameValuePairs.add(new BasicNameValuePair("Type", actualService));
 		
 	    	HttpClient httpclient = new DefaultHttpClient();  
-	    	HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/service.php");   
+	    	HttpPost httppost = new HttpPost(MainURL+"service.php");   
 
 	    	try {
 	    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -372,7 +380,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("UserID", (new Integer(user_id)).toString()));
 	    nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
 	    HttpClient httpclient = new DefaultHttpClient();  
-    	HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/owner.php");   
+    	HttpPost httppost = new HttpPost(MainURL+"owner.php");   
 
     	try {
     		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -402,7 +410,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
 	  
 	    HttpClient httpclient = new DefaultHttpClient();  
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/favorite.php");
+	    HttpPost httppost = new HttpPost(MainURL+"favorite.php");
 	    try {
     		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
 			HttpResponse response = httpclient.execute(httppost);
@@ -430,7 +438,7 @@ public class Communication implements CommunicationInterface{
 	    nameValuePairs.add(new BasicNameValuePair("FavID", (new Integer(fav_id)).toString()));
 	  
 	    HttpClient httpclient = new DefaultHttpClient();  
-	    HttpPost httppost = new HttpPost("http://schonhercz.bl.ee/partyapp/favorite.php");
+	    HttpPost httppost = new HttpPost(MainURL+"favorite.php");
 	    try {
 	    	
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
