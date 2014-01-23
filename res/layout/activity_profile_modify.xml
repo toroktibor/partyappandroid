@@ -45,7 +45,10 @@
         android:id="@+id/profile_modify_edittext_dateofbirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10"
+        android:onClick="onClickHandler"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/profile_modify_textview_sex"
