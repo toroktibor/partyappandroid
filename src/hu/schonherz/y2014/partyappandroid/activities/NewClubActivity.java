@@ -32,7 +32,9 @@ public class NewClubActivity extends FragmentActivity implements SetServicesComm
     public void onServicesSetted(List<String> services) {
     	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
 	   	this.services = services;
-	   	Log.e("NEWCLUBACTIVITY","SERVICES ARRAY FROM SERVICES LIST DONE");
+	   	for(int i = 0; i < this.services.size(); ++i) 
+	   		Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
+	   	Log.e("NEWCLUBACTIVTY", "ONSERVICESETTED FINISHED");
     }
     
     @Override
@@ -73,7 +75,7 @@ public class NewClubActivity extends FragmentActivity implements SetServicesComm
 
 		Session.getInstance().getActualCommunicationInterface()
 			.sendANewClubRequest(newClubName, newClubAddress, newClubType, owner_user_id, services);
-
+		Log.e("NEWCLUBACTIVITY", "NEW CLUB REQUEST SENT");
 		onBackPressed();
 	    }
 	});

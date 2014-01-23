@@ -103,8 +103,10 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 				Log.e("SETSERVICESFRAGMENT","DONE BUTTON CLICKED");
 			List<String> result = new ArrayList<String>();
 			for(int i = 0; i < icons.length; ++i) {
-				if(checkboxes.get(i).isChecked())
+				if(checkboxes.get(i).isChecked()) {
+					Log.e("SETSERVICESFRAGMENT","SERVICES: "+ services[i]);
 					result.add(services[i]);
+				}
 			}
 			Log.e("SETSERVICESFRAGMENT","");
 			communicator.onServicesSetted(result);
