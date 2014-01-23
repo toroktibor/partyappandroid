@@ -1,6 +1,9 @@
 package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import android.util.Log;
 
 public class Club {
 	public int id;
@@ -16,10 +19,10 @@ public class Club {
 
 	public String ownerName;
 
-	public List<MenuItem> menuItems;
-	public List<Rating> ratings;
-	public List<Event> events;
-	public List<String> services;
+	public List<MenuItem> menuItems = new ArrayList<MenuItem>();
+	public List<Rating> ratings = new ArrayList<Rating>();
+	public List<Event> events = new ArrayList<Event>();
+	public List<String> services = new ArrayList<String>();
 
 	public Club(int id, String name, String type, String description,
 			String address, String phonenumber, String email, String date,
@@ -84,6 +87,18 @@ public class Club {
 	public boolean isNotFullDownloaded() {
 		return (this.email == null) && (this.date == null)
 				&& (this.description == null) && (this.events == null);
+	}
+	
+	public void downloadEverything(){
+	    Log.i(this.getClass().getName(),"Minden infó lekérése a klubról ( "+id+" )");
+	    
+	    Club clubWithAllInfo = Session.getInstance().getActualCommunicationInterface().getEverythingFromClub(this.id);
+	    this.email=clubWithAllInfo.email;
+	    this.date=clubWithAllInfo.date;
+	    this.description=clubWithAllInfo.description;
+	    this.events=clubWithAllInfo.events;
+	    
+	    Log.i(this.getClass().getName(),"Klub adatai frissítve ( "+id+" )");
 	}
 
 }

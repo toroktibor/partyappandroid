@@ -12,6 +12,8 @@ import android.util.Log;
 
 public class Session {
     private static Session instance = null;
+    
+    public String citynameFromGPS="Budapest";
 
     User actualUser;
     List<Club> searchViewClubs;
@@ -21,8 +23,7 @@ public class Session {
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
-    	//actualCommunicationInterface = new Communication(); //meg nem all teljesen keszen
-    	actualCommunicationInterface = new SillyCommunication();
+    	actualCommunicationInterface = new Communication();
     }
     
     public void makeLocalDatabaseConnection(Context context){

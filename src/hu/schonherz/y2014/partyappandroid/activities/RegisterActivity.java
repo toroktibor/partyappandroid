@@ -4,9 +4,11 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -68,8 +70,11 @@ public class RegisterActivity extends FragmentActivity implements hu.schonherz.y
     		if(newUser == null){
     			return;
     		}
-    		Session.closeSession();
-    		finish();
+    		LoginActivity.loginSynchronize(newUser);
+		Intent newIntent = new Intent(this, ClubsActivity.class);
+		startActivity(newIntent);
+		Log.e("REGISTER FORM", "CLUBSACTIVITY STARTED");
+		finish();
     	}
     	if (v.getId() == R.id.register_edittext_dateofbirth) {
 
