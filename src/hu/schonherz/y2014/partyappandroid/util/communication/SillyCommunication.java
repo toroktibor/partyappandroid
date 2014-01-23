@@ -232,4 +232,11 @@ public class SillyCommunication implements CommunicationInterface {
 	    // TODO Auto-generated method stub
 	    return null;
 	}
+
+	@Override
+	public void sendANewClubRequest(String newClubName, String newClubAddress,
+			String newClubType, int owner_user_id, List<String> services) {
+		// TODO Auto-generated method stub
+		
+	}
 }

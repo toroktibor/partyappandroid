@@ -460,4 +460,11 @@ public class Communication implements CommunicationInterface{
 		
 	}
 
+	@Override
+	public void sendANewClubRequest(String newClubName, String newClubAddress,
+			String newClubType, int owner_user_id, List<String> services) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

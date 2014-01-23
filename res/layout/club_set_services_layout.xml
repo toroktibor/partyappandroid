@@ -2,59 +2,54 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="20dp" >
+    android:layout_gravity="center" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#FFFFFF"
-        android:paddingTop="20dp">
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/white" >
 
         <ImageButton
             android:id="@+id/imageButtonCoctailBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen van koktélbár."
             android:src="@drawable/club_service_icon_64px_coctailbar" />
-        
-		<ImageButton
+
+        <ImageButton
             android:id="@+id/imageButtonLiveMusic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageButtonBilliard"
             android:layout_alignTop="@+id/imageButtonDJ"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)."
             android:src="@drawable/club_service_icon_64px_livemusic" />
-        
+
         <ImageButton
             android:id="@+id/imageButtonFnDControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageButtonDJ"
+            android:layout_below="@+id/imageButtonDJ"
             android:layout_margin="15dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen ki kell öltözni."
-            android:src="@drawable/club_service_icon_64px_fndcontrol" />		
-            
+            android:src="@drawable/club_service_icon_64px_fndcontrol" />
+
         <ImageButton
             android:id="@+id/imageButtonDJ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageButtonCoctailBar"
             android:layout_margin="15dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen szokott lenni DJ (is)."
             android:src="@drawable/club_service_icon_64px_dj" />
-
-
 
         <ImageButton
             android:id="@+id/imageButtonDarts"
@@ -62,8 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imageButtonFnDControl"
             android:layout_margin="15dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen lehet darts-ozni."
             android:src="@drawable/club_service_icon_64px_darts" />
 
@@ -73,8 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imageButtonDarts"
             android:layout_margin="15dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen lehet bowlingozni."
             android:src="@drawable/club_service_icon_64px_bowling" />
 
@@ -83,21 +76,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/button_club_services_setted"
-            android:layout_alignTop="@+id/imageButtonDarts"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:layout_alignTop="@id/imageButtonDarts"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen lehet billiárdozni."
             android:src="@drawable/club_service_icon_64px_billiard" />
-
-
 
         <ImageButton
             android:id="@+id/imageButtonSportTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButtonBowling"
-            android:layout_alignLeft="@id/imageButtonBilliard"
-            android:background="#FFFFFF"
+            android:layout_alignBottom="@id/imageButtonBowling"
+            android:layout_alignLeft="@+id/imageButtonBilliard"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)."
             android:src="@drawable/club_service_icon_64px_sporttv" />
 
@@ -105,22 +95,19 @@
             android:id="@+id/imageButtonWiFi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageButtonBowling"
+            android:layout_alignLeft="@id/imageButtonBowling"
             android:layout_below="@id/imageButtonBowling"
-            android:background="#FFFFFF"
+            android:background="@android:color/white"
             android:src="@drawable/club_service_icon_64px_wifi" />
-
-       
 
         <ImageButton
             android:id="@+id/imageButtonMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/imageButtonDJ"
-            android:layout_alignLeft="@+id/imageButtonLiveMusic"
+            android:layout_alignLeft="@id/imageButtonLiveMusic"
             android:layout_marginLeft="19dp"
-            android:background="#FFFFFF"
-            android:clickable="true"
+            android:background="@android:color/white"
             android:contentDescription="A szórakozóhelyen lehet menüt rendelni, enni."
             android:src="@drawable/club_service_icon_32px_menu" />
 
@@ -128,10 +115,11 @@
             android:id="@+id/imageButtonDance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageButtonLiveMusic"
-            android:background="#FFFFFF"
-            android:layout_below="@+id/imageButtonDJ"
+            android:layout_alignLeft="@id/imageButtonLiveMusic"
+            android:layout_below="@id/imageButtonDJ"
+            android:background="@android:color/white"
             android:src="@drawable/club_service_icon_64px_dance" />
+
         <Button
             android:id="@+id/button_club_services_cancel"
             android:layout_width="100dp"
@@ -139,7 +127,7 @@
             android:layout_below="@id/imageButtonWiFi"
             android:layout_marginLeft="15dp"
             android:text="Mégse" />
-        
+
         <Button
             android:id="@+id/button_club_services_setted"
             android:layout_width="100dp"
@@ -147,9 +135,6 @@
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@id/button_club_services_cancel"
             android:text="Kész" />
-
-
-
     </RelativeLayout>
 
 </ScrollView>

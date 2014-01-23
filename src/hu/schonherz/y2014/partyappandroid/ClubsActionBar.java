@@ -153,7 +153,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	int clickedItemId = arg0.getItemId();
 	switch (clickedItemId) {
 		case 1: // ÚJ HELY HOZZÁADÁSA
-			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> KEDVENCEK");
+			Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> ÚJ HELY HOZZÁADÁSA");
 		    i = new Intent(activity, NewClubActivity.class);
 		    Log.e("MAIN SCREEN", "STARTING NEWCLUBACTIVITY");
 		    activity.startActivity(i);

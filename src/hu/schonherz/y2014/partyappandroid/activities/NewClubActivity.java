@@ -9,6 +9,7 @@ import java.util.List;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,11 +26,13 @@ public class NewClubActivity extends FragmentActivity implements SetServicesComm
     CheckBox newClubOwnerCheckBox;
     Button addButton;
     Context thisContext;
-    String[] services;
+    List<String> services;
 
     @Override	// EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
     public void onServicesSetted(List<String> services) {
-    	   	this.services = (String[]) services.toArray();
+    	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
+	   	this.services = services;
+	   	Log.e("NEWCLUBACTIVITY","SERVICES ARRAY FROM SERVICES LIST DONE");
     }
     
     @Override
@@ -82,7 +85,6 @@ public class NewClubActivity extends FragmentActivity implements SetServicesComm
 		public void onClick(View v) {
 			SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
 			serviceSetterFragment.show(getSupportFragmentManager(), "SetServicesOfClub");
-			
 		}
 	});
     }

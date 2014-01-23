@@ -88,4 +88,7 @@ public interface CommunicationInterface {
     public void setFavoriteClubForUser(int user_id, int club_id);
     
     public void deleteFavoriteClubForUser(int fav_id);
+
+	public void sendANewClubRequest(String newClubName, String newClubAddress,
+			String newClubType, int owner_user_id, List<String> services);
 }
