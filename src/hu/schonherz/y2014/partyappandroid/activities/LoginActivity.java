@@ -35,7 +35,7 @@ public class LoginActivity extends Activity
 
 	boolean mBounded;
 	GPSLocation mGpsLocation;
-	String cityname = "Budapest";
+	//String cityname = "Budapest";
 	// create new async task for fetching location and execute it
 	LocationWorker locationTask = new LocationWorker();
 
@@ -52,7 +52,7 @@ public class LoginActivity extends Activity
 			 * myLocationHelper.getLong() to get the location data.
 			 */
 			if (mGpsLocation.gotLocation() == true) {
-				cityname = mGpsLocation.getCityName();
+				Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
 				Log.e("async",
 						"lekérdezett város : " + mGpsLocation.getCityName());
 			}
@@ -177,8 +177,9 @@ public class LoginActivity extends Activity
 	}
 
 
-	void loginSynchronize(User actualUser) {
+	public static void loginSynchronize(User actualUser) {
 		Session.setActualUser(actualUser);
+		String cityname = Session.getInstance().citynameFromGPS;
 		Log.e("LOGIN SYNCHRONIZE", "LOGIN IN PROGRESS, NAME OF ACTUAL CITY: "
 				+ cityname);
 		actualUser.favoriteClubs = Session.getInstance()

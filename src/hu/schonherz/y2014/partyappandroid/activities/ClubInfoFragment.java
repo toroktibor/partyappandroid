@@ -14,13 +14,20 @@ import android.widget.TextView;
 
 public class ClubInfoFragment extends Fragment {
 
+    private Club actualClub;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_info, container, false);
 
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	Log.i("átjött", (new Integer(clubListPosition)).toString());
-	clubFullDownload(clubListPosition);
+	Log.i("átjött", String.valueOf(clubListPosition));
+	actualClub = Session.getSearchViewClubs().get(clubListPosition);
+	
+	if (actualClub.isNotFullDownloaded()){
+		actualClub.downloadEverything();
+	}
+	
 	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 	
 	
@@ -42,12 +49,5 @@ public class ClubInfoFragment extends Fragment {
 	    startActivity(new Intent(getActivity(), ClubReviewsActivity.class));
 	}
     }
-
-    protected void clubFullDownload(int actualClubPosition){
-    	Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
-    	if (actualCLub.isNotFullDownloaded()){
-    		Session.getSearchViewClubs().set(actualClubPosition, Session.getInstance().getActualCommunicationInterface().getEverythingFromClub(actualCLub.id));
-    	}
-    };
     
 }
