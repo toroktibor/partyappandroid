@@ -8,123 +8,131 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="150dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="150dp"
         android:background="@android:color/white" >
 
-        <ImageButton
-            android:id="@+id/imageButtonCoctailBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <CheckBox
+            android:id="@+id/checkBoxCoctailBar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="15dp"
-            android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen van koktélbár."
-            android:src="@drawable/club_service_icon_64px_coctailbar" />
+            android:button="@drawable/club_service_icon_64px_coctailbar"
+            android:contentDescription="A szórakozóhelyen van koktélbár." />
 
-        <ImageButton
-            android:id="@+id/imageButtonLiveMusic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageButtonBilliard"
-            android:layout_alignTop="@+id/imageButtonDJ"
+        <CheckBox
+            android:id="@+id/checkBoxLiveMusic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@+id/checkBoxBilliard"
+            android:layout_alignTop="@+id/checkBoxDJ"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)."
-            android:src="@drawable/club_service_icon_64px_livemusic" />
+            android:button="@drawable/club_service_icon_64px_livemusic"
+            android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)." />
 
-        <ImageButton
-            android:id="@+id/imageButtonFnDControl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageButtonDJ"
+        <CheckBox
+            android:id="@+id/checkBoxFnDControl"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/checkBoxDJ"
             android:layout_margin="15dp"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen ki kell öltözni."
-            android:src="@drawable/club_service_icon_64px_fndcontrol" />
+            android:button="@drawable/club_service_icon_64px_fndcontrol"
+            android:contentDescription="A szórakozóhelyen ki kell öltözni." />
 
-        <ImageButton
-            android:id="@+id/imageButtonDJ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageButtonCoctailBar"
+        <CheckBox
+            android:id="@+id/checkBoxDJ"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/checkBoxCoctailBar"
             android:layout_margin="15dp"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen szokott lenni DJ (is)."
-            android:src="@drawable/club_service_icon_64px_dj" />
+            android:button="@drawable/club_service_icon_64px_dj"
+            android:contentDescription="A szórakozóhelyen szokott lenni DJ (is)." />
 
-        <ImageButton
-            android:id="@+id/imageButtonDarts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageButtonFnDControl"
+        <CheckBox
+            android:id="@+id/checkBoxDarts"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/checkBoxFnDControl"
             android:layout_margin="15dp"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen lehet darts-ozni."
-            android:src="@drawable/club_service_icon_64px_darts" />
+            android:button="@drawable/club_service_icon_64px_darts"
+            android:contentDescription="A szórakozóhelyen lehet darts-ozni." />
 
-        <ImageButton
-            android:id="@+id/imageButtonBowling"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageButtonDarts"
+        <CheckBox
+            android:id="@+id/checkBoxBowling"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/checkBoxDarts"
             android:layout_margin="15dp"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen lehet bowlingozni."
-            android:src="@drawable/club_service_icon_64px_bowling" />
+            android:button="@drawable/club_service_icon_64px_bowling"
+            android:contentDescription="A szórakozóhelyen lehet bowlingozni." />
 
-        <ImageButton
-            android:id="@+id/imageButtonBilliard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <CheckBox
+            android:id="@+id/checkBoxBilliard"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignLeft="@+id/button_club_services_setted"
-            android:layout_alignTop="@id/imageButtonDarts"
+            android:layout_alignTop="@id/checkBoxDarts"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen lehet billiárdozni."
-            android:src="@drawable/club_service_icon_64px_billiard" />
+            android:button="@drawable/club_service_icon_64px_billiard"
+            android:contentDescription="A szórakozóhelyen lehet billiárdozni." />
 
-        <ImageButton
-            android:id="@+id/imageButtonSportTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imageButtonBowling"
-            android:layout_alignLeft="@+id/imageButtonBilliard"
+        <CheckBox
+            android:id="@+id/checkBoxSportTV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignBottom="@id/checkBoxBowling"
+            android:layout_alignLeft="@+id/checkBoxBilliard"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)."
-            android:src="@drawable/club_service_icon_64px_sporttv" />
+            android:button="@drawable/club_service_icon_64px_sporttv"
+            android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)." />
 
-        <ImageButton
-            android:id="@+id/imageButtonWiFi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/imageButtonBowling"
-            android:layout_below="@id/imageButtonBowling"
+        <CheckBox
+            android:id="@+id/checkBoxWiFi"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@id/checkBoxBowling"
+            android:layout_below="@id/checkBoxBowling"
             android:background="@android:color/white"
-            android:src="@drawable/club_service_icon_64px_wifi" />
+            android:button="@drawable/club_service_icon_64px_wifi" />
 
-        <ImageButton
-            android:id="@+id/imageButtonMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/imageButtonDJ"
-            android:layout_alignLeft="@id/imageButtonLiveMusic"
+        <CheckBox
+            android:id="@+id/checkBoxMenu"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/checkBoxDJ"
+            android:layout_alignLeft="@id/checkBoxLiveMusic"
             android:layout_marginLeft="19dp"
             android:background="@android:color/white"
-            android:contentDescription="A szórakozóhelyen lehet menüt rendelni, enni."
-            android:src="@drawable/club_service_icon_32px_menu" />
+            android:button="@drawable/club_service_icon_32px_menu"
+            android:contentDescription="A szórakozóhelyen lehet menüt rendelni, enni." />
 
-        <ImageButton
-            android:id="@+id/imageButtonDance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/imageButtonLiveMusic"
-            android:layout_below="@id/imageButtonDJ"
+        <CheckBox
+            android:id="@+id/checkBoxDance"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@id/checkBoxLiveMusic"
+            android:layout_below="@id/checkBoxDJ"
             android:background="@android:color/white"
-            android:src="@drawable/club_service_icon_64px_dance" />
+            android:button="@drawable/club_service_icon_64px_dance" />
+
+        <CheckBox
+            android:id="@+id/checkBoxWiFi"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@id/checkBoxBilliard"
+            android:layout_alignTop="@id/checkBoxWiFi"
+            android:background="@android:color/white"
+            android:button="@drawable/club_service_icon_64px_wifi" />
 
         <Button
             android:id="@+id/button_club_services_cancel"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageButtonWiFi"
+            android:layout_below="@id/checkBoxWiFi"
             android:layout_marginLeft="15dp"
             android:text="Mégse" />
 

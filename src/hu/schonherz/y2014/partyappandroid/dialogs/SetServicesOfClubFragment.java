@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
 
 public class SetServicesOfClubFragment extends DialogFragment implements OnClickListener {
 	
@@ -24,17 +24,17 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	
 	Button done, cancel;
 	
-	Integer[] icons = { R.id.imageButtonBilliard,
-						R.id.imageButtonBowling,
-						R.id.imageButtonCoctailBar,
-						R.id.imageButtonDance,
-						R.id.imageButtonDarts,
-						R.id.imageButtonDJ,
-						R.id.imageButtonFnDControl,
-						R.id.imageButtonLiveMusic,
-						R.id.imageButtonMenu,
-						R.id.imageButtonSportTV,
-						R.id.imageButtonWiFi };
+	Integer[] icons = { R.id.checkBoxBilliard,
+						R.id.checkBoxBowling,
+						R.id.checkBoxCoctailBar,
+						R.id.checkBoxDance,
+						R.id.checkBoxDarts,
+						R.id.checkBoxDJ,
+						R.id.checkBoxFnDControl,
+						R.id.checkBoxLiveMusic,
+						R.id.checkBoxMenu,
+						R.id.checkBoxSportTV,
+						R.id.checkBoxWiFi };
 	
 	String[] services = { 	"billiard",
 							"bowling",
@@ -48,6 +48,8 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 							"sporttv",
 							"wifi" };
 	
+	List<CheckBox> checkboxes = new ArrayList<CheckBox>();
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -59,25 +61,15 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = (View) inflater.inflate(R.layout.club_set_services_layout, null);
 		Log.e("SETSERVICESFRAGMENT","LAYOUT OF DIALOGFRAGMENT INFLATED");
-		//done = (Button) container.findViewById(R.id.button_club_services_setted);
-		//cancel = (Button) container.findViewById(R.id.button_club_services_cancel);
+		
 		done = (Button) view.findViewById(R.id.button_club_services_setted);	
 		cancel = (Button) view.findViewById(R.id.button_club_services_cancel);
 		done.setOnClickListener(this);
 		cancel.setOnClickListener(this);
-		ImageButton[] imagebuttons = { (ImageButton) view.findViewById(R.id.imageButtonBilliard),
-				(ImageButton)view.findViewById(R.id.imageButtonBowling),
-				(ImageButton)view.findViewById(R.id.imageButtonCoctailBar),
-				(ImageButton)view.findViewById(R.id.imageButtonDance),
-				(ImageButton)view.findViewById(R.id.imageButtonDarts),
-				(ImageButton)view.findViewById(R.id.imageButtonDJ),
-				(ImageButton)view.findViewById(R.id.imageButtonFnDControl),
-				(ImageButton)view.findViewById(R.id.imageButtonLiveMusic),
-				(ImageButton)view.findViewById(R.id.imageButtonMenu),
-				(ImageButton)view.findViewById(R.id.imageButtonSportTV),
-				(ImageButton)view.findViewById(R.id.imageButtonWiFi) };
-		for(int i = 0; i < imagebuttons.length; ++i)
-			imagebuttons[i].setOnClickListener(this);
+		for(int i = 0; i < icons.length; ++i) {
+			checkboxes.add((CheckBox)view.findViewById(icons[i]));
+			checkboxes.get(i).setOnClickListener(this);
+		}
 		Log.e("SETSERVICESFRAGMENT","ONCLICKLISTENER OF EVERY BUTTONS SETTED");
 		return view;
 	}
@@ -93,13 +85,13 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 		}
 		if( j < icons.length) {
 			Log.e("SETSERVICESFRAGMENT","ONE OF THE SERVICES ICON CLICKED...");
-			if(v.getBackground().equals(Color.WHITE)) {
+			if(((CheckBox)v).isChecked()) {
 				Log.e("SETSERVICESFRAGMENT","ICON COLOR CHANGED (WHILE->YELLOW)...");
-				v.setBackgroundColor(Color.YELLOW);
-			}
-			else if(v.getBackground().equals(Color.YELLOW)) {
-				Log.e("SETSERVICESFRAGMENT","ICON COLOR CHANGED (YELLOW->WHITE)...");
 				v.setBackgroundColor(Color.WHITE);
+			}
+			else if(((CheckBox)v).isChecked()==false) {
+				Log.e("SETSERVICESFRAGMENT","ICON COLOR CHANGED (YELLOW->WHITE)...");
+				v.setBackgroundColor(Color.YELLOW);
 			}
 		}
 		else if(v.getId() == R.id.button_club_services_cancel) {
@@ -107,10 +99,11 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 			dismiss();
 		}
 		else if(v.getId() == R.id.button_club_services_setted) {
-			Log.e("SETSERVICESFRAGMENT","DONE BUTTON CLICKED");
+			
+				Log.e("SETSERVICESFRAGMENT","DONE BUTTON CLICKED");
 			List<String> result = new ArrayList<String>();
 			for(int i = 0; i < icons.length; ++i) {
-				if(v.getBackground().equals(Color.YELLOW))
+				if(checkboxes.get(i).isChecked())
 					result.add(services[i]);
 			}
 			Log.e("SETSERVICESFRAGMENT","");

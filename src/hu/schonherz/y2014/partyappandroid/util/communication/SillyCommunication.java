@@ -15,7 +15,7 @@ import org.apache.http.client.ClientProtocolException;
 
 import android.util.Log;
 
-public class SillyCommunication implements CommunicationInterface {
+public class SillyCommunication {
 
     public SillyCommunication() {
 	// TODO Auto-generated constructor stub
@@ -77,13 +77,13 @@ public class SillyCommunication implements CommunicationInterface {
      * válaszoljon erre nekem, Tibinek szóban! :D
      * Mármint nem csak itt, hanem az Interface-ben is... nem kellene egy toArray-t használnom. 
      * Fölösleges kasztolásokat kerülnék el => egyel kevesebb hibalehetőség lenne!*/
-    @Override
-    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, String[] services) {
+    
+    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, List<String> services) {
 	// TODO Auto-generated method stub
 
     }
 
-    @Override
+    
     public List<Club> searchClubs(String name, String cityname, String type, int offset, int limit) throws Exception {
 	List<Club> ret = new ArrayList<Club>();
 
@@ -122,17 +122,17 @@ public class SillyCommunication implements CommunicationInterface {
 
     }
 
-    @Override
+    
     public void modifyPassword(int id, String password) throws Exception {
 	// TODO: módosítás az adatbázisban
     }
 
-    @Override
+    
     public void modifyUserData(int id, String email, String birthday, int sex) throws Exception {
 	// TODO: módosítás az adatbázisban
     }
 
-    @Override
+    
     public List<Club> getOwnedClubsFromUserId(int user_id) {
 
 	ArrayList<Club> ownedClubs = new ArrayList<Club>();
@@ -149,7 +149,7 @@ public class SillyCommunication implements CommunicationInterface {
 	return ownedClubs;
     }
 
-	@Override
+	
 	public Club getEverythingFromClub(int club_id) {
 		
 		Club fullClub;
@@ -195,48 +195,42 @@ public class SillyCommunication implements CommunicationInterface {
 		return fullClub;
 	}
 
-	@Override
+	
 	public User registerANewUser(String nick_name, String password,
 			String email, int sex, String birthday) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void setServices(int club_id, String[] services) {
+	
+	public void setServices(int club_id, List<String> services) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setOwnerForClub(int user_id, int club_id) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setFavoriteClubForUser(int user_id, int club_id) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void deleteFavoriteClubForUser(int fav_id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	@Override
+	
 	public String httpPost(String url,HashMap<String, String> post) throws ClientProtocolException, IOException {
 	    // TODO Auto-generated method stub
 	    return null;
 	}
 
-	@Override
-	public void sendANewClubRequest(String newClubName, String newClubAddress,
-			String newClubType, int owner_user_id, List<String> services) {
-		// TODO Auto-generated method stub
-		
-	}
 }

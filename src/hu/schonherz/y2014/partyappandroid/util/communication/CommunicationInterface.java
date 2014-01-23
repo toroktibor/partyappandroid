@@ -22,10 +22,6 @@ public interface CommunicationInterface {
     
     public String httpPost(String url,HashMap<String, String> post) throws ClientProtocolException, IOException;
 
-    // Elküld egy új hely kérelmet a szervernek, ha a owner_user_id -1 akkor
-    // nincs neki tulaj jelöltje
-    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id, String[] services);
-
     /**
      * Adatbázissal kommunikáló metódus a klubbok kereséshez, melynek
      * paraméterei a kereséshez feltételei és logikai kapcsolattal. A keresési
@@ -81,7 +77,7 @@ public interface CommunicationInterface {
     
     public User registerANewUser(String nick_name, String password, String email, int sex, String birthday);
     
-    public void setServices(int club_id, String[] services);
+    public void setServices(int club_id, List<String> services);
     
     public void setOwnerForClub(int user_id, int club_id);
     
