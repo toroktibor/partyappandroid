@@ -29,7 +29,6 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 	ab.setDisplayShowCustomEnabled(true);
 	ab.setCustomView(actionBarLayout);
 
-	activity.findViewById(R.id.actionbar_club_button_a).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_club_button_b).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_club_button_c).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_club_button_d).setOnClickListener(this);
