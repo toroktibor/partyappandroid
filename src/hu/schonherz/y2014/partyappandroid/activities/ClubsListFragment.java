@@ -10,11 +10,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
 import android.opengl.Visibility;
->>>>>>> branch 'master' of https://github.com/toroktibor/partyappandroid.git
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,28 +26,12 @@ import android.widget.TextView;
 public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment {
 
     private ListView clubsListView;
-
-    
+ 
     public enum SourceOfList {
 	LOCATION, SEARCH, OWNERSHIP, FAVORITES
     };
 
-<<<<<<< HEAD
-		clubsListView = new ListView(getActivity().getApplicationContext());
-		Log.d("FELSOROLÁS ELEJE", "HURRÁ BÉBI! :D");
-		Club[] clubArray = getClubArrayFromClubsList(Session
-				.getSearchViewClubs());
-		// Log.i("jojo",clubArray[0].address);
-		clubsListView.setAdapter(new ClubListAdapter(getActivity(), clubArray));
-		// clubsListView.setClickable(true);
-		clubsListView.setCacheColorHint(Color.TRANSPARENT);
-		clubsListView.setOnItemClickListener(new OnItemClickListener() {
-=======
-    /* A szűrés módját tárolja. Ez alapján generálhatjuk a hibaüzenetet, ha nincs találat, és tanácsot is adhatunk neki.
-     * Pl.: A keresés nem adott eredményt, próbálj meg kevesebb feltételt megadni.
-     */
     public SourceOfList sourceOfList = SourceOfList.LOCATION;
->>>>>>> branch 'master' of https://github.com/toroktibor/partyappandroid.git
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
