@@ -79,7 +79,11 @@ public class PendingOwnerRequest extends ActionBarActivity {
 	
 	@Override
 	protected void onResume() {
-		ownerRequestListView.setAdapter(new OwnerRequestListAdapter(this, getOwnerRequestArrayFromList(ownerRequestList)));
+		if(ownerRequestList==null){
+			
+		} else {
+			ownerRequestListView.setAdapter(new OwnerRequestListAdapter(this, getOwnerRequestArrayFromList(ownerRequestList)));
+		}
 		super.onResume();
 	}
 	

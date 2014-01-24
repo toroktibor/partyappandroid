@@ -467,7 +467,7 @@ public class Communication implements CommunicationInterface {
 
 		}
 
-		return new LinkedList<Club>();
+		return null;
 	}
 
 	@Override
@@ -536,7 +536,7 @@ public class Communication implements CommunicationInterface {
 
 		}
 
-		return new LinkedList<OwnerRequest>();
+		return null;
 	}
 
 	@Override
@@ -548,6 +548,22 @@ public class Communication implements CommunicationInterface {
 			post.put("userid", String.valueOf(user_id));
 
 			String data = httpPost("owner.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void uploadAImage(int club_id, String rowImage) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "ADD");
+			post.put("clubid", String.valueOf(club_id));
+			post.put("rowImage", rowImage);
+
+			String data = httpPost("image.php", post);
 
 		} catch (Exception e) {
 
