@@ -42,6 +42,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 	Club[] clubArray = getClubArrayFromClubsList(Session.getSearchViewClubs());
 	// Log.i("jojo",clubArray[0].address);
 	clubsListView.setAdapter(new ClubListAdapter(getActivity(), clubArray));
+	clubsListView.setCacheColorHint(Color.TRANSPARENT);
 	// clubsListView.setClickable(true);
 	clubsListView.setOnItemClickListener(new OnItemClickListener() {
 
