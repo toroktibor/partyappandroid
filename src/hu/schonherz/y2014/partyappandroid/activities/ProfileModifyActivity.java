@@ -3,19 +3,19 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class ProfileModifyActivity extends FragmentActivity implements DatePickerCommunicator {
+public class ProfileModifyActivity extends ActionBarActivity implements DatePickerCommunicator {
 
 	private User user;
 	private EditText editTextName;
@@ -26,6 +26,9 @@ public class ProfileModifyActivity extends FragmentActivity implements DatePicke
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		new SimpleActionBar(this, "Adatok szerkesztése").setLayout();
+		
 		setContentView(R.layout.activity_profile_modify);
 
 		user = Session.getActualUser();

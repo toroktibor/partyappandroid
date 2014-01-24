@@ -1,20 +1,17 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
-import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 
-import java.util.ArrayList;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PendingListActivity extends ActionBarActivity {
-	
-	ArrayList<Club> newClubsList;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +32,27 @@ public class PendingListActivity extends ActionBarActivity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			
+			Intent i = new Intent(getApplicationContext(),PendingClubsListActivity.class);
+			startActivity(i);		
 		}
 	});
 	
+	pendingOwnersButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(getApplicationContext(),PendingOwnerRequest.class);
+			startActivity(i);
+		}
+	});
+	
+    }
+    
+    @Override
+    protected void onResume() {
+    	TextView menuText = (TextView) findViewById(R.id.pending_list_actionbar_name);
+    	menuText.setText("Jóváhagyások");
+    	super.onResume();
     }
 
 }

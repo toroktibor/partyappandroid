@@ -69,15 +69,15 @@
     <string name="club_menu_add_textview_discount">Kedvezmény</string>
     <string name="toast_login_unsuccesful_text">Sikertelen bejelentkezés! Hibás felhasználónév, vagy jelszó! Próbáld újra</string>
     <string name="clubs_type_spinner_prompt">Vegyes</string>
-    <string name="club_service_coctailbar" >Koktélbár</string>
-    <string name="club_service_dance" >Táncparkett</string>
-    <string name="club_service_beergarden" >Sörkert</string>
-    <string name="club_service_pubsports" >Kocsmasportok</string>
-    <string name="club_service_sportTV" >Sport közvetítés</string>
-    <string name="club_service_menu" >Étkezés, menü</string>
-	<string name="club_service_liveMusic" >Élő zene</string>
-    <string name="club_service_dj" >DJ</string>
-    <string name="club_service_face_and_dress_control" >Face and Dress Control</string>
+    <string name="club_service_coctailbar">Koktélbár</string>
+    <string name="club_service_dance">Táncparkett</string>
+    <string name="club_service_beergarden">Sörkert</string>
+    <string name="club_service_pubsports">Kocsmasportok</string>
+    <string name="club_service_sportTV">Sport közvetítés</string>
+    <string name="club_service_menu">Étkezés, menü</string>
+    <string name="club_service_liveMusic">Élő zene</string>
+    <string name="club_service_dj">DJ</string>
+    <string name="club_service_face_and_dress_control">Face and Dress Control</string>
     <string name="club_service_wifi">WiFi</string>
 
     <string-array name="clubs_types">
@@ -106,5 +106,7 @@
 
     <string name="title_activity_visitor_email">VisitorEmail</string>
     <string name="title_activity_round_email">RoundEmail</string>
+    <string name="title_activity_pending_clubs_list">PendingClubsListActivity</string>
+    <string name="title_activity_pending_owner_request">PendingOwnerRequest</string>
 
 </resources>

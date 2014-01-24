@@ -3,21 +3,24 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class ProfilePasswordActivity extends Activity {
+public class ProfilePasswordActivity extends ActionBarActivity {
 
     private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Jelszó módosítása").setLayout();
+	
 	setContentView(R.layout.activity_profile_password);
 
 	user = Session.getActualUser();

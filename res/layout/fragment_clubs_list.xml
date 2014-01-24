@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context=".ClubsListFragment" >
 
+    	<TextView
+    	    android:id="@+id/clubs_list_textview_message" 
+    	    android:layout_width="match_parent"
+    	    android:layout_height="match_parent"
+    	    android:paddingTop="120dp"
+    	    android:gravity="center_horizontal"
+    	    android:visibility="gone" />
 
         <ListView
         	android:id="@+id/clubs_list_listview"

@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -87,4 +88,16 @@ public interface CommunicationInterface {
 
 	public void sendANewClubRequest(String newClubName, String newClubAddress,
 			String newClubType, int owner_user_id, List<String> services);
+	
+	public List<Club> getNotApprovedClubs();
+	
+	public void approveClub(int club_id);
+	
+	public void declineNewClub(int club_id);
+	
+	public void declineOwnerRequest(int club_id, int user_id);
+	
+	public void acceptOwnerRequest(int club_id, int user_id);
+	
+	public List<OwnerRequest> getNotApprovedOwnerRequest();
 }
