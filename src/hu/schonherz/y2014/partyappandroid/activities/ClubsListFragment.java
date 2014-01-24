@@ -10,6 +10,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,15 +26,11 @@ import android.widget.TextView;
 public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment {
 
     private ListView clubsListView;
-
-    
+ 
     public enum SourceOfList {
 	LOCATION, SEARCH, OWNERSHIP, FAVORITES
     };
 
-    /* A szűrés módját tárolja. Ez alapján generálhatjuk a hibaüzenetet, ha nincs találat, és tanácsot is adhatunk neki.
-     * Pl.: A keresés nem adott eredményt, próbálj meg kevesebb feltételt megadni.
-     */
     public SourceOfList sourceOfList = SourceOfList.LOCATION;
 
     @Override

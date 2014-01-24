@@ -1,9 +1,10 @@
 package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
-import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -58,6 +59,9 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 
 	    item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
 	    item.setOnMenuItemClickListener(this);
+	    if (activity.viewPager.getCurrentItem() == 2)
+	    	item = popupmenu.getMenu().add(0, 2, 0, "Feltöltés");
+	    item.setOnMenuItemClickListener(this);
 	    
 	    popupmenu.show();
 	    break;
@@ -77,6 +81,11 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 	    i = new Intent(activity, ClubMenuActivity.class);
 	    activity.startActivity(i);
 	    break;
+	case 2:
+		Log.e(this.getClass().getName(), "képfeltöltés");
+		ClubGaleryFragment f = (ClubGaleryFragment) activity.getSupportFragmentManager().findFragmentById(activity.viewPager.getId());
+		f.uploadPicture();
+		break;
 	default:
 	    Log.e(this.getClass().getName(), "Nem kezelt onMenuItemClick");
 	}
