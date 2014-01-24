@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Idejönvalamicím"
-        android:textColor="@android:color/white"
+        android:textColor="@color/actionBarTextColor"
         android:gravity="center_vertical"
         android:layout_marginLeft="20dp"
         android:textSize="18sp"        
