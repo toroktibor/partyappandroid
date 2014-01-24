@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 public class SetServicesOfClubFragment extends DialogFragment implements OnClickListener {
 	
@@ -61,7 +63,7 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = (View) inflater.inflate(R.layout.club_set_services_layout, null);
 		Log.e("SETSERVICESFRAGMENT","LAYOUT OF DIALOGFRAGMENT INFLATED");
-		
+		getDialog().setTitle("Szolgáltatások");
 		done = (Button) view.findViewById(R.id.button_club_services_setted);	
 		cancel = (Button) view.findViewById(R.id.button_club_services_cancel);
 		done.setOnClickListener(this);
@@ -69,11 +71,28 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 		for(int i = 0; i < icons.length; ++i) {
 			checkboxes.add((CheckBox)view.findViewById(icons[i]));
 			checkboxes.get(i).setOnClickListener(this);
+			checkboxes.get(i).setOnLongClickListener(new OnLongClickListener() {
+				
+				@Override
+				public boolean onLongClick(View v) {
+					Log.e("SETSERVICESFRAGMENT","DIALOGFRAGMENT LONGONCLICKLISTENER CALLED");
+					int j = 0;
+					while(j < icons.length) {
+						if(v.getId() == icons[j]) {
+							Toast.makeText(v.getContext(), v.getContentDescription(), Toast.LENGTH_LONG).show();
+							break;
+						}
+							
+						++j;
+					}
+					return true;
+				}
+			});
 		}
 		Log.e("SETSERVICESFRAGMENT","ONCLICKLISTENER OF EVERY BUTTONS SETTED");
 		return view;
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		Log.e("SETSERVICESFRAGMENT","DIALOGFRAGMENT ONCLICKLISTENER CALLED");
