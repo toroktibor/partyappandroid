@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewClubActivity extends FragmentActivity implements SetServicesCommunicator{
+public class NewClubActivity extends ActionBarActivity implements SetServicesCommunicator{
 
     EditText newClubNameEditText;
     EditText newClubAddressEditText;
@@ -40,6 +41,9 @@ public class NewClubActivity extends FragmentActivity implements SetServicesComm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Új klub hozzáadása").setLayout();
+	
 	setContentView(R.layout.activity_new_club);
 	thisContext = getApplicationContext();
 

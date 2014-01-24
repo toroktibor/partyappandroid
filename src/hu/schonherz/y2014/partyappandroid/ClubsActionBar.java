@@ -78,7 +78,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		}
 	    });
 	    break;
-	case R.id.actionbar_clubs_button_d:
+	case R.id.actionbar_clubs_button_d: // KERESÉS
 
 	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
 		@Override

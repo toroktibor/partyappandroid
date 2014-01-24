@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ClubsSearchActivity"    
-    android:orientation="vertical">
+    android:paddingBottom="@dimen/dialog_vertical_margin"
+    android:paddingLeft="@dimen/dialog_horizontal_margin"
+    android:paddingRight="@dimen/dialog_horizontal_margin"
+    android:paddingTop="@dimen/dialog_vertical_margin"   
+    android:orientation="vertical"
+    android:background="@color/applicationWindowBackground">
     
     <TextView 
         android:layout_width="wrap_content"
@@ -17,7 +17,8 @@
     <EditText 
         android:id="@+id/dialog_clubs_search_edittext_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/CustomEditText"/>
     
     <TextView 
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
     <EditText 
         android:id="@+id/dialog_clubs_search_edittext_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/CustomEditText"/>
     
     <TextView 
         android:layout_width="wrap_content"
@@ -37,12 +39,16 @@
     <EditText 
         android:id="@+id/dialog_clubs_search_edittext_cityname"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/CustomEditText"/>
     
     <Button 
+        android:layout_marginTop="10dp"
         android:id="@+id/dialog_clubs_search_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Keresés"/>
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Keresés"
+        style="@style/CustomPurpleButton"
+             />
 
 </LinearLayout>

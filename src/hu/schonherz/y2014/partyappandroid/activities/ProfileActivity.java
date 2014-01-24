@@ -1,21 +1,26 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends ActionBarActivity {
 
     private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Profilom").setLayout();
+	
 	setContentView(R.layout.activity_profile);
 
 	user = Session.getActualUser();
