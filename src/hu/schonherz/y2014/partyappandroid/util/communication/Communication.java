@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -445,6 +446,113 @@ public class Communication implements CommunicationInterface {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public List<Club> getNotApprovedClubs() {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "GETNOTAPPROVEDCLUB");
+
+			List<Club> ret = new LinkedList<Club>();
+			String data = httpPost("club.php", post);
+			JSONArray jsonArray = new JSONArray(data);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ret.add(new Club(jsonObject.getInt("id"), jsonObject
+						.getString("name"), jsonObject.getString("address")));
+			}
+			return ret;
+		} catch (Exception e) {
+
+		}
+
+		return new LinkedList<Club>();
+	}
+
+	@Override
+	public void approveClub(int club_id) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "ACCEPTCLUB");
+			post.put("clubid", String.valueOf(club_id));
+
+			String data = httpPost("club.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void declineNewClub(int club_id) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "DECLINECLUB");
+			post.put("clubid", String.valueOf(club_id));
+
+			String data = httpPost("club.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void declineOwnerRequest(int club_id, int user_id) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "DELETE");
+			post.put("clubid", String.valueOf(club_id));
+			post.put("userid", String.valueOf(user_id));
+
+			String data = httpPost("owner.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public List<OwnerRequest> getNotApprovedOwnerRequest() {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "GET");
+
+			List<OwnerRequest> ret = new LinkedList<OwnerRequest>();
+			String data = httpPost("owner.php", post);
+			Log.i("itt",data);
+			JSONArray jsonArray = new JSONArray(data);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ret.add(new OwnerRequest(new Club(jsonObject.getInt("club_id"), jsonObject
+						.getString("name"), jsonObject.getString("address")),new User(jsonObject.getInt("user_id"), jsonObject.getString("nick_name"), null, jsonObject.getString("email"), 0, null, 0)));
+			}
+			return ret;
+		} catch (Exception e) {
+
+		}
+
+		return new LinkedList<OwnerRequest>();
+	}
+
+	@Override
+	public void acceptOwnerRequest(int club_id, int user_id) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "ACCEPT");
+			post.put("clubid", String.valueOf(club_id));
+			post.put("userid", String.valueOf(user_id));
+
+			String data = httpPost("owner.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
 	}
 
 }

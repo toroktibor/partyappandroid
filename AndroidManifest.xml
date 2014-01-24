@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-     
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -138,13 +138,18 @@
             android:name="hu.schonherz.y2014.partyappandroid.activities.RoundEmail"
             android:label="@string/title_activity_round_email" >
         </activity>
-        <activity
-            android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser" >
+        <activity android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser" >
+        </activity>
+        <activity android:name="hu.schonherz.y2014.partyappandroid.activities.FullImageActivity" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.FullImageActivity" >
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PendingClubsListActivity"
+            android:label="@string/title_activity_pending_clubs_list" >
         </activity>
-        
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PendingOwnerRequest"
+            android:label="@string/title_activity_pending_owner_request" >
+        </activity>
     </application>
 
 </manifest>
