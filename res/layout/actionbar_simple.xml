@@ -14,7 +14,7 @@
         android:textColor="@color/actionBarTextColor"
         android:gravity="center_vertical"
         android:layout_marginLeft="20dp"
-        android:textSize="18sp"        
+        android:textSize="19sp"        
         />
     
   
