@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class ClubsListFragment extends Fragment implements
 		// Log.i("jojo",clubArray[0].address);
 		clubsListView.setAdapter(new ClubListAdapter(getActivity(), clubArray));
 		// clubsListView.setClickable(true);
+		clubsListView.setCacheColorHint(Color.TRANSPARENT);
 		clubsListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

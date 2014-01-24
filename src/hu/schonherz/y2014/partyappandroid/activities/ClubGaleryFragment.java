@@ -5,14 +5,21 @@ import hu.schonherz.y2014.partyappandroid.adapters.GridViewAdapter;
 import hu.schonherz.y2014.partyappandroid.adapters.ImageItem;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +34,7 @@ public class ClubGaleryFragment extends Fragment {
     private GridViewAdapter customGridAdapter;
     ArrayList<Bitmap> imgs = new ArrayList<Bitmap>();
     private Context mContext;
+    private static final int SELECT_PICTURE = 1;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,7 @@ public class ClubGaleryFragment extends Fragment {
     	super.onAttach(activity);
     	this.mContext = activity;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +80,15 @@ public class ClubGaleryFragment extends Fragment {
 	return rootView;
     }
     
+    @Override
+    public void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	customGridAdapter = new GridViewAdapter(getActivity().getApplicationContext(), R.layout.row_grid, getData());
+    	gridView.invalidate();
+        gridView.setAdapter(customGridAdapter);
+    }
+    
     private ArrayList getData() {
         final ArrayList imageItems = new ArrayList();
         // retrieve String drawable array
@@ -84,5 +102,97 @@ public class ClubGaleryFragment extends Fragment {
         return imageItems;
  
     }
+    
+    public void uploadPicture(){
+    	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    	builder.setTitle("Válassz!");
+    	builder.setNegativeButton("Galéria", new android.content.DialogInterface.OnClickListener() {
+    	    @Override
+    	    public void onClick(DialogInterface dialog, int which) {
+    		Log.e("uploadPicture", "Galéria");
+    		
+    		Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    		
+    	    }
+    	});
+    	builder.setPositiveButton("Kamera", new android.content.DialogInterface.OnClickListener() {
 
-}
+    	    @Override
+    	    public void onClick(DialogInterface dialog, int which) {
+    		// TODO Auto-generated method stub
+    	    	Log.e("uploadPicture", "Kamera");
+    	    }
+    	});
+    	
+    	final AlertDialog dialog = builder.create();
+
+    	dialog.show();
+    }
+    
+    
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode ==Activity.RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                Bitmap b;
+				try {
+//					b = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), selectedImageUri);
+					b = decodeUri(selectedImageUri);
+					Log.e("kép", "kép hozzáadva");
+					
+					//ezt kell elküldeni a szervernek
+					String picture = BitMapToString(b);
+					
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+            }
+        }
+    }
+    
+    public String BitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String strBitMap = Base64.encodeToString(b, Base64.DEFAULT);
+        return strBitMap;
+    }
+    
+    
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(
+                getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);
+
+        final int REQUIRED_SIZE = 300;
+
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(
+        		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o2);
+    }
+    
+
+
+    }

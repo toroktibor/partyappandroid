@@ -21,7 +21,7 @@ public class ClubActivity extends ActionBarActivity {
 	static public Intent intent;
 	static public boolean isClubOfActualUser;
 
-	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+	public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 		public ScreenSlidePagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -64,6 +64,12 @@ public class ClubActivity extends ActionBarActivity {
 				getSupportFragmentManager());
 		viewPager.setAdapter(mPagerAdapter);
 
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 
 	public void phoneCall(View v) {
