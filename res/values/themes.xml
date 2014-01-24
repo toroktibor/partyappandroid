@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="CustomTheme" parent="@style/Theme.AppCompat">
+        <item name="android:windowBackground">@color/applicationWindowBackground</item>
+    </style>
+
+</resources>

@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:text="a"/>
+        android:text="a"        
+        style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/login_edittext_password"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/password"
-        android:text="a">
+        android:text="a"
+        style="@style/CustomEditText">
 
         <requestFocus />
     </EditText>
@@ -29,15 +31,17 @@
     <Button
         android:id="@+id/login_button_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="@string/login" 
-        android:onClick="onClickHandler"/>
+        android:onClick="onClickHandler"
+        style="@style/CustomPurpleButton"/>
     
    <Button
         android:id="@+id/login_button_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="@string/register" 
-        android:onClick="onClickHandler"/>
+        android:onClick="onClickHandler"
+        style="@style/CustomPurpleButton"/>
 
 </LinearLayout>

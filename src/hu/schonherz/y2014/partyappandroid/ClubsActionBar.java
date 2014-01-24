@@ -38,6 +38,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		ViewGroup actionBarLayout = (ViewGroup) activity.getLayoutInflater()
 				.inflate(R.layout.actionbar_clubs, null);
 		ActionBar ab = activity.getSupportActionBar();
+		
+		
 		ab.setDisplayShowHomeEnabled(false);
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowCustomEnabled(true);

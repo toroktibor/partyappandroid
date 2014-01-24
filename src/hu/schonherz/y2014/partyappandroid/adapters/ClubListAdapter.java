@@ -25,9 +25,9 @@ public class ClubListAdapter extends ArrayAdapter<Club> {
 	    LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
 	    item = inflater.inflate(R.layout.club_list_item, parent, false);
 	}
-	if(((Club) getItem(position)).approved==0){
+	/*if(((Club) getItem(position)).approved==0){
 		item.setBackgroundColor(Color.RED);
-	}
+	}*/
 	((TextView) item.findViewById(R.id.club_list_item_name)).setText(((Club) getItem(position)).name);
 	((TextView) item.findViewById(R.id.club_list_item_address)).setText(((Club) getItem(position)).address);
 	item.setTag((Club) getItem(position));

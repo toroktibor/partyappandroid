@@ -12,28 +12,32 @@
         android:id="@+id/register_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name" />
+        android:hint="@string/name"
+        style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/register_edittext_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+		style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/register_edittext_password2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password_again"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+		style="@style/CustomEditText" />
 
     <EditText
         android:id="@+id/register_edittext_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email_address"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+		style="@style/CustomEditText" />
     
      <EditText
         android:id="@+id/register_edittext_dateofbirth"
@@ -42,22 +46,25 @@
         android:hint="Születési idő"
         android:onClick="onClickHandler"
         android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+		style="@style/CustomEditText" />
 
      <Spinner
         android:id="@+id/register_spinner_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/register_spinner_sex"
+		style="@style/CustomEditText"
         />     
     
     
     <Button
         android:id="@+id/register_button_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="@string/register" 
-        android:onClick="onClickHandler"/>
+        android:onClick="onClickHandler"
+        style="@style/CustomPurpleButton"/>
 
 
     

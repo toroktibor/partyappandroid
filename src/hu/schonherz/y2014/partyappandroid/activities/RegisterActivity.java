@@ -1,6 +1,8 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
@@ -8,12 +10,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class RegisterActivity extends FragmentActivity implements hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator {
+public class RegisterActivity extends ActionBarActivity implements hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator {
 
 	EditText nameEditText;
 	EditText passwordEditText;
@@ -25,6 +28,9 @@ public class RegisterActivity extends FragmentActivity implements hu.schonherz.y
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	
+    	new SimpleActionBar(this,"Regisztráció").setLayout();
+    	
     	setContentView(R.layout.activity_register);
     	nameEditText = (EditText) findViewById(R.id.register_edittext_name);
     	passwordEditText = (EditText) findViewById(R.id.register_edittext_password);
@@ -44,6 +50,7 @@ public class RegisterActivity extends FragmentActivity implements hu.schonherz.y
     		String userSex = spinnerSexSpinner.getSelectedItem().toString();
     		
     		if(userName.isEmpty()){
+    		    	new ErrorToast(this, "Nem adtál meg nevet!").show();
     			return;
     		}
     		if(userPassword.isEmpty()){

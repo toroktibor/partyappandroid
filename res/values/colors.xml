@@ -1,0 +1,8 @@
+<resources>
+
+    <color name="applicationWindowBackground">#252932</color>
+    <color name="purple">#9a6ebd</color>
+    
+    <color name="editTextBackground">#363a46</color>
+
+</resources>

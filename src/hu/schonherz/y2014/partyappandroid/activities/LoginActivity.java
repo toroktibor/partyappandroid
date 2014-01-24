@@ -1,19 +1,13 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-import org.apache.http.client.ClientProtocolException;
-
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation.LocalBinder;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
-import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,16 +15,13 @@ import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
-public class LoginActivity extends Activity
+public class LoginActivity extends ActionBarActivity
 {
 
 	boolean mBounded;
@@ -75,6 +66,8 @@ public class LoginActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		new SimpleActionBar(this,"Bejelentkezés").setLayout();
 
 		setContentView(R.layout.activity_login);
 
@@ -93,6 +86,8 @@ public class LoginActivity extends Activity
 			finish();
 		}
 				
+		
+		
 		
 
 	}
