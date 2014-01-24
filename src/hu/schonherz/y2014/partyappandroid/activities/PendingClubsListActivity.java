@@ -77,7 +77,10 @@ public class PendingClubsListActivity extends ActionBarActivity {
     
     @Override
     protected void onResume() {
-    	newClubsListView.setAdapter(new ClubListAdapter(this, getClubArrayFromList(newClubsList)));
+    	if(newClubsList == null){
+    		
+    	} else
+    		newClubsListView.setAdapter(new ClubListAdapter(this, getClubArrayFromList(newClubsList)));
     	super.onResume();
     }
     
