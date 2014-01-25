@@ -10,5 +10,9 @@
     
     <color name="popupBackground">#2e2e3c</color>
     <color name="dialogBackground">#2e2e3c</color>
+    
+    
+    <color name="purpleButtonBackground">#8e6bab</color>
+    <color name="purpleButtonBackgroundPressed">#814faa</color>
 
 </resources>
