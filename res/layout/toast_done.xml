@@ -2,18 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-	android:padding="10dp" >
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/toast_done_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#AADAAA"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
         android:text="" 
         android:textColor="@android:color/black"/>
 
