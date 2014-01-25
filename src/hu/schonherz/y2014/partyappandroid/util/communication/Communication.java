@@ -556,7 +556,7 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public void uploadAImage(int club_id, String rowImage) {
+	public void uploadAnImage(int club_id, String rowImage) {
 		try {
 			HashMap<String, String> post = new HashMap<String, String>();
 			post.put("action", "ADD");
