@@ -6,13 +6,14 @@
 
       <ImageView
         android:src="@drawable/ab_filter_location"
-        android:background="?attr/actionBarItemBackground"
+        android:background="@drawable/actionbar_filterbg"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
         android:id="@+id/actionbar_clubs_button_a"		
         android:layout_alignParentLeft="true"                 
-        android:text="+" />
+        android:text="+" 
+      />
        
     
         <ImageView
@@ -29,7 +30,9 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/actionbar_clubs_button_a">
+        android:layout_toRightOf="@+id/actionbar_clubs_button_a"
+        android:layout_toLeftOf="@+id/actionbar_clubs_button_e"
+        android:gravity="left">
 
         <ImageView
         android:src="@drawable/ab_list"
@@ -38,6 +41,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerInside"
             android:id="@+id/actionbar_clubs_button_b"
+            
              
 
             android:text="Li" />
@@ -61,5 +65,7 @@
             android:id="@+id/actionbar_clubs_button_d"
             android:text="Ke" />
     </LinearLayout>
+    
+
 
 </RelativeLayout>

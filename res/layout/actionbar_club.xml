@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    style="@style/CustomActionBar">
 
      
 
-    <Button
+    <ImageView
         android:id="@+id/actionbar_club_button_e"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true" 
+        android:scaleType="centerInside"
+        android:src="@drawable/ab_more"
         android:text="M" />
        
     
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent"     
         android:layout_alignParentLeft="true" >
 
-        <Button
+        <ImageView
             android:id="@+id/actionbar_club_button_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ab_info"
             android:text="Info" />
 
-        <Button
+        <ImageView
             android:id="@+id/actionbar_club_button_c"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ab_events"
             android:text="Es" />
 
-        <Button
+        <ImageView
             android:id="@+id/actionbar_club_button_d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ab_gallery"
             android:text="Kép" />
     </LinearLayout>
     

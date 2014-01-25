@@ -19,7 +19,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_launcher_label"
-        android:theme="@style/CustomTheme" >
+        android:theme="@style/CustomTheme"         >
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.LoginActivity"
             android:label="@string/login" >

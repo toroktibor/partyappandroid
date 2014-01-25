@@ -44,6 +44,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	activity.findViewById(R.id.actionbar_clubs_button_c).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_clubs_button_d).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_clubs_button_e).setOnClickListener(this);
+	
+	((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
+	((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( null );
 
     }
 
@@ -68,6 +71,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	case R.id.actionbar_clubs_button_b:
 	    /* viewPager lapozása a lista nézetre */
 	    activity.viewPager.setCurrentItem(0);
+	    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
+	    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( null );
 	    break;
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
@@ -75,6 +80,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		@Override
 		public void onResume() {
 		    activity.viewPager.setCurrentItem(1);
+		    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
+		    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( null );
+		    
 		}
 	    });
 	    break;
@@ -126,6 +134,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    break;
 	case R.id.actionbar_clubs_button_e:
 	    PopupMenu popupmenu2 = new PopupMenu(activity, v);
+	    
 	    MenuItem item2;
 
 	    /*item = popupmenu.getMenu().add(0, 7, 0, "Hozzám közeli klubok");
@@ -146,6 +155,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		item2.setOnMenuItemClickListener(this);
 
 	    }
+	
+	    
 	    popupmenu2.show();
 	    break;
 	default:
@@ -194,6 +205,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    Log.e("MAIN SCREEN", "PENDINGLISTACTIVITY STARTED");
 	    break;
 
+	/* Filter */
+	    
 	case 7: // KÖZELI HELYEK
 	    Session.getInstance().getSearchViewClubs().clear();
 	    Session.getInstance()
@@ -204,8 +217,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_location));
-	    break;
-	    
+	    break;    
 	    
 	case 2: // KEDVENCEK
 	    Session.getInstance().getSearchViewClubs().clear();
@@ -214,7 +226,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    	.addAll(Session.getInstance().getActualUser().favoriteClubs);
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
+	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_favorites));	   
 	    break;
 
 	case 3: // HELYEIM

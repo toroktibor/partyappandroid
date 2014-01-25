@@ -1,11 +1,14 @@
 <resources>
 
-    <color name="applicationTextColor">#cccccc</color>
+    <color name="applicationTextColor">#bbbbbb</color>
     <color name="applicationWindowBackground">#282a33</color>
     <color name="purple">#8e6bab</color>
     
     <color name="editTextBackground">#363a46</color>
     
     <color name="actionBarTextColor">#dddddd</color>
+    
+    <color name="popupBackground">#2e2e3c</color>
+    <color name="dialogBackground">#2e2e3c</color>
 
 </resources>

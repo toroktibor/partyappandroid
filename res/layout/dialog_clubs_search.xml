@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/dialog_horizontal_margin"
     android:paddingTop="@dimen/dialog_vertical_margin"   
     android:orientation="vertical"
-    android:background="@color/applicationWindowBackground">
+    android:background="@color/dialogBackground">
     
     <TextView 
         android:layout_width="wrap_content"
