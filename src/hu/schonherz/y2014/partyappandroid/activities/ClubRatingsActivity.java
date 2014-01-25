@@ -21,6 +21,7 @@ public class ClubRatingsActivity extends ActionBarActivity {
 	List<Rating> ratingsList;
 	ListView ratingsListView;
 	Button addButton;
+	int clubListPosition;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class ClubRatingsActivity extends ActionBarActivity {
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		actionBar.setCustomView(R.layout.rating_list_actionbar);
 		
-		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+		clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 		ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
 		
 		ratingsListView = (ListView) findViewById(R.id.club_ratings_list);
@@ -55,6 +56,7 @@ public class ClubRatingsActivity extends ActionBarActivity {
 		if(ratingsList == null){
 			
 		}else{
+			ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
 			ratingsListView.setAdapter(new RatingListAdapter(this, getRatingArrayFromList(ratingsList)));
 		}
 		super.onResume();

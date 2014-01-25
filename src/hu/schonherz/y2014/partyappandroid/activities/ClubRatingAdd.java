@@ -8,6 +8,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;

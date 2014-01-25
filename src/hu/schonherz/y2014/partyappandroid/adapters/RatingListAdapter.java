@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +27,10 @@ public class RatingListAdapter extends ArrayAdapter<Rating> {
 		}
 		
 		Rating actualRating = (Rating) getItem(position);
-		
-		TextView ratingerUserName = (TextView) convertView.findViewById(R.id.rating_list_item_user_name);
-		RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.rating_list_item_ratingbar);
-		TextView ratingerUserText = (TextView) convertView.findViewById(R.id.rating_list_item_text);
+
+		TextView ratingerUserName = (TextView) item.findViewById(R.id.rating_list_item_user_name);
+		RatingBar ratingBar = (RatingBar) item.findViewById(R.id.rating_list_item_ratingbar);
+		TextView ratingerUserText = (TextView) item.findViewById(R.id.rating_list_item_text);
 		
 		ratingerUserName.setText(actualRating.userName);
 		ratingBar.setRating(actualRating.value);
