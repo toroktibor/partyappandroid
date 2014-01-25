@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class ClubInfoFragment extends Fragment {
@@ -31,7 +34,7 @@ public class ClubInfoFragment extends Fragment {
 	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 	
 	
-	
+	RatingBar clubRatingBar = (RatingBar) rootView.findViewById(R.id.club_info_ratingbar);
 	TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
 	TextView clubAddressTextView = (TextView) rootView.findViewById(R.id.club_info_textview_address);
 	TextView clubDescriptionTextView = (TextView) rootView.findViewById(R.id.club_info_textview_description);
@@ -39,6 +42,16 @@ public class ClubInfoFragment extends Fragment {
 	clubNameTextView.setText(actualClub.name);
 	clubAddressTextView.setText(actualClub.address);
 	clubDescriptionTextView.setText(actualClub.description);
+	
+	clubRatingBar.setOnTouchListener(new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			Intent i = new Intent(getActivity(),ClubRatingsActivity.class);
+			startActivity(i);
+			return false;
+		}
+	});
 	
 	return rootView;
     }
