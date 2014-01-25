@@ -63,7 +63,8 @@ public class ClubActivity extends ActionBarActivity {
 		ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(
 				getSupportFragmentManager());
 		viewPager.setAdapter(mPagerAdapter);
-
+		
+		clubFullDownload(clubListPosition);
 	}
 	
 	@Override
@@ -99,7 +100,9 @@ public class ClubActivity extends ActionBarActivity {
 
 	protected void clubFullDownload(int actualClubPosition) {
 		Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
+		Log.i("fulldownload", "kommunikáció előtt");
 		if (actualCLub.isNotFullDownloaded()) {
+			Log.i("fulldownload", "kommunikáció után");
 			Session.getSearchViewClubs().set(
 					actualClubPosition,
 					Session.getInstance().getActualCommunicationInterface()

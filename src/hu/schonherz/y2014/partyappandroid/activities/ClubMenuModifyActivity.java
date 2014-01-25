@@ -124,6 +124,7 @@ public class ClubMenuModifyActivity extends Activity {
 				actualMenuItem.currency = currency;
 				actualMenuItem.unit = unit;
 				actualMenuItem.discount = discount;
+				Session.getInstance().getActualCommunicationInterface().updateAMenuItem(actualMenuItem);
 				finish();
 			}
 		});

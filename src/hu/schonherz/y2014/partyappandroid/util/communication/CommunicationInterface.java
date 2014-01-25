@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
@@ -108,5 +109,11 @@ public interface CommunicationInterface {
 	
 	public ArrayList<Integer> selectClubsImagesIds(int club_id);
 	
+	public int addANewMenuItem(int clubId, MenuItem menuItem);
+
+	public List<MenuItem> getMenuItemsForClub(int club_id);
 	
+	public void updateAMenuItem(MenuItem menuItem);
+	
+	public void removeEMenuItem(int menuid);
 }

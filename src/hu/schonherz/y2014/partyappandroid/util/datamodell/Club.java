@@ -50,7 +50,7 @@ public class Club {
 		this.address = address;
 		this.phonenumber = phonenumber;
 		this.email = email;
-		this.date = null; // !!!!!!
+		this.date = ""; // !!!!!!
 		this.highlite_expire = highlight_expire;
 		this.approved = approved; // !!!!!!
 	}
@@ -69,6 +69,7 @@ public class Club {
 		this.highlite_expire = highlite_expire;
 		this.approved = approved;
 		this.services = services;
+		this.date = "";
 	}
 
 	public Club(int id, String name, String address) {
@@ -85,8 +86,7 @@ public class Club {
 	}
 
 	public boolean isNotFullDownloaded() {
-		return (this.email == null) && (this.date == null)
-				&& (this.description == null) && (this.events == null);
+		return (this.date == null);
 	}
 	
 	public void downloadEverything(){

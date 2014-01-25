@@ -148,10 +148,12 @@ public class ClubMenuAddActivity extends Activity {
 				}
 				
 				//Uzenet a servernek h uj menuitem van
-				
-				MenuItem newMenuItem = new MenuItem(0, name, price, currency, unit, discount, category, 1);
-				
 				int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+				int clubId = Session.getSearchViewClubs().get(clubListPosition).id;
+				MenuItem newMenuItem = new MenuItem(0, name, price, currency, unit, discount, category, 1);
+				int menuItemId = Session.getInstance().getActualCommunicationInterface().addANewMenuItem(clubId, newMenuItem);
+				newMenuItem.id=menuItemId;
+				
 				Session.getSearchViewClubs().get(clubListPosition).menuItems.add(newMenuItem);
 				
 				finish();

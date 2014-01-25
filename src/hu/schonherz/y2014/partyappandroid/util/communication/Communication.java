@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
@@ -55,9 +56,9 @@ public class Communication implements CommunicationInterface {
 			nameValuePairs.add(new BasicNameValuePair((String) pairs.getKey(),
 					(String) pairs.getValue()));
 		}
-
+		
 		HttpPost httppost = new HttpPost(MainURL + file);
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
 		HttpResponse response = httpclient.execute(httppost);
 		String data = new BasicResponseHandler().handleResponse(response);
 		return data;
@@ -183,16 +184,17 @@ public class Communication implements CommunicationInterface {
 		try {
 			String data = httpPost("club.php", post);
 
-			Log.i("asdasd", data);
-
 			JSONArray jsonArray = new JSONArray(data);
 			JSONObject j = jsonArray.getJSONObject(0);
-
-			return new Club(j.getInt("id"), j.getString("name"),
+			Club out = new Club(j.getInt("id"), j.getString("name"),
 					j.getString("type"), j.getString("description"),
 					j.getString("address"), j.getString("phonenumber"),
 					j.getString("email"), "nemtudommilyendátum",
 					j.getString("highlight_expire"), j.getInt("approved"));
+			
+			out.menuItems = getMenuItemsForClub(club_id);
+			
+			return out;
 		} catch (Exception e) {
 			Log.e(this.getClass().getName(), "bajvan", e);
 		}
@@ -681,4 +683,91 @@ public class Communication implements CommunicationInterface {
 		return null;
 	}
 
+	@Override
+	public int addANewMenuItem(int clubId, MenuItem menuItem) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "ADDNEW");
+			post.put("clubid", String.valueOf(clubId));
+			post.put("name", menuItem.name);
+			post.put("price", ""+menuItem.price);
+			post.put("currency", menuItem.currency);
+			post.put("unit", menuItem.unit);
+			post.put("discount", ""+menuItem.discount);
+			post.put("menu_category", menuItem.menu_category);
+			post.put("menu_sort", ""+menuItem.menu_sort);
+
+			String data = httpPost("menu_item.php", post);
+			JSONObject jsonObject = new JSONObject(data);
+			int menuitem_id = Integer.parseInt(jsonObject.getString("NewID"));
+			return menuitem_id;
+
+		} catch (Exception e) {
+
+		}
+		
+		return 0;
+		
+	}
+
+	@Override
+	public List<MenuItem> getMenuItemsForClub(int club_id) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "GETFROMCLUBID");
+			post.put("clubid", ""+club_id);
+
+			List<MenuItem> ret = new ArrayList<MenuItem>();
+			String data = httpPost("menu_item.php", post);
+			JSONArray jsonArray = new JSONArray(data);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ret.add(new MenuItem(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getInt("price"), jsonObject.getString("currency"), jsonObject.getString("unit"), jsonObject.getInt("discount"), jsonObject.getString("menu_category"), jsonObject.getInt("menu_sort")));
+			}
+			return ret;
+		} catch (Exception e) {
+
+		}
+
+		return new ArrayList<MenuItem>();
+	}
+
+	@Override
+	public void updateAMenuItem( MenuItem menuItem) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "UPDATE");
+			post.put("menuid", ""+menuItem.id);
+			post.put("name", menuItem.name);
+			post.put("price", ""+menuItem.price);
+			post.put("currency", menuItem.currency);
+			post.put("unit", menuItem.unit);
+			post.put("discount", ""+menuItem.discount);
+			post.put("menu_category", menuItem.menu_category);
+			post.put("menu_sort", ""+menuItem.menu_sort);
+
+			String data = httpPost("menu_item.php", post);
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void removeEMenuItem(int menuid) {
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "DELETE");
+			post.put("menuid", ""+menuid);
+
+			String data = httpPost("menu_item.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+	
+	
+	
 }

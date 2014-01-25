@@ -34,8 +34,9 @@ public class ClubMenuActivity extends ActionBarActivity {
 		int index = info.position;
 		switch(item.getItemId()) {
 		case R.id.delete_club_menu_item:
-			//kuldunk majd egy delete uzcsit
 			int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+			int menuid = Session.getSearchViewClubs().get(clubListPosition).menuItems.get(index).id;
+			Session.getInstance().getActualCommunicationInterface().removeEMenuItem(menuid);		
 			Session.getSearchViewClubs().get(clubListPosition).menuItems.remove(index);
 			onResume();
 			return true;
