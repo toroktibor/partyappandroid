@@ -108,5 +108,7 @@
     <string name="title_activity_round_email">RoundEmail</string>
     <string name="title_activity_pending_clubs_list">PendingClubsListActivity</string>
     <string name="title_activity_pending_owner_request">PendingOwnerRequest</string>
+    <string name="title_activity_club_ratings">ClubRatingsActivity</string>
+    <string name="title_activity_club_rating_add">ClubRatingAdd</string>
 
 </resources>

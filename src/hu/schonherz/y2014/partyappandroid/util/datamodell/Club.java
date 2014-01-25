@@ -100,5 +100,13 @@ public class Club {
 	    
 	    Log.i(this.getClass().getName(),"Klub adatai frissítve ( "+id+" )");
 	}
-
+	
+	public Rating isRatingThisUser(int userId){
+		for(Rating rating : ratings){
+			if(rating.userId==userId)
+				return rating;
+		}
+		return null;
+	}
+	
 }

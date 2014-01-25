@@ -102,9 +102,7 @@ public class ClubActivity extends ActionBarActivity {
 		if (actualCLub.isNotFullDownloaded()) {
 			Session.getSearchViewClubs().set(
 					actualClubPosition,
-					Session.getInstance
-
-					().getActualCommunicationInterface()
+					Session.getInstance().getActualCommunicationInterface()
 							.getEverythingFromClub(actualCLub.id));
 		}
 	};
