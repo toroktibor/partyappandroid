@@ -658,8 +658,8 @@ public class Communication implements CommunicationInterface {
 		return null;
 	}
 	
-	public List<Integer> selectClubsImagesIds(int club_id){
-		List<Integer> list = new LinkedList<Integer>();
+	public ArrayList<Integer> selectClubsImagesIds(int club_id){
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		try {
 			HashMap<String, String> post = new HashMap<String, String>();
 			post.put("action", "GETIDS");
@@ -669,12 +669,15 @@ public class Communication implements CommunicationInterface {
 			JSONArray array = new JSONArray(data);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
-				list.add(jsonObject.getInt("imageid"));
+				list.add(new Integer( jsonObject.getInt("imageid")) );
 			}
+			for (int i=0;i<list.size();i++)
+				Log.e("log", list.get(i).toString());
 			return list;
 		} catch (Exception e) {
 			
 		}
+		
 		return null;
 	}
 

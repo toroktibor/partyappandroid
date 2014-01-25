@@ -49,7 +49,7 @@ public class ClubGaleryFragment extends Fragment {
     ArrayList<Bitmap> imgs = new ArrayList<Bitmap>();
     private Context mContext;
     private static final int SELECT_PICTURE = 1;
-    private String imagepath=null;
+    ArrayList<Integer> lista;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,16 +71,18 @@ public class ClubGaleryFragment extends Fragment {
 	
 	//TODO:képek lekérése a szervertől
 //	imgs.add  (StringToBitMap (Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(4)) );
-//	List<Integer> list = new LinkedList<Integer>();
-//	
-//	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-//	clubFullDownload(clubListPosition);
-//	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
-//
-//	int club_id = actualClub.id;
-//	list.addAll(Session.getInstance().getActualCommunicationInterface().selectClubsImagesIds(club_id));
-//	for (int i = 0; i < list.size(); i++)
-//		imgs.add(StringToBitMap (Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(i)) );
+	
+	
+	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	clubFullDownload(clubListPosition);
+	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+
+	int club_id = actualClub.id;
+	lista = Session.getInstance().getActualCommunicationInterface().selectClubsImagesIds(club_id);
+	for (int i = 0; i < lista.size(); i++){
+		Log.e("galery", "i: "+i);
+		imgs.add(StringToBitMap (Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(lista.get(i))) );
+	}
 	
 	gridView = new GridView(mContext);
     gridView = (GridView) rootView.findViewById(R.id.gridView);

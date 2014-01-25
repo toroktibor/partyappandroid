@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public interface CommunicationInterface {
 	
 	public String DownLoadAnImage(int id);
 	
-	public List<Integer> selectClubsImagesIds(int club_id);
+	public ArrayList<Integer> selectClubsImagesIds(int club_id);
 	
 	
 }
