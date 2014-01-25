@@ -3,6 +3,8 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.GridViewAdapter;
 import hu.schonherz.y2014.partyappandroid.adapters.ImageItem;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -55,6 +57,8 @@ public class ClubGaleryFragment extends Fragment {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_galery, container, false);
 	
 	//TODO:képek lekérése a szervertől
+//	imgs.add  (StringToBitMap (Session.getInstance().getActualCommunicationInterface().loadAnImage(1)) );
+	
 	
 	gridView = new GridView(mContext);
     gridView = (GridView) rootView.findViewById(R.id.gridView);
@@ -146,6 +150,13 @@ public class ClubGaleryFragment extends Fragment {
 					//ezt kell elküldeni a szervernek
 					String picture = BitMapToString(b);
 					
+					int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+					clubFullDownload(clubListPosition);
+					Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+	
+					int club_id = actualClub.id;
+					
+					Session.getInstance().getActualCommunicationInterface().uploadAnImage(club_id, picture);
 					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -159,12 +170,18 @@ public class ClubGaleryFragment extends Fragment {
         }
     }
     
-    public String BitMapToString(Bitmap bitmap) {
+    public static String BitMapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
         String strBitMap = Base64.encodeToString(b, Base64.DEFAULT);
         return strBitMap;
+    }
+    
+    public static Bitmap StringToBitMap(String input) 
+    {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length); 
     }
     
     
@@ -192,6 +209,18 @@ public class ClubGaleryFragment extends Fragment {
         return BitmapFactory.decodeStream(
         		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o2);
     }
+    
+	protected void clubFullDownload(int actualClubPosition) {
+		Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
+		if (actualCLub.isNotFullDownloaded()) {
+			Session.getSearchViewClubs().set(
+					actualClubPosition,
+					Session.getInstance
+
+					().getActualCommunicationInterface()
+							.getEverythingFromClub(actualCLub.id));
+		}
+	};
     
 
 
