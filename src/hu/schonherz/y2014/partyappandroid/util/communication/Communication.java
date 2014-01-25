@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -439,10 +440,10 @@ public class Communication implements CommunicationInterface {
 	public void deleteFavoriteClubForUser(int club_id, int user_id) {
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("action", "DELETE"));
-		nameValuePairs.add(new BasicNameValuePair("clubid",
-				(new Integer(club_id)).toString()));
-		nameValuePairs.add(new BasicNameValuePair("userid",
-				(new Integer(user_id)).toString()));
+		nameValuePairs.add(new BasicNameValuePair("clubid", (new Integer(
+				club_id)).toString()));
+		nameValuePairs.add(new BasicNameValuePair("userid", (new Integer(
+				user_id)).toString()));
 
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(MainURL + "favorite.php");
@@ -501,7 +502,7 @@ public class Communication implements CommunicationInterface {
 		} catch (Exception e) {
 
 		}
-		
+
 	}
 
 	@Override
@@ -516,7 +517,7 @@ public class Communication implements CommunicationInterface {
 		} catch (Exception e) {
 
 		}
-		
+
 	}
 
 	@Override
@@ -532,7 +533,7 @@ public class Communication implements CommunicationInterface {
 		} catch (Exception e) {
 
 		}
-		
+
 	}
 
 	@Override
@@ -543,12 +544,15 @@ public class Communication implements CommunicationInterface {
 
 			List<OwnerRequest> ret = new LinkedList<OwnerRequest>();
 			String data = httpPost("owner.php", post);
-			Log.i("itt",data);
+			Log.i("itt", data);
 			JSONArray jsonArray = new JSONArray(data);
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				ret.add(new OwnerRequest(new Club(jsonObject.getInt("club_id"), jsonObject
-						.getString("name"), jsonObject.getString("address")),new User(jsonObject.getInt("user_id"), jsonObject.getString("nick_name"), null, jsonObject.getString("email"), 0, null, 0)));
+				ret.add(new OwnerRequest(new Club(jsonObject.getInt("club_id"),
+						jsonObject.getString("name"), jsonObject
+								.getString("address")), new User(jsonObject
+						.getInt("user_id"), jsonObject.getString("nick_name"),
+						null, jsonObject.getString("email"), 0, null, 0)));
 			}
 			return ret;
 		} catch (Exception e) {
@@ -571,38 +575,105 @@ public class Communication implements CommunicationInterface {
 		} catch (Exception e) {
 
 		}
-		
+
 	}
 
-	@Override
-	public void uploadAnImage(int club_id, String rowImage) {
+
+	public void uploadAnImage(int club_id, String rowImage){
 		try {
-			HashMap<String, String> post = new HashMap<String, String>();
-			post.put("action", "ADD");
-			post.put("clubid", String.valueOf(club_id));
-			post.put("rawImage", rowImage);
-
-			String data = httpPost("image.php", post);
-		} catch (Exception e) {
-
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost(MainURL + "image.php");
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
+			nameValuePairs.add(new BasicNameValuePair("clubid", String.valueOf(club_id)));
+			nameValuePairs.add(new BasicNameValuePair("rawImage", rowImage));
+			
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response1 = httpclient.execute(httppost);
+			String the_string_response = convertResponseToString(response1);
+			Log.e("the_string_response", the_string_response);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
 	}
+
 	
+// don't magic :D
+	public String convertResponseToString(HttpResponse response)
+			throws IllegalStateException, IOException {
+		InputStream inputStream;
+		String res = "";
+		StringBuffer buffer = new StringBuffer();
+		inputStream = response.getEntity().getContent();
+		int contentLength = (int) response.getEntity().getContentLength(); // getting
+																			// content
+																			// length…..
+
+		if (contentLength < 0) {
+		} else {
+			byte[] data = new byte[512];
+			int len = 0;
+			try {
+				while (-1 != (len = inputStream.read(data))) {
+					buffer.append(new String(data, 0, len)); // converting to
+																// string and
+																// appending to
+																// stringbuffer…..
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				inputStream.close(); // closing the stream…..
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			res = buffer.toString(); // converting stringbuffer to string…..
+
+			// System.out.println("Response => " +
+			// EntityUtils.toString(response.getEntity()));
+		}
+		return res;
+	}
+
 	@Override
-	public String loadAnImage(int imageid) {
+	public String DownLoadAnImage(int imageid) {
 		try {
 			HashMap<String, String> post = new HashMap<String, String>();
 			post.put("action", "GET");
 			post.put("imageid", String.valueOf(imageid));
 
 			String data = httpPost("image.php", post);
-			
-			JSONObject jsonObject = new JSONObject(data);
-			String image = jsonObject.getString("rawImage");
+			JSONArray array = new JSONArray(data);
+			JSONObject jsonObject = array.getJSONObject(0);
+			String image = (String) jsonObject.get("rawImage");
 			return image;
 		} catch (Exception e) {
+			
+		}
+		return null;
+	}
+	
+	public List<Integer> selectClubsImagesIds(int club_id){
+		List<Integer> list = new LinkedList<Integer>();
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "GETIDS");
+			post.put("clubid", String.valueOf(club_id));
 
+			String data = httpPost("image.php", post);
+			JSONArray array = new JSONArray(data);
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject jsonObject = array.getJSONObject(i);
+				list.add(jsonObject.getInt("imageid"));
+			}
+			return list;
+		} catch (Exception e) {
+			
 		}
 		return null;
 	}

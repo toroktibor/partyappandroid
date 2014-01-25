@@ -103,5 +103,9 @@ public interface CommunicationInterface {
 	
 	public void uploadAnImage(int club_id, String rowImage);
 	
-	public String loadAnImage(int id);
+	public String DownLoadAnImage(int id);
+	
+	public List<Integer> selectClubsImagesIds(int club_id);
+	
+	
 }

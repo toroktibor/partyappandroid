@@ -7,19 +7,30 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -29,6 +40,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class ClubGaleryFragment extends Fragment {
 	
@@ -37,6 +49,7 @@ public class ClubGaleryFragment extends Fragment {
     ArrayList<Bitmap> imgs = new ArrayList<Bitmap>();
     private Context mContext;
     private static final int SELECT_PICTURE = 1;
+    private String imagepath=null;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +70,17 @@ public class ClubGaleryFragment extends Fragment {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_galery, container, false);
 	
 	//TODO:képek lekérése a szervertől
-//	imgs.add  (StringToBitMap (Session.getInstance().getActualCommunicationInterface().loadAnImage(1)) );
-	
+//	imgs.add  (StringToBitMap (Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(4)) );
+//	List<Integer> list = new LinkedList<Integer>();
+//	
+//	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+//	clubFullDownload(clubListPosition);
+//	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+//
+//	int club_id = actualClub.id;
+//	list.addAll(Session.getInstance().getActualCommunicationInterface().selectClubsImagesIds(club_id));
+//	for (int i = 0; i < list.size(); i++)
+//		imgs.add(StringToBitMap (Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(i)) );
 	
 	gridView = new GridView(mContext);
     gridView = (GridView) rootView.findViewById(R.id.gridView);
@@ -138,8 +160,7 @@ public class ClubGaleryFragment extends Fragment {
     
     
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode ==Activity.RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
+            if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK && data != null) {
                 Uri selectedImageUri = data.getData();
                 Bitmap b;
 				try {
@@ -156,8 +177,8 @@ public class ClubGaleryFragment extends Fragment {
 	
 					int club_id = actualClub.id;
 					
-					Session.getInstance().getActualCommunicationInterface().uploadAnImage(club_id, picture);
 					
+					Session.getInstance().getActualCommunicationInterface().uploadAnImage(club_id, picture);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,7 +188,7 @@ public class ClubGaleryFragment extends Fragment {
 				}
 
             }
-        }
+        
     }
     
     public static String BitMapToString(Bitmap bitmap) {
@@ -221,7 +242,7 @@ public class ClubGaleryFragment extends Fragment {
 							.getEverythingFromClub(actualCLub.id));
 		}
 	};
-    
+
 
 
     }
