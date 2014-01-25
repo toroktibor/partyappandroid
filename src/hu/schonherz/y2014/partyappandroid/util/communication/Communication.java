@@ -94,8 +94,25 @@ public class Communication implements CommunicationInterface {
 
 	@Override
 	public List<Club> getFavoriteClubsFromUserId(int user_id) {
-		ArrayList<Club> outList = new ArrayList<Club>();
-		return outList;
+		try {
+			HashMap<String, String> post = new HashMap<String, String>();
+			post.put("action", "GETFAVORIT");
+			post.put("userid", (new Integer(user_id)).toString());
+
+			List<Club> ret = new LinkedList<Club>();
+			String data = httpPost("favorite.php", post);
+			JSONArray jsonArray = new JSONArray(data);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ret.add(new Club(jsonObject.getInt("id"), jsonObject
+						.getString("name"), jsonObject.getString("address")));
+			}
+			return ret;
+		} catch (Exception e) {
+
+		}
+
+		return new LinkedList<Club>();
 	}
 
 	// kész
@@ -419,11 +436,13 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public void deleteFavoriteClubForUser(int fav_id) {
+	public void deleteFavoriteClubForUser(int club_id, int user_id) {
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("action", "DELETE"));
-		nameValuePairs.add(new BasicNameValuePair("FavID",
-				(new Integer(fav_id)).toString()));
+		nameValuePairs.add(new BasicNameValuePair("clubid",
+				(new Integer(club_id)).toString()));
+		nameValuePairs.add(new BasicNameValuePair("userid",
+				(new Integer(user_id)).toString()));
 
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(MainURL + "favorite.php");

@@ -209,6 +209,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    
 	case 2: // KEDVENCEK
 	    Session.getInstance().getSearchViewClubs().clear();
+	    Session.getInstance()
+	    	.getSearchViewClubs()
+	    	.addAll(Session.getInstance().getActualUser().favoriteClubs);
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
@@ -216,6 +219,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 	case 3: // HELYEIM
 	    Session.getInstance().getSearchViewClubs().clear();
+	    Session.getInstance()
+    		.getSearchViewClubs()
+    		.addAll(Session.getInstance().getActualUser().usersClubs);
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_ownership));

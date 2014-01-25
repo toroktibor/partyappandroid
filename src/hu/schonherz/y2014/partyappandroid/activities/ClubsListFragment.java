@@ -98,7 +98,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 	
 	
 	
-	if (Session.getSearchViewClubs().size() == 0 ) {
+	if (Session.getSearchViewClubs().size() == 0) {
 	    tv.setText("Sajnos nincs találat :(");
 	    tv.setVisibility(View.VISIBLE);
 	} else {
