@@ -1,6 +1,8 @@
-package hu.schonherz.y2014.partyappandroid;
+package hu.schonherz.y2014.partyappandroid.activities;
 
-import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.R.id;
+import hu.schonherz.y2014.partyappandroid.R.layout;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;

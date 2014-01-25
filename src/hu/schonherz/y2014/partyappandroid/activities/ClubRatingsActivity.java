@@ -1,6 +1,5 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import hu.schonherz.y2014.partyappandroid.ClubRatingAdd;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.RatingListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;

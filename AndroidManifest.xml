@@ -155,7 +155,7 @@
             android:label="@string/title_activity_club_ratings" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.ClubRatingAdd"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubRatingAdd"
             android:label="@string/title_activity_club_rating_add" >
         </activity>
     </application>
