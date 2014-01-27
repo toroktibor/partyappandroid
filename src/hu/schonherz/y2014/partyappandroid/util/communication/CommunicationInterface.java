@@ -134,4 +134,8 @@ public interface CommunicationInterface {
     public List<Rating> getRatings(int clubId);
     
     public List<Rating> getNotApprovedRatings();
+    
+    public void declineRating(int userId, int clubId);
+    
+    public void acceptRating(int userId, int clubId);
 }
