@@ -78,7 +78,7 @@ public class PendingRatingsActivity extends ActionBarActivity {
 		if (ratings == null) {
 
 		} else
-			ratingsListView.setAdapter(new PendingRatingListAdapter(getApplicationContext(), getRatingArrayFromList(ratings)));
+			ratingsListView.setAdapter(new PendingRatingListAdapter(this, getRatingArrayFromList(ratings)));
 		super.onResume();
 	}
 	private AdminRating[] getRatingArrayFromList(List<AdminRating> ratingList) {
