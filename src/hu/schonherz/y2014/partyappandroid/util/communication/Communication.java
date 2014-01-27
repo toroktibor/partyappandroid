@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -185,7 +186,7 @@ public class Communication implements CommunicationInterface {
 		    j.getString("address"), j.getString("phonenumber"), j.getString("email"), "nemtudommilyendátum",
 		    j.getString("highlight_expire"), j.getInt("approved"));
 
-	    out.menuItems = getMenuItemsForClub(club_id);
+	    //out.menuItems = getMenuItemsForClub(club_id);
 
 	    return out;
 	} catch (Exception e) {
@@ -751,7 +752,7 @@ public class Communication implements CommunicationInterface {
 	    post.put("action", "GETEVENTSOFCLUB");
 	    post.put("id", String.valueOf(id));
 
-	    String data = httpPost("club.php", post);
+	    String data = httpPost("event.php", post);
 	    JSONArray ja = new JSONArray(data);
 
 	    for (int i = 0; i < ja.length(); i++) {
@@ -768,5 +769,50 @@ public class Communication implements CommunicationInterface {
 	return null;
 
     }
+
+	@Override
+	public int addEvent(int clubid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void updateEvent(int eventid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteEvent(int eventId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int addRating(int clubId, int userId, float value, String comment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void updateRating(int clubId, int userId, float value, String comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Rating> getRatings(int clubId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Rating> getNotApprovedRatings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
