@@ -64,11 +64,14 @@ public class ClubRatingAdd extends ActionBarActivity {
 		if (actualRating == null) {
 		    actualRating = new Rating(Session.getActualUser().getId(), Session.getActualUser().getNickname(),
 			    value, comment, 0);
+		    Session.getInstance().getActualCommunicationInterface().addRating(Session.getInstance().getSearchViewClubs().get(clubListPosition).id, actualRating.userId, actualRating.value, actualRating.comment);
 		    Session.getSearchViewClubs().get(clubListPosition).ratings.add(actualRating);
 		} else {
 		    actualRating.value = value;
 		    actualRating.comment = comment;
+		    Session.getInstance().getActualCommunicationInterface().updateRating(Session.getInstance().getSearchViewClubs().get(clubListPosition).id, actualRating.userId, actualRating.value, actualRating.comment);
 		}
+		
 		finish();
 	    }
 	});
