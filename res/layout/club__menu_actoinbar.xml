@@ -14,15 +14,15 @@
 
     <Button
         android:id="@+id/club_menu_item_actionbar_import_button"
-        android:layout_width="wrap_content"
+        android:layout_width="?attr/actionBarSize"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="in" />
+        android:background="@drawable/ic_launcher"/>
 
     <Button
         android:id="@+id/club_menu_item_actionbar_add_button"
-        android:layout_width="wrap_content"
+        android:layout_width="?attr/actionBarSize"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"

@@ -120,7 +120,10 @@ public interface CommunicationInterface {
     public void removeEMenuItem(int menuid);
 
     public List<Event> getEventsOfClub(int id);
+
+    String DownLoadAnImageThumbnail(int imageid);
     
+        
     public int addEvent(int clubid, String name, String description, String start_date, String row_image, String music_type);
     
     public void updateEvent(int eventid, String name, String description, String start_date, String row_image, String music_type);
@@ -138,4 +141,5 @@ public interface CommunicationInterface {
     public void declineRating(int userId, int clubId);
     
     public void acceptRating(int userId, int clubId);
+    
 }
