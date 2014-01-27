@@ -102,9 +102,11 @@ public class ClubGaleryFragment extends Fragment {
 	    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		actualClub.images.get(position).downloadBitmap();
 		actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
 		byte[] byteArray = stream.toByteArray();
 
+		
 		Intent in1 = new Intent(getActivity(), FullImageActivity.class);
 		in1.putExtra("image", byteArray);
 		startActivity(in1);
@@ -226,10 +228,14 @@ public class ClubGaleryFragment extends Fragment {
 		// ezt kell elküldeni a szervernek
 		String picture = ImageUtils.BitMapToString(b);
 
-		ClubGaleryFragment.actualClub.images.add(new GaleryImage(999, b));
-
-		Session.getInstance().getActualCommunicationInterface()
+		int newID = Session.getInstance().getActualCommunicationInterface()
 			.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+		
+		ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
+			ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
+			));
+
+		
 
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -254,11 +260,14 @@ public class ClubGaleryFragment extends Fragment {
 		// ezt kell elküldeni a szervernek
 		String picture = ImageUtils.BitMapToString(b);
 
-		// int club_id = actualClub.id;
-		ClubGaleryFragment.actualClub.images.add(new GaleryImage(999, b));
-
-		Session.getInstance().getActualCommunicationInterface()
+		int newID = Session.getInstance().getActualCommunicationInterface()
 			.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+		
+		ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
+			ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
+			));
+
+
 
 	    } catch (Exception e) {
 		// TODO Auto-generated catch block

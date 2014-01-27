@@ -556,7 +556,7 @@ public class Communication implements CommunicationInterface {
 
     }
 
-    public void uploadAnImage(int club_id, String rowImage) {
+    public int uploadAnImage(int club_id, String rowImage) {
 	try {
 	    HttpClient httpclient = new DefaultHttpClient();
 	    HttpPost httppost = new HttpPost(MainURL + "image.php");
@@ -569,13 +569,21 @@ public class Communication implements CommunicationInterface {
 	    HttpResponse response1 = httpclient.execute(httppost);
 	    String the_string_response = convertResponseToString(response1);
 	    Log.e("the_string_response", the_string_response);
+	    JSONObject jo = new JSONObject(the_string_response);
+	    
+	    return jo.getInt("NewID");
+	    
 	} catch (ClientProtocolException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
+	} catch (JSONException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
+	return 0;
     }
 
     // don't magic :D
