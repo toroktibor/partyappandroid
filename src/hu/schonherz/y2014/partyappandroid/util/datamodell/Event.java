@@ -16,4 +16,29 @@ public class Event {
 	this.music_type = music_type;
 	this.approved = approved;
     }
+    
+    public static int getMusicTypePosition(String musicType){
+    	if(musicType.equals("Vegyes"))
+    		return 0;
+    	if(musicType.equals("Rock"))
+    		return 1;
+    	if(musicType.equals("Jazz"))
+    		return 2;
+    	if(musicType.equals("Electro"))
+    		return 3;
+    	if(musicType.equals("Metál"))
+    		return 4;
+    	if(musicType.equals("Mulatós"))
+    		return 5;
+    	if(musicType.equals("House"))
+    		return 6;
+    	if(musicType.equals("Dubstep"))
+    		return 7;
+    	if(musicType.equals("Pop"))
+    		return 8;
+    	if(musicType.equals("Egyéb"))
+    		return 9;
+   	
+    	return 0;
+    }
 }

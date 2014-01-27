@@ -85,28 +85,9 @@ public class ClubEventsFragment extends Fragment {
 
     @Override
     public void onResume() {
-	/*
-	 * int clubListPosition =
-	 * ClubActivity.intent.getExtras().getInt("listPosition"); Event[]
-	 * eventArray =
-	 * getEventArrayFromList(Session.getSearchViewClubs().get(clubListPosition
-	 * ).events); eventsListView.setAdapter(new
-	 * EventsListAdapter(getActivity(), eventArray));
-	 * 
-	 * eventsListView.setOnItemClickListener(new OnItemClickListener() {
-	 * 
-	 * @Override public void onItemClick(AdapterView<?> arg0, View arg1, int
-	 * arg2, long arg3) { Activity activity = getActivity(); Intent i = new
-	 * Intent(activity, ClubEventDetailsActivity.class);
-	 * i.putExtra("listPosition", arg2); activity.startActivity(i); }
-	 * 
-	 * });
-	 * 
-	 * 
-	 * //tulajextra funkcioi if(ClubActivity.isClubOfActualUser){
-	 * registerForContextMenu(eventsListView); }
-	 */
-
+    	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+    	Event[] eventArray = getEventArrayFromList(Session.getSearchViewClubs().get(clubListPosition).events);
+    	eventsListView.setAdapter(new EventsListAdapter(getActivity(), eventArray));
 	super.onResume();
     }
 
@@ -126,9 +107,10 @@ public class ClubEventsFragment extends Fragment {
 	int index = info.position;
 	switch (item.getItemId()) {
 	case R.id.delete_event_menu_item:
-	    // kuldunk majd egy delete uzcsit
 	    int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	    int eventId = Session.getSearchViewClubs().get(clubListPosition).events.get(index).id;
 	    Session.getSearchViewClubs().get(clubListPosition).events.remove(index);
+	    Session.getInstance().getActualCommunicationInterface().deleteEvent(eventId);
 	    onResume();
 	    return true;
 	case R.id.modify_event_menu_item:

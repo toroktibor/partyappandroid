@@ -10,14 +10,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class ClubEventModifyActivity extends Activity {
 
-    ImageView imageView;
     EditText nameEditText;
     EditText dateEditText;
     EditText descriptionEditText;
+    Spinner musicTypeSpinner;
     Button modifyButton;
     Event actualEvent;
 
@@ -30,12 +31,15 @@ public class ClubEventModifyActivity extends Activity {
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	actualEvent = Session.getSearchViewClubs().get(clubListPosition).events.get(eventListPosition);
 
-	imageView = (ImageView) findViewById(R.id.club_event_modify_imageview);
 	nameEditText = (EditText) findViewById(R.id.club_event_modify_edittext_name);
 	dateEditText = (EditText) findViewById(R.id.club_event_modify_edittext_date);
 	descriptionEditText = (EditText) findViewById(R.id.club_event_modify_edittext_description);
 	modifyButton = (Button) findViewById(R.id.club_event_modify_button_modify);
+	musicTypeSpinner = (Spinner) findViewById(R.id.club_event_modify_music_type_spinner);
 
+	int position = Event.getMusicTypePosition(actualEvent.music_type);
+	
+	musicTypeSpinner.setSelection(position);
 	nameEditText.setText(actualEvent.name);
 	dateEditText.setText(actualEvent.start_date);
 	descriptionEditText.setText(actualEvent.description);
@@ -47,6 +51,7 @@ public class ClubEventModifyActivity extends Activity {
 		String name = nameEditText.getText().toString();
 		String date = dateEditText.getText().toString();
 		String description = descriptionEditText.getText().toString();
+		String musicType = musicTypeSpinner.getSelectedItem().toString();
 
 		if (name.isEmpty()) {
 		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
@@ -62,10 +67,13 @@ public class ClubEventModifyActivity extends Activity {
 			    .show();
 		    return;
 		}
-		// kuldunk uzenetet a szervernek
+		
 		actualEvent.name = name;
 		actualEvent.start_date = date;
 		actualEvent.description = description;
+		actualEvent.music_type = musicType;
+		
+		Session.getInstance().getActualCommunicationInterface().updateEvent(actualEvent.id, actualEvent.name, actualEvent.description, actualEvent.start_date, "", actualEvent.music_type);
 		finish();
 	    }
 	});

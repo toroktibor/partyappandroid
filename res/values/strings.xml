@@ -103,7 +103,20 @@
         <item>EUR</item>
         <item>USD</item>
     </string-array>
-
+	<string-array name="event_music_type">
+        <item>Vegyes</item>
+        <item>Rock</item>
+        <item>Jazz</item>
+        <item>Electro</item>
+        <item>Metál</item>
+        <item>Mulatós</item>
+        <item>House</item>
+        <item>Dubstep</item>
+        <item>Pop</item>
+        <item>Egyéb</item>
+    </string-array>
+    
+    
     <string name="title_activity_visitor_email">VisitorEmail</string>
     <string name="title_activity_round_email">RoundEmail</string>
     <string name="title_activity_pending_clubs_list">PendingClubsListActivity</string>

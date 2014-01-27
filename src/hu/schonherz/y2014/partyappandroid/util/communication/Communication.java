@@ -810,6 +810,7 @@ public class Communication implements CommunicationInterface {
 
 		    String data = httpPost("event.php", post);
 		    JSONObject jsonObject = new JSONObject(data);
+		    
 		    return;
 
 		} catch (Exception e) {
