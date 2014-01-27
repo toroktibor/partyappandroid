@@ -8,10 +8,17 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.GaleryImage;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,8 +27,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -42,6 +51,7 @@ public class ClubGaleryFragment extends Fragment {
     private static final int TAKE_PICTURE = 2;
     ArrayList<Integer> lista;
     public static Club actualClub;
+    private String mCurrentPhotoPath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,7 +135,7 @@ public class ClubGaleryFragment extends Fragment {
 	 */
 
 	for (int i = 0; i < actualClub.images.size(); i++) {
-	    imageItems.add(new ImageItem(actualClub.images.get(i).getBitmap(), "Image#" + i));
+	    imageItems.add(new ImageItem(actualClub.images.get(i).getBitmap_thumbnail(), "Image#" + i));
 	    Log.e("getData", "i: " + i + ", " + imageItems.get(i));
 	}
 
@@ -154,8 +164,27 @@ public class ClubGaleryFragment extends Fragment {
 	    public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
 		Log.e("uploadPicture", "Kamera");
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		startActivityForResult(Intent.createChooser(intent, "Képfeltöltés"), TAKE_PICTURE);
+		/*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(Intent.createChooser(intent, "Képfeltöltés"), TAKE_PICTURE);*/
+		
+		    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		    // Ensure that there's a camera activity to handle the intent
+		    if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+		        // Create the File where the photo should go
+		        File photoFile = null;
+		        try {
+		            photoFile = createImageFile();
+		        } catch (IOException ex) {
+		            Log.e("asdasd","createImageFile hiba van",ex);
+		        }
+		        // Continue only if the File was successfully created
+		        if (photoFile != null) {
+		            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+		                    Uri.fromFile(photoFile));
+		            startActivityForResult(Intent.createChooser(takePictureIntent, "Képfeltöltés"), TAKE_PICTURE);
+		        }
+		    }
+		
 	    }
 	});
 
@@ -164,27 +193,39 @@ public class ClubGaleryFragment extends Fragment {
 	dialog.show();
     }
 
+    private File createImageFile() throws IOException {
+	    // Create an image file name
+	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	    
+	    String imageFileName = "JPEG_" + timeStamp + "_";
+	    File storageDir = Environment.getExternalStoragePublicDirectory(
+	            Environment.DIRECTORY_PICTURES);
+	    Log.d("asdasd", imageFileName+"; "+".jpg; "+storageDir);
+	    /*File image = File.createTempFile(
+	        imageFileName,  
+	        ".jpg",         
+	        storageDir    
+	    );*/
+	    File image = new File(Environment.getExternalStorageDirectory(),  imageFileName+".jpg");
+
+	    mCurrentPhotoPath = image.getAbsolutePath();
+	    return image;
+	}
+    
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK && data != null) {
 	    Uri selectedImageUri = data.getData();
 	    Bitmap b;
 	    try {
-		// b =
-		// MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
-		// selectedImageUri);
+
 		b = decodeUri(selectedImageUri);
-		Log.e("kép", "kép hozzáadva");
+		//b = resizeBitmap(b);
+		Log.e("kép", "galéria kép hozzáadva");
+		Log.i("asdasd","A galériából feltöltendő kép mérete: "+b.getWidth()+"x"+b.getHeight());
 
 		// ezt kell elküldeni a szervernek
 		String picture = ImageUtils.BitMapToString(b);
 
-		// int clubListPosition =
-		// ClubActivity.intent.getExtras().getInt("listPosition");
-		// clubFullDownload(clubListPosition);
-		// Club actualClub =
-		// Session.getSearchViewClubs().get(clubListPosition);
-
-		// int club_id = actualClub.id;
 		ClubGaleryFragment.actualClub.images.add(new GaleryImage(999, b));
 
 		Session.getInstance().getActualCommunicationInterface()
@@ -198,24 +239,20 @@ public class ClubGaleryFragment extends Fragment {
 		e.printStackTrace();
 	    }
 
-	} else if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK && data != null) {
-	    Uri selectedImageUri = data.getData();
+	} else if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK ) {
+	    //Uri selectedImageUri = data.getData();
 	    Bitmap b;
 	    try {
-		// b =
-		// MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
-		// selectedImageUri);
-		b = decodeUri(selectedImageUri);
-		Log.e("kép", "kép hozzáadva");
+
+		
+		b = decodeUri( Uri.fromFile(new File(mCurrentPhotoPath)) );
+		//b = (Bitmap) data.getExtras().get("data");
+		//b = resizeBitmap(b);
+		Log.e("kép", "kamera kép hozzáadva");
+		Log.i("asdasd","A kamerából feltöltendő kép merete: "+b.getWidth()+"x"+b.getHeight());
 
 		// ezt kell elküldeni a szervernek
 		String picture = ImageUtils.BitMapToString(b);
-
-		// int clubListPosition =
-		// ClubActivity.intent.getExtras().getInt("listPosition");
-		// clubFullDownload(clubListPosition);
-		// Club actualClub =
-		// Session.getSearchViewClubs().get(clubListPosition);
 
 		// int club_id = actualClub.id;
 		ClubGaleryFragment.actualClub.images.add(new GaleryImage(999, b));
@@ -223,10 +260,7 @@ public class ClubGaleryFragment extends Fragment {
 		Session.getInstance().getActualCommunicationInterface()
 			.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
 
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
+	    } catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
@@ -235,14 +269,81 @@ public class ClubGaleryFragment extends Fragment {
 
     }
 
+    private Bitmap resizeBitmap(Bitmap b) {
+	Log.i("asdasd","Kép átméretezése");
+	Log.i("asdasd","Jelenlegi méret: "+b.getWidth()+"x"+b.getHeight());
+	
+	
+	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	b.compress(CompressFormat.JPEG, 70, baos);
+	baos.toByteArray();
+
+	Log.i(getClass().getName(), "resizeBitmap : Kiválasztott kép elkészítése Bitmapként");
+	/*BitmapFactory.Options o = new BitmapFactory.Options();
+	o.inJustDecodeBounds = true;
+	// BitmapFactory.decodeStream(os, null, o);
+	BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.size(), o);*/
+
+	final float TARGETMEGAPIXELS = 0.5f;
+
+	BitmapFactory.Options o2 = new BitmapFactory.Options();
+
+	//int currentpixels = o.outWidth * o.outHeight;
+	int currentpixels = b.getWidth() * b.getHeight();
+	Log.i("asdasd","Jelenlegi minőség: "+currentpixels+"P");
+	float ratio = TARGETMEGAPIXELS * 1000000 / currentpixels;
+	ratio = (float) Math.sqrt(ratio);
+	Log.i("asdasd","A méretezés aránya 1MP hez: "+ratio);
+
+	
+	if (ratio < 1) { // ha kicsinyíteni kell
+	    Log.i(getClass().getName(), "Kicsinyíteni kell a képet");
+
+	    int width_tmp = b.getWidth(), height_tmp = b.getHeight();
+	    
+	    int width_dest = Math.round(ratio * b.getWidth());
+	    int height_dest = Math.round(ratio * b.getHeight());
+	    
+	    Log.i("asdasd","Cél felbontás: "+width_dest+"x"+height_dest);
+	    int scale = 2;
+	    while ( width_tmp * height_tmp / scale / scale > TARGETMEGAPIXELS * 1000000) {
+		scale += 1;
+	    }
+	    Log.i("asdasd","Skálázás: "+scale);
+	    o2.inSampleSize = scale;
+
+	    /*
+	     * Bitmap b =
+	     * BitmapFactory.decodeStream(getActivity().getApplicationContext
+	     * ().getContentResolver() .openInputStream(selectedImage), null,
+	     * o2);
+	     */
+	    Bitmap scaled = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.size(), o2);
+	    
+	    return Bitmap.createScaledBitmap(scaled, width_dest, height_dest, true);
+	    // return Bitmap.createScaledBitmap(b, width_dest, height_dest,
+	    // true);
+
+	} else {
+	    Log.i(getClass().getName(), "A kép mérete nem lépi át a limitet");
+	    // return b.compress(format, quality, stream);
+	    return b;
+	}
+    }
+
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
-	Log.i(getClass().getName(), "Kiválasztott kép elkészítése Bitmapként");
+	Log.i(getClass().getName(), "Uri dekódolása");
 	BitmapFactory.Options o = new BitmapFactory.Options();
 	o.inJustDecodeBounds = true;
-	BitmapFactory.decodeStream(
-		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);
+	/*Bitmap b = BitmapFactory.decodeStream(
+		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);*/
+	Bitmap b = BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage));
+	
+	return b;
+	
+	//return b;
 
-	final float TARGETMEGAPIXELS = 1;
+	/*final float TARGETMEGAPIXELS = 1;
 
 	BitmapFactory.Options o2 = new BitmapFactory.Options();
 
@@ -269,7 +370,7 @@ public class ClubGaleryFragment extends Fragment {
 	    Log.i(getClass().getName(), "A kép mérete nem lépi át a limitet");
 	    return BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver()
 		    .openInputStream(selectedImage), null, o2);
-	}
+	}*/
 
     }
 

@@ -108,7 +108,7 @@ public class Club {
 	for (int i = 0; i < imageIDList.size(); i++) {
 	    Log.e("galery", "i: " + i);
 	    this.images.add(new GaleryImage(imageIDList.get(i), (ImageUtils.StringToBitMap(Session.getInstance()
-		    .getActualCommunicationInterface().DownLoadAnImage(imageIDList.get(i))))));
+		    .getActualCommunicationInterface().DownLoadAnImageThumbnail(imageIDList.get(i))))));
 	}
 
 	Log.i(this.getClass().getName(), "Klub adatai frissítve ( " + id + " )");

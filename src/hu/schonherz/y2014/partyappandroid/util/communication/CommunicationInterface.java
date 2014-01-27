@@ -119,4 +119,6 @@ public interface CommunicationInterface {
     public void removeEMenuItem(int menuid);
 
     public List<Event> getEventsOfClub(int id);
+
+    String DownLoadAnImageThumbnail(int imageid);
 }

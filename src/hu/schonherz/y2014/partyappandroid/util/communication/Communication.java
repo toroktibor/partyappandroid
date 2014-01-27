@@ -632,6 +632,24 @@ public class Communication implements CommunicationInterface {
 	return null;
     }
 
+    @Override
+    public String DownLoadAnImageThumbnail(int imageid) {
+	try {
+	    HashMap<String, String> post = new HashMap<String, String>();
+	    post.put("action", "GETTHUMBNAIL");
+	    post.put("imageid", String.valueOf(imageid));
+
+	    String data = httpPost("image.php", post);
+	    JSONArray array = new JSONArray(data);
+	    JSONObject jsonObject = array.getJSONObject(0);
+	    String image = (String) jsonObject.get("rawImage");
+	    return image;
+	} catch (Exception e) {
+
+	}
+	return null;
+    }
+    
     public ArrayList<Integer> selectClubsImagesIds(int club_id) {
 	ArrayList<Integer> list = new ArrayList<Integer>();
 	try {
