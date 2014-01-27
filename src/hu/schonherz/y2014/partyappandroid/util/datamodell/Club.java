@@ -100,6 +100,8 @@ public class Club {
 	this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
 	Log.i(getClass().getName(), "Klub eseményei: " + this.events.size());
 
+	this.menuItems = Session.getInstance().getActualCommunicationInterface().getMenuItemsForClub(this.id);
+	
 	this.images.clear();
 	ArrayList<Integer> imageIDList = Session.getInstance().getActualCommunicationInterface()
 		.selectClubsImagesIds(this.id);

@@ -185,7 +185,7 @@ public class Communication implements CommunicationInterface {
 		    j.getString("address"), j.getString("phonenumber"), j.getString("email"), "nemtudommilyendátum",
 		    j.getString("highlight_expire"), j.getInt("approved"));
 
-	    out.menuItems = getMenuItemsForClub(club_id);
+	    //out.menuItems = getMenuItemsForClub(club_id);
 
 	    return out;
 	} catch (Exception e) {
