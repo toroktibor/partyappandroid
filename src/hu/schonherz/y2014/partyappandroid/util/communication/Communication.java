@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -768,5 +769,203 @@ public class Communication implements CommunicationInterface {
 	return null;
 
     }
+
+	@Override
+	public int addEvent(int clubid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "ADDNEW");
+		    post.put("clubid", String.valueOf(clubid));
+		    post.put("name", name);
+		    post.put("description", description);
+		    post.put("start_date", start_date);
+		    post.put("row_image", row_image);
+		    post.put("music_type", music_type);
+
+		    String data = httpPost("event.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    int event_id = Integer.parseInt(jsonObject.getString("NewID"));
+		    return event_id;
+
+		} catch (Exception e) {
+
+		}
+
+		return 0;
+	}
+
+	@Override
+	public void updateEvent(int eventid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "UPDATE");
+		    post.put("eventid", String.valueOf(eventid));
+		    post.put("name", name);
+		    post.put("description", description);
+		    post.put("start_date", start_date);
+		    post.put("row_image", row_image);
+		    post.put("music_type", music_type);
+
+		    String data = httpPost("event.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+
+		return;
+		
+	}
+
+	@Override
+	public void deleteEvent(int eventId) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DELETE");
+		    post.put("eventid", "" + eventId);
+
+		    String data = httpPost("event.php", post);
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public int addRating(int clubId, int userId, float value, String comment) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "ADD");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("userid", String.valueOf(userId));
+		    post.put("value", ""+value);
+		    post.put("comment", comment);
+
+		    String data = httpPost("rating.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    int rating_id = Integer.parseInt(jsonObject.getString("NewID"));
+		    return rating_id;
+
+		} catch (Exception e) {
+
+		}
+
+		return 0;
+	}
+
+	@Override
+	public void updateRating(int clubId, int userId, float value, String comment) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "UPDATE");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("userid", String.valueOf(userId));
+		    post.put("value", ""+value);
+		    post.put("comment", comment);
+
+		    String data = httpPost("rating.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+
+		return;
+		
+	}
+
+	@Override
+	public List<Rating> getRatings(int clubId) {
+		List<Rating> ret = new ArrayList<Rating>();
+
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "GET");
+		    post.put("clubid", String.valueOf(clubId));
+
+		    String data = httpPost("rating.php", post);
+		    JSONArray ja = new JSONArray(data);
+
+		    for (int i = 0; i < ja.length(); i++) {
+			JSONObject jo = ja.getJSONObject(i);
+			ret.add(new Rating(jo.getInt("user_id"), jo.getString("name"), (float) jo.getDouble("value"), jo.getString("comment"), jo.getInt("approved")));
+		    }
+
+		    return ret;
+		} catch (Exception e) {
+
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Rating> getNotApprovedRatings() {
+		List<Rating> ret = new ArrayList<Rating>();
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "GETNOTAPPROVED");
+
+		    String data = httpPost("rating.php", post);
+		    JSONArray ja = new JSONArray(data);
+
+		    for (int i = 0; i < ja.length(); i++) {
+			JSONObject jo = ja.getJSONObject(i);
+			ret.add(new Rating(jo.getInt("user_id"), jo.getString("name"), (float) jo.getDouble("value"), jo.getString("comment"), jo.getInt("approved")));
+		    }
+
+		    return ret;
+		} catch (Exception e) {
+
+		}
+
+		return null;
+	}
+
+	@Override
+	public void declineRating(int userId, int clubId) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DECLINERATING");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("userid", String.valueOf(userId));
+
+		    String data = httpPost("rating.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+
+		return;
+		
+	}
+
+	@Override
+	public void acceptRating(int userId, int clubId) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "APPROVERATING");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("userid", String.valueOf(userId));
+
+		    String data = httpPost("rating.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+
+		return;
+		
+	}
+
 
 }
