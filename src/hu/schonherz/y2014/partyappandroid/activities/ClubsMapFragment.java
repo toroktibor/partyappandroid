@@ -7,6 +7,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -34,7 +35,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
 	private GoogleMap googleMap;
 	private static View view;
-   
+	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	if (view != null) {
@@ -85,15 +86,17 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
     private void showOnlyApprovedPlacesOnTheMap() {
     	BitmapDescriptor bmd = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
     	List<Address> addressList = new ArrayList<Address>();
-    	Geocoder geocoder = new Geocoder(getActivity());
+    	Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
     	LatLng actualClubsLatLng;
     	List<MarkerOptions> markerList = new ArrayList<MarkerOptions>();
 
         for(int i = 0; i < Session.getSearchViewClubs().size(); ++i) {
         	Club actualClub = Session.getSearchViewClubs().get(i);
         	try {
-				addressList = geocoder.getFromLocationName(actualClub.address, 3);
-				Log.e("MAP ADDRESSLIST: ","SG");
+        		Log.e("MAP", actualClub.address);
+				addressList = geocoder.getFromLocationName(actualClub.address, 1);
+				Log.e("MAP LATITUDE", ((Double)(addressList.get(0).getLatitude())).toString());
+				Log.e("MAP ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -160,6 +163,15 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
     }
     
     @Override
+    public void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    	initilizeMap();
+    	updateResults();
+    }
+    
+    /*
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         SupportMapFragment f = (SupportMapFragment) getFragmentManager()
@@ -167,5 +179,5 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
         if (f != null) 
             getFragmentManager().beginTransaction().remove(f).commit();
     }
-    
+    */
 }
