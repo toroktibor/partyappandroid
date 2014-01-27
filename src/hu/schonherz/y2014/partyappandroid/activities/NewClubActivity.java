@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewClubActivity extends ActionBarActivity implements SetServicesCommunicator{
+public class NewClubActivity extends ActionBarActivity implements SetServicesCommunicator {
 
     EditText newClubNameEditText;
     EditText newClubAddressEditText;
@@ -29,21 +29,23 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     Context thisContext;
     List<String> services;
 
-    @Override	// EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
+    @Override
+    // EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A
+    // FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
     public void onServicesSetted(List<String> services) {
-    	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
-	   	this.services = services;
-	   	for(int i = 0; i < this.services.size(); ++i) 
-	   		Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
-	   	Log.e("NEWCLUBACTIVTY", "ONSERVICESETTED FINISHED");
+	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
+	this.services = services;
+	for (int i = 0; i < this.services.size(); ++i)
+	    Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
+	Log.e("NEWCLUBACTIVTY", "ONSERVICESETTED FINISHED");
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
 	new SimpleActionBar(this, "Új klub hozzáadása").setLayout();
-	
+
 	setContentView(R.layout.activity_new_club);
 	thisContext = getApplicationContext();
 
@@ -86,12 +88,12 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 
 	Button setServicesButton = (Button) findViewById(R.id.new_club_button_set_services);
 	setServicesButton.setOnClickListener(new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
-			serviceSetterFragment.show(getSupportFragmentManager(), "SetServicesOfClub");
-		}
+
+	    @Override
+	    public void onClick(View v) {
+		SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+		serviceSetterFragment.show(getSupportFragmentManager(), "SetServicesOfClub");
+	    }
 	});
     }
 }

@@ -77,26 +77,25 @@ public class User {
 	Session.getInstance().getActualCommunicationInterface().modifyPassword(id, newPassword);
 	this.password = newPassword;
     }
-    
-    public String toString()
-    {
-    	return String.format("id: %d nickname: %s password: %s email: %s " +
-    			"sex: %d birhtday: %s type: %d", id,nickname,password,email,sex,birthday,type);
+
+    public String toString() {
+	return String.format("id: %d nickname: %s password: %s email: %s " + "sex: %d birhtday: %s type: %d", id,
+		nickname, password, email, sex, birthday, type);
     }
 
-    public boolean isMine(int clubId){
-    	for(Club actualClub : this.usersClubs){
-    		if(actualClub.id == clubId)
-    			return true;
-    	}
-    	return false;
+    public boolean isMine(int clubId) {
+	for (Club actualClub : this.usersClubs) {
+	    if (actualClub.id == clubId)
+		return true;
+	}
+	return false;
     }
-    
-    public boolean isLike(int clubId){
-    	for(Club actualClub : this.favoriteClubs){
-    		if(actualClub.id == clubId)
-    			return true;
-    	}
-    	return false;
+
+    public boolean isLike(int clubId) {
+	for (Club actualClub : this.favoriteClubs) {
+	    if (actualClub.id == clubId)
+		return true;
+	}
+	return false;
     }
 }

@@ -1,6 +1,5 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.ClubListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
@@ -11,7 +10,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,7 +24,7 @@ import android.widget.TextView;
 public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment {
 
     private ListView clubsListView;
- 
+
     public enum SourceOfList {
 	LOCATION, SEARCH, OWNERSHIP, FAVORITES
     };
@@ -95,9 +93,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 	lv.invalidateViews();
 
 	TextView tv = (TextView) getActivity().findViewById(R.id.clubs_list_textview_message);
-	
-	
-	
+
 	if (Session.getSearchViewClubs().size() == 0) {
 	    tv.setText("Sajnos nincs találat :(");
 	    tv.setVisibility(View.VISIBLE);

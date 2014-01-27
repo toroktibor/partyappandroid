@@ -21,115 +21,97 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 public class SetServicesOfClubFragment extends DialogFragment implements OnClickListener {
-	
-	SetServicesCommunicator communicator;
-	
-	Button done, cancel;
-	
-	Integer[] icons = { R.id.checkBoxBilliard,
-						R.id.checkBoxBowling,
-						R.id.checkBoxCoctailBar,
-						R.id.checkBoxDance,
-						R.id.checkBoxDarts,
-						R.id.checkBoxDJ,
-						R.id.checkBoxFnDControl,
-						R.id.checkBoxLiveMusic,
-						R.id.checkBoxMenu,
-						R.id.checkBoxSportTV,
-						R.id.checkBoxWiFi };
-	
-	String[] services = { 	"billiard",
-							"bowling",
-							"coctailbar",
-							"dance",
-							"darts",
-							"dj",
-							"fndcontrol",
-							"livemusic",
-							"menu",
-							"sporttv",
-							"wifi" };
-	
-	List<CheckBox> checkboxes = new ArrayList<CheckBox>();
-	
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		communicator = (SetServicesCommunicator) activity;
-		Log.e("SETSERVICESFRAGMENT", "ONATTACH SUCCESSFULLY RUN");
-	}
-	
-	@Override	//BE KELL ÁLLÍTANI A KEZDŐ HÁTTÉRSZÍNT, HOGY NE AZ XML-BŐL DOLGOZZON, HANEM A SZERVERRŐL KAPOTT LISTÁBÓL....
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = (View) inflater.inflate(R.layout.club_set_services_layout, null);
-		Log.e("SETSERVICESFRAGMENT","LAYOUT OF DIALOGFRAGMENT INFLATED");
-		getDialog().setTitle("Szolgáltatások");
-		done = (Button) view.findViewById(R.id.button_club_services_setted);	
-		cancel = (Button) view.findViewById(R.id.button_club_services_cancel);
-		done.setOnClickListener(this);
-		cancel.setOnClickListener(this);
-		for(int i = 0; i < icons.length; ++i) {
-			checkboxes.add((CheckBox)view.findViewById(icons[i]));
-			checkboxes.get(i).setOnClickListener(this);
-			checkboxes.get(i).setOnLongClickListener(new OnLongClickListener() {
-				
-				@Override
-				public boolean onLongClick(View v) {
-					Log.e("SETSERVICESFRAGMENT","DIALOGFRAGMENT LONGONCLICKLISTENER CALLED");
-					int j = 0;
-					while(j < icons.length) {
-						if(v.getId() == icons[j]) {
-							Toast.makeText(v.getContext(), v.getContentDescription(), Toast.LENGTH_LONG).show();
-							break;
-						}
-							
-						++j;
-					}
-					return true;
-				}
-			});
-		}
-		Log.e("SETSERVICESFRAGMENT","ONCLICKLISTENER OF EVERY BUTTONS SETTED");
-		return view;
-	}
-	
-	@Override
-	public void onClick(View v) {
-		Log.e("SETSERVICESFRAGMENT","DIALOGFRAGMENT ONCLICKLISTENER CALLED");
-		int j = 0;
-		while(j < icons.length) {
-			if(v.getId() == icons[j])
-				break;
+
+    SetServicesCommunicator communicator;
+
+    Button done, cancel;
+
+    Integer[] icons = { R.id.checkBoxBilliard, R.id.checkBoxBowling, R.id.checkBoxCoctailBar, R.id.checkBoxDance,
+	    R.id.checkBoxDarts, R.id.checkBoxDJ, R.id.checkBoxFnDControl, R.id.checkBoxLiveMusic, R.id.checkBoxMenu,
+	    R.id.checkBoxSportTV, R.id.checkBoxWiFi };
+
+    String[] services = { "billiard", "bowling", "coctailbar", "dance", "darts", "dj", "fndcontrol", "livemusic",
+	    "menu", "sporttv", "wifi" };
+
+    List<CheckBox> checkboxes = new ArrayList<CheckBox>();
+
+    @Override
+    public void onAttach(Activity activity) {
+	super.onAttach(activity);
+	communicator = (SetServicesCommunicator) activity;
+	Log.e("SETSERVICESFRAGMENT", "ONATTACH SUCCESSFULLY RUN");
+    }
+
+    @Override
+    // BE KELL ÁLLÍTANI A KEZDŐ HÁTTÉRSZÍNT, HOGY NE AZ XML-BŐL DOLGOZZON, HANEM
+    // A SZERVERRŐL KAPOTT LISTÁBÓL....
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	View view = (View) inflater.inflate(R.layout.club_set_services_layout, null);
+	Log.e("SETSERVICESFRAGMENT", "LAYOUT OF DIALOGFRAGMENT INFLATED");
+	getDialog().setTitle("Szolgáltatások");
+	done = (Button) view.findViewById(R.id.button_club_services_setted);
+	cancel = (Button) view.findViewById(R.id.button_club_services_cancel);
+	done.setOnClickListener(this);
+	cancel.setOnClickListener(this);
+	for (int i = 0; i < icons.length; ++i) {
+	    checkboxes.add((CheckBox) view.findViewById(icons[i]));
+	    checkboxes.get(i).setOnClickListener(this);
+	    checkboxes.get(i).setOnLongClickListener(new OnLongClickListener() {
+
+		@Override
+		public boolean onLongClick(View v) {
+		    Log.e("SETSERVICESFRAGMENT", "DIALOGFRAGMENT LONGONCLICKLISTENER CALLED");
+		    int j = 0;
+		    while (j < icons.length) {
+			if (v.getId() == icons[j]) {
+			    Toast.makeText(v.getContext(), v.getContentDescription(), Toast.LENGTH_LONG).show();
+			    break;
+			}
+
 			++j;
+		    }
+		    return true;
 		}
-		if( j < icons.length) {
-			Log.e("SETSERVICESFRAGMENT","ONE OF THE SERVICES ICON CLICKED...");
-			if(((CheckBox)v).isChecked()) {
-				Log.e("SETSERVICESFRAGMENT","ICON COLOR CHANGED (WHILE->YELLOW)...");
-				v.setBackgroundColor(Color.WHITE);
-			}
-			else if(((CheckBox)v).isChecked()==false) {
-				Log.e("SETSERVICESFRAGMENT","ICON COLOR CHANGED (YELLOW->WHITE)...");
-				v.setBackgroundColor(Color.YELLOW);
-			}
-		}
-		else if(v.getId() == R.id.button_club_services_cancel) {
-			Log.e("SETSERVICESFRAGMENT","CANCEL BUTTON CLICKED");
-			dismiss();
-		}
-		else if(v.getId() == R.id.button_club_services_setted) {
-			
-				Log.e("SETSERVICESFRAGMENT","DONE BUTTON CLICKED");
-			List<String> result = new ArrayList<String>();
-			for(int i = 0; i < icons.length; ++i) {
-				if(checkboxes.get(i).isChecked()) {
-					Log.e("SETSERVICESFRAGMENT","SERVICES: "+ services[i]);
-					result.add(services[i]);
-				}
-			}
-			Log.e("SETSERVICESFRAGMENT","");
-			communicator.onServicesSetted(result);
-			dismiss();
-		}
+	    });
 	}
-}	
+	Log.e("SETSERVICESFRAGMENT", "ONCLICKLISTENER OF EVERY BUTTONS SETTED");
+	return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+	Log.e("SETSERVICESFRAGMENT", "DIALOGFRAGMENT ONCLICKLISTENER CALLED");
+	int j = 0;
+	while (j < icons.length) {
+	    if (v.getId() == icons[j])
+		break;
+	    ++j;
+	}
+	if (j < icons.length) {
+	    Log.e("SETSERVICESFRAGMENT", "ONE OF THE SERVICES ICON CLICKED...");
+	    if (((CheckBox) v).isChecked()) {
+		Log.e("SETSERVICESFRAGMENT", "ICON COLOR CHANGED (WHILE->YELLOW)...");
+		v.setBackgroundColor(Color.WHITE);
+	    } else if (((CheckBox) v).isChecked() == false) {
+		Log.e("SETSERVICESFRAGMENT", "ICON COLOR CHANGED (YELLOW->WHITE)...");
+		v.setBackgroundColor(Color.YELLOW);
+	    }
+	} else if (v.getId() == R.id.button_club_services_cancel) {
+	    Log.e("SETSERVICESFRAGMENT", "CANCEL BUTTON CLICKED");
+	    dismiss();
+	} else if (v.getId() == R.id.button_club_services_setted) {
+
+	    Log.e("SETSERVICESFRAGMENT", "DONE BUTTON CLICKED");
+	    List<String> result = new ArrayList<String>();
+	    for (int i = 0; i < icons.length; ++i) {
+		if (checkboxes.get(i).isChecked()) {
+		    Log.e("SETSERVICESFRAGMENT", "SERVICES: " + services[i]);
+		    result.add(services[i]);
+		}
+	    }
+	    Log.e("SETSERVICESFRAGMENT", "");
+	    communicator.onServicesSetted(result);
+	    dismiss();
+	}
+    }
+}

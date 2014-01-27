@@ -26,33 +26,32 @@ public class ClubInfoFragment extends Fragment {
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	Log.i("átjött", String.valueOf(clubListPosition));
 	actualClub = Session.getSearchViewClubs().get(clubListPosition);
-	
-	if (actualClub.isNotFullDownloaded()){
-		actualClub.downloadEverything();
+
+	if (actualClub.isNotFullDownloaded()) {
+	    actualClub.downloadEverything();
 	}
-	
+
 	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
-	
-	
+
 	RatingBar clubRatingBar = (RatingBar) rootView.findViewById(R.id.club_info_ratingbar);
 	TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
 	TextView clubAddressTextView = (TextView) rootView.findViewById(R.id.club_info_textview_address);
 	TextView clubDescriptionTextView = (TextView) rootView.findViewById(R.id.club_info_textview_description);
-	
+
 	clubNameTextView.setText(actualClub.name);
 	clubAddressTextView.setText(actualClub.address);
 	clubDescriptionTextView.setText(actualClub.description);
-	
+
 	clubRatingBar.setOnTouchListener(new OnTouchListener() {
-		
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			Intent i = new Intent(getActivity(),ClubRatingsActivity.class);
-			startActivity(i);
-			return false;
-		}
+
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event) {
+		Intent i = new Intent(getActivity(), ClubRatingsActivity.class);
+		startActivity(i);
+		return false;
+	    }
 	});
-	
+
 	return rootView;
     }
 
@@ -62,5 +61,5 @@ public class ClubInfoFragment extends Fragment {
 	    startActivity(new Intent(getActivity(), ClubReviewsActivity.class));
 	}
     }
-    
+
 }

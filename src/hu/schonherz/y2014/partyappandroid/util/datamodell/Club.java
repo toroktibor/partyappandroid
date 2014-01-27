@@ -3,7 +3,6 @@ package hu.schonherz.y2014.partyappandroid.util.datamodell;
 import hu.schonherz.y2014.partyappandroid.ImageUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;

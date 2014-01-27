@@ -18,9 +18,9 @@ public class ProfilePasswordActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
 	new SimpleActionBar(this, "Jelszó módosítása").setLayout();
-	
+
 	setContentView(R.layout.activity_profile_password);
 
 	user = Session.getActualUser();

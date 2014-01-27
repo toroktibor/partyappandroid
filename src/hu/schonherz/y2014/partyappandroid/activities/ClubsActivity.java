@@ -2,13 +2,11 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubsActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 
 public class ClubsActivity extends ActionBarActivity {
@@ -48,30 +46,30 @@ public class ClubsActivity extends ActionBarActivity {
 	viewPager.setAdapter(mPagerAdapter);
 
     }
-    
+
     @Override
     protected void onResume() {
-    	super.onResume();
-    	setContentView(R.layout.activity_clubs);
+	super.onResume();
+	setContentView(R.layout.activity_clubs);
 
-    	ClubsActionBar ab = new ClubsActionBar(this);
-    	ab.setLayout();
+	ClubsActionBar ab = new ClubsActionBar(this);
+	ab.setLayout();
 
-    	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
-    	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-    	viewPager.setAdapter(mPagerAdapter);
+	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
+	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+	viewPager.setAdapter(mPagerAdapter);
     }
-    
+
     @Override
     protected void onRestart() {
-    	super.onRestart();
-    	setContentView(R.layout.activity_clubs);
+	super.onRestart();
+	setContentView(R.layout.activity_clubs);
 
-    	ClubsActionBar ab = new ClubsActionBar(this);
-    	ab.setLayout();
+	ClubsActionBar ab = new ClubsActionBar(this);
+	ab.setLayout();
 
-    	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
-    	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-    	viewPager.setAdapter(mPagerAdapter);
+	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
+	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+	viewPager.setAdapter(mPagerAdapter);
     }
 }

@@ -44,9 +44,10 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	activity.findViewById(R.id.actionbar_clubs_button_c).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_clubs_button_d).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_clubs_button_e).setOnClickListener(this);
-	
-	((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
-	((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( null );
+
+	((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(activity
+		.getResources().getDrawable(R.drawable.ab_selected));
+	((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(null);
 
     }
 
@@ -63,7 +64,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    item = popupmenu.getMenu().add(0, 2, 0, "Kedvenceim");
 	    item.setOnMenuItemClickListener(this);
 	    item = popupmenu.getMenu().add(0, 3, 0, "Saját klubjaim");
-	    item.setOnMenuItemClickListener(this);	    
+	    item.setOnMenuItemClickListener(this);
 
 	    popupmenu.show();
 	    break;
@@ -71,8 +72,9 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	case R.id.actionbar_clubs_button_b:
 	    /* viewPager lapozása a lista nézetre */
 	    activity.viewPager.setCurrentItem(0);
-	    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
-	    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( null );
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(activity
+		    .getResources().getDrawable(R.drawable.ab_selected));
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(null);
 	    break;
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
@@ -80,9 +82,10 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		@Override
 		public void onResume() {
 		    activity.viewPager.setCurrentItem(1);
-		    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable( activity.getResources().getDrawable(R.drawable.ab_selected) );
-		    ((ImageView)activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable( null );
-		    
+		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(activity
+			    .getResources().getDrawable(R.drawable.ab_selected));
+		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
+
 		}
 	    });
 	    break;
@@ -134,17 +137,23 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    break;
 	case R.id.actionbar_clubs_button_e:
 	    PopupMenu popupmenu2 = new PopupMenu(activity, v);
-	    
+
 	    MenuItem item2;
 
-	    /*item = popupmenu.getMenu().add(0, 7, 0, "Hozzám közeli klubok");
-	    item.setOnMenuItemClickListener(this);*/
+	    /*
+	     * item = popupmenu.getMenu().add(0, 7, 0, "Hozzám közeli klubok");
+	     * item.setOnMenuItemClickListener(this);
+	     */
 	    item2 = popupmenu2.getMenu().add(0, 1, 0, "Új hely hozzáadása");
 	    item2.setOnMenuItemClickListener(this);
-	    /*item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
-	    item.setOnMenuItemClickListener(this);*/
-	    /*item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
-	    item.setOnMenuItemClickListener(this);*/
+	    /*
+	     * item = popupmenu.getMenu().add(0, 2, 0, "Kedvencek");
+	     * item.setOnMenuItemClickListener(this);
+	     */
+	    /*
+	     * item = popupmenu.getMenu().add(0, 3, 0, "Helyeim");
+	     * item.setOnMenuItemClickListener(this);
+	     */
 	    item2 = popupmenu2.getMenu().add(0, 4, 0, "Profilom");
 	    item2.setOnMenuItemClickListener(this);
 	    item2 = popupmenu2.getMenu().add(0, 5, 0, "Kijelentkezés");
@@ -155,8 +164,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 		item2.setOnMenuItemClickListener(this);
 
 	    }
-	
-	    
+
 	    popupmenu2.show();
 	    break;
 	default:
@@ -178,7 +186,6 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    activity.startActivity(i);
 	    Log.e("MAIN SCREEN", "NEWCLUBACTIVITY STARTED");
 	    break;
-
 
 	case 4: // PROFILOM
 	    Log.e("MAIN SCREEN", "POPUPMENU ITEM #" + clickedItemId + " CLICKED -> PROFILOM");
@@ -206,7 +213,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    break;
 
 	/* Filter */
-	    
+
 	case 7: // KÖZELI HELYEK
 	    Session.getInstance().getSearchViewClubs().clear();
 	    Session.getInstance()
@@ -216,29 +223,25 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_location));
-	    break;    
-	    
+	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_location));
+	    break;
+
 	case 2: // KEDVENCEK
 	    Session.getInstance().getSearchViewClubs().clear();
-	    Session.getInstance()
-	    	.getSearchViewClubs()
-	    	.addAll(Session.getInstance().getActualUser().favoriteClubs);
+	    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().favoriteClubs);
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_favorites));	   
+	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
 	    break;
 
 	case 3: // HELYEIM
 	    Session.getInstance().getSearchViewClubs().clear();
-	    Session.getInstance()
-    		.getSearchViewClubs()
-    		.addAll(Session.getInstance().getActualUser().usersClubs);
+	    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().usersClubs);
 	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
 	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable( activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
+	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
 	    break;
-	    
+
 	default:
 	    Log.e("MAIN SCREEN", "POPUP MENU: NOT HANDLED onMenuItemClick");
 	}

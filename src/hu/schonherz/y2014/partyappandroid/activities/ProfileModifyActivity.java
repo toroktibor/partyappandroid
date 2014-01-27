@@ -17,63 +17,61 @@ import android.widget.Spinner;
 
 public class ProfileModifyActivity extends ActionBarActivity implements DatePickerCommunicator {
 
-	private User user;
-	private EditText editTextName;
-	private EditText editTextEmail;
-	private EditText editTextDateOfBirth;
-	private Spinner spinnerSex;
+    private User user;
+    private EditText editTextName;
+    private EditText editTextEmail;
+    private EditText editTextDateOfBirth;
+    private Spinner spinnerSex;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		new SimpleActionBar(this, "Adatok szerkesztése").setLayout();
-		
-		setContentView(R.layout.activity_profile_modify);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
 
-		user = Session.getActualUser();
+	new SimpleActionBar(this, "Adatok szerkesztése").setLayout();
 
-		editTextName = (EditText) findViewById(R.id.profile_modify_edittext_name);
-		editTextName.setText(user.getNickname());
+	setContentView(R.layout.activity_profile_modify);
 
-		editTextEmail = (EditText) findViewById(R.id.profile_modify_edittext_email);
-		editTextEmail.setText(user.getEmail());
+	user = Session.getActualUser();
 
-		editTextDateOfBirth = (EditText) findViewById(R.id.profile_modify_edittext_dateofbirth);
-		editTextDateOfBirth.setText(user.getBirthday());
+	editTextName = (EditText) findViewById(R.id.profile_modify_edittext_name);
+	editTextName.setText(user.getNickname());
 
-		spinnerSex = (Spinner) findViewById(R.id.profile_modify_spinner_sex);
-		spinnerSex.setSelection(user.getSex());
+	editTextEmail = (EditText) findViewById(R.id.profile_modify_edittext_email);
+	editTextEmail.setText(user.getEmail());
+
+	editTextDateOfBirth = (EditText) findViewById(R.id.profile_modify_edittext_dateofbirth);
+	editTextDateOfBirth.setText(user.getBirthday());
+
+	spinnerSex = (Spinner) findViewById(R.id.profile_modify_spinner_sex);
+	spinnerSex.setSelection(user.getSex());
+    }
+
+    public void onClickHandler(View v) {
+	switch (v.getId()) {
+	case R.id.profile_modify_button_save:
+
+	    try {
+		user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(),
+			spinnerSex.getSelectedItemPosition());
+		new DoneToast(this, "Adatok sikeresen módosítva").show();
+	    } catch (Exception e) {
+		new ErrorToast(this, "Az adatok módosítása nem sikerült!").show();
+	    }
+
+	    finish();
+	    break;
+
+	case R.id.profile_modify_edittext_dateofbirth:
+	    DialogFragment datepicker = new DatePickerFragment();
+	    datepicker.show(getSupportFragmentManager(), "timePicker");
+
+	    break;
 	}
+    }
 
-	public void onClickHandler(View v) {
-		switch (v.getId()) {
-		case R.id.profile_modify_button_save:
-
-			try {
-				user.modifyUserData(editTextEmail.getText().toString(),
-						editTextDateOfBirth.getText().toString(),
-						spinnerSex.getSelectedItemPosition());
-				new DoneToast(this, "Adatok sikeresen módosítva").show();
-			} catch (Exception e) {
-				new ErrorToast(this, "Az adatok módosítása nem sikerült!")
-						.show();
-			}
-
-			finish();
-			break;
-
-		case R.id.profile_modify_edittext_dateofbirth:
-			DialogFragment datepicker = new DatePickerFragment();
-			datepicker.show(getSupportFragmentManager(), "timePicker");
-
-			break;
-		}
-	}
-	
-	@Override
-	public void onDatePicked(String date) {
-		editTextDateOfBirth.setText(date);
-	}
+    @Override
+    public void onDatePicked(String date) {
+	editTextDateOfBirth.setText(date);
+    }
 
 }

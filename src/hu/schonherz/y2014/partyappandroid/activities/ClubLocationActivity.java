@@ -10,9 +10,9 @@ public class ClubLocationActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
 	new SimpleActionBar(this, "Klub helye a térképen").setLayout();
-	
+
 	setContentView(R.layout.activity_club_location);
     }
 

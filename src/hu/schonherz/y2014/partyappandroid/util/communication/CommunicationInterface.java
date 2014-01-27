@@ -21,10 +21,10 @@ public interface CommunicationInterface {
     public List<Club> getClubsFromCityName(String cityname);
 
     public List<Club> getOwnedClubsFromUserId(int user_id);
-    
+
     public Club getEverythingFromClub(int club_id);
-    
-    public String httpPost(String url,HashMap<String, String> post) throws ClientProtocolException, IOException;
+
+    public String httpPost(String url, HashMap<String, String> post) throws ClientProtocolException, IOException;
 
     /**
      * Adatbázissal kommunikáló metódus a klubbok kereséshez, melynek
@@ -78,45 +78,45 @@ public interface CommunicationInterface {
      *             módosítás sikertelenségét jelző kivétel
      */
     public void modifyUserData(int id, String email, String birthday, int sex) throws Exception;
-    
+
     public User registerANewUser(String nick_name, String password, String email, int sex, String birthday);
-    
+
     public void setServices(int club_id, List<String> services);
-    
+
     public void setOwnerForClub(int user_id, int club_id);
-    
+
     public void setFavoriteClubForUser(int user_id, int club_id);
-    
+
     public void deleteFavoriteClubForUser(int club_id, int user_id);
 
-	public void sendANewClubRequest(String newClubName, String newClubAddress,
-			String newClubType, int owner_user_id, List<String> services);
-	
-	public List<Club> getNotApprovedClubs();
-	
-	public void approveClub(int club_id);
-	
-	public void declineNewClub(int club_id);
-	
-	public void declineOwnerRequest(int club_id, int user_id);
-	
-	public void acceptOwnerRequest(int club_id, int user_id);
-	
-	public List<OwnerRequest> getNotApprovedOwnerRequest();
-	
-	public void uploadAnImage(int club_id, String rowImage);
-	
-	public String DownLoadAnImage(int id);
-	
-	public ArrayList<Integer> selectClubsImagesIds(int club_id);
-	
-	public int addANewMenuItem(int clubId, MenuItem menuItem);
+    public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id,
+	    List<String> services);
 
-	public List<MenuItem> getMenuItemsForClub(int club_id);
-	
-	public void updateAMenuItem(MenuItem menuItem);
-	
-	public void removeEMenuItem(int menuid);
+    public List<Club> getNotApprovedClubs();
 
-	public List<Event> getEventsOfClub(int id);
+    public void approveClub(int club_id);
+
+    public void declineNewClub(int club_id);
+
+    public void declineOwnerRequest(int club_id, int user_id);
+
+    public void acceptOwnerRequest(int club_id, int user_id);
+
+    public List<OwnerRequest> getNotApprovedOwnerRequest();
+
+    public void uploadAnImage(int club_id, String rowImage);
+
+    public String DownLoadAnImage(int id);
+
+    public ArrayList<Integer> selectClubsImagesIds(int club_id);
+
+    public int addANewMenuItem(int clubId, MenuItem menuItem);
+
+    public List<MenuItem> getMenuItemsForClub(int club_id);
+
+    public void updateAMenuItem(MenuItem menuItem);
+
+    public void removeEMenuItem(int menuid);
+
+    public List<Event> getEventsOfClub(int id);
 }

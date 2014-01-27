@@ -749,12 +749,11 @@ public class Communication implements CommunicationInterface {
 	try {
 	    HashMap<String, String> post = new HashMap<String, String>();
 	    post.put("action", "GETEVENTSOFCLUB");
-	    post.put("id", String.valueOf(id) );
+	    post.put("id", String.valueOf(id));
 
 	    String data = httpPost("club.php", post);
 	    JSONArray ja = new JSONArray(data);
-	    
-	    
+
 	    for (int i = 0; i < ja.length(); i++) {
 		JSONObject jo = ja.getJSONObject(i);
 		ret.add(new Event(jo.getInt("id"), jo.getString("name"), jo.getString("description"), jo
@@ -763,7 +762,7 @@ public class Communication implements CommunicationInterface {
 
 	    return ret;
 	} catch (Exception e) {
-	    
+
 	}
 
 	return null;

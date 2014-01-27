@@ -25,14 +25,14 @@ public class DoneToast {
     public void show() {
 	Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 	vibrator.vibrate(new long[] { 0, 50 }, -1); // egy rövid
-	    
+
 	LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
 	View toastView = inflater.inflate(R.layout.toast_done, null);
 	TextView tv = (TextView) toastView.findViewById(R.id.toast_done_textview);
 	tv.setText(this.message);
-	
+
 	Toast t = new Toast(activity);
-	t.setGravity(Gravity.FILL_HORIZONTAL|Gravity.BOTTOM,0,0);
+	t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
 	t.setDuration(Toast.LENGTH_SHORT);
 	t.setView(toastView);
 	t.show();

@@ -5,7 +5,6 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -38,8 +37,8 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 	activity.findViewById(R.id.actionbar_club_button_d).setOnClickListener(this);
 	activity.findViewById(R.id.actionbar_club_button_e).setOnClickListener(this);
 
-	((ImageView) activity.findViewById(R.id.actionbar_club_button_b)).setBackgroundDrawable(activity
-		.getResources().getDrawable(R.drawable.ab_selected));
+	((ImageView) activity.findViewById(R.id.actionbar_club_button_b)).setBackgroundDrawable(activity.getResources()
+		.getDrawable(R.drawable.ab_selected));
 	((ImageView) activity.findViewById(R.id.actionbar_club_button_c)).setBackgroundDrawable(null);
 	((ImageView) activity.findViewById(R.id.actionbar_club_button_d)).setBackgroundDrawable(null);
 
@@ -77,10 +76,13 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 	    PopupMenu popupmenu = new PopupMenu(activity, v);
 	    MenuItem item;
 
+	    item = popupmenu.getMenu().add(0, 999, 0, "[debug] Adatok frissítése");
+	    item.setOnMenuItemClickListener(this);
+
 	    item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
 	    item.setOnMenuItemClickListener(this);
 	    if (activity.viewPager.getCurrentItem() == 2) {
-		item = popupmenu.getMenu().add(0, 2, 0, "Feltöltés");
+		item = popupmenu.getMenu().add(0, 2, 0, "Képfeltöltés");
 		item.setOnMenuItemClickListener(this);
 	    }
 
@@ -140,6 +142,10 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 	    Session.getInstance().getActualCommunicationInterface().setFavoriteClubForUser(user_id, club_id);
 	    Session.getActualUser().favoriteClubs.add(Session.getSearchViewClubs().get(clubListPosition));
 	    Toast.makeText(activity, "A szórakozóhely bekerült a kedvenceid közzé!", Toast.LENGTH_LONG).show();
+	    break;
+	case 999:
+	    activity.actualClub.downloadEverything();
+	    new DoneToast(activity, "A szórakozóhely adatai le lettek töltve ismét!").show();
 	    break;
 	default:
 	    Log.e(this.getClass().getName(), "Nem kezelt onMenuItemClick");

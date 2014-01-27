@@ -2,7 +2,6 @@ package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
 import hu.schonherz.y2014.partyappandroid.util.communication.Communication;
 import hu.schonherz.y2014.partyappandroid.util.communication.CommunicationInterface;
-import hu.schonherz.y2014.partyappandroid.util.communication.SillyCommunication;
 import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil;
 
 import java.util.List;
@@ -12,8 +11,8 @@ import android.util.Log;
 
 public class Session {
     private static Session instance = null;
-    
-    public String citynameFromGPS="Budapest";
+
+    public String citynameFromGPS = "Budapest";
 
     User actualUser;
     List<Club> searchViewClubs;
@@ -23,13 +22,13 @@ public class Session {
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
-    	actualCommunicationInterface = new Communication();
+	actualCommunicationInterface = new Communication();
     }
-    
-    public void makeLocalDatabaseConnection(Context context){
-    	databaseConnecter = new LocalDatabaseUtil(context);
+
+    public void makeLocalDatabaseConnection(Context context) {
+	databaseConnecter = new LocalDatabaseUtil(context);
     }
-    
+
     public static Session getInstance() {
 	if (instance == null) {
 	    instance = new Session();
