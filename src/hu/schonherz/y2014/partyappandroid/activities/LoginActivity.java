@@ -104,7 +104,8 @@ public class LoginActivity extends ActionBarActivity {
 	    mGpsLocation = mLocalBinder.getServerInstance();
 
 	    if (InternetConnection.isOnline(getApplicationContext())
-		    && locationTask.getStatus() != AsyncTask.Status.PENDING) {
+		    && locationTask.getStatus() == AsyncTask.Status.PENDING) {
+	    	Log.i("async", "lefuttatja");
 		locationTask.execute(new Boolean[] { true });
 	    }
 
