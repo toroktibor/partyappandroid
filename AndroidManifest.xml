@@ -11,6 +11,7 @@
     <permission
         android:name="hu.schonherz.y2014.partyappandroid.MAPS_RECEIVE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="hu.schonherz.y2014.partyappandroid.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -20,18 +21,20 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_launcher_label"
         android:theme="@style/CustomTheme" >
-        <meta-data android:name="com.google.android.maps.v2.API_KEY"
-    		android:value="AIzaSyDAP9bBgJgvssQ-Msr2C-tmer9OLATZFkY"/>
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-       	
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDAP9bBgJgvssQ-Msr2C-tmer9OLATZFkY" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.LoginActivity"
             android:label="@string/login" >
@@ -169,6 +172,10 @@
         <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubRatingAdd"
             android:label="@string/title_activity_club_rating_add" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PendingRatingsActivity"
+            android:label="@string/title_activity_pending_ratings" >
         </activity>
     </application>
 

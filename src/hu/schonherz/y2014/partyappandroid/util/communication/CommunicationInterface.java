@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
+import hu.schonherz.y2014.partyappandroid.util.datamodell.AdminRating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
@@ -136,7 +137,7 @@ public interface CommunicationInterface {
     
     public List<Rating> getRatings(int clubId);
     
-    public List<Rating> getNotApprovedRatings();
+    public List<AdminRating> getNotApprovedRatings();
     
     public void declineRating(int userId, int clubId);
     

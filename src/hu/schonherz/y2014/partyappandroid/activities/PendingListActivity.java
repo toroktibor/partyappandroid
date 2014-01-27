@@ -44,7 +44,15 @@ public class PendingListActivity extends ActionBarActivity {
 		startActivity(i);
 	    }
 	});
-
+	
+	pendingRatingsButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(getApplicationContext(), PendingRatingsActivity.class);
+			startActivity(i);			
+		}
+	});
     }
 
     @Override

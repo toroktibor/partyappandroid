@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
+import hu.schonherz.y2014.partyappandroid.util.datamodell.AdminRating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
@@ -933,8 +934,8 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public List<Rating> getNotApprovedRatings() {
-		List<Rating> ret = new ArrayList<Rating>();
+	public List<AdminRating> getNotApprovedRatings() {
+		List<AdminRating> ret = new ArrayList<AdminRating>();
 		try {
 		    HashMap<String, String> post = new HashMap<String, String>();
 		    post.put("action", "GETNOTAPPROVED");
@@ -944,7 +945,7 @@ public class Communication implements CommunicationInterface {
 
 		    for (int i = 0; i < ja.length(); i++) {
 			JSONObject jo = ja.getJSONObject(i);
-			ret.add(new Rating(jo.getInt("user_id"), jo.getString("name"), (float) jo.getDouble("value"), jo.getString("comment"), jo.getInt("approved")));
+			ret.add(new AdminRating(jo.getInt("user_id"), jo.getString("name"), (float) jo.getDouble("value"), jo.getString("comment"), jo.getInt("approved"),jo.getInt("club_id"),jo.getString("clubName")));
 		    }
 
 		    return ret;
