@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/xls"/>
+        android:background="@drawable/ic_launcher"/>
 
     <Button
         android:id="@+id/club_menu_item_actionbar_add_button"

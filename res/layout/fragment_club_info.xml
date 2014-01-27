@@ -57,7 +57,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:onClick="phoneCall"
-            android:src="@drawable/phone" />
+            android:src="@drawable/ic_launcher" />
 
         <ImageButton
             android:id="@+id/message"
@@ -66,6 +66,6 @@
             android:layout_alignBottom="@+id/phone_call"
             android:layout_toRightOf="@+id/phone_call"
             android:onClick="message"
-            android:src="@drawable/mail" />
+            android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>
