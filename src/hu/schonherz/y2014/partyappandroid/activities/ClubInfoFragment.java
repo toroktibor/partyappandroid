@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -37,6 +40,24 @@ public class ClubInfoFragment extends Fragment {
 	TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
 	TextView clubAddressTextView = (TextView) rootView.findViewById(R.id.club_info_textview_address);
 	TextView clubDescriptionTextView = (TextView) rootView.findViewById(R.id.club_info_textview_description);
+	ImageButton call = (ImageButton) rootView.findViewById(R.id.phone_call);
+	ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
+	
+	if (actualClub.phonenumber == null || actualClub.phonenumber.equals("null")){
+		call.setEnabled(false);
+		call.setBackgroundColor(Color.TRANSPARENT);
+	} else{
+		call.setEnabled(true);
+	}
+	
+	if (actualClub.email  == null || actualClub.email.equals("null")){
+		//TODO:ikon csere
+		message.setEnabled(false);
+	} else{
+		message.setEnabled(true);
+		//TODO:ikon csere
+	}
+	
 
 	clubNameTextView.setText(actualClub.name);
 	clubAddressTextView.setText(actualClub.address);
