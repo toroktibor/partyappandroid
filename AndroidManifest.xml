@@ -177,6 +177,10 @@
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingRatingsActivity"
             android:label="@string/title_activity_pending_ratings" >
         </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity"
+            android:label="@string/title_activity_club_info_modify" >
+        </activity>
     </application>
 
 </manifest>
