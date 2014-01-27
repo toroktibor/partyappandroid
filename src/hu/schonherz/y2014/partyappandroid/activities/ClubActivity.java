@@ -102,11 +102,12 @@ public class ClubActivity extends ActionBarActivity {
 		Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
 		Log.i("fulldownload", "kommunikáció előtt");
 		if (actualCLub.isNotFullDownloaded()) {
+		    	actualCLub.downloadEverything();
 			Log.i("fulldownload", "kommunikáció után");
-			Session.getSearchViewClubs().set(
+			/*Session.getSearchViewClubs().set(
 					actualClubPosition,
 					Session.getInstance().getActualCommunicationInterface()
-							.getEverythingFromClub(actualCLub.id));
+							.getEverythingFromClub(actualCLub.id));*/
 		}
 	};
 

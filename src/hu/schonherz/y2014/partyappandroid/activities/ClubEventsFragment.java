@@ -86,7 +86,7 @@ public class ClubEventsFragment extends Fragment {
     
     @Override
     public void onResume() {    	
-    	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+    	/*int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
     	Event[] eventArray = getEventArrayFromList(Session.getSearchViewClubs().get(clubListPosition).events);
     	eventsListView.setAdapter(new EventsListAdapter(getActivity(), eventArray));
     	
@@ -107,7 +107,7 @@ public class ClubEventsFragment extends Fragment {
     	if(ClubActivity.isClubOfActualUser){
     		registerForContextMenu(eventsListView);
     	}
-    	
+    	*/
  
     	super.onResume();
     }
