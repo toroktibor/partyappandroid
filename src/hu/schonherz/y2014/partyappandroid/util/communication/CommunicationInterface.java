@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -119,4 +120,18 @@ public interface CommunicationInterface {
     public void removeEMenuItem(int menuid);
 
     public List<Event> getEventsOfClub(int id);
+    
+    public int addEvent(int clubid, String name, String description, String start_date, String row_image, String music_type);
+    
+    public void updateEvent(int eventid, String name, String description, String start_date, String row_image, String music_type);
+    
+    public void deleteEvent(int eventId);
+    
+    public int addRating(int clubId, int userId, float value, String comment);
+    
+    public void updateRating(int clubId, int userId, float value, String comment);
+    
+    public List<Rating> getRatings(int clubId);
+    
+    public List<Rating> getNotApprovedRatings();
 }

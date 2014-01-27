@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
@@ -768,5 +769,50 @@ public class Communication implements CommunicationInterface {
 	return null;
 
     }
+
+	@Override
+	public int addEvent(int clubid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void updateEvent(int eventid, String name, String description,
+			String start_date, String row_image, String music_type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteEvent(int eventId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int addRating(int clubId, int userId, float value, String comment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void updateRating(int clubId, int userId, float value, String comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Rating> getRatings(int clubId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Rating> getNotApprovedRatings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
