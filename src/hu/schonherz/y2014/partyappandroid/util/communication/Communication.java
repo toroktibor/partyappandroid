@@ -751,7 +751,7 @@ public class Communication implements CommunicationInterface {
 	    post.put("action", "GETEVENTSOFCLUB");
 	    post.put("id", String.valueOf(id));
 
-	    String data = httpPost("club.php", post);
+	    String data = httpPost("event.php", post);
 	    JSONArray ja = new JSONArray(data);
 
 	    for (int i = 0; i < ja.length(); i++) {
