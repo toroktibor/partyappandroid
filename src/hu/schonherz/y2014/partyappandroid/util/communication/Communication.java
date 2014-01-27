@@ -895,6 +895,7 @@ public class Communication implements CommunicationInterface {
 		    post.put("comment", comment);
 
 		    String data = httpPost("rating.php", post);
+		    Log.i("itt", data);
 		    JSONObject jsonObject = new JSONObject(data);
 		    return;
 
