@@ -1042,5 +1042,12 @@ public class Communication implements CommunicationInterface {
 		
 	}
 
+	@Override
+	public void setHighlightExpire(int clubId, int days) {
+		
+		Log.i("kiemelés",clubId+" "+days);
+		
+	}
+
 
 }

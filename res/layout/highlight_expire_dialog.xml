@@ -3,6 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <TextView
+        android:id="@+id/highlight_expire_dialog_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add meg hány napos kiemelést szeretnél:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/highlight_expire_dialog_number_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>

@@ -2,11 +2,8 @@ package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
-import hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
-import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
-import hu.schonherz.y2014.partyappandroid.dialogs.HighlightExpireDialog;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +18,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -193,12 +191,33 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 		case 7:
 			LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			ViewGroup view = (ViewGroup) inflater.inflate(R.layout.highlight_expire_dialog, null);
-
+			
+			final EditText daysEditText = (EditText) view.findViewById(R.id.highlight_expire_dialog_number_edittext);
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setView(view);
 			builder.setNegativeButton("Igénylés", new android.content.DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					String daysString = daysEditText.getText().toString();
+					if(daysString.isEmpty()){
+						Toast t = Toast.makeText(activity, "Nem adtad meg hány napra szeretnéd a kiemelést.", Toast.LENGTH_LONG);
+						t.show();
+						return;
+					}
 					
+					int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+					
+					int clubId = Session.getSearchViewClubs().get(clubListPosition).id;
+					int days = Integer.parseInt(daysString);
+					
+					if(days<=0){
+						Toast t = Toast.makeText(activity, "Nem kérhetsz nullánál kisebb napnyi kiemelést!", Toast.LENGTH_LONG);
+						t.show();
+						return;
+					}
+					
+					Session.getInstance().getActualCommunicationInterface().setHighlightExpire(clubId, days);
 
 				}
 			});
@@ -207,7 +226,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
+					
 
 				}
 			});

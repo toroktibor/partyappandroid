@@ -146,4 +146,6 @@ public interface CommunicationInterface {
     public void deleteClub(int clubId);
     
     public void updateClubInfo(int clubId, String name, String type, String description, String address, String phonenumber, String email);
+    
+    public void setHighlightExpire(int clubId, int days);
 }
