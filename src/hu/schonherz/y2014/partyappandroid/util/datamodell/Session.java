@@ -13,7 +13,7 @@ import android.util.Log;
 public class Session {
     private static Session instance = null;
 
-    public String citynameFromGPS = "Budapest";
+    public String citynameFromGPS = "Debrecen";
     public ProgressDialog progressDialog = null;
     
     User actualUser;
