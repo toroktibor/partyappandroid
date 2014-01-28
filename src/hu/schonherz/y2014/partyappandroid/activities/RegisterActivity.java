@@ -1,11 +1,13 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -42,11 +44,11 @@ public class RegisterActivity extends ActionBarActivity implements
 
     public void onClickHandler(View v) {
 	if (v.getId() == R.id.register_button_register) {
-	    String userName = nameEditText.getText().toString();
-	    String userPassword = passwordEditText.getText().toString();
+	    final String userName = nameEditText.getText().toString();
+	    final String userPassword = passwordEditText.getText().toString();
 	    String userPassword2 = password2EditText.getText().toString();
-	    String userEmail = emailEditText.getText().toString();
-	    String userBirthday = dateOfBirthEditText.getText().toString();
+	    final String userEmail = emailEditText.getText().toString();
+	    final String userBirthday = dateOfBirthEditText.getText().toString();
 	    String userSex = spinnerSexSpinner.getSelectedItem().toString();
 
 	    if (userName.isEmpty()) {
@@ -72,17 +74,34 @@ public class RegisterActivity extends ActionBarActivity implements
 	    if (userSex.isEmpty()) {
 		return;
 	    }
-	    int userSexInt = userSex.equals("Férfi") ? 0 : 1;
-	    User newUser = Session.getInstance().getActualCommunicationInterface()
-		    .registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
-	    if (newUser == null) {
-		return;
-	    }
-	    LoginActivity.loginSynchronize(newUser);
-	    Intent newIntent = new Intent(this, ClubsActivity.class);
-	    startActivity(newIntent);
-	    Log.e("REGISTER FORM", "CLUBSACTIVITY STARTED");
-	    finish();
+	    final int userSexInt = userSex.equals("Férfi") ? 0 : 1;
+	    
+	    Session.getInstance().progressDialog=ProgressDialog.show(this, "Kérlek várj", "Regisztráció folyamatban...", true, false);
+	    new Thread(new Runnable() {
+
+		@Override
+		public void run() {
+		    final User newUser = Session.getInstance().getActualCommunicationInterface()
+			    .registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
+		    RegisterActivity.this.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+			    if (newUser == null) {
+				return;
+			    }
+			    LoginActivity.loginSynchronize(newUser);
+			    Intent newIntent = new Intent(RegisterActivity.this, ClubsActivity.class);
+			    Session.getInstance().dismissProgressDialog();			    
+			    new DoneToast(RegisterActivity.this,"Sikeres regisztráció!").show();
+			    startActivity(newIntent);
+			    Log.e("REGISTER FORM", "CLUBSACTIVITY STARTED");
+			    finish();			    
+			}
+		    });
+		}
+	    }).start();
+
 	}
 	if (v.getId() == R.id.register_edittext_dateofbirth) {
 

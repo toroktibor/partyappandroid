@@ -11,6 +11,7 @@ import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionC
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener {
@@ -109,25 +111,44 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 			    EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
 			    EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
-			    EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
+			    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
 
 			    Log.i(this.getClass().getName(), "Eddigi találatok száma: "
 				    + Session.getSearchViewClubs().size());
 			    Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["
 				    + type.getText().toString() + "] város:[" + city.getText().toString() + "]");
 
-			    Session.getSearchViewClubs().clear();
-			    Session.getSearchViewClubs().addAll(
-				    Session.getInstance().getActualCommunicationInterface()
-					    .getClubsFromCityName(city.getText().toString()));
+			    Session.getInstance().progressDialog=ProgressDialog.show(activity, "Kérlek várj", "Szórakozóhelyek keresése...", true, false);
+			    new Thread(new Runnable() {
+			        
+			        @Override
+			        public void run() {
 
-			    Log.i(this.getClass().getName(), "Keresési találatok száma: "
-				    + Session.getSearchViewClubs().size());
+				    Session.getSearchViewClubs().clear();
+				    Session.getSearchViewClubs().addAll(
+					    Session.getInstance().getActualCommunicationInterface()
+						    .getClubsFromCityName(city.getText().toString()));
 
-			    ClubsUpdateableFragment cuf = (ClubsUpdateableFragment) ((ClubsActivity) activity).currentFragment;
-			    cuf.updateResults();
+				    Log.i(this.getClass().getName(), "Keresési találatok száma: "
+					    + Session.getSearchViewClubs().size());
+			            
+			            activity.runOnUiThread(new Runnable() {
 
-			    d.cancel();
+				        @Override
+				        public void run() {
+					    	ClubsUpdateableFragment cuf = (ClubsUpdateableFragment) ((ClubsActivity) activity).currentFragment;
+					    	cuf.updateResults();
+
+					    	d.cancel();
+				    	 	Session.getInstance().dismissProgressDialog();
+
+				        }
+				    });
+			    	
+			        }
+			    }).start();
+			    
+
 
 			}
 		    });
@@ -215,15 +236,32 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	/* Filter */
 
 	case 7: // KÖZELI HELYEK
-	    Session.getInstance().getSearchViewClubs().clear();
-	    Session.getInstance()
-		    .getSearchViewClubs()
-		    .addAll(Session.getInstance().getActualCommunicationInterface()
-			    .getClubsFromCityName(Session.getInstance().citynameFromGPS));
 
-	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
-	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_location));
+	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
+		    "Közeli helyek keresése...", true, false);
+	    new Thread(new Runnable() {
+
+		@Override
+		public void run() {
+		    Session.getInstance().getSearchViewClubs().clear();
+		    Session.getInstance()
+			    .getSearchViewClubs()
+			    .addAll(Session.getInstance().getActualCommunicationInterface()
+				    .getClubsFromCityName(Session.getInstance().citynameFromGPS));
+
+		    activity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+			    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
+			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
+			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_location));
+			    Session.getInstance().dismissProgressDialog();
+			}
+		    });
+		}
+	    }).start();
+
 	    break;
 
 	case 2: // KEDVENCEK
