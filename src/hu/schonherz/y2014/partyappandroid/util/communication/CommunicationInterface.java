@@ -106,7 +106,7 @@ public interface CommunicationInterface {
 
     public List<OwnerRequest> getNotApprovedOwnerRequest();
 
-    public int uploadAnImage(int club_id, String rowImage);
+    public int uploadAnImage(int club_id, String rowImage, int rotate);
 
     public String DownLoadAnImage(int id);
 

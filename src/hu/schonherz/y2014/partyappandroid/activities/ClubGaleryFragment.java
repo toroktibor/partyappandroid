@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -217,13 +218,15 @@ public class ClubGaleryFragment extends Fragment {
 	    Uri selectedImageUri = data.getData();
 	    try {
 
-		final Bitmap b = decodeUri(selectedImageUri);
-		//b = resizeBitmap(b);
+		Uri uri = selectedImageUri;
+		
+		final int orientation = ImageUtils.tryGetOrientation(getActivity(),uri);
+		
+		final Bitmap b = decodeUri( uri );
+
 		Log.e("kép", "galéria kép hozzáadva");
 		Log.i("asdasd","A galériából feltöltendő kép mérete: "+b.getWidth()+"x"+b.getHeight());
 
-		// ezt kell elküldeni a szervernek
-		final String picture = ImageUtils.BitMapToString(b);
 
 		Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép feltöltése...", true, false);
 		new Thread(new Runnable() {
@@ -234,7 +237,7 @@ public class ClubGaleryFragment extends Fragment {
 			final String picture = ImageUtils.BitMapToString(b);
 			
 			final int newID = Session.getInstance().getActualCommunicationInterface()
-				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture, orientation);
 			
 			ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
 				ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
@@ -270,12 +273,17 @@ public class ClubGaleryFragment extends Fragment {
 	    
 	    try {
 
+		Uri uri = Uri.fromFile(new File(mCurrentPhotoPath));
+		 
+		final int orientation = ImageUtils.tryGetOrientation(getActivity(),uri);
 		
-		final Bitmap b = decodeUri( Uri.fromFile(new File(mCurrentPhotoPath)) );
-		//b = (Bitmap) data.getExtras().get("data");
-		//b = resizeBitmap(b);
+		final Bitmap b = decodeUri( uri );
+
 		Log.e("kép", "kamera kép hozzáadva");
 		Log.i("asdasd","A kamerából feltöltendő kép merete: "+b.getWidth()+"x"+b.getHeight());
+		
+		
+		
 
 		Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép feltöltése...", true, false);
 		new Thread(new Runnable() {
@@ -286,7 +294,7 @@ public class ClubGaleryFragment extends Fragment {
 			final String picture = ImageUtils.BitMapToString(b);
 			
 			final int newID = Session.getInstance().getActualCommunicationInterface()
-				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture, orientation);
 			
 			ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
 				ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )

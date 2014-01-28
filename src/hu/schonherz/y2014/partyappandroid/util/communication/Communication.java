@@ -559,7 +559,7 @@ public class Communication implements CommunicationInterface {
 
     }
 
-    public int uploadAnImage(int club_id, String rowImage) {
+    public int uploadAnImage(int club_id, String rowImage, int rotate) {
 	try {
 	    HttpClient httpclient = new DefaultHttpClient();
 	    HttpPost httppost = new HttpPost(MainURL + "image.php");
@@ -567,6 +567,7 @@ public class Communication implements CommunicationInterface {
 	    nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
 	    nameValuePairs.add(new BasicNameValuePair("clubid", String.valueOf(club_id)));
 	    nameValuePairs.add(new BasicNameValuePair("rawImage", rowImage));
+	    nameValuePairs.add(new BasicNameValuePair("rotate", String.valueOf(rotate)));
 
 	    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	    HttpResponse response1 = httpclient.execute(httppost);
