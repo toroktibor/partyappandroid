@@ -38,7 +38,7 @@ public class Communication implements CommunicationInterface {
 
     HttpClient httpclient;
 
-    final String MainURL = "http://95.85.19.48/";
+    final String MainURL = "http://partyapp.bugs3.com/";
 
     public Communication() {
 	httpclient = new DefaultHttpClient();
@@ -252,6 +252,7 @@ public class Communication implements CommunicationInterface {
 
 	    List<Club> ret = new LinkedList<Club>();
 	    String data = httpPost("club.php", post);
+	    Log.i("itt", data);
 	    JSONArray jsonArray = new JSONArray(data);
 	    for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
