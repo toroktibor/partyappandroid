@@ -19,4 +19,17 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
     <dimen name="CustomPurpleButtonHeight">40dp</dimen>
+    
+    <style name="ProfileListTitle">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/profileTitle</item>
+                
+    </style>
+    
+    <style name="ProfileListValue">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+
+    </style>
+    
 </resources>

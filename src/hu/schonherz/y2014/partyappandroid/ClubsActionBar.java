@@ -222,6 +222,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    i = new Intent(activity, LoginActivity.class);
 	    Log.e("MAIN SCREEN", "STARTING LOGINACTIVITY");
 	    activity.startActivity(i);
+	    activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	    Log.e("MAIN SCREEN", "LOGINACTIVITY STARTED");
 	    activity.finish();
 	    break;

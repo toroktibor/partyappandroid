@@ -144,6 +144,15 @@ public class LoginActivity extends ActionBarActivity {
 	            final User actualUser = Session.getInstance().getActualCommunicationInterface()
 			    .authenticationUser(usernameFromEditText, passwordFromEditText);
 	            
+	            if (actualUser != null) {
+	        	// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
+			Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
+			mGpsLocation.onDestroy();
+			locationTask.cancel(true);
+
+			loginSynchronize(actualUser);
+	            }
+	            
 	            Activity a = LoginActivity.this;
 	            a.runOnUiThread(new Runnable() {
 		        
@@ -155,15 +164,10 @@ public class LoginActivity extends ActionBarActivity {
 				new ErrorToast(LoginActivity.this, "Sikertelen bejelentkezés! Hibásfelhasználónév vagy jelszó! Próbáld újra!").show();
 				Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY");
 			    } else {
-				// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
-				Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
-				mGpsLocation.onDestroy();
-				locationTask.cancel(true);
-
-				loginSynchronize(actualUser);
 				Intent newIntent = new Intent(LoginActivity.this, ClubsActivity.class);
 				
 				startActivity(newIntent);
+				overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 				Log.e("LOGIN SCREEN", "CLUBSACTIVITY STARTED");
 				finish();
 			    }	
