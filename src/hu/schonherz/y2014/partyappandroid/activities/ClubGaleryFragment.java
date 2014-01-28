@@ -101,43 +101,11 @@ public class ClubGaleryFragment extends Fragment {
 	gridView.setOnItemClickListener(new OnItemClickListener() {
 	    @Override
 	    public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-
-		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		if( actualClub.images.get(position).getBitmap() == null ){
-		    
-		    
-		    Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép betöltése...", true, false);
-		    new Thread(new Runnable() {
-		        
-		        @Override
-		        public void run() {
-		            actualClub.images.get(position).downloadBitmap();
-		            getActivity().runOnUiThread(new Runnable() {
-			        
-			        @Override
-			        public void run() {
-					actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-					byte[] byteArray = stream.toByteArray();
-
-					
-					Intent in1 = new Intent(getActivity(), FullImageActivity.class);
-					in1.putExtra("image", byteArray);
-					startActivity(in1);
-			    		Session.getInstance().dismissProgressDialog();
-			        }
-			    });
-		        }
-		    }).start();
-		    
-		}else{
-			actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] byteArray = stream.toByteArray();
-
-			
-			Intent in1 = new Intent(getActivity(), FullImageActivity.class);
-			in1.putExtra("image", byteArray);
-			startActivity(in1);
-		}
+	
+		Intent in1 = new Intent(getActivity(), FullImageActivity.class);
+		in1.putExtra("imageid", position);
+		startActivity(in1);
+		getActivity().overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 					
 
 	    }
