@@ -49,9 +49,12 @@ public class ClubInfoModifyActivity extends Activity {
 		clubNameEditText.setText(actualClub.name);
 		clubAddressEditText.setText(actualClub.address);
 		clubTypeSpinner.setSelection(Club.getClubTypePosition(actualClub.type));
-		clubPhonenumberEditText.setText(actualClub.phonenumber);
-		clubEmailEditText.setText(actualClub.email);
-		clubDescriptionEditText.setText(actualClub.description);
+		if(!actualClub.phonenumber.equals("null"))
+			clubPhonenumberEditText.setText(actualClub.phonenumber);
+		if(!actualClub.email.equals("null"))
+			clubEmailEditText.setText(actualClub.email);
+		if(!actualClub.description.equals("null"))
+			clubDescriptionEditText.setText(actualClub.description);
 		
 		clubModifyButton.setOnClickListener(new OnClickListener() {
 			

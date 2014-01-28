@@ -335,7 +335,7 @@ public class Communication implements CommunicationInterface {
 
 	    nameValuePairs.add(new BasicNameValuePair("action", "ADD"));
 	    nameValuePairs.add(new BasicNameValuePair("ClubID", (new Integer(club_id)).toString()));
-	    nameValuePairs.add(new BasicNameValuePair("Type", actualService));
+	    nameValuePairs.add(new BasicNameValuePair("ServiceName", actualService));
 
 	    HttpClient httpclient = new DefaultHttpClient();
 	    HttpPost httppost = new HttpPost(MainURL + "service.php");
@@ -930,7 +930,7 @@ public class Communication implements CommunicationInterface {
 
 		}
 
-		return null;
+		return ret;
 	}
 
 	@Override
