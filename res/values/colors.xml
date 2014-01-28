@@ -4,7 +4,9 @@
     <color name="applicationWindowBackground">#282a33</color>
     <color name="purple">#8e6bab</color>
     
-    <color name="editTextBackground">#363a46</color>
+<!--     <color name="editTextBackground">#363a46</color> -->
+    <color name="editTextBackground">#2D2D3C</color>
+    
     
     <color name="actionBarTextColor">#dddddd</color>
     
