@@ -996,5 +996,48 @@ public class Communication implements CommunicationInterface {
 		
 	}
 
+	@Override
+	public void deleteClub(int clubId) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DELETE");
+		    post.put("clubid", String.valueOf(clubId));
+
+		    String data = httpPost("club.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void updateClubInfo(int clubId, String name, String type,
+			String description, String address, String phonenumber, String email) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "UPDATE");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("name", name);
+		    post.put("type", type);
+		    post.put("description", description);
+		    post.put("address", address);
+		    post.put("phonenumber", phonenumber);
+		    post.put("email", email);
+		    
+		    
+
+		    String data = httpPost("club.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
 
 }

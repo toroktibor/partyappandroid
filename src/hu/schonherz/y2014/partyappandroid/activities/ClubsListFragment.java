@@ -17,10 +17,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -84,10 +89,15 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 		}
 	    }
 
-	});
-	rootView.addView(clubsListView);
-	return rootView;
-    }
+		});
+		
+		if(Session.getActualUser().getType()==1){
+			registerForContextMenu(clubsListView);
+		}
+		
+		rootView.addView(clubsListView);
+		return rootView;
+	}
 
     private Club[] getClubArrayFromClubsList(List<Club> clubList) {
 	Club[] clubArray = new Club[clubList.size()];
@@ -130,5 +140,35 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 	}
 
     }
-
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		
+		MenuInflater inflater = getActivity().getMenuInflater();
+		inflater.inflate(R.menu.club_list_context_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int index = info.position;
+		switch (item.getItemId()) {
+		case R.id.delete_club:
+		    int clubId = Session.getSearchViewClubs().get(index).id;
+		    Session.getInstance().getActualCommunicationInterface().deleteClub(clubId);
+		    Session.getSearchViewClubs().remove(index);
+		    onResume();
+		    return true;
+		case R.id.modify_club:
+			Activity activity = getActivity();
+		    Intent i = new Intent(activity, ClubInfoModifyActivity.class);
+		    i.putExtra("listPosition", index);
+		    activity.startActivity(i);
+		    return true;
+		default:
+		    return super.onContextItemSelected(item);
+		}
+	}
 }

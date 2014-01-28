@@ -62,6 +62,8 @@ public class ClubInfoFragment extends Fragment {
 	clubNameTextView.setText(actualClub.name);
 	clubAddressTextView.setText(actualClub.address);
 	clubDescriptionTextView.setText(actualClub.description);
+	
+	clubRatingBar.setRating(actualClub.getAvarageRate());
 
 	clubRatingBar.setOnTouchListener(new OnTouchListener() {
 

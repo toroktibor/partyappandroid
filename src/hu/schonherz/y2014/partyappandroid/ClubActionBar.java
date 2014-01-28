@@ -111,14 +111,13 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			if (!Session.getActualUser().isMine(club_id)) {
 				item = popupmenu.getMenu().add(0, 3, 0, "Én vagyok a tulaj");
 				item.setOnMenuItemClickListener(this);
-			} else {
 				if(Session.getActualUser().getType()==1){
 					item = popupmenu.getMenu().add(0, 6, 0, "Hely szerkesztése");
 					item.setOnMenuItemClickListener(this);
-				} else {
-					item = popupmenu.getMenu().add(0, 6, 0, "Hely szerkesztése");
-					item.setOnMenuItemClickListener(this);
 				}
+			} else {
+				item = popupmenu.getMenu().add(0, 6, 0, "Hely szerkesztése");
+				item.setOnMenuItemClickListener(this);
 			}
 
 			if (Session.getActualUser().isLike(club_id)) {
@@ -186,6 +185,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			break;
 		case 6:
 			i = new Intent(activity, ClubInfoModifyActivity.class);
+			i.putExtra("listPosition", ClubActivity.intent.getExtras().getInt("listPosition"));
 			activity.startActivity(i);
 			break;
 		case 999:
