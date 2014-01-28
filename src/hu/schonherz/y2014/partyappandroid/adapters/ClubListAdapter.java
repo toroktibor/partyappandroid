@@ -4,6 +4,7 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,11 @@ public class ClubListAdapter extends ArrayAdapter<Club> {
 	    LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
 	    item = inflater.inflate(R.layout.club_list_item, parent, false);
 	}
-	/*
-	 * if(((Club) getItem(position)).approved==0){
-	 * item.setBackgroundColor(Color.RED); }
-	 */
+	
+	/*if(((Club) getItem(position)).highlite_expire!=null || ((Club) getItem(position)).highlite_expire.equals("null")){
+		item.setBackgroundColor(Color.YELLOW);
+	}*/
+	
 	((TextView) item.findViewById(R.id.club_list_item_name)).setText(((Club) getItem(position)).name);
 	((TextView) item.findViewById(R.id.club_list_item_address)).setText(((Club) getItem(position)).address);
 	item.setTag((Club) getItem(position));

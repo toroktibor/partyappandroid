@@ -3,6 +3,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,11 +22,14 @@ import android.widget.TextView;
 public class ClubInfoFragment extends Fragment {
 
     private Club actualClub;
+    //public static android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_info, container, false);
-
+	
+	//fragmentManager = getFragmentManager();
+	
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	Log.i("átjött", String.valueOf(clubListPosition));
 	actualClub = Session.getSearchViewClubs().get(clubListPosition);

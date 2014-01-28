@@ -66,7 +66,7 @@ public class ClubEventsFragment extends Fragment {
 	rootView.addView(eventsListView);
 
 	// tulajextra funkcioi
-	if (ClubActivity.isClubOfActualUser) {
+	if (ClubActivity.isClubOfActualUser || Session.getActualUser().getType()==1) {
 	    registerForContextMenu(eventsListView);
 	} else {
 	    addButton.setVisibility(View.INVISIBLE);
