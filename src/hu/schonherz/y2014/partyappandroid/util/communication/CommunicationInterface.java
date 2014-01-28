@@ -147,5 +147,5 @@ public interface CommunicationInterface {
     
     public void updateClubInfo(int clubId, String name, String type, String description, String address, String phonenumber, String email);
     
-    public void setHighlightExpire(int clubId, int days);
+    public String setHighlightExpire(int clubId, int days);
 }

@@ -1043,9 +1043,24 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public void setHighlightExpire(int clubId, int days) {
+	public String setHighlightExpire(int clubId, int days) {
 		
-		Log.i("kiemelés",clubId+" "+days);
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "SETHIGHLIGHTEXPIRE");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("day", ""+days);
+		    
+		    String data = httpPost("club.php", post);
+		    JSONArray ja = new JSONArray(data);
+		    JSONObject jsonObject =ja.getJSONObject(0);
+		    String newDate = jsonObject.getString("highlight_expire");
+		    return newDate;
+
+		} catch (Exception e) {
+
+		}
+		return "";
 		
 	}
 
