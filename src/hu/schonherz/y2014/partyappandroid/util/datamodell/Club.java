@@ -18,6 +18,8 @@ public class Club {
     public String date;
     public String highlite_expire;
     public int approved;
+    
+    public boolean fullDownloaded = false;
 
     public String ownerName;
 
@@ -86,7 +88,7 @@ public class Club {
     }
 
     public boolean isNotFullDownloaded() {
-	return (this.date == null);
+	return !fullDownloaded;
     }
 
     public void downloadEverything() {
@@ -113,6 +115,7 @@ public class Club {
 	}
 
 	Log.i(this.getClass().getName(), "Klub adatai frissítve ( " + id + " )");
+	fullDownloaded=true;
     }
 
     public Rating isRatingThisUser(int userId) {

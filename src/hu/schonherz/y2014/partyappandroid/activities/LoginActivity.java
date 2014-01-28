@@ -8,6 +8,8 @@ import hu.schonherz.y2014.partyappandroid.services.GPSLocation.LocalBinder;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -125,31 +127,56 @@ public class LoginActivity extends ActionBarActivity {
     public void onClickHandler(View v) {
 	switch (v.getId()) {
 	case R.id.login_button_login:
-	    String usernameFromEditText = ((EditText) findViewById(R.id.login_edittext_name)).getEditableText()
+	    final String usernameFromEditText = ((EditText) findViewById(R.id.login_edittext_name)).getEditableText()
 		    .toString();
 
 	    Log.e("LOGIN SCREEN - CATCHED USERNAME", usernameFromEditText);
-	    String passwordFromEditText = ((EditText) findViewById(R.id.login_edittext_password)).getEditableText()
+	    final String passwordFromEditText = ((EditText) findViewById(R.id.login_edittext_password)).getEditableText()
 		    .toString();
 	    Log.e("LOGIN SCREEN - CATCHED PASSWORD: ", passwordFromEditText);
-	    User actualUser = Session.getInstance().getActualCommunicationInterface()
-		    .authenticationUser(usernameFromEditText, passwordFromEditText);
-	    if (actualUser == null) {
-		Log.e("LOGIN SCREEN", "WRONG NAME-PASSWORD PAIR, TOAST WILL BE SHOWED");
-		new ErrorToast(this, "Sikertelen bejelentkezés! Hibásfelhasználónév vagy jelszó! Próbáld újra!").show();
-		Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY");
-	    } else {
-		// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
-		Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
-		mGpsLocation.onDestroy();
-		locationTask.cancel(true);
+	    
+	    
+	    Runnable r = new Runnable() {
+	        
+	        @Override
+	        public void run() {
+	            
+	            final User actualUser = Session.getInstance().getActualCommunicationInterface()
+			    .authenticationUser(usernameFromEditText, passwordFromEditText);
+	            
+	            Activity a = LoginActivity.this;
+	            a.runOnUiThread(new Runnable() {
+		        
+		        @Override
+		        public void run() {
+		            if (actualUser == null) {
+		        	Session.getInstance().dismissProgressDialog();
+				Log.e("LOGIN SCREEN", "WRONG NAME-PASSWORD PAIR, TOAST WILL BE SHOWED");				
+				new ErrorToast(LoginActivity.this, "Sikertelen bejelentkezés! Hibásfelhasználónév vagy jelszó! Próbáld újra!").show();
+				Log.e("LOGIN SCREEN", "TOAST SHOWN SUCCESSFULLY");
+			    } else {
+				// Ha a nĂ©v Ă©s jelszĂł pĂˇros helyes
+				Log.e("LOGIN SCREEN", "CORRECT USERNAME-PASSWORD PAIR, CLUBSACTIVITY STARTING");
+				mGpsLocation.onDestroy();
+				locationTask.cancel(true);
 
-		loginSynchronize(actualUser);
-		Intent newIntent = new Intent(this, ClubsActivity.class);
-		startActivity(newIntent);
-		Log.e("LOGIN SCREEN", "CLUBSACTIVITY STARTED");
-		finish();
-	    }
+				loginSynchronize(actualUser);
+				Intent newIntent = new Intent(LoginActivity.this, ClubsActivity.class);
+				
+				startActivity(newIntent);
+				Log.e("LOGIN SCREEN", "CLUBSACTIVITY STARTED");
+				finish();
+			    }	
+		            Session.getInstance().dismissProgressDialog();
+		        }
+		    });
+	            		    
+	        }
+	    };
+	    
+	    Session.getInstance().progressDialog=ProgressDialog.show(this, "Kérlek várj", "Bejelentkezés folyamatban...", true, false);
+	    new Thread(r).start();
+	    
 	    break;
 
 	case R.id.login_button_register:

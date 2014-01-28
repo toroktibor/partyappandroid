@@ -22,6 +22,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -99,17 +100,46 @@ public class ClubGaleryFragment extends Fragment {
 	 * */
 	gridView.setOnItemClickListener(new OnItemClickListener() {
 	    @Override
-	    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
 
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		actualClub.images.get(position).downloadBitmap();
-		actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-		byte[] byteArray = stream.toByteArray();
+		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		if( actualClub.images.get(position).getBitmap() == null ){
+		    
+		    
+		    Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép betöltése...", true, false);
+		    new Thread(new Runnable() {
+		        
+		        @Override
+		        public void run() {
+		            actualClub.images.get(position).downloadBitmap();
+		            getActivity().runOnUiThread(new Runnable() {
+			        
+			        @Override
+			        public void run() {
+					actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
+					byte[] byteArray = stream.toByteArray();
 
-		
-		Intent in1 = new Intent(getActivity(), FullImageActivity.class);
-		in1.putExtra("image", byteArray);
-		startActivity(in1);
+					
+					Intent in1 = new Intent(getActivity(), FullImageActivity.class);
+					in1.putExtra("image", byteArray);
+					startActivity(in1);
+			    		Session.getInstance().dismissProgressDialog();
+			        }
+			    });
+		        }
+		    }).start();
+		    
+		}else{
+			actualClub.images.get(position).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
+
+			
+			Intent in1 = new Intent(getActivity(), FullImageActivity.class);
+			in1.putExtra("image", byteArray);
+			startActivity(in1);
+		}
+					
+
 	    }
 	});
 	return rootView;
@@ -217,24 +247,46 @@ public class ClubGaleryFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK && data != null) {
 	    Uri selectedImageUri = data.getData();
-	    Bitmap b;
 	    try {
 
-		b = decodeUri(selectedImageUri);
+		final Bitmap b = decodeUri(selectedImageUri);
 		//b = resizeBitmap(b);
 		Log.e("kép", "galéria kép hozzáadva");
 		Log.i("asdasd","A galériából feltöltendő kép mérete: "+b.getWidth()+"x"+b.getHeight());
 
 		// ezt kell elküldeni a szervernek
-		String picture = ImageUtils.BitMapToString(b);
+		final String picture = ImageUtils.BitMapToString(b);
 
-		int newID = Session.getInstance().getActualCommunicationInterface()
-			.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
-		
-		ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
-			ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
-			));
-
+		Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép feltöltése...", true, false);
+		new Thread(new Runnable() {
+		    
+		    @Override
+		    public void run() {
+			// ezt kell elküldeni a szervernek
+			final String picture = ImageUtils.BitMapToString(b);
+			
+			final int newID = Session.getInstance().getActualCommunicationInterface()
+				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+			
+			ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
+				ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
+				));
+			
+			getActivity().runOnUiThread(new Runnable() {
+			    
+			    @Override
+			    public void run() {
+				customGridAdapter = new GridViewAdapter(getActivity().getApplicationContext(), R.layout.row_grid,
+					getDataForGridView());
+				gridView.setAdapter(customGridAdapter);
+				gridView.invalidate();
+				Session.getInstance().dismissProgressDialog();	
+				
+			    }
+			});
+			
+		    }
+		}).start();
 		
 
 	    } catch (FileNotFoundException e) {
@@ -247,26 +299,46 @@ public class ClubGaleryFragment extends Fragment {
 
 	} else if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK ) {
 	    //Uri selectedImageUri = data.getData();
-	    Bitmap b;
+	    
 	    try {
 
 		
-		b = decodeUri( Uri.fromFile(new File(mCurrentPhotoPath)) );
+		final Bitmap b = decodeUri( Uri.fromFile(new File(mCurrentPhotoPath)) );
 		//b = (Bitmap) data.getExtras().get("data");
 		//b = resizeBitmap(b);
 		Log.e("kép", "kamera kép hozzáadva");
 		Log.i("asdasd","A kamerából feltöltendő kép merete: "+b.getWidth()+"x"+b.getHeight());
 
-		// ezt kell elküldeni a szervernek
-		String picture = ImageUtils.BitMapToString(b);
-
-		int newID = Session.getInstance().getActualCommunicationInterface()
-			.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
-		
-		ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
-			ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
-			));
-
+		Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép feltöltése...", true, false);
+		new Thread(new Runnable() {
+		    
+		    @Override
+		    public void run() {
+			// ezt kell elküldeni a szervernek
+			final String picture = ImageUtils.BitMapToString(b);
+			
+			final int newID = Session.getInstance().getActualCommunicationInterface()
+				.uploadAnImage(ClubGaleryFragment.actualClub.id, picture);
+			
+			ClubGaleryFragment.actualClub.images.add(new GaleryImage(newID, 
+				ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImageThumbnail(newID) )
+				));
+			
+			getActivity().runOnUiThread(new Runnable() {
+			    
+			    @Override
+			    public void run() {
+				customGridAdapter = new GridViewAdapter(getActivity().getApplicationContext(), R.layout.row_grid,
+					getDataForGridView());
+				gridView.setAdapter(customGridAdapter);
+				gridView.invalidate();
+				Session.getInstance().dismissProgressDialog();	
+				
+			    }
+			});
+			
+		    }
+		}).start();
 
 
 	    } catch (Exception e) {
@@ -278,108 +350,27 @@ public class ClubGaleryFragment extends Fragment {
 
     }
 
-    private Bitmap resizeBitmap(Bitmap b) {
-	Log.i("asdasd","Kép átméretezése");
-	Log.i("asdasd","Jelenlegi méret: "+b.getWidth()+"x"+b.getHeight());
-	
-	
-	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	b.compress(CompressFormat.JPEG, 70, baos);
-	baos.toByteArray();
-
-	Log.i(getClass().getName(), "resizeBitmap : Kiválasztott kép elkészítése Bitmapként");
-	/*BitmapFactory.Options o = new BitmapFactory.Options();
-	o.inJustDecodeBounds = true;
-	// BitmapFactory.decodeStream(os, null, o);
-	BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.size(), o);*/
-
-	final float TARGETMEGAPIXELS = 0.5f;
-
-	BitmapFactory.Options o2 = new BitmapFactory.Options();
-
-	//int currentpixels = o.outWidth * o.outHeight;
-	int currentpixels = b.getWidth() * b.getHeight();
-	Log.i("asdasd","Jelenlegi minőség: "+currentpixels+"P");
-	float ratio = TARGETMEGAPIXELS * 1000000 / currentpixels;
-	ratio = (float) Math.sqrt(ratio);
-	Log.i("asdasd","A méretezés aránya 1MP hez: "+ratio);
-
-	
-	if (ratio < 1) { // ha kicsinyíteni kell
-	    Log.i(getClass().getName(), "Kicsinyíteni kell a képet");
-
-	    int width_tmp = b.getWidth(), height_tmp = b.getHeight();
-	    
-	    int width_dest = Math.round(ratio * b.getWidth());
-	    int height_dest = Math.round(ratio * b.getHeight());
-	    
-	    Log.i("asdasd","Cél felbontás: "+width_dest+"x"+height_dest);
-	    int scale = 2;
-	    while ( width_tmp * height_tmp / scale / scale > TARGETMEGAPIXELS * 1000000) {
-		scale += 1;
-	    }
-	    Log.i("asdasd","Skálázás: "+scale);
-	    o2.inSampleSize = scale;
-
-	    /*
-	     * Bitmap b =
-	     * BitmapFactory.decodeStream(getActivity().getApplicationContext
-	     * ().getContentResolver() .openInputStream(selectedImage), null,
-	     * o2);
-	     */
-	    Bitmap scaled = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.size(), o2);
-	    
-	    return Bitmap.createScaledBitmap(scaled, width_dest, height_dest, true);
-	    // return Bitmap.createScaledBitmap(b, width_dest, height_dest,
-	    // true);
-
-	} else {
-	    Log.i(getClass().getName(), "A kép mérete nem lépi át a limitet");
-	    // return b.compress(format, quality, stream);
-	    return b;
-	}
-    }
-
     private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
 	Log.i(getClass().getName(), "Uri dekódolása");
 	BitmapFactory.Options o = new BitmapFactory.Options();
+	
 	o.inJustDecodeBounds = true;
-	/*Bitmap b = BitmapFactory.decodeStream(
-		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);*/
-	Bitmap b = BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage));
+	BitmapFactory.decodeStream(
+		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);
+		
+	Log.i("asdasd","Eredeti méret: "+o.outWidth+"x"+o.outHeight);
+		
+	o.inSampleSize = 1;
+	while( o.outHeight * o.outWidth / (o.inSampleSize*4) > 1000000 ){
+	    o.inSampleSize*=2;
+	}	
+	
+	Log.i("asdasd","Skálázás szükséges: "+o.inSampleSize);
+	o.inJustDecodeBounds = false;
+	
+	Bitmap b = BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage),null,o);
 	
 	return b;
-	
-	//return b;
-
-	/*final float TARGETMEGAPIXELS = 1;
-
-	BitmapFactory.Options o2 = new BitmapFactory.Options();
-
-	int currentpixels = o.outWidth * o.outHeight;
-	float ratio = TARGETMEGAPIXELS * 1000000 / currentpixels;
-
-	if (ratio < 1) { // ha kicsinyíteni kell
-	    Log.i(getClass().getName(), "Kicsinyíteni kell a képet");
-
-	    int width_tmp = o.outWidth, height_tmp = o.outHeight;
-	    int width_dest = Math.round(ratio * width_tmp), height_dest = Math.round(ratio * o.outHeight);
-	    int scale = 1;
-	    while (currentpixels / scale > TARGETMEGAPIXELS * 1000000) {
-		scale *= 2;
-	    }
-	    o2.inSampleSize = scale;
-
-	    Bitmap b = BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver()
-		    .openInputStream(selectedImage), null, o2);
-
-	    return Bitmap.createScaledBitmap(b, width_dest, height_dest, true);
-
-	} else {
-	    Log.i(getClass().getName(), "A kép mérete nem lépi át a limitet");
-	    return BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver()
-		    .openInputStream(selectedImage), null, o2);
-	}*/
 
     }
 
