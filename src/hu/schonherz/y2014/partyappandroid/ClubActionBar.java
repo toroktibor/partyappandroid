@@ -189,6 +189,12 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			activity.startActivity(i);
 			break;
 		case 7:
+			if(!Session.getSearchViewClubs().get(clubListPosition).highlite_expire.equals("null")){
+				Toast t = Toast.makeText(activity, "Erre a helyre már van beállítva kiemelés.", Toast.LENGTH_LONG);
+				t.show();
+				break;
+			}
+			
 			LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			ViewGroup view = (ViewGroup) inflater.inflate(R.layout.highlight_expire_dialog, null);
 			
@@ -217,7 +223,8 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 						return;
 					}
 					
-					Session.getInstance().getActualCommunicationInterface().setHighlightExpire(clubId, days);
+					
+					Session.getSearchViewClubs().get(clubListPosition).highlite_expire = Session.getInstance().getActualCommunicationInterface().setHighlightExpire(clubId, days);
 
 				}
 			});

@@ -105,7 +105,7 @@ public class Communication implements CommunicationInterface {
 	    JSONArray jsonArray = new JSONArray(data);
 	    for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
-		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"),jsonObject.getInt("approved"), jsonObject.getString("highlight_expire")));
+		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"),1, jsonObject.getString("highlight_expire")));
 	    }
 	    return ret;
 	} catch (Exception e) {
@@ -1043,9 +1043,24 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public void setHighlightExpire(int clubId, int days) {
+	public String setHighlightExpire(int clubId, int days) {
 		
-		Log.i("kiemelés",clubId+" "+days);
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "SETHIGHLIGHTEXPIRE");
+		    post.put("clubid", String.valueOf(clubId));
+		    post.put("day", ""+days);
+		    
+		    String data = httpPost("club.php", post);
+		    JSONArray ja = new JSONArray(data);
+		    JSONObject jsonObject =ja.getJSONObject(0);
+		    String newDate = jsonObject.getString("highlight_expire");
+		    return newDate;
+
+		} catch (Exception e) {
+
+		}
+		return "";
 		
 	}
 
