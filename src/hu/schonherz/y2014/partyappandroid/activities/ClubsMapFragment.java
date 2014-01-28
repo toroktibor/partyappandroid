@@ -1,7 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
-import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
