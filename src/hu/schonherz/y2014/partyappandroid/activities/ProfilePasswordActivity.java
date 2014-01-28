@@ -6,6 +6,7 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -30,7 +31,7 @@ public class ProfilePasswordActivity extends ActionBarActivity {
 	switch (v.getId()) {
 	case R.id.profile_password_button_save:
 	    EditText oldPassword = (EditText) findViewById(R.id.profile_password_edittext_oldpassword);
-	    EditText newPassword = (EditText) findViewById(R.id.profile_password_edittext_newpassword);
+	    final EditText newPassword = (EditText) findViewById(R.id.profile_password_edittext_newpassword);
 	    EditText newPasswordAgain = (EditText) findViewById(R.id.profile_password_edittext_newpasswordagain);
 
 	    if (oldPassword.getText().toString().isEmpty() || newPassword.getText().toString().isEmpty()
@@ -49,15 +50,40 @@ public class ProfilePasswordActivity extends ActionBarActivity {
 		return;
 	    }
 
-	    try {
-		user.modifyPassword(newPassword.getText().toString());
-	    } catch (Exception e) {
-		new ErrorToast(this, "A jelszómódosítás sikertelen!").show();
-	    }
+	    Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj", "Jelszó módosítása...",
+		    true, false);
 
-	    new DoneToast(this, "Sikeres jelszómódosítás").show();
+	    new Thread(new Runnable() {
 
-	    finish();
+		@Override
+		public void run() {
+		    try {
+			user.modifyPassword(newPassword.getText().toString());
+		    } catch (Exception e) {
+			ProfilePasswordActivity.this.runOnUiThread(new Runnable() {
+			    @Override
+			    public void run() {
+				new ErrorToast(ProfilePasswordActivity.this, "A jelszómódosítás sikertelen!").show();
+				Session.getInstance().dismissProgressDialog();
+			    }
+			});
+			return;
+		    }
+
+		    ProfilePasswordActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+			    new DoneToast(ProfilePasswordActivity.this, "Sikeres jelszómódosítás").show();
+			    Session.getInstance().dismissProgressDialog();
+			    finish();
+			}
+		    });
+
+		    
+
+		}
+	    }).start();
+
 	    break;
 	}
     }

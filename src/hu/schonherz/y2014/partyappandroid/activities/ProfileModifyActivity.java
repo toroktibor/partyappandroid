@@ -8,6 +8,7 @@ import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -50,15 +51,38 @@ public class ProfileModifyActivity extends ActionBarActivity implements DatePick
 	switch (v.getId()) {
 	case R.id.profile_modify_button_save:
 
-	    try {
-		user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(),
-			spinnerSex.getSelectedItemPosition());
-		new DoneToast(this, "Adatok sikeresen módosítva").show();
-	    } catch (Exception e) {
-		new ErrorToast(this, "Az adatok módosítása nem sikerült!").show();
-	    }
-
-	    finish();
+	    
+	    Session.getInstance().progressDialog=ProgressDialog.show(this, "Kérlek várj", "Adatok módosítása...", true, false);
+	    new Thread(new Runnable() {
+	        
+	        @Override
+	        public void run() {
+	            try {
+			user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(),
+				spinnerSex.getSelectedItemPosition());
+		    } catch (Exception e) {
+			ProfileModifyActivity.this.runOnUiThread(new Runnable() {
+			    
+			    @Override
+			    public void run() {
+				new ErrorToast(ProfileModifyActivity.this, "Az adatok módosítása nem sikerült!").show();				
+			    }
+			});			
+			return;
+		    }
+	            ProfileModifyActivity.this.runOnUiThread(new Runnable() {
+		        
+		        @Override
+		        public void run() {
+		            new DoneToast(ProfileModifyActivity.this, "Adatok sikeresen módosítva").show();		    	
+		        }
+		    });
+	            
+		    finish();
+	    	
+	        }
+	    }).start();
+	    
 	    break;
 
 	case R.id.profile_modify_edittext_dateofbirth:
