@@ -8,9 +8,87 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClubInfoModifyActivity" >
 
-    <TextView
+    <EditText
+        android:id="@+id/club_modify_activity_name_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Szórakozóhely neve">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/club_modify_activity_address_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/club_modify_activity_name_edittext"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/club_modify_activity_name_edittext"
+        android:ems="10"
+        android:hint="Szórakozóhely címe"/>
+
+    <Spinner
+        android:id="@+id/club_modify_activity_type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/club_modify_activity_image_imageview"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/club_modify_activity_address_edittext"
+        android:entries="@array/clubs_types" />
+
+    <EditText
+        android:id="@+id/club_modify_activity_phonenumber_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/club_modify_activity_type_spinner"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/club_modify_activity_type_spinner"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="Szórakozóhely telefonszáma"/>
+
+    <EditText
+        android:id="@+id/club_modify_activity_email_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/club_modify_activity_phonenumber_edittext"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/club_modify_activity_phonenumber_edittext"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Szórakozóhely e-mail címe"/>
+
+    <EditText
+        android:id="@+id/club_modify_activity_description_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/club_modify_activity_modify_button"
+        android:layout_alignLeft="@+id/club_modify_activity_email_edittext"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/club_modify_activity_email_edittext"
+        android:ems="10"
+        android:hint="Szórakozóhely leírása" />
+
+    <ImageView
+        android:id="@+id/club_modify_activity_image_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/club_modify_activity_address_edittext"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/club_modify_activity_name_edittext"
+        android:layout_toLeftOf="@+id/club_modify_activity_name_edittext"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/club_modify_activity_modify_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Módosítás" />
 
 </RelativeLayout>

@@ -96,6 +96,9 @@ public class Club {
 	this.email = clubWithAllInfo.email;
 	this.date = clubWithAllInfo.date;
 	this.description = clubWithAllInfo.description;
+	this.phonenumber = clubWithAllInfo.phonenumber;
+	this.approved = clubWithAllInfo.approved;
+	this.type = clubWithAllInfo.type;
 
 	this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
 	Log.i(getClass().getName(), "Klub eseményei: " + this.events.size());
@@ -122,5 +125,42 @@ public class Club {
 	}
 	return null;
     }
-
+    
+    
+    public static int getClubTypePosition(String category){
+    	if(category.equals("Vegyes")){
+    		return 0;
+    	}
+    	if(category.equals("Kocsma")){
+    		return 1;
+    	}
+    	if(category.equals("Pub")){
+    		return 2;
+    	}
+    	if(category.equals("Club")){
+    		return 3;
+    	}
+    	if(category.equals("Étterem")){
+    		return 4;
+    	}
+    	if(category.equals("Sport központ")){
+    		return 5;
+    	}
+    	if(category.equals("Disco")){
+    		return 6;
+    	}
+    	
+    	return 0;
+    }
+    
+    public float getAvarageRate(){
+    	float out = (float) 0.0;
+    	if(this.ratings==null || this.ratings.size()==0){
+    		return out;
+    	}
+    	for(Rating rating : this.ratings){
+    		out += rating.value;
+    	}
+    	return out/this.ratings.size();
+    }
 }

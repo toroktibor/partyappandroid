@@ -143,4 +143,7 @@ public interface CommunicationInterface {
     
     public void acceptRating(int userId, int clubId);
     
+    public void deleteClub(int clubId);
+    
+    public void updateClubInfo(int clubId, String name, String type, String description, String address, String phonenumber, String email);
 }
