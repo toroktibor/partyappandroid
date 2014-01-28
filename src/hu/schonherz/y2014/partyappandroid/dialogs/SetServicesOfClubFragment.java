@@ -89,13 +89,6 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	}
 	if (j < icons.length) {
 	    Log.e("SETSERVICESFRAGMENT", "ONE OF THE SERVICES ICON CLICKED...");
-	    if (((CheckBox) v).isChecked()) {
-		Log.e("SETSERVICESFRAGMENT", "ICON COLOR CHANGED (WHILE->YELLOW)...");
-		v.setBackgroundColor(Color.WHITE);
-	    } else if (((CheckBox) v).isChecked() == false) {
-		Log.e("SETSERVICESFRAGMENT", "ICON COLOR CHANGED (YELLOW->WHITE)...");
-		v.setBackgroundColor(Color.YELLOW);
-	    }
 	} else if (v.getId() == R.id.button_club_services_cancel) {
 	    Log.e("SETSERVICESFRAGMENT", "CANCEL BUTTON CLICKED");
 	    dismiss();

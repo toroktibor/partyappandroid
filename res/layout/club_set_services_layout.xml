@@ -2,21 +2,22 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center" >
+    android:layout_gravity="center" 
+    android:paddingTop="20dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="65dp"
-        android:paddingTop="50dp">
+        android:layout_marginTop="140dp"
+        >
 
         <LinearLayout
             android:id="@+id/linLayoutRow1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:orientation="vertical" >
 
@@ -74,7 +75,7 @@
                 android:id="@+id/checkBoxMenu"
                 android:layout_width="120dp"
                 android:layout_height="100dp"
-                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
                 android:drawableRight="@drawable/club_service_icon_32px_menu"
                 android:contentDescription="A szórakozóhelyen lehet menüt rendelni, enni." />
 
@@ -97,7 +98,7 @@
                 android:layout_width="120dp"
                 android:layout_height="100dp"
                 android:drawableRight="@drawable/club_service_icon_64px_sporttv"
-                android:contentDescription="A szórakozóhelyen szokott lenni élő zene (is)." />
+                android:contentDescription="A szórakozóhelyen lehet sport közvetítéseket nézni kivetítőn." />
 
             <CheckBox
                 android:id="@+id/checkBoxDance"
