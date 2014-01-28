@@ -33,7 +33,12 @@ public class FullImageActivity extends Activity {
     int mode = NONE;
     int currentImageID;
 
-    private void loadImage(final int imageid) {	
+    private void loadImage(final int imageid) {
+	final Button bNext = (Button) findViewById(R.id.full_image_button_next);
+	final Button bPrev = (Button) findViewById(R.id.full_image_button_prev);
+	bPrev.setEnabled(false);
+	bNext.setEnabled(false);
+	
 	Log.i("asdasd","Kép beöltése #"+imageid);
 	if( imageid==-1 || imageid==ClubGaleryFragment.actualClub.images.size() ){
 	    return;
@@ -42,12 +47,8 @@ public class FullImageActivity extends Activity {
 	this.currentImageID=imageid;
 	final ImageView iv = (ImageView) findViewById(R.id.full_image_view);	
 	final TextView loadingTextView = (TextView) findViewById(R.id.full_image_textview_loading);
-	Button bNext = (Button) findViewById(R.id.full_image_button_next);
-	Button bPrev = (Button) findViewById(R.id.full_image_button_prev);
 	
-	bPrev.setEnabled(imageid!=0);
-	bNext.setEnabled(imageid != ClubGaleryFragment.actualClub.images.size()-1);
-	
+
 	iv.setVisibility(View.INVISIBLE);
 	loadingTextView.setVisibility(View.VISIBLE);
 	new Thread(new Runnable() {
@@ -65,6 +66,9 @@ public class FullImageActivity extends Activity {
 			iv.setImageBitmap(img.getBitmap());
 			loadingTextView.setVisibility(View.INVISIBLE);
 			iv.setVisibility(View.VISIBLE);
+			bPrev.setEnabled(imageid!=0);
+			bNext.setEnabled(imageid != ClubGaleryFragment.actualClub.images.size()-1);
+			
 			
 		    }
 		});
