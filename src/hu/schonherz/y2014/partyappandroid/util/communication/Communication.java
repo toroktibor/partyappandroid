@@ -105,7 +105,7 @@ public class Communication implements CommunicationInterface {
 	    JSONArray jsonArray = new JSONArray(data);
 	    for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
-		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address")));
+		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"),jsonObject.getInt("approved"), jsonObject.getString("highlight_expire")));
 	    }
 	    return ret;
 	} catch (Exception e) {
@@ -150,7 +150,8 @@ public class Communication implements CommunicationInterface {
 		    int clubId = jsonObject.getInt("id");
 		    String clubName = jsonObject.getString("name");
 		    String clubAddress = jsonObject.getString("address");
-		    Club newClub = new Club(clubId, clubName, clubAddress);
+		    String highlight_expire = jsonObject.getString("highlight_expire");
+		    Club newClub = new Club(clubId, clubName, clubAddress, highlight_expire);
 		    outList.add(newClub);
 		}
 
@@ -254,7 +255,7 @@ public class Communication implements CommunicationInterface {
 	    JSONArray jsonArray = new JSONArray(data);
 	    for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
-		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address")));
+		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"), jsonObject.getString("highlight_expire")));
 	    }
 	    return ret;
 	} catch (Exception e) {

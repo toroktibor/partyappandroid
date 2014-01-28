@@ -87,6 +87,13 @@ public class Club {
 	this.approved = approved;
     }
     
+    public Club(int id, String name, String address, String highlite_expire) {
+    	this.id = id;
+    	this.name = name;
+    	this.address = address;
+    	this.highlite_expire = highlite_expire;
+    }
+    
     public Club(int id, String name, String address, int approved, String highlite_expire) {
     	this.id = id;
     	this.name = name;
@@ -109,6 +116,7 @@ public class Club {
 	this.phonenumber = clubWithAllInfo.phonenumber;
 	this.approved = clubWithAllInfo.approved;
 	this.type = clubWithAllInfo.type;
+	this.highlite_expire = clubWithAllInfo.highlite_expire;
 
 	this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
 	Log.i(getClass().getName(), "Klub eseményei: " + this.events.size());
