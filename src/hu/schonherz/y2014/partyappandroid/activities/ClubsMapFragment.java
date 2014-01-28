@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.MarkerOptionsCreator;
 
 public class ClubsMapFragment extends Fragment implements
 		ClubsUpdateableFragment {
@@ -65,46 +66,73 @@ public class ClubsMapFragment extends Fragment implements
 
 				final Activity activity = getActivity();
 				final Intent i = new Intent(activity, ClubActivity.class);
-				int listPosition = markerList.indexOf(arg0);
-				i.putExtra("listPosition", listPosition);
-				final Club actualClub = Session.getSearchViewClubs().get(
-						listPosition);
+				int listPosition = giveIndexOfMarkerFromMarkerList(arg0);
+				Log.e("MAP", "INDEX=" + listPosition);
+				if (listPosition > -1) {
+					Log.e("MAP", "YES, MARKERLIST CONTAINS THE CLICKED MARKER");
+					i.putExtra("listPosition", listPosition);
+					final Club actualClub = Session.getSearchViewClubs().get(
+							listPosition);
 
-				if (actualClub.isNotFullDownloaded()) {
+					if (actualClub.isNotFullDownloaded()) {
 
-					Session.getInstance().progressDialog = ProgressDialog.show(
-							activity, "Kérlek várj", "Adatok betöltése...",
-							true, false);
-					new Thread(new Runnable() {
+						Session.getInstance().progressDialog = ProgressDialog
+								.show(activity, "Kérlek várj",
+										"Adatok betöltése...", true, false);
+						new Thread(new Runnable() {
 
-						@Override
-						public void run() {
-							actualClub.downloadEverything();
-							activity.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								actualClub.downloadEverything();
+								activity.runOnUiThread(new Runnable() {
 
-								@Override
-								public void run() {
-									activity.startActivity(i);
-									activity.overridePendingTransition(
-											R.anim.slide_left_in,
-											R.anim.slide_left_out);
-									Session.getInstance()
-											.dismissProgressDialog();
-								}
-							});
-						}
-					}).start();
-				} else {
-					activity.startActivity(i);
-					activity.overridePendingTransition(R.anim.slide_left_in,
-							R.anim.slide_left_out);
+									@Override
+									public void run() {
+										activity.startActivity(i);
+										activity.overridePendingTransition(
+												R.anim.slide_left_in,
+												R.anim.slide_left_out);
+										Session.getInstance()
+												.dismissProgressDialog();
+									}
+								});
+							}
+						}).start();
+					} else {
+						activity.startActivity(i);
+						activity.overridePendingTransition(
+								R.anim.slide_left_in, R.anim.slide_left_out);
+					}
+					return;
 				}
-				return;
+				else
+					Toast.makeText(activity, "Sajnáljuk! Nem sikerült megnyitni a hely információs lapját.", Toast.LENGTH_SHORT);
 			}
 		});
 
 		updateResults();
 		return view;
+	}
+
+	private int giveIndexOfMarkerFromMarkerList(Marker marker) {
+		MarkerOptions mOpts =  new MarkerOptions()
+		.title(marker.getTitle())
+		.position(marker.getPosition())
+		.snippet(marker.getSnippet());
+		MarkerOptions actOpts;
+		for (int i = 0; i < markerList.size(); ++i) {
+			actOpts = markerList.get(i);
+			Log.e("MAP COMPARE", actOpts.getTitle() + " " + mOpts.getTitle());
+			Log.e("MAP COMPARE", actOpts.getSnippet() + " " + mOpts.getSnippet());
+			Log.e("MAP COMPARE", actOpts.getPosition() + " " + mOpts.getPosition());
+			if (actOpts.getTitle() == mOpts.getTitle()
+					&&
+				actOpts.getSnippet() == mOpts.getSnippet()
+					&&
+				actOpts.getPosition() == mOpts.getPosition())
+				return i;
+		}
+		return -1;
 	}
 
 	@Override
@@ -134,14 +162,10 @@ public class ClubsMapFragment extends Fragment implements
 				if (addressList.size() > 0) {
 					actualClubsLatLng = new LatLng(addressList.get(0)
 							.getLatitude(), addressList.get(0).getLongitude());
-					if (actualClub.approved == 1) {
-						markerList.add(new MarkerOptions()
-								.position(actualClubsLatLng)
-								.title(actualClub.name)
-								.snippet(actualClub.address).icon(bmd));
-						
-						Log.e("MAP", "NEW CLUB APPEARED ON THE MAP");
-					}
+					markerList.add(new MarkerOptions()
+							.position(actualClubsLatLng).title(actualClub.name)
+							.snippet(actualClub.address).icon(bmd));
+					Log.e("MAP", "NEW CLUB APPEARED ON THE MAP");
 				} else {
 					Log.e("MAP", "SIZE OF ADDRESSLIST IS 0");
 				}
@@ -150,8 +174,7 @@ public class ClubsMapFragment extends Fragment implements
 			if (markerList.size() > 0) {
 				LatLngBounds.Builder builder = new LatLngBounds.Builder();
 				for (int i = 0; i < markerList.size(); ++i) {
-					googleMap
-					.addMarker(markerList.get(i));
+					googleMap.addMarker(markerList.get(i));
 					builder.include(markerList.get(i).getPosition());
 				}
 				LatLngBounds bounds = builder.build();
