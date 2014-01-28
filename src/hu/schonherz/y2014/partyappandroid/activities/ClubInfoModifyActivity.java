@@ -1,10 +1,12 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubInfoModifyActivity extends Activity {
+public class ClubInfoModifyActivity extends ActionBarActivity {
 	
 	Club actualClub;
 	EditText clubNameEditText;
@@ -28,6 +30,8 @@ public class ClubInfoModifyActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		new SimpleActionBar(this, "Hely adatainak módosítása").setLayout();
+		
 		setContentView(R.layout.activity_club_info_modify);
 		
 		int position = getIntent().getExtras().getInt("listPosition");
@@ -86,6 +90,7 @@ public class ClubInfoModifyActivity extends Activity {
 				actualClub.description = clubDescription;
 				
 				Session.getInstance().getActualCommunicationInterface().updateClubInfo(actualClub.id, actualClub.name, actualClub.type, actualClub.description, actualClub.address, actualClub.phonenumber, actualClub.email);
+				new DoneToast(ClubInfoModifyActivity.this,"Szórakozóhely adatai módosítva lettek!").show();
 				finish();
 			}
 		});

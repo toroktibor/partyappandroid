@@ -99,6 +99,7 @@
         android:id="@+id/club_menu_add_button_add"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:layout_marginTop="20dp"
         android:text="Hozzáadás"
         style="@style/CustomPurpleButton"/>
 

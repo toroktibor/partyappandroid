@@ -70,7 +70,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/club_modify_activity_email_edittext"
         android:ems="10"
-        android:hint="Szórakozóhely leírása" />
+        android:hint="Szórakozóhely leírása"
+        android:gravity="top" />
 
     <ImageView
         android:id="@+id/club_modify_activity_image_imageview"

@@ -1,22 +1,19 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import java.util.ArrayList;
-
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubEventNewActivity extends Activity {
+public class ClubEventNewActivity extends ActionBarActivity {
 
     EditText nameEditText;
     EditText dateEditText;
@@ -28,6 +25,9 @@ public class ClubEventNewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Esemény módosítása").setLayout();
+	
 	setContentView(R.layout.activity_club_event_new);
 
 	clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");

@@ -1,10 +1,11 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,7 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ClubMenuModifyActivity extends Activity {
+public class ClubMenuModifyActivity extends ActionBarActivity {
 
     Spinner categorySpinner;
     EditText nameEditText;
@@ -37,6 +38,9 @@ public class ClubMenuModifyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Tétel módosítása").setLayout();
+	
 	setContentView(R.layout.activity_club_menu_modify);
 
 	int menuItemListPosition = getIntent().getExtras().getInt("menuItemListPosition");

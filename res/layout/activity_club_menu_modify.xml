@@ -100,6 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="@string/club_menu_modify_button_add"
-        style="@style/CustomPurpleButton" />
+        style="@style/CustomPurpleButton"
+        android:layout_marginTop="20dp"
+         />
 
 </LinearLayout>
