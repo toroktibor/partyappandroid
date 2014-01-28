@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.ClubsList;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class ClubsMapFragment extends Fragment implements
 
 				final Activity activity = getActivity();
 				final Intent i = new Intent(activity, ClubActivity.class);
-				int listPosition = giveIndexOfMarkerFromMarkerList(arg0);
+				int listPosition = giveIndexOfMarkerFromSearchViewClubs(arg0);
 				Log.e("MAP", "INDEX=" + listPosition);
 				if (listPosition > -1) {
 					Log.e("MAP", "YES, MARKERLIST CONTAINS THE CLICKED MARKER");
@@ -114,24 +115,13 @@ public class ClubsMapFragment extends Fragment implements
 		return view;
 	}
 
-	private int giveIndexOfMarkerFromMarkerList(Marker marker) {
-		MarkerOptions mOpts =  new MarkerOptions()
-		.title(marker.getTitle())
-		.position(marker.getPosition())
-		.snippet(marker.getSnippet());
-		MarkerOptions actOpts;
-		for (int i = 0; i < markerList.size(); ++i) {
-			actOpts = markerList.get(i);
-			Log.e("MAP COMPARE", actOpts.getTitle() + " " + mOpts.getTitle());
-			Log.e("MAP COMPARE", actOpts.getSnippet() + " " + mOpts.getSnippet());
-			Log.e("MAP COMPARE", actOpts.getPosition() + " " + mOpts.getPosition());
-			if (actOpts.getTitle() == mOpts.getTitle()
-					&&
-				actOpts.getSnippet() == mOpts.getSnippet()
-					&&
-				Math.abs( actOpts.getPosition().latitude- mOpts.getPosition().latitude ) < 0.001
-					&&
-					Math.abs( actOpts.getPosition().longitude- mOpts.getPosition().longitude ) < 0.001)
+	private int giveIndexOfMarkerFromSearchViewClubs(Marker marker) {
+		List<Club> actList = Session.getSearchViewClubs();
+		for (int i = 0; i < actList.size(); ++i) {
+			Log.e("MAP COMPARE", actList.get(i).address + " " + marker.getSnippet() );
+			Log.e("MAP COMPARE", actList.get(i).name + " " + marker.getTitle());
+			if ((actList.get(i).name == marker.getTitle()) &&
+				(actList.get(i).address == marker.getSnippet()))
 				return i;
 		}
 		return -1;
