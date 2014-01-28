@@ -37,6 +37,8 @@ public class ClubListAdapter extends ArrayAdapter<Club> {
 			Log.i("próba log", "itt van sárgítás");
 			Log.i("itt", ((Club) getItem(position)).highlite_expire+" "+((Club) getItem(position)).name+" "+position);
 			item.setBackgroundColor(Color.YELLOW);
+		} else {
+			item.setBackgroundColor(Color.TRANSPARENT);
 		}
 	}
 	
