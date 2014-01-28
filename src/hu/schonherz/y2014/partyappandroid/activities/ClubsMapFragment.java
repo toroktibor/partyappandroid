@@ -129,7 +129,9 @@ public class ClubsMapFragment extends Fragment implements
 					&&
 				actOpts.getSnippet() == mOpts.getSnippet()
 					&&
-				actOpts.getPosition() == mOpts.getPosition())
+				Math.abs( actOpts.getPosition().latitude- mOpts.getPosition().latitude ) < 0.001
+					&&
+					Math.abs( actOpts.getPosition().longitude- mOpts.getPosition().longitude ) < 0.001)
 				return i;
 		}
 		return -1;
