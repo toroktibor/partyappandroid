@@ -65,8 +65,9 @@
 
     <Button
         android:id="@+id/new_club_button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Regisztrálom" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Regisztrálom"
+        style="@style/CustomPurpleButton"/>
 
 </LinearLayout>

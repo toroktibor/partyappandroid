@@ -79,6 +79,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 				@Override
 				public void run() {
 				    activity.startActivity(i);
+				    activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 				    Session.getInstance().dismissProgressDialog();
 				}
 			    });
@@ -86,6 +87,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 		    }).start();
 		} else {
 		    activity.startActivity(i);
+		    activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 		}
 	    }
 

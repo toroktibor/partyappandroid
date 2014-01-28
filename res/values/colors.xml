@@ -14,5 +14,8 @@
     
     <color name="purpleButtonBackground">#8e6bab</color>
     <color name="purpleButtonBackgroundPressed">#814faa</color>
+    
+    
+    <color name="profileTitle">#888888</color>
 
 </resources>

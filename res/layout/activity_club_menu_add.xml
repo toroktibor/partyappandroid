@@ -98,7 +98,8 @@
     <Button
         android:id="@+id/club_menu_add_button_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hozzáadás" />
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Hozzáadás"
+        style="@style/CustomPurpleButton"/>
 
 </LinearLayout>

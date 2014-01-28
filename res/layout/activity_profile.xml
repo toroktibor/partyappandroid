@@ -13,63 +13,73 @@
         android:id="@+id/profile_textview_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Név" />
+        android:text="Név"
+        style="@style/ProfileListTitle"  />
 
     <TextView
         android:id="@+id/profile_textview_name_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        style="@style/ProfileListValue"  />
 
     <TextView
         android:id="@+id/profile_textview_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email cím" />
+        android:text="Email cím"
+        style="@style/ProfileListTitle" />
 
     <TextView
         android:id="@+id/profile_textview_email_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView" 
+        style="@style/ProfileListValue" />
 
     <TextView
         android:id="@+id/profile_textview_dateofbirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Születési dátum" />
+        android:text="Születési dátum"
+        style="@style/ProfileListTitle" />
 
     <TextView
         android:id="@+id/profile_textview_dateofbirth_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView" 
+        style="@style/ProfileListValue" />
 
     <TextView
         android:id="@+id/profile_textview_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nem" />
+        android:text="Nem"
+        style="@style/ProfileListTitle" />
 
     <TextView
         android:id="@+id/profile_textview_sex_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView" 
+        style="@style/ProfileListValue" />
 
     <Button
         android:layout_marginTop="20dp"
         android:id="@+id/profile_button_modify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Adataim szerkesztése" 
-        android:onClick="onClickHandler"/>
+        android:onClick="onClickHandler"
+        style="@style/CustomPurpleButton"/>
 
     <Button
         android:id="@+id/profile_button_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Jelszó módosítása"
-        android:onClick="onClickHandler" />
+        android:onClick="onClickHandler" 
+        style="@style/CustomPurpleButton"/>
     
 </LinearLayout>
