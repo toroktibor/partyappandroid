@@ -22,13 +22,10 @@ import android.widget.TextView;
 public class ClubInfoFragment extends Fragment {
 
     private Club actualClub;
-    //public static android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_info, container, false);
-	
-	//fragmentManager = getFragmentManager();
 	
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	Log.i("átjött", String.valueOf(clubListPosition));

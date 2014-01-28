@@ -22,7 +22,6 @@ public class ClubActivity extends ActionBarActivity {
     public ViewPager viewPager;
     static public Intent intent;
     static public boolean isClubOfActualUser;
-    //public static ActionBarActivity activityForDialog;
     public Club actualClub;
 
     public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
