@@ -72,8 +72,9 @@
     <Button
         android:id="@+id/round_email_send"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentBottom="true"
-        android:text="Elküld" />
+        android:text="Elküld"
+        style="@style/CustomPurpleButton" />
 
 </RelativeLayout>

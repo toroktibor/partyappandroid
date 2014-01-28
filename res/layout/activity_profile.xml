@@ -69,15 +69,17 @@
         android:layout_marginTop="20dp"
         android:id="@+id/profile_button_modify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Adataim szerkesztése" 
-        android:onClick="onClickHandler"/>
+        android:onClick="onClickHandler"
+        style="@style/CustomPurpleButton"/>
 
     <Button
         android:id="@+id/profile_button_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Jelszó módosítása"
-        android:onClick="onClickHandler" />
+        android:onClick="onClickHandler" 
+        style="@style/CustomPurpleButton"/>
     
 </LinearLayout>

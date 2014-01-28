@@ -40,9 +40,10 @@
     <Button
         android:id="@+id/club_event_new_button_new"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentBottom="true"
-        android:text="@string/club_event_new_button_new" />
+        android:text="@string/club_event_new_button_new"
+        style="@style/CustomPurpleButton" />
 
     <Spinner
         android:id="@+id/club_event_new_music_type_spinner"

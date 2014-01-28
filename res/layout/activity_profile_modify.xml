@@ -65,8 +65,9 @@
     <Button
         android:id="@+id/profile_modify_button_save"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Módosítások mentése"
-        android:onClick="onClickHandler" />
+        android:onClick="onClickHandler" 
+        style="@style/CustomPurpleButton"/>
     
 </LinearLayout>
