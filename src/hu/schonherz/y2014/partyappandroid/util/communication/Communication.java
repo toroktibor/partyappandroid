@@ -38,7 +38,7 @@ public class Communication implements CommunicationInterface {
 
     HttpClient httpclient;
 
-    final String MainURL = "http://partyapp.bugs3.com/";
+    final String MainURL = "http://95.85.19.48/";
 
     public Communication() {
 	httpclient = new DefaultHttpClient();
@@ -668,6 +668,7 @@ public class Communication implements CommunicationInterface {
 	    post.put("clubid", String.valueOf(club_id));
 
 	    String data = httpPost("image.php", post);
+	    Log.i("asdasd",data);
 	    JSONArray array = new JSONArray(data);
 	    for (int i = 0; i < array.length(); i++) {
 		JSONObject jsonObject = array.getJSONObject(i);
@@ -676,7 +677,7 @@ public class Communication implements CommunicationInterface {
 	    for (int i = 0; i < list.size(); i++)
 		Log.e("log", list.get(i).toString());
 	    return list;
-	} catch (Exception e) {
+	} catch (Exception e) {	    
 	    Log.e(getClass().getName(), "Hiba a képek listájának lekérésekor", e);
 	}
 
