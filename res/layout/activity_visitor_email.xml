@@ -18,10 +18,11 @@
     <EditText
         android:id="@+id/visitor_subject"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/visitor_targy"
-        android:ems="10" >
+        android:ems="10"
+        style="@style/CustomPurpleButton">
 
         <requestFocus />
     </EditText>

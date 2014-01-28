@@ -19,11 +19,12 @@
 
     <Button
         android:id="@+id/club_rating_add_rating_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Értékelés elküldése" />
+        android:text="Értékelés elküldése"
+        style="@style/CustomPurpleButton"/>
 
     <TextView
         android:id="@+id/club_rating_add_comment_description"
