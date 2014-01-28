@@ -139,8 +139,7 @@ public class ClubsMapFragment extends Fragment implements
 								.position(actualClubsLatLng)
 								.title(actualClub.name)
 								.snippet(actualClub.address).icon(bmd));
-						googleMap
-								.addMarker(markerList.get(markerList.size() - 1));
+						
 						Log.e("MAP", "NEW CLUB APPEARED ON THE MAP");
 					}
 				} else {
@@ -151,6 +150,8 @@ public class ClubsMapFragment extends Fragment implements
 			if (markerList.size() > 0) {
 				LatLngBounds.Builder builder = new LatLngBounds.Builder();
 				for (int i = 0; i < markerList.size(); ++i) {
+					googleMap
+					.addMarker(markerList.get(i));
 					builder.include(markerList.get(i).getPosition());
 				}
 				LatLngBounds bounds = builder.build();
