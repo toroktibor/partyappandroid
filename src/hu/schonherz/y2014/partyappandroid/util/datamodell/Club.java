@@ -122,6 +122,8 @@ public class Club {
     }
 
     public Rating isRatingThisUser(int userId) {
+    if(this.ratings == null || this.ratings.size()==0)
+    	return null;
 	for (Rating rating : ratings) {
 	    if (rating.userId == userId)
 		return rating;
