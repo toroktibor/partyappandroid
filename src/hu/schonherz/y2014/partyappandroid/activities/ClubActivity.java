@@ -63,7 +63,7 @@ public class ClubActivity extends ActionBarActivity {
 	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 	viewPager.setAdapter(mPagerAdapter);
 
-	clubFullDownload(clubListPosition);
+	//clubFullDownload(clubListPosition);
     }
 
     @Override

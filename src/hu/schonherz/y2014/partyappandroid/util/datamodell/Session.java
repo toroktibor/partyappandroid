@@ -6,6 +6,7 @@ import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -13,7 +14,8 @@ public class Session {
     private static Session instance = null;
 
     public String citynameFromGPS = "Budapest";
-
+    public ProgressDialog progressDialog = null;
+    
     User actualUser;
     List<Club> searchViewClubs;
     boolean isOnline;
@@ -25,6 +27,13 @@ public class Session {
 	actualCommunicationInterface = new Communication();
     }
 
+    public void dismissProgressDialog(){
+	if(progressDialog!=null){
+	    progressDialog.dismiss();
+	    progressDialog=null;
+	}
+    }
+    
     public void makeLocalDatabaseConnection(Context context) {
 	databaseConnecter = new LocalDatabaseUtil(context);
     }
