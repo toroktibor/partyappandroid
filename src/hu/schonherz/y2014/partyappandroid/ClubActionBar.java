@@ -159,29 +159,22 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			break;
 		case 3:
 			Session.getInstance().getActualCommunicationInterface()
-					.setOwnerForClub(user_id, club_id);
-			Toast.makeText(
-					activity,
-					"Tulajdonosi kérelmedet fogadtuk, kérlek várj türelemmel az admin jóváhagyására!",
-					Toast.LENGTH_LONG).show();
+					.setOwnerForClub(user_id, club_id);			
+			new DoneToast(activity,"Tulajdonosi kérelmedet fogadtuk, kérlek várj türelemmel az admin jóváhagyására!").show();
 			break;
 		case 4:
 			Session.getInstance().getActualCommunicationInterface()
 					.deleteFavoriteClubForUser(club_id, user_id);
 			Session.getActualUser().favoriteClubs.add(Session
 					.getSearchViewClubs().remove(clubListPosition));
-			Toast.makeText(activity,
-					"A szórakozóhely kikerült a kedvenceidből!",
-					Toast.LENGTH_LONG).show();
+			new DoneToast(activity,"A szórakozóhely kikerült a kedvenceidből!").show();
 			break;
 		case 5:
 			Session.getInstance().getActualCommunicationInterface()
 					.setFavoriteClubForUser(user_id, club_id);
 			Session.getActualUser().favoriteClubs.add(Session
 					.getSearchViewClubs().get(clubListPosition));
-			Toast.makeText(activity,
-					"A szórakozóhely bekerült a kedvenceid közzé!",
-					Toast.LENGTH_LONG).show();
+			new DoneToast(activity,"A szórakozóhely bekerült a kedvenceid közé!").show();
 			break;
 		case 6:
 			i = new Intent(activity, ClubInfoModifyActivity.class);
