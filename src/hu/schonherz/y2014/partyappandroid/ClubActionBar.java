@@ -5,12 +5,17 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.dialogs.HighlightExpireDialog;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
@@ -186,7 +191,31 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			activity.startActivity(i);
 			break;
 		case 7:
-			//new HighlightExpireDialog().show(ClubInfoFragment.fragmentManager, "proba");
+			LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			ViewGroup view = (ViewGroup) inflater.inflate(R.layout.highlight_expire_dialog, null);
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setNegativeButton("Igénylés", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+
+				}
+			});
+			builder.setPositiveButton("Mégse",
+			new android.content.DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+			builder.setTitle("Kiemelés igénylése.");
+
+			final AlertDialog dialog = builder.create();
+
+			dialog.show();
 			break;
 		case 999:
 			activity.actualClub.downloadEverything();
