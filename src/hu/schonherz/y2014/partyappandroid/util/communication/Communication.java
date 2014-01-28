@@ -105,7 +105,7 @@ public class Communication implements CommunicationInterface {
 	    JSONArray jsonArray = new JSONArray(data);
 	    for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
-		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"),jsonObject.getInt("approved"), jsonObject.getString("highlight_expire")));
+		ret.add(new Club(jsonObject.getInt("id"), jsonObject.getString("name"), jsonObject.getString("address"),1, jsonObject.getString("highlight_expire")));
 	    }
 	    return ret;
 	} catch (Exception e) {
