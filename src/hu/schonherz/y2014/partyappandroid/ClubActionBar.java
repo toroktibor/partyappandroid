@@ -2,8 +2,10 @@ package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
+import hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
+import hu.schonherz.y2014.partyappandroid.dialogs.HighlightExpireDialog;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -118,6 +120,8 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			} else {
 				item = popupmenu.getMenu().add(0, 6, 0, "Hely szerkesztése");
 				item.setOnMenuItemClickListener(this);
+				item = popupmenu.getMenu().add(0, 7, 0, "Kiemelés igénylése");
+				item.setOnMenuItemClickListener(this);
 			}
 
 			if (Session.getActualUser().isLike(club_id)) {
@@ -187,6 +191,9 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 			i = new Intent(activity, ClubInfoModifyActivity.class);
 			i.putExtra("listPosition", ClubActivity.intent.getExtras().getInt("listPosition"));
 			activity.startActivity(i);
+			break;
+		case 7:
+			//new HighlightExpireDialog().show(ClubInfoFragment.fragmentManager, "proba");
 			break;
 		case 999:
 			activity.actualClub.downloadEverything();

@@ -86,6 +86,14 @@ public class Club {
 	this.address = address;
 	this.approved = approved;
     }
+    
+    public Club(int id, String name, String address, int approved, String highlite_expire) {
+    	this.id = id;
+    	this.name = name;
+    	this.address = address;
+    	this.approved = approved;
+    	this.highlite_expire = highlite_expire;
+    }
 
     public boolean isNotFullDownloaded() {
 	return !fullDownloaded;

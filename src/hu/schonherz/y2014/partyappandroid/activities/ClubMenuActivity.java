@@ -95,7 +95,7 @@ public class ClubMenuActivity extends ActionBarActivity {
 	});
 
 	// tulajextra funkcioi
-	if (!ClubActivity.isClubOfActualUser) {
+	if (!ClubActivity.isClubOfActualUser &&  Session.getActualUser().getType()!=1) {
 	    addButton.setVisibility(View.INVISIBLE);
 	    importButton.setVisibility(View.INVISIBLE);
 	}
@@ -118,7 +118,7 @@ public class ClubMenuActivity extends ActionBarActivity {
 	menuItemListView.setAdapter(new MenuItemsListAdapter(this, menuItemArray));
 
 	// tulajextra funkcioi
-	if (ClubActivity.isClubOfActualUser) {
+	if (ClubActivity.isClubOfActualUser ||  Session.getActualUser().getType()==1) {
 	    registerForContextMenu(menuItemListView);
 	}
 	super.onResume();
