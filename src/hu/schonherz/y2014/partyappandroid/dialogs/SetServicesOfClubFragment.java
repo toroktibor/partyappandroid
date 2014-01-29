@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.dialogs;
 
+import hu.schonherz.y2014.partyappandroid.ClubsActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.activities.SetServicesCommunicator;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -10,6 +11,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 
     SetServicesCommunicator communicator;
 
+    public static ClubsActionBar cab;
     Button done, cancel;
 
     Integer[] icons = { R.id.checkBoxBilliard, R.id.checkBoxBowling, R.id.checkBoxCoctailBar, R.id.checkBoxDance,
@@ -34,11 +37,22 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
     List<CheckBox> checkboxes = new ArrayList<CheckBox>();
 
     
+    public void show(ClubsActionBar cab, FragmentManager manager, String tag) {
+	SetServicesOfClubFragment.cab = cab;
+        super.show(manager, tag);
+    }
+    
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        cab=null;
+        super.show(manager, tag);
+    }
+    
     @Override
     public void onAttach(Activity activity) {
-	super.onAttach(activity);
-	communicator = (SetServicesCommunicator) activity;
-	Log.e("SETSERVICESFRAGMENT", "ONATTACH SUCCESSFULLY RUN");
+		super.onAttach(activity);
+		communicator = (SetServicesCommunicator) activity;
+		Log.e("SETSERVICESFRAGMENT", "ONATTACH SUCCESSFULLY RUN");
     }
 
     @Override
@@ -102,7 +116,9 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 		}
 	    }
 	    Log.e("SETSERVICESFRAGMENT", "");
-	    communicator.onServicesSetted(result);
+	    
+	    if(cab!=null ) cab.onServicesSetted(result);
+	    else communicator.onServicesSetted(result);
 	    dismiss();
 	}
     }

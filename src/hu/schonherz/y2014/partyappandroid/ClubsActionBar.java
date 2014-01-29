@@ -1,5 +1,8 @@
 package hu.schonherz.y2014.partyappandroid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.android.gms.internal.ac;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
@@ -8,9 +11,12 @@ import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.PendingListActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
+import hu.schonherz.y2014.partyappandroid.activities.SetServicesCommunicator;
+import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -23,13 +29,18 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener {
+public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener, SetServicesCommunicator {
 
     private final ClubsActivity activity;
+    private static int numberOfSelectedServices = 0;
+    private static List<String> selectedServices = new ArrayList<String>();
+    private TextView textViewSelectedServicesNumber;
 
     public ClubsActionBar(ClubsActivity activity) {
 	this.activity = activity;
@@ -96,8 +107,12 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	case R.id.actionbar_clubs_button_d: // KERESÉS
 
 	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
+
 		@Override
 		public void onResume() {
+		    // VAN HIBA VAGY NINCS HIBA!? :D
+		    textViewSelectedServicesNumber = (TextView) activity
+			    .findViewById(R.id.dialog_club_search_textview_number_of_selected_services);
 		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
 		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 			    null);
@@ -105,7 +120,16 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 		    final Dialog d = adb.create();
 		    d.show();
+		    Button servicesButton = (Button) d.findViewById(R.id.dialog_club_search_button_set_services);
 
+		    servicesButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+			    SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+			    serviceSetterFragment.show(ClubsActionBar.this, activity.getSupportFragmentManager(), "SetServicesOfClub");
+			}
+		    });
 		    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -120,41 +144,39 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 			    Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["
 				    + type.getText().toString() + "] város:[" + city.getText().toString() + "]");
 
-			    Session.getInstance().progressDialog=ProgressDialog.show(activity, "Kérlek várj", "Szórakozóhelyek keresése...", true, false);
+			    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
+				    "Szórakozóhelyek keresése...", true, false);
 			    new Thread(new Runnable() {
-			        
-			        @Override
-			        public void run() {
+
+				@Override
+				public void run() {
 
 				    Session.getSearchViewClubs().clear();
 				    Session.getSearchViewClubs().addAll(
 					    Session.getInstance().getActualCommunicationInterface()
 						    .getClubsFromCityName(city.getText().toString()));
-				  //Geocoder send the latlng position of the places.
+				    // Geocoder send the latlng position of the
+				    // places.
 				    Session.getInstance().setPositions(activity);
-				    
-				    
 
 				    Log.i(this.getClass().getName(), "Keresési találatok száma: "
 					    + Session.getSearchViewClubs().size());
-			            
-			            activity.runOnUiThread(new Runnable() {
 
-				        @Override
-				        public void run() {
-				            	((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
-				            	((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
+				    activity.runOnUiThread(new Runnable() {
 
-					    	d.cancel();
-				    	 	Session.getInstance().dismissProgressDialog();
+					@Override
+					public void run() {
+					    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+					    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 
-				        }
+					    d.cancel();
+					    Session.getInstance().dismissProgressDialog();
+
+					}
 				    });
-			    	
-			        }
-			    }).start();
-			    
 
+				}
+			    }).start();
 
 			}
 		    });
@@ -277,54 +299,54 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 		    "Kedvencek betöltése...", true, false);
 	    new Thread(new Runnable() {
-	        
-	        @Override
-	        public void run() {
+
+		@Override
+		public void run() {
 		    Session.getInstance().getSearchViewClubs().clear();
-		    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().favoriteClubs);
+		    Session.getInstance().getSearchViewClubs()
+			    .addAll(Session.getInstance().getActualUser().favoriteClubs);
 		    Session.getInstance().setPositions(activity);
-		    
+
 		    activity.runOnUiThread(new Runnable() {
-		        
-		        @Override
-		        public void run() {
-		            Session.getInstance().dismissProgressDialog();
+
+			@Override
+			public void run() {
+			    Session.getInstance().dismissProgressDialog();
 			    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
 			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
-		        }
+			}
 		    });
-		    
 
-	        }
+		}
 	    }).start();
 
 	    break;
 
 	case 3: // HELYEIM
-	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
-		    "Helyeid betöltése...", true, false);
+	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj", "Helyeid betöltése...",
+		    true, false);
 	    new Thread(new Runnable() {
-	        
-	        @Override
-	        public void run() {
+
+		@Override
+		public void run() {
 		    Session.getInstance().getSearchViewClubs().clear();
 		    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().usersClubs);
 		    Session.getInstance().setPositions(activity);
 		    activity.runOnUiThread(new Runnable() {
-		        
-		        @Override
-		        public void run() {
-		            Session.getInstance().dismissProgressDialog();
+
+			@Override
+			public void run() {
+			    Session.getInstance().dismissProgressDialog();
 			    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
 			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
-		        }
+			}
 		    });
 
-	        }
+		}
 	    }).start();
 
 	    break;
@@ -334,5 +356,12 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	}
 
 	return true;
+    }
+
+    @Override
+    public void onServicesSetted(List<String> result) {
+	numberOfSelectedServices = result.size();
+	selectedServices = result;
+	textViewSelectedServicesNumber.setText(numberOfSelectedServices + " szolgáltatás kiválasztva");
     }
 }

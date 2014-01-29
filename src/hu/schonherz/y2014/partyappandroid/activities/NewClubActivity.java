@@ -32,7 +32,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     List<String> services;
     int selectedServicesNumber;
     TextView selectedServicesTextView;
-    List<String> servicesTokenList = new ArrayList<String>();
+    
     @Override
     // EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A
     // FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
@@ -41,7 +41,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 	this.services = services;
 	selectedServicesNumber = 0;
 	for (String actService : services ) {
-		if(servicesTokenList.contains(actService));
+		if(Session.getInstance().servicesTokenList.contains(actService));
 			selectedServicesNumber++;
 	}
 	selectedServicesTextView.setText(selectedServicesNumber + " szolgáltatás kiválasztva");
@@ -53,17 +53,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	servicesTokenList.add("billiard");
-	servicesTokenList.add("bowling");
-	servicesTokenList.add("coctailbar");
-	servicesTokenList.add("dance");
-	servicesTokenList.add("darts");
-	servicesTokenList.add("dj");
-	servicesTokenList.add("fndcontrol");
-	servicesTokenList.add("livemusic");
-	servicesTokenList.add("menu");
-	servicesTokenList.add("sporttv");
-	servicesTokenList.add("wifi");
+	
 	new SimpleActionBar(this, "Új klub hozzáadása").setLayout();
 
 	setContentView(R.layout.activity_new_club);
@@ -86,13 +76,13 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 		Boolean isOwner = newClubOwnerCheckBox.isChecked();
 
 		if (newClubName.isEmpty()) {
-		    Toast.makeText(thisContext, "Nem adtál meg nevet, ez baj, sűtgősed szedd össze magad.",
+		    Toast.makeText(thisContext, "Nem adtál meg nevet! Sürgősen szedd össze magad.",
 			    Toast.LENGTH_LONG).show();
 		    return;
 		}
 
 		if (newClubAddress.isEmpty()) {
-		    Toast.makeText(thisContext, "Már arra se emlékszel hol basztál be tegnap? Szép vagy...",
+		    Toast.makeText(thisContext, "Már arra se emlékszel hol b@sztál be tegnap? Szép vagy...",
 			    Toast.LENGTH_LONG).show();
 		    return;
 		}
