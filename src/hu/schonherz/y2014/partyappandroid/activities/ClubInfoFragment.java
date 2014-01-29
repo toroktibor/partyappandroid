@@ -29,36 +29,8 @@ import android.widget.TextView;
 
 public class ClubInfoFragment extends Fragment {
 
-	{
-		servicesTokenList.add("billiard");
-		servicesTokenList.add("bowling");
-		servicesTokenList.add("coctailbar");
-		servicesTokenList.add("dance");
-		servicesTokenList.add("darts");
-		servicesTokenList.add("dj");
-		servicesTokenList.add("fndcontrol");
-		servicesTokenList.add("livemusic");
-		servicesTokenList.add("menu");
-		servicesTokenList.add("sporttv");
-		servicesTokenList.add("wifi");
-		
-		servicesNameList.add("billiárd");
-		servicesNameList.add("bowling");
-		servicesNameList.add("koktélbár");
-		servicesNameList.add("táncparkett");
-		servicesNameList.add("darts");
-		servicesNameList.add("dj");
-		servicesNameList.add("face & dress contol");
-		servicesNameList.add("élőzene");
-		servicesNameList.add("étkezés");
-		servicesNameList.add("sport közvetítés");
-		servicesNameList.add("wifi");
-		
-	}
-	
 	private Club actualClub;
-	private static List<String> servicesTokenList = new ArrayList<String>();
-	private static List<String> servicesNameList = new ArrayList<String>();
+	
 
 	Integer[] icons = { R.drawable.club_service_icon_64px_billiard,
 						R.drawable.club_service_icon_64px_bowling,
@@ -137,9 +109,9 @@ public class ClubInfoFragment extends Fragment {
 		clubAddressTextView.setText(actualClub.address);
 		clubDescriptionTextView.setText(actualClub.description);
 		for (String service : actualClub.services) {
-			if(servicesTokenList.contains(service)) {
+			if(Session.getInstance().servicesTokenList.contains(service)) {
 				TextView tw = new TextView(getActivity());
-				tw.setText(servicesNameList.get(servicesTokenList.indexOf(service)));
+				tw.setText(Session.getInstance().servicesNameList.get(Session.getInstance().servicesTokenList.indexOf(service)));
 				servicesLayout.addView(tw);
 			}
 		}

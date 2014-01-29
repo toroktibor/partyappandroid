@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -31,13 +32,18 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     List<String> services;
     int selectedServicesNumber;
     TextView selectedServicesTextView;
-
+    List<String> servicesTokenList = new ArrayList<String>();
     @Override
     // EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A
     // FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
     public void onServicesSetted(List<String> services) {
 	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
 	this.services = services;
+	selectedServicesNumber = 0;
+	for (String actService : services ) {
+		if(servicesTokenList.contains(actService));
+			selectedServicesNumber++;
+	}
 	selectedServicesTextView.setText(selectedServicesNumber + " szolgáltatás kiválasztva");
 	for (int i = 0; i < this.services.size(); ++i)
 	    Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
@@ -47,7 +53,17 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-
+	servicesTokenList.add("billiard");
+	servicesTokenList.add("bowling");
+	servicesTokenList.add("coctailbar");
+	servicesTokenList.add("dance");
+	servicesTokenList.add("darts");
+	servicesTokenList.add("dj");
+	servicesTokenList.add("fndcontrol");
+	servicesTokenList.add("livemusic");
+	servicesTokenList.add("menu");
+	servicesTokenList.add("sporttv");
+	servicesTokenList.add("wifi");
 	new SimpleActionBar(this, "Új klub hozzáadása").setLayout();
 
 	setContentView(R.layout.activity_new_club);

@@ -22,7 +22,8 @@ public class Session {
 
     public String citynameFromGPS = "Debrecen";
     public ProgressDialog progressDialog = null;
-    
+    public static List<String> servicesTokenList = new ArrayList<String>();
+    public static List<String> servicesNameList = new ArrayList<String>();
     User actualUser;
     List<Club> searchViewClubs;
     boolean isOnline;
@@ -71,6 +72,28 @@ public class Session {
 	if (instance == null) {
 	    instance = new Session();
 	}
+	servicesTokenList.add("billiard");
+	servicesTokenList.add("bowling");
+	servicesTokenList.add("coctailbar");
+	servicesTokenList.add("dance");
+	servicesTokenList.add("darts");
+	servicesTokenList.add("dj");
+	servicesTokenList.add("fndcontrol");
+	servicesTokenList.add("livemusic");
+	servicesTokenList.add("menu");
+	servicesTokenList.add("sporttv");
+	servicesTokenList.add("wifi");
+	servicesNameList.add("billiárd");
+	servicesNameList.add("bowling");
+	servicesNameList.add("koktélbár");
+	servicesNameList.add("táncparkett");
+	servicesNameList.add("darts");
+	servicesNameList.add("dj");
+	servicesNameList.add("face & dress contol");
+	servicesNameList.add("élőzene");
+	servicesNameList.add("étkezés");
+	servicesNameList.add("sport közvetítés");
+	servicesNameList.add("wifi");
 	return instance;
     }
 

@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.dialogs;
 
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.activities.SetServicesCommunicator;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,6 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	    R.id.checkBoxDarts, R.id.checkBoxDJ, R.id.checkBoxFnDControl, R.id.checkBoxLiveMusic, R.id.checkBoxMenu,
 	    R.id.checkBoxSportTV, R.id.checkBoxWiFi };
 
-    String[] services = { "billiard", "bowling", "coctailbar", "dance", "darts", "dj", "fndcontrol", "livemusic",
-	    "menu", "sporttv", "wifi" };
 
     List<CheckBox> checkboxes = new ArrayList<CheckBox>();
 
@@ -97,8 +96,8 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	    List<String> result = new ArrayList<String>();
 	    for (int i = 0; i < icons.length; ++i) {
 		if (checkboxes.get(i).isChecked()) {
-		    Log.e("SETSERVICESFRAGMENT", "SERVICES: " + services[i]);
-		    result.add(services[i]);
+		    Log.e("SETSERVICESFRAGMENT", "SERVICES: " + Session.getInstance().servicesTokenList.get(i));
+		    result.add(Session.getInstance().servicesTokenList.get(i));
 		}
 	    }
 	    Log.e("SETSERVICESFRAGMENT", "");
