@@ -38,7 +38,9 @@ public class Communication implements CommunicationInterface {
 
     HttpClient httpclient;
 
-    final String MainURL = "http://partyapp.bugs3.com/";
+    //final String MainURL = "http://partyapp.bugs3.com/";
+
+    final String MainURL = "http://95.85.19.48/";
 
     public Communication() {
 	httpclient = new DefaultHttpClient();
