@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -15,12 +16,10 @@ public class PendingListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
+	
+	new SimpleActionBar(this, "Jóváhagyandó tételek").setLayout();
+	
 	setContentView(R.layout.activity_pending_list);
-
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.pending_list_actionbar);
 
 	Button pendingClubsButton = (Button) findViewById(R.id.pendings_new_clubs_button);
 	Button pendingRatingsButton = (Button) findViewById(R.id.pendings_new_rating_button);
@@ -55,11 +54,5 @@ public class PendingListActivity extends ActionBarActivity {
 	});
     }
 
-    @Override
-    protected void onResume() {
-	TextView menuText = (TextView) findViewById(R.id.pending_list_actionbar_name);
-	menuText.setText("Jóváhagyások");
-	super.onResume();
-    }
 
 }

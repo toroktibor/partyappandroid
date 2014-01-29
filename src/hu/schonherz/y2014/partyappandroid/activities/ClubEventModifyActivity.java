@@ -1,10 +1,16 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
+import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
+import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
+import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerCommunicator;
+import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,10 +19,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubEventModifyActivity extends Activity {
+public class ClubEventModifyActivity extends ActionBarActivity implements DatePickerCommunicator,TimePickerCommunicator{
 
     EditText nameEditText;
     EditText dateEditText;
+    EditText timeEditText;
     EditText descriptionEditText;
     Spinner musicTypeSpinner;
     Button modifyButton;
@@ -25,6 +32,9 @@ public class ClubEventModifyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new SimpleActionBar(this, "Esemény módosítása").setLayout();
+	
 	setContentView(R.layout.activity_club_event_modify);
 
 	int eventListPosition = getIntent().getExtras().getInt("eventsListPosition");
@@ -33,6 +43,7 @@ public class ClubEventModifyActivity extends Activity {
 
 	nameEditText = (EditText) findViewById(R.id.club_event_modify_edittext_name);
 	dateEditText = (EditText) findViewById(R.id.club_event_modify_edittext_date);
+	timeEditText = (EditText) findViewById(R.id.club_event_modify_edittext_time);
 	descriptionEditText = (EditText) findViewById(R.id.club_event_modify_edittext_description);
 	modifyButton = (Button) findViewById(R.id.club_event_modify_button_modify);
 	musicTypeSpinner = (Spinner) findViewById(R.id.club_event_modify_music_type_spinner);
@@ -44,6 +55,25 @@ public class ClubEventModifyActivity extends Activity {
 	dateEditText.setText(actualEvent.start_date);
 	descriptionEditText.setText(actualEvent.description);
 
+	
+	dateEditText.setOnClickListener(new OnClickListener() {
+	    
+	    @Override
+	    public void onClick(View v) {
+		new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
+		
+	    }
+	});
+	
+	timeEditText.setOnClickListener(new OnClickListener() {
+	    
+	    @Override
+	    public void onClick(View v) {
+		new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
+		
+	    }
+	});
+	
 	modifyButton.setOnClickListener(new OnClickListener() {
 
 	    @Override
@@ -78,6 +108,17 @@ public class ClubEventModifyActivity extends Activity {
 	    }
 	});
 
+    }
+    
+    @Override
+    public void onDatePicked(String date) {
+	dateEditText.setText(date);	
+    }
+
+    @Override
+    public void onTimePicked(String time) {
+	timeEditText.setText(time);
+	
     }
 
 }

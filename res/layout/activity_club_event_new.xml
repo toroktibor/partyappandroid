@@ -21,11 +21,23 @@
     <EditText
         android:id="@+id/club_event_new_edittext_date"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:layout_alignParentLeft="true"        
+        android:layout_below="@+id/club_event_new_edittext_name"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Esemény napja" />
+    
+    <EditText
+        android:id="@+id/club_event_new_edittext_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/club_event_new_edittext_name"
+        android:layout_toRightOf="@+id/club_event_new_edittext_date"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/club_event_new_edittext_name"
-        android:hint="@string/club_event_new_edittext_date" />
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Ideje" />
 
     <EditText
         android:id="@+id/club_event_new_edittext_description"
