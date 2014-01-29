@@ -102,7 +102,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 	    @Override
 	    public void onClick(View v) {
 		SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
-		serviceSetterFragment.show(getSupportFragmentManager(), "SetServicesOfClub");
+		serviceSetterFragment.show(NewClubActivity.this, getSupportFragmentManager(), "SetServicesOfClub");
 	    }
 	});
     }

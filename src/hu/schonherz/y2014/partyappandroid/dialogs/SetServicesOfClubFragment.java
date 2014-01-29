@@ -38,23 +38,15 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 
     
     public void show(ClubsActionBar cab, FragmentManager manager, String tag) {
-	SetServicesOfClubFragment.cab = cab;
+	communicator = (SetServicesCommunicator) cab;
         super.show(manager, tag);
     }
     
-    @Override
-    public void show(FragmentManager manager, String tag) {
-        cab=null;
+    public void show(Activity activity ,FragmentManager manager, String tag) {
+	communicator = (SetServicesCommunicator) activity;
         super.show(manager, tag);
     }
     
-    @Override
-    public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		communicator = (SetServicesCommunicator) activity;
-		Log.e("SETSERVICESFRAGMENT", "ONATTACH SUCCESSFULLY RUN");
-    }
-
     @Override
     // BE KELL ÁLLÍTANI A KEZDŐ HÁTTÉRSZÍNT, HOGY NE AZ XML-BŐL DOLGOZZON, HANEM
     // A SZERVERRŐL KAPOTT LISTÁBÓL....
@@ -117,8 +109,8 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	    }
 	    Log.e("SETSERVICESFRAGMENT", "");
 	    
-	    if(cab!=null ) cab.onServicesSetted(result);
-	    else communicator.onServicesSetted(result);
+
+	    communicator.onServicesSetted(result);
 	    dismiss();
 	}
     }

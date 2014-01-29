@@ -111,15 +111,18 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 		@Override
 		public void onResume() {
 		    // VAN HIBA VAGY NINCS HIBA!? :D
-		    textViewSelectedServicesNumber = (TextView) activity
-			    .findViewById(R.id.dialog_club_search_textview_number_of_selected_services);
 		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
 		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 			    null);
 		    adb.setView(view);
+		   
 
 		    final Dialog d = adb.create();
 		    d.show();
+		    
+		    textViewSelectedServicesNumber = (TextView) d
+			    .findViewById(R.id.dialog_club_search_textview_number_of_selected_services);
+		    
 		    Button servicesButton = (Button) d.findViewById(R.id.dialog_club_search_button_set_services);
 
 		    servicesButton.setOnClickListener(new OnClickListener() {
