@@ -69,4 +69,5 @@ public class ClubsActivity extends ActionBarActivity {
             super.onBackPressed();
         }
     }
+    
 }

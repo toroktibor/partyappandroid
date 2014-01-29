@@ -57,9 +57,9 @@ public class ClubActivity extends ActionBarActivity {
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	actualClub = Session.getSearchViewClubs().get(clubListPosition);
 	isClubOfActualUser = Session.getActualUser().isMine(Session.getSearchViewClubs().get(clubListPosition).id);
-	
-	//activityForDialog = this;
-	
+
+	// activityForDialog = this;
+
 	ClubActionBar ab = new ClubActionBar(this);
 	ab.setLayout();
 
@@ -67,7 +67,7 @@ public class ClubActivity extends ActionBarActivity {
 	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 	viewPager.setAdapter(mPagerAdapter);
 
-	//clubFullDownload(clubListPosition);
+	// clubFullDownload(clubListPosition);
     }
 
     @Override
@@ -113,11 +113,20 @@ public class ClubActivity extends ActionBarActivity {
 	     */
 	}
     };
-    
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+	if (android.os.Build.VERSION.SDK_INT <= 10) {	    
+	    Intent newIntent = new Intent(this, ClubsActivity.class);
+	    startActivity(newIntent);
+	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+	    super.onBackPressed();
+	}else{
+	    super.onBackPressed();
+	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+	}
+	
+
     }
 
 }
