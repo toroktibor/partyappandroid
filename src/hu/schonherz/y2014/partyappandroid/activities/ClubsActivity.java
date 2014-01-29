@@ -2,17 +2,21 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubsActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.Toast;
 
 public class ClubsActivity extends ActionBarActivity {
 
     public ViewPager viewPager;
     public Fragment currentFragment = null;
+    private Toast backToast;
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 	public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -71,5 +75,19 @@ public class ClubsActivity extends ActionBarActivity {
 	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
 	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 	viewPager.setAdapter(mPagerAdapter);
+    }
+    
+    @Override
+    public void onBackPressed() {
+        
+	
+        if ( backToast == null || backToast.getView().getWindowToken() == null ){
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    	    vibrator.vibrate(new long[] { 0, 50 }, -1); // egy rövid
+            backToast = Toast.makeText(this, "A kilépéshez nyomd meg a vissza gombot!", Toast.LENGTH_SHORT);
+            backToast.show();
+        }else{
+            super.onBackPressed();
+        }
     }
 }
