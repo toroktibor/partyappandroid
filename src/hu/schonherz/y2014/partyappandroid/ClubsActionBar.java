@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid;
 
+import com.google.android.gms.internal.ac;
+
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsUpdateableFragment;
 import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
@@ -140,8 +142,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 
 				        @Override
 				        public void run() {
-					    	ClubsUpdateableFragment cuf = (ClubsUpdateableFragment) ((ClubsActivity) activity).currentFragment;
-					    	cuf.updateResults();
+				            	((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+				            	((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 
 					    	d.cancel();
 				    	 	Session.getInstance().dismissProgressDialog();
@@ -253,15 +255,17 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 			    .getSearchViewClubs()
 			    .addAll(Session.getInstance().getActualCommunicationInterface()
 				    .getClubsFromCityName(Session.getInstance().citynameFromGPS));
+		    Session.getInstance().setPositions(activity);
 
 		    activity.runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
-			    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
+			    Session.getInstance().dismissProgressDialog();
+			    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_location));
-			    Session.getInstance().dismissProgressDialog();
 			}
 		    });
 		}
@@ -270,19 +274,59 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 	    break;
 
 	case 2: // KEDVENCEK
-	    Session.getInstance().getSearchViewClubs().clear();
-	    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().favoriteClubs);
-	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
-	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
+	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
+		    "Kedvencek betöltése...", true, false);
+	    new Thread(new Runnable() {
+	        
+	        @Override
+	        public void run() {
+		    Session.getInstance().getSearchViewClubs().clear();
+		    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().favoriteClubs);
+		    Session.getInstance().setPositions(activity);
+		    
+		    activity.runOnUiThread(new Runnable() {
+		        
+		        @Override
+		        public void run() {
+		            Session.getInstance().dismissProgressDialog();
+			    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
+			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
+			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
+		        }
+		    });
+		    
+
+	        }
+	    }).start();
+
 	    break;
 
 	case 3: // HELYEIM
-	    Session.getInstance().getSearchViewClubs().clear();
-	    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().usersClubs);
-	    ((ClubsUpdateableFragment) activity.currentFragment).updateResults();
-	    ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-	    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
+	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
+		    "Helyeid betöltése...", true, false);
+	    new Thread(new Runnable() {
+	        
+	        @Override
+	        public void run() {
+		    Session.getInstance().getSearchViewClubs().clear();
+		    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().usersClubs);
+		    Session.getInstance().setPositions(activity);
+		    activity.runOnUiThread(new Runnable() {
+		        
+		        @Override
+		        public void run() {
+		            Session.getInstance().dismissProgressDialog();
+			    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
+			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
+			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
+		        }
+		    });
+
+	        }
+	    }).start();
+
 	    break;
 
 	default:

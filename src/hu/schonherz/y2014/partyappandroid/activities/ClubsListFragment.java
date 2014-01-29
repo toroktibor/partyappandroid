@@ -41,9 +41,10 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 
     public SourceOfList sourceOfList = SourceOfList.LOCATION;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	
+	Log.i("asdasd","Lista onCreateView");
 	if (rootView != null) {
 		ViewGroup parent = (ViewGroup) rootView.getParent();
 		if (parent != null)
@@ -129,7 +130,8 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
     @Override
     public void onAttach(Activity activity) {
 	super.onAttach(activity);
-	((ClubsActivity) activity).currentFragment = this;
+	Log.i("asdasd","Lista hozzáadása a fragmentekhez");
+	((ClubsActivity) activity).fragments[0] = this;
     }
 
     @Override

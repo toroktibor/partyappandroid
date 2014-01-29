@@ -10,12 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 public class ClubsActivity extends ActionBarActivity {
 
     public ViewPager viewPager;
-    public Fragment currentFragment = null;
+    public ClubsUpdateableFragment[] fragments = new ClubsUpdateableFragment[2];
     private Toast backToast;
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -39,11 +40,14 @@ public class ClubsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+	Log.i("asdasd","clubs onCreate");
+	
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_clubs);
 
 	ClubsActionBar ab = new ClubsActionBar(this);
 	ab.setLayout();
+	
 
 	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
 	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -51,32 +55,7 @@ public class ClubsActivity extends ActionBarActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-	super.onResume();
-	setContentView(R.layout.activity_clubs);
 
-	ClubsActionBar ab = new ClubsActionBar(this);
-	ab.setLayout();
-
-	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
-	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-	viewPager.setAdapter(mPagerAdapter);
-    }
-
-    @Override
-    protected void onRestart() {
-	super.onRestart();
-	setContentView(R.layout.activity_clubs);
-
-	ClubsActionBar ab = new ClubsActionBar(this);
-	ab.setLayout();
-
-	viewPager = (ViewPager) findViewById(R.id.clubs_viewpager);
-	ScreenSlidePagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-	viewPager.setAdapter(mPagerAdapter);
-    }
-    
     @Override
     public void onBackPressed() {
         

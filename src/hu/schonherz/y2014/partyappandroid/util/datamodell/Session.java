@@ -48,13 +48,13 @@ public class Session {
 		for (int i = 0; i < searchViewClubs.size(); ++i) {
 			actualClub = searchViewClubs.get(i);
 			try {
-				//Log.e("SESSION", actualClub.address);
+				Log.e("SESSION", actualClub.address);
 				addressList = geocoder.getFromLocationName(actualClub.address, 1);
 				actualClub.position = new LatLng(addressList.get(0).getLatitude(), 
 												addressList.get(0).getLongitude());
-				//Log.e("SESSION - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
-				//		((Double) (addressList.get(0).getLongitude())).toString());
-				//Log.e("SESSION ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
+				Log.e("SESSION - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
+						((Double) (addressList.get(0).getLongitude())).toString());
+				Log.e("SESSION ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
