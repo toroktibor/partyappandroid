@@ -18,6 +18,13 @@ public class ClubsActivity extends ActionBarActivity {
     public ViewPager viewPager;
     public ClubsUpdateableFragment[] fragments = new ClubsUpdateableFragment[2];
     private Toast backToast;
+    
+    public enum SourceOfList {
+	LOCATION, SEARCH, OWNERSHIP, FAVORITES
+    };
+
+    public static SourceOfList sourceOfList = SourceOfList.LOCATION;
+
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 	public ScreenSlidePagerAdapter(FragmentManager fm) {

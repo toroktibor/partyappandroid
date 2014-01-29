@@ -35,13 +35,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 
     private ListView clubsListView;
     private static ViewGroup rootView;
-    public enum SourceOfList {
-	LOCATION, SEARCH, OWNERSHIP, FAVORITES
-    };
-
-    public SourceOfList sourceOfList = SourceOfList.LOCATION;
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	Log.i("asdasd","Lista onCreateView");

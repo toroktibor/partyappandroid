@@ -12,6 +12,7 @@ import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.PendingListActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import hu.schonherz.y2014.partyappandroid.activities.SetServicesCommunicator;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfList;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
@@ -171,7 +172,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 					public void run() {
 					    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
 					    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
-
+					    ClubsActivity.sourceOfList = SourceOfList.SEARCH;
+					    // Legszélső szűrő ikon beállítása keresésre.
 					    d.cancel();
 					    Session.getInstance().dismissProgressDialog();
 
@@ -291,6 +293,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_location));
+			    ClubsActivity.sourceOfList = SourceOfList.LOCATION;
 			}
 		    });
 		}
@@ -319,6 +322,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_favorites));
+			    ClubsActivity.sourceOfList = SourceOfList.FAVORITES;
 			}
 		    });
 
@@ -346,6 +350,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 			    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 			    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
 			    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_ownership));
+			    ClubsActivity.sourceOfList = SourceOfList.OWNERSHIP;
 			}
 		    });
 
