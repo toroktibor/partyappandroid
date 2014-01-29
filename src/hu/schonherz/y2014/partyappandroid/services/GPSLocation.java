@@ -50,34 +50,34 @@ public class GPSLocation extends Service {
 	Location mLastLocation;
 
 	public LocationListener(String provider) {
-	    Log.e(TAG, "LocationListener " + provider);
+	    //Log.e(TAG, "LocationListener " + provider);
 	    mLastLocation = new Location(provider);
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-	    Log.e(TAG, "onLocationChanged: " + location);
+	    //Log.e(TAG, "onLocationChanged: " + location);
 	    mLastLocation.set(location);
 	    gotLocation = true;
 	    latitude = (float) location.getLatitude();
 	    longitude = (float) location.getLongitude();
-	    Log.e("latitude ", "latitude " + Float.toString(latitude));
-	    Log.e("longitude ", "longitude " + Float.toString(longitude));
+	    //Log.e("latitude ", "latitude " + Float.toString(latitude));
+	    // Log.e("longitude ", "longitude " + Float.toString(longitude));
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-	    Log.e(TAG, "onProviderDisabled: " + provider);
+	    //Log.e(TAG, "onProviderDisabled: " + provider);
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-	    Log.e(TAG, "onProviderEnabled: " + provider);
+	    //Log.e(TAG, "onProviderEnabled: " + provider);
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-	    Log.e(TAG, "onStatusChanged: " + provider);
+	    //Log.e(TAG, "onStatusChanged: " + provider);
 	}
     }
 
@@ -86,50 +86,50 @@ public class GPSLocation extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-	Log.e(TAG, "onStartCommand");
+	//Log.e(TAG, "onStartCommand");
 	super.onStartCommand(intent, flags, startId);
 	return START_STICKY;
     }
 
     @Override
     public void onCreate() {
-	Log.e(TAG, "onCreate");
+	//Log.e(TAG, "onCreate");
 	initializeLocationManager();
 	try {
 	    mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL,
 		    LOCATION_DISTANCE, mLocationListeners[1]);
 	} catch (java.lang.SecurityException ex) {
-	    Log.i(TAG, "fail to request location update, ignore", ex);
+	    //Log.i(TAG, "fail to request location update, ignore", ex);
 	} catch (IllegalArgumentException ex) {
-	    Log.d(TAG, "network provider does not exist, " + ex.getMessage());
+	    //Log.d(TAG, "network provider does not exist, " + ex.getMessage());
 	}
 	try {
 	    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
 		    mLocationListeners[0]);
 	} catch (java.lang.SecurityException ex) {
-	    Log.i(TAG, "fail to request location update, ignore", ex);
+	    //Log.i(TAG, "fail to request location update, ignore", ex);
 	} catch (IllegalArgumentException ex) {
-	    Log.d(TAG, "gps provider does not exist " + ex.getMessage());
+	    //Log.d(TAG, "gps provider does not exist " + ex.getMessage());
 	}
     }
 
     @Override
     public void onDestroy() {
-	Log.e(TAG, "onDestroy");
+	//Log.e(TAG, "onDestroy");
 	super.onDestroy();
 	if (mLocationManager != null) {
 	    for (int i = 0; i < mLocationListeners.length; i++) {
 		try {
 		    mLocationManager.removeUpdates(mLocationListeners[i]);
 		} catch (Exception ex) {
-		    Log.i(TAG, "fail to remove location listners, ignore", ex);
+		    //Log.i(TAG, "fail to remove location listners, ignore", ex);
 		}
 	    }
 	}
     }
 
     private void initializeLocationManager() {
-	Log.e(TAG, "initializeLocationManager");
+	//Log.e(TAG, "initializeLocationManager");
 	if (mLocationManager == null) {
 	    mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 	}
@@ -155,24 +155,24 @@ public class GPSLocation extends Service {
     }
 
     public String getCityName() {
-	Log.e("GPS - GETCITYNAME", "METHOD STARTED");
+	//Log.e("GPS - GETCITYNAME", "METHOD STARTED");
 	Geocoder gc = new Geocoder(this, Locale.getDefault());
-	Log.e("GPS - GETCITYNAME", "GEOCODER INSTANTIATED");
+	//Log.e("GPS - GETCITYNAME", "GEOCODER INSTANTIATED");
 	StringBuilder sb = new StringBuilder();
 	List<Address> addresses;
 	try {
 	    addresses = gc.getFromLocation(latitude, longitude, 1);
-	    Log.e("GPS - GETCITYNAME", "POSSIBLE ADRESSES FROM LOCATION CATCHED");
+	    //Log.e("GPS - GETCITYNAME", "POSSIBLE ADRESSES FROM LOCATION CATCHED");
 	    if (addresses.size() > 0) {
 		Address address = addresses.get(0);
-		Log.e("GPS - GETCITYNAME", "FIRST ITEM OF LIST CATCHED");
+		//Log.e("GPS - GETCITYNAME", "FIRST ITEM OF LIST CATCHED");
 		sb.append(address.getLocality());
-		Log.e("GPS - GETCITYNAME", "NAME OF ACTUAL CITY CATCHED");
+		//Log.e("GPS - GETCITYNAME", "NAME OF ACTUAL CITY CATCHED");
 	    }
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	Log.e(TAG, sb.toString());
+	//Log.e(TAG, sb.toString());
 	return sb.toString();
     }
 
