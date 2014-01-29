@@ -128,6 +128,10 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener 
 				    Session.getSearchViewClubs().addAll(
 					    Session.getInstance().getActualCommunicationInterface()
 						    .getClubsFromCityName(city.getText().toString()));
+				  //Geocoder send the latlng position of the places.
+				    Session.getInstance().setPositions(activity);
+				    
+				    
 
 				    Log.i(this.getClass().getName(), "Keresési találatok száma: "
 					    + Session.getSearchViewClubs().size());
