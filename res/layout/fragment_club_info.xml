@@ -72,7 +72,7 @@
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textViewServices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/club_info_textview_description"
@@ -82,12 +82,12 @@
 
         <LinearLayout
             android:id="@+id/club_info_fragment_linear_layout_for_services"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignLeft="@+id/textViewServices"
             android:layout_alignRight="@+id/club_info_textview_description"
-            android:layout_below="@+id/textView1"
+            android:layout_below="@+id/textViewServices"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="18dp" >
 
