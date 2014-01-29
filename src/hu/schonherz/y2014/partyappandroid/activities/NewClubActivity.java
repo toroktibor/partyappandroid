@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class NewClubActivity extends ActionBarActivity implements SetServicesCommunicator {
@@ -28,6 +29,8 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     Button addButton;
     Context thisContext;
     List<String> services;
+    int selectedServicesNumber;
+    TextView selectedServicesTextView;
 
     @Override
     // EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A
@@ -35,6 +38,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     public void onServicesSetted(List<String> services) {
 	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
 	this.services = services;
+	selectedServicesTextView.setText(selectedServicesNumber + " szolgáltatás kiválasztva");
 	for (int i = 0; i < this.services.size(); ++i)
 	    Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
 	Log.e("NEWCLUBACTIVTY", "ONSERVICESETTED FINISHED");
@@ -54,7 +58,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 	newClubTypeSpinner = (Spinner) findViewById(R.id.new_club_spinner_type);
 	newClubOwnerCheckBox = (CheckBox) findViewById(R.id.new_club_checkbox_add);
 	addButton = (Button) findViewById(R.id.new_club_button_add);
-
+	selectedServicesTextView = (TextView) findViewById(R.id.new_club_selected_services_number_textview);
 	addButton.setOnClickListener(new OnClickListener() {
 
 	    @Override

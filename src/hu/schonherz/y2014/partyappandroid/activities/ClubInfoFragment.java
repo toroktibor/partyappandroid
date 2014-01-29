@@ -1,5 +1,8 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -17,6 +20,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,21 +29,48 @@ import android.widget.TextView;
 
 public class ClubInfoFragment extends Fragment {
 
+	{
+		servicesTokenList.add("billiard");
+		servicesTokenList.add("bowling");
+		servicesTokenList.add("coctailbar");
+		servicesTokenList.add("dance");
+		servicesTokenList.add("darts");
+		servicesTokenList.add("dj");
+		servicesTokenList.add("fndcontrol");
+		servicesTokenList.add("livemusic");
+		servicesTokenList.add("menu");
+		servicesTokenList.add("sporttv");
+		servicesTokenList.add("wifi");
+		
+		servicesNameList.add("billiárd");
+		servicesNameList.add("bowling");
+		servicesNameList.add("koktélbár");
+		servicesNameList.add("táncparkett");
+		servicesNameList.add("darts");
+		servicesNameList.add("dj");
+		servicesNameList.add("face & dress contol");
+		servicesNameList.add("élőzene");
+		servicesNameList.add("étkezés");
+		servicesNameList.add("sport közvetítés");
+		servicesNameList.add("wifi");
+		
+	}
+	
 	private Club actualClub;
-	String[] services = { "billiard", "bowling", "coctailbar", "dance",
-			"darts", "dj", "fndcontrol", "livemusic", "menu", "sporttv", "wifi" };
+	private static List<String> servicesTokenList = new ArrayList<String>();
+	private static List<String> servicesNameList = new ArrayList<String>();
 
 	Integer[] icons = { R.drawable.club_service_icon_64px_billiard,
-			R.drawable.club_service_icon_64px_bowling,
-			R.drawable.club_service_icon_64px_coctailbar,
-			R.drawable.club_service_icon_64px_dance,
-			R.drawable.club_service_icon_64px_darts,
-			R.drawable.club_service_icon_64px_dj,
-			R.drawable.club_service_icon_64px_fndcontrol,
-			R.drawable.club_service_icon_64px_livemusic,
-			R.drawable.club_service_icon_64px_menu,
-			R.drawable.club_service_icon_64px_sporttv,
-			R.drawable.club_service_icon_64px_wifi };
+						R.drawable.club_service_icon_64px_bowling,
+						R.drawable.club_service_icon_64px_coctailbar,
+						R.drawable.club_service_icon_64px_dance,
+						R.drawable.club_service_icon_64px_darts,
+						R.drawable.club_service_icon_64px_dj,
+						R.drawable.club_service_icon_64px_fndcontrol,
+						R.drawable.club_service_icon_64px_livemusic,
+						R.drawable.club_service_icon_64px_menu,
+						R.drawable.club_service_icon_64px_sporttv,
+						R.drawable.club_service_icon_64px_wifi };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +113,7 @@ public class ClubInfoFragment extends Fragment {
 				.findViewById(R.id.club_info_textview_address);
 		TextView clubDescriptionTextView = (TextView) rootView
 				.findViewById(R.id.club_info_textview_description);
+		LinearLayout servicesLayout = (LinearLayout) rootView.findViewById(R.id.club_info_fragment_linear_layout_for_services);
 		ImageButton call = (ImageButton) rootView.findViewById(R.id.phone_call);
 		ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
 
@@ -104,7 +136,15 @@ public class ClubInfoFragment extends Fragment {
 		clubNameTextView.setText(actualClub.name);
 		clubAddressTextView.setText(actualClub.address);
 		clubDescriptionTextView.setText(actualClub.description);
-
+		for (String service : actualClub.services) {
+			if(servicesTokenList.contains(service)) {
+				TextView tw = new TextView(getActivity());
+				tw.setText(servicesNameList.get(servicesTokenList.indexOf(service)));
+				servicesLayout.addView(tw);
+			}
+		}
+		
+		
 		clubRatingBar.setRating(actualClub.getAvarageRate());
 
 		clubRatingBar.setOnTouchListener(new OnTouchListener() {

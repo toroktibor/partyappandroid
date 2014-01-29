@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -46,7 +45,7 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
     // BE KELL ÁLLÍTANI A KEZDŐ HÁTTÉRSZÍNT, HOGY NE AZ XML-BŐL DOLGOZZON, HANEM
     // A SZERVERRŐL KAPOTT LISTÁBÓL....
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View view = (View) inflater.inflate(R.layout.club_set_services_layout, null);
+	View view = (View) inflater.inflate(R.layout.club_set_services_layout_b, null);
 	Log.e("SETSERVICESFRAGMENT", "LAYOUT OF DIALOGFRAGMENT INFLATED");
 	getDialog().setTitle("Szolgáltatások");
 	done = (Button) view.findViewById(R.id.button_club_services_setted);

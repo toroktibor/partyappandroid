@@ -56,6 +56,12 @@
         android:layout_height="wrap_content"
         android:onClick="setServicesOfClub"
         android:text="Beállítom a hely szolgáltatásait" />
+
+    <TextView
+        android:id="@+id/new_club_selected_services_number_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 szolgáltatás kiválasztva" />
     
     <CheckBox
         android:id="@+id/new_club_checkbox_add"
