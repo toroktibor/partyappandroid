@@ -187,8 +187,9 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	// Minden klubhoz a searchViewClubs-ból csinálunk egy markert a
 	// térképre, ezt a listába tesszük.
 	for (Club actualClub : Session.getSearchViewClubs()) {
-	    markerList.add(new MarkerOptions().position(actualClub.position).title(actualClub.name)
-		    .snippet(actualClub.address).icon(bmd));
+	    if (actualClub.position != null)
+		markerList.add(new MarkerOptions().position(actualClub.position).title(actualClub.name)
+			.snippet(actualClub.address).icon(bmd));
 	    // Log.e("MAP", "NEW MARKER IN THE MARKERLIST");
 	}
 	Log.i("asdasd", "Markerlist mérete: " + markerList.size());

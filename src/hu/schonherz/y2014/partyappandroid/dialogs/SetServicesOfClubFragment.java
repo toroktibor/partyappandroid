@@ -33,6 +33,7 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 
     List<CheckBox> checkboxes = new ArrayList<CheckBox>();
 
+    
     @Override
     public void onAttach(Activity activity) {
 	super.onAttach(activity);

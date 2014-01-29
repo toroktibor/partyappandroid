@@ -51,6 +51,10 @@ public class Session {
 			try {
 				Log.e("SESSION", actualClub.address);
 				addressList = geocoder.getFromLocationName(actualClub.address, 1);
+				if( addressList.size() < 1 ){
+				    Log.e("MAP","Ez a cím nincs megtalálva: "+actualClub.address);
+				    continue;
+				}
 				actualClub.position = new LatLng(addressList.get(0).getLatitude(), 
 												addressList.get(0).getLongitude());
 				Log.e("SESSION - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +

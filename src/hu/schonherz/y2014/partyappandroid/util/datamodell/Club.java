@@ -19,7 +19,7 @@ public class Club {
     public String email;
     public String date;
     public String highlite_expire;
-    public LatLng position;
+    public LatLng position = null;
     public int approved;
     
     public boolean fullDownloaded = false;
