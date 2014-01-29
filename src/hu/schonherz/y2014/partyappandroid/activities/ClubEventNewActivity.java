@@ -2,6 +2,10 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
+import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
+import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerFragment;
+import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerCommunicator;
+import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;
@@ -13,7 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubEventNewActivity extends ActionBarActivity {
+public class ClubEventNewActivity extends ActionBarActivity implements DatePickerCommunicator,TimePickerCommunicator {
 
     EditText nameEditText;
     EditText dateEditText;
@@ -21,12 +25,13 @@ public class ClubEventNewActivity extends ActionBarActivity {
     Button addButton;
     Spinner musicTypeSpinner;
     int clubListPosition;
+    EditText timeEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	
-	new SimpleActionBar(this, "Esemény módosítása").setLayout();
+	new SimpleActionBar(this, "Új esemény").setLayout();
 	
 	setContentView(R.layout.activity_club_event_new);
 
@@ -34,10 +39,29 @@ public class ClubEventNewActivity extends ActionBarActivity {
 
 	nameEditText = (EditText) findViewById(R.id.club_event_new_edittext_name);
 	dateEditText = (EditText) findViewById(R.id.club_event_new_edittext_date);
+	timeEditText = (EditText) findViewById(R.id.club_event_new_edittext_time);
 	descriptionEditText = (EditText) findViewById(R.id.club_event_new_edittext_description);
 	addButton = (Button) findViewById(R.id.club_event_new_button_new);
 	musicTypeSpinner = (Spinner) findViewById(R.id.club_event_new_music_type_spinner);
 
+	dateEditText.setOnClickListener(new OnClickListener() {
+	    
+	    @Override
+	    public void onClick(View v) {
+		new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
+		
+	    }
+	});
+	
+	timeEditText.setOnClickListener(new OnClickListener() {
+	    
+	    @Override
+	    public void onClick(View v) {
+		new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
+		
+	    }
+	});
+	
 	addButton.setOnClickListener(new OnClickListener() {
 
 	    @Override
@@ -69,6 +93,17 @@ public class ClubEventNewActivity extends ActionBarActivity {
 	    }
 	});
 
+    }
+
+    @Override
+    public void onDatePicked(String date) {
+	dateEditText.setText(date);	
+    }
+
+    @Override
+    public void onTimePicked(String time) {
+	timeEditText.setText(time);
+	
     }
 
 }
