@@ -72,9 +72,9 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 				final Activity activity = getActivity();
 				final Intent i = new Intent(activity, ClubActivity.class);
 				int listPosition = giveIndexOfMarkerFromSearchViewClubs(arg0);
-				Log.e("MAP", "INDEX=" + listPosition);
+				//Log.e("MAP", "INDEX=" + listPosition);
 				if (listPosition > -1) {
-					Log.e("MAP", "YES, MARKERLIST CONTAINS THE CLICKED MARKER");
+					//Log.e("MAP", "YES, MARKERLIST CONTAINS THE CLICKED MARKER");
 					i.putExtra("listPosition", listPosition);
 					final Club actualClub = Session.getSearchViewClubs().get(
 							listPosition);
@@ -187,8 +187,8 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 			try {
 				//Log.e("MAP", actualClub.address);
 				addressList = geocoder.getFromLocationName(actualClub.address, 1);
-				Log.e("MAP - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
-						((Double) (addressList.get(0).getLongitude())).toString());
+				//Log.e("MAP - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
+				//		((Double) (addressList.get(0).getLongitude())).toString());
 				//Log.e("MAP ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -199,9 +199,9 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 				markerList.add(new MarkerOptions()
 						.position(actualClubsLatLng).title(actualClub.name)
 						.snippet(actualClub.address).icon(bmd));
-				Log.e("MAP", "NEW MARKER IN THE MARKERLIST");
+				//Log.e("MAP", "NEW MARKER IN THE MARKERLIST");
 			} else {
-				Log.e("MAP", "NO NEW MARKER IN THE MARKERLIST");
+				//Log.e("MAP", "NO NEW MARKER IN THE MARKERLIST");
 			}
 		}
 		return;
@@ -209,7 +209,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	
 	@Override
 	public void updateResults() {
-		Log.i("MAP", "REFRESH RESULTS ON THE MAP");
+		//Log.i("MAP", "REFRESH RESULTS ON THE MAP");
 		//Make markers from the searchViewClubs and set it to the MarkerList list.
 		makeMarkersFromSearchViewClubs();
 		//Adding the markers to the googleMap.
@@ -218,7 +218,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 				googleMap.addMarker(actMarker);
 			}
 		}
-		Log.e("MAP", "APPROVED PLACES SHOWN");
+		//Log.e("MAP", "APPROVED PLACES SHOWN");
 	}
 
 	private LatLngBounds giveBoundsForMarkerlist() {
@@ -234,6 +234,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	}
 	
 	private void initilizeMap() {
+		Log.e("MAP", "INITIALIZE");
 		if (googleMap == null) {
 			FragmentManager fragmentManager = getFragmentManager();
 			googleMap = ((SupportMapFragment) fragmentManager
