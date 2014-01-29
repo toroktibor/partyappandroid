@@ -96,6 +96,9 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 					activity.startActivity(i);
 					activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 					Session.getInstance().dismissProgressDialog();
+					if (android.os.Build.VERSION.SDK_INT <= 10) {
+					    getActivity().finish();
+					}
 				    }
 				});
 			    }
@@ -104,6 +107,9 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 		    } else {
 			activity.startActivity(i);
 			activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+			if (android.os.Build.VERSION.SDK_INT <= 10) {
+			    getActivity().finish();
+			}
 		    }
 		    return;
 		} else {
@@ -317,18 +323,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
     @Override
     public void onResume() {
 	super.onResume();
-	/*
-	 * initilizeMap(); updateResults();
-	 */
-    }
-
-    @Override
-    public void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
-	/*
-	 * initilizeMap(); updateResults();
-	 */
+	Log.i("asdasd", "ClubsMapFragment.onResume()");
     }
 
     /*
