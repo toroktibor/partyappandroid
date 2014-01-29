@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,7 +34,7 @@ import android.widget.TextView;
 public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment {
 
     private ListView clubsListView;
-
+    private static ViewGroup rootView;
     public enum SourceOfList {
 	LOCATION, SEARCH, OWNERSHIP, FAVORITES
     };
@@ -42,8 +43,17 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_clubs_list, container, false);
-
+	
+	if (rootView != null) {
+		ViewGroup parent = (ViewGroup) rootView.getParent();
+		if (parent != null)
+			parent.removeView(rootView);
+	}
+	try {
+		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_clubs_list, container, false);
+	} catch (InflateException e) {
+		/* map is already there, just return view as it is */
+	}
 	clubsListView = new ListView(getActivity().getApplicationContext());
 	Log.d("FELSOROLÁS ELEJE", "HURRÁ BÉBI! :D");
 	Club[] clubArray = getClubArrayFromClubsList(Session.getSearchViewClubs());

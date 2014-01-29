@@ -50,6 +50,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		Log.e("MAP", "ONCREATEVIEW RUNS");
 		if (view != null) {
 			ViewGroup parent = (ViewGroup) view.getParent();
 			if (parent != null)
@@ -121,17 +122,17 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 			
 			@Override
 			public void onCameraChange(CameraPosition arg0) {
-				int padding = 0; // offset from edges of the map in pixels
+				int padding = 60; // offset from edges of the map in pixels
             	//Set the camera position to the bounds - calculated from the markers of Markerlist.
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(giveBoundsForMarkerlist(), padding);
-                googleMap.moveCamera(cu);
+                googleMap.animateCamera(cu);
                 googleMap.setOnCameraChangeListener(null);
 				
 			}
 		});	
-		
-		//Másik lehetséges megoldás.
 		/*
+		//Másik lehetséges megoldás.
+		
 		try {
 	        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(giveBoundsForMarkerlist(), 0));
 	    } catch (IllegalStateException e) {
@@ -150,22 +151,26 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	                    } else {
 	                        mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 	                    }
-	                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(giveBoundsForMarkerlist(), 0));
+	                    googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(giveBoundsForMarkerlist(), 0));
 	                }
 	            });
 	        }
-	    }*/
-		
+	    }
+		*/
 		return view;
 	}
 
 	private int giveIndexOfMarkerFromSearchViewClubs(Marker marker) {
 		List<Club> actList = Session.getSearchViewClubs();
+		Club actClub;
 		for (int i = 0; i < actList.size(); ++i) {
-			Log.e("MAP COMPARE", actList.get(i).address + " " + marker.getSnippet() );
-			Log.e("MAP COMPARE", actList.get(i).name + " " + marker.getTitle());
-			if ((actList.get(i).name == marker.getTitle()) &&
-				(actList.get(i).address == marker.getSnippet()))
+			actClub = actList.get(i);
+			//Log.e("COMPARE ADDRESS LIST", 	"#" + actClub.address.toString()	+ "#");
+			//Log.e("COMPARE ADDRESS MARK", 	"#" + marker.getSnippet().toString()+ "#");
+			//Log.e("COMPARE NAME LIST", 		"#" + actClub.name.toString() 		+ "#");
+			//Log.e("COMPARE NAME MARK", 		"#" + marker.getTitle().toString() 	+ "#" );
+			if ((actClub.name.toString()).equals(marker.getTitle().toString()) &&
+				(actClub.address.toString()).equals(marker.getSnippet().toString()))
 				return i;
 		}
 		return -1;
