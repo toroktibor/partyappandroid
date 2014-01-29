@@ -1,18 +1,27 @@
 package hu.schonherz.y2014.partyappandroid;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 
 public class ImageUtils {
+    public static String mCurrentPhotoPath;
+
     public static String BitMapToString(Bitmap bitmap) {
 	ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
@@ -53,7 +62,7 @@ public class ImageUtils {
 	try {
 	    ExifInterface exif = new ExifInterface(photoUri.getPath());
 	    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 999);
-	    Log.i("asdasd","orientation:"+orientation);
+	    Log.i("asdasd", "orientation:" + orientation);
 	    if (orientation == 1) {
 		return 0;
 	    } else if (orientation == 6) {
@@ -72,17 +81,57 @@ public class ImageUtils {
     }
 
     public static int tryGetOrientation(Context context, Uri photoUri) {
-	
-	int cursor=getOrientation(context, photoUri);
-	int exif=getOrientationFromExif(photoUri);
 
-	
-	if(exif!=-1){
+	int cursor = getOrientation(context, photoUri);
+	int exif = getOrientationFromExif(photoUri);
+
+	if (exif != -1) {
 	    return exif;
-	}else if(cursor !=-1){
+	} else if (cursor != -1) {
 	    return cursor;
-	}else{
+	} else {
 	    return 0;
-	}	
+	}
+    }
+
+    public static File createImageFile() throws IOException {
+	// Create an image file name
+	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+	String imageFileName = "JPEG_" + timeStamp + "_";
+	File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+	Log.d("asdasd", imageFileName + "; " + ".jpg; " + storageDir);
+	/*
+	 * File image = File.createTempFile( imageFileName, ".jpg", storageDir
+	 * );
+	 */
+	File image = new File(Environment.getExternalStorageDirectory(), imageFileName + ".jpg");
+
+	mCurrentPhotoPath = image.getAbsolutePath();
+	return image;
+    }
+
+    public static Bitmap decodeUri(Activity activity, Uri selectedImage) throws FileNotFoundException {
+	Log.i("ImageUtils", "Uri dekódolása");
+	BitmapFactory.Options o = new BitmapFactory.Options();
+
+	o.inJustDecodeBounds = true;
+	BitmapFactory.decodeStream(
+		activity.getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);
+
+	Log.i("ImageUtils", "Eredeti méret: " + o.outWidth + "x" + o.outHeight);
+
+	o.inSampleSize = 1;
+	while (o.outHeight * o.outWidth / (o.inSampleSize * 4) > 1000000) {
+	    o.inSampleSize *= 2;
+	}
+
+	Log.i("ImageUtils", "Skálázás szükséges: " + o.inSampleSize);
+	o.inJustDecodeBounds = false;
+
+	Bitmap b = BitmapFactory.decodeStream(activity.getApplicationContext().getContentResolver()
+		.openInputStream(selectedImage), null, o);
+
+	return b;
     }
 }

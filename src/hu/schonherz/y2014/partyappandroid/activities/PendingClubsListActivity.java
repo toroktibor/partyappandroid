@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.ClubListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -26,15 +27,12 @@ public class PendingClubsListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
+	
+	
+	new SimpleActionBar(this, "Jóváhagyandó klubok").setLayout();
+	
 	setContentView(R.layout.activity_pending_clubs_list);
 
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.pending_list_actionbar);
-
-	TextView menuText = (TextView) findViewById(R.id.pending_list_actionbar_name);
-	menuText.setText("Szórakozóhely jóváhagyások");
 
 	newClubsList = Session.getInstance().getActualCommunicationInterface().getNotApprovedClubs();
 

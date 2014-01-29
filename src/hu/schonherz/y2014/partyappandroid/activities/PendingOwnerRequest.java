@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.OwnerRequestListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.OwnerRequest;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -27,15 +28,11 @@ public class PendingOwnerRequest extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
+
+	new SimpleActionBar(this, "Jóváhagyandó tulajdonosok").setLayout();
+	
 	setContentView(R.layout.activity_pending_owner_request);
 
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.pending_list_actionbar);
-
-	TextView menuText = (TextView) findViewById(R.id.pending_list_actionbar_name);
-	menuText.setText("Tulajdonosi kérelem jóváhagyások");
 
 	ownerRequestList = Session.getInstance().getActualCommunicationInterface().getNotApprovedOwnerRequest();
 

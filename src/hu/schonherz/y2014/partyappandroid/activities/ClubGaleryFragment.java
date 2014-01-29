@@ -53,7 +53,6 @@ public class ClubGaleryFragment extends Fragment {
     private static final int TAKE_PICTURE = 2;
     ArrayList<Integer> lista;
     public static Club actualClub;
-    private String mCurrentPhotoPath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -146,7 +145,7 @@ public class ClubGaleryFragment extends Fragment {
 
     public void uploadPicture() {
 	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	builder.setTitle("Válassz!");
+	builder.setTitle("Honnan szeretnél feltölteni?");
 	builder.setNegativeButton("Galéria", new android.content.DialogInterface.OnClickListener() {
 	    @Override
 	    public void onClick(DialogInterface dialog, int which) {
@@ -174,7 +173,7 @@ public class ClubGaleryFragment extends Fragment {
 		        // Create the File where the photo should go
 		        File photoFile = null;
 		        try {
-		            photoFile = createImageFile();
+		            photoFile = ImageUtils.createImageFile();
 		        } catch (IOException ex) {
 		            Log.e("asdasd","createImageFile hiba van",ex);
 		        }
@@ -193,25 +192,6 @@ public class ClubGaleryFragment extends Fragment {
 
 	dialog.show();
     }
-
-    private File createImageFile() throws IOException {
-	    // Create an image file name
-	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	    
-	    String imageFileName = "JPEG_" + timeStamp + "_";
-	    File storageDir = Environment.getExternalStoragePublicDirectory(
-	            Environment.DIRECTORY_PICTURES);
-	    Log.d("asdasd", imageFileName+"; "+".jpg; "+storageDir);
-	    /*File image = File.createTempFile(
-	        imageFileName,  
-	        ".jpg",         
-	        storageDir    
-	    );*/
-	    File image = new File(Environment.getExternalStorageDirectory(),  imageFileName+".jpg");
-
-	    mCurrentPhotoPath = image.getAbsolutePath();
-	    return image;
-	}
     
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK && data != null) {
@@ -222,7 +202,7 @@ public class ClubGaleryFragment extends Fragment {
 		
 		final int orientation = ImageUtils.tryGetOrientation(getActivity(),uri);
 		
-		final Bitmap b = decodeUri( uri );
+		final Bitmap b = ImageUtils.decodeUri( getActivity(), uri );
 
 		Log.e("kép", "galéria kép hozzáadva");
 		Log.i("asdasd","A galériából feltöltendő kép mérete: "+b.getWidth()+"x"+b.getHeight());
@@ -273,18 +253,15 @@ public class ClubGaleryFragment extends Fragment {
 	    
 	    try {
 
-		Uri uri = Uri.fromFile(new File(mCurrentPhotoPath));
+		Uri uri = Uri.fromFile(new File(ImageUtils.mCurrentPhotoPath));
 		 
 		final int orientation = ImageUtils.tryGetOrientation(getActivity(),uri);
 		
-		final Bitmap b = decodeUri( uri );
+		final Bitmap b = ImageUtils.decodeUri( getActivity(), uri );
 
 		Log.e("kép", "kamera kép hozzáadva");
 		Log.i("asdasd","A kamerából feltöltendő kép merete: "+b.getWidth()+"x"+b.getHeight());
 		
-		
-		
-
 		Session.getInstance().progressDialog=ProgressDialog.show(getActivity(), "Kérlek várj", "Kép feltöltése...", true, false);
 		new Thread(new Runnable() {
 		    
@@ -323,30 +300,6 @@ public class ClubGaleryFragment extends Fragment {
 	    }
 
 	}
-
-    }
-
-    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
-	Log.i(getClass().getName(), "Uri dekódolása");
-	BitmapFactory.Options o = new BitmapFactory.Options();
-	
-	o.inJustDecodeBounds = true;
-	BitmapFactory.decodeStream(
-		getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage), null, o);
-		
-	Log.i("asdasd","Eredeti méret: "+o.outWidth+"x"+o.outHeight);
-		
-	o.inSampleSize = 1;
-	while( o.outHeight * o.outWidth / (o.inSampleSize*4) > 1000000 ){
-	    o.inSampleSize*=2;
-	}	
-	
-	Log.i("asdasd","Skálázás szükséges: "+o.inSampleSize);
-	o.inJustDecodeBounds = false;
-	
-	Bitmap b = BitmapFactory.decodeStream(getActivity().getApplicationContext().getContentResolver().openInputStream(selectedImage),null,o);
-	
-	return b;
 
     }
 

@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.PendingRatingListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.AdminRating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -27,15 +28,11 @@ public class PendingRatingsActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
+
+		new SimpleActionBar(this, "Jóváhagyandó értékelések").setLayout();
+		
 		setContentView(R.layout.activity_pending_ratings);
-		
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		actionBar.setCustomView(R.layout.pending_list_actionbar);
-		
-		TextView menuText = (TextView) findViewById(R.id.pending_list_actionbar_name);
-		menuText.setText("Értékelés jóváhagyások");
+
 		
 		ratings = Session.getInstance().getActualCommunicationInterface().getNotApprovedRatings();
 		

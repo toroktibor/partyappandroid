@@ -2,31 +2,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"    
+    android:paddingTop="15dp" >
 
     <Button
         android:id="@+id/pendings_new_clubs_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Szórakozóhelyek" />
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Szórakozóhelyek"
+        style="@style/CustomPurpleButton" />
 
     <Button
         android:id="@+id/pendings_owner_please_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tulajdonosi kérelmek" />
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Tulajdonosi kérelmek"
+        style="@style/CustomPurpleButton"  />
 
     <Button
         android:id="@+id/pendings_new_rating_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vélemények" />
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Vélemények"
+        style="@style/CustomPurpleButton"  />
 
     <Button
         android:id="@+id/pendings_new_image_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Képek" />
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
+        android:text="Képek"
+        style="@style/CustomPurpleButton"  />
     
 </LinearLayout>
 
