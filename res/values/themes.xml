@@ -2,8 +2,7 @@
 
 
     <style name="CustomTheme" parent="@style/Theme.AppCompat">
-<!--         <item name="android:windowBackground">@color/applicationWindowBackground</item> -->
-		<item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@color/applicationWindowBackground</item>
         <item name="android:textColor">@color/applicationTextColor</item>
         
         <item name="android:popupBackground">@color/popupBackground</item>

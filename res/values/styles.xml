@@ -5,7 +5,7 @@
     </style>
 
     <style name="CustomEditText" parent="">
-<!--         <item name="android:background">@color/editTextBackground</item> -->
+        <item name="android:background">@color/editTextBackground</item>
         <item name="android:layout_height">20dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
