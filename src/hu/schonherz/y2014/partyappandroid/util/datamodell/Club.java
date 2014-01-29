@@ -5,6 +5,8 @@ import hu.schonherz.y2014.partyappandroid.ImageUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.util.Log;
 
 public class Club {
@@ -17,6 +19,7 @@ public class Club {
     public String email;
     public String date;
     public String highlite_expire;
+    public LatLng position;
     public int approved;
     
     public boolean fullDownloaded = false;

@@ -90,7 +90,7 @@ public class RegisterActivity extends ActionBarActivity implements
 			    if (newUser == null) {
 				return;
 			    }
-			    LoginActivity.loginSynchronize(newUser);
+			    LoginActivity.loginSynchronize(newUser, getApplicationContext());
 			    Intent newIntent = new Intent(RegisterActivity.this, ClubsActivity.class);
 			    Session.getInstance().dismissProgressDialog();			    
 			    new DoneToast(RegisterActivity.this,"Sikeres regisztráció!").show();

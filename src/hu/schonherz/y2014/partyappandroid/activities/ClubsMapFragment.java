@@ -179,31 +179,16 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	public void makeMarkersFromSearchViewClubs() {
 		//Lila pöttyök a clubokhoz.
 		BitmapDescriptor bmd = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
-		List<Address> addressList = new ArrayList<Address>();
-		Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-		LatLng actualClubsLatLng;
+				
 		//Minden klubhoz a searchViewClubs-ból csinálunk egy markert a térképre, ezt a  listába tesszük.
 		for (Club actualClub : Session.getSearchViewClubs()) {
-			try {
-				//Log.e("MAP", actualClub.address);
-				addressList = geocoder.getFromLocationName(actualClub.address, 1);
-				//Log.e("MAP - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
-				//		((Double) (addressList.get(0).getLongitude())).toString());
-				//Log.e("MAP ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			if (addressList.size() > 0) {
-				actualClubsLatLng = new LatLng(	addressList.get(0).getLatitude(),
-												addressList.get(0).getLongitude());
 				markerList.add(new MarkerOptions()
-						.position(actualClubsLatLng).title(actualClub.name)
-						.snippet(actualClub.address).icon(bmd));
+						.position(actualClub.position)
+						.title(actualClub.name)
+						.snippet(actualClub.address)
+						.icon(bmd));
 				//Log.e("MAP", "NEW MARKER IN THE MARKERLIST");
-			} else {
-				//Log.e("MAP", "NO NEW MARKER IN THE MARKERLIST");
 			}
-		}
 		return;
 	}
 	

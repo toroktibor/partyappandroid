@@ -78,7 +78,7 @@ public class LoginActivity extends ActionBarActivity {
 	// gyors teszt vege
 
 	if (Session.getInstance().getActualUser() != null) {
-	    loginSynchronize(Session.getInstance().getActualUser());
+	    loginSynchronize(Session.getInstance().getActualUser(), getApplicationContext());
 	    Intent newIntent = new Intent(this, ClubsActivity.class);
 	    startActivity(newIntent);
 	    finish();
@@ -150,7 +150,7 @@ public class LoginActivity extends ActionBarActivity {
 			mGpsLocation.onDestroy();
 			locationTask.cancel(true);
 
-			loginSynchronize(actualUser);
+			loginSynchronize(actualUser, getApplicationContext());
 	            }
 	            
 	            Activity a = LoginActivity.this;
@@ -190,7 +190,7 @@ public class LoginActivity extends ActionBarActivity {
 	}
     }
 
-    public static void loginSynchronize(User actualUser) {
+    public static void loginSynchronize(User actualUser, Context context) {
 	Session.setActualUser(actualUser);
 	String cityname = Session.getInstance().citynameFromGPS;
 	Log.e("LOGIN SYNCHRONIZE", "LOGIN IN PROGRESS, NAME OF ACTUAL CITY: " + cityname);
@@ -199,6 +199,9 @@ public class LoginActivity extends ActionBarActivity {
 	Log.e("LOGIN SYNCHRONIZE", "FAVOURITE CLUBS CATCHED");
 	Session.setSearchViewClubs(Session.getInstance().getActualCommunicationInterface()
 		.getClubsFromCityName(cityname));
+	
+	//ideírd
+	Session.getInstance().setPositions(context);
 	Log.e("LOGIN SYNCHRONIZE", "CLUBS IN THE ACTUAL CITY (" + cityname + ") CATCHED");
 	Session.getActualUser().usersClubs = Session.getInstance().getActualCommunicationInterface()
 		.getOwnedClubsFromUserId(actualUser.getId());
