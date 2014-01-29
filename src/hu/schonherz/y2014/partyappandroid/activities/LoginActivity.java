@@ -28,6 +28,7 @@ public class LoginActivity extends ActionBarActivity {
     GPSLocation mGpsLocation;
     // String cityname = "Budapest";
     // create new async task for fetching location and execute it
+    public static LoginActivity instance = null;
     LocationWorker locationTask = new LocationWorker();
 
     class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
@@ -66,6 +67,8 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
+	instance=this;
+	
 	new SimpleActionBar(this, "Bejelentkezés").setLayout();
 
 	setContentView(R.layout.activity_login);
@@ -152,6 +155,7 @@ public class LoginActivity extends ActionBarActivity {
 
 			loginSynchronize(actualUser, getApplicationContext());
 	            }
+	            
 	            
 	            Activity a = LoginActivity.this;
 	            a.runOnUiThread(new Runnable() {

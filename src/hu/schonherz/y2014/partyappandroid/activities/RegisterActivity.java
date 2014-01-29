@@ -92,7 +92,10 @@ public class RegisterActivity extends ActionBarActivity implements
 			    }
 			    LoginActivity.loginSynchronize(newUser, getApplicationContext());
 			    Intent newIntent = new Intent(RegisterActivity.this, ClubsActivity.class);
-			    Session.getInstance().dismissProgressDialog();			    
+			    Session.getInstance().dismissProgressDialog();			   
+			    if( LoginActivity.instance != null ){
+				LoginActivity.instance.finish();
+			    }
 			    new DoneToast(RegisterActivity.this,"Sikeres regisztráció!").show();
 			    startActivity(newIntent);
 			    Log.e("REGISTER FORM", "CLUBSACTIVITY STARTED");
