@@ -148,4 +148,8 @@ public interface CommunicationInterface {
     public void updateClubInfo(int clubId, String name, String type, String description, String address, String phonenumber, String email);
     
     public String setHighlightExpire(int clubId, int days);
+    
+    public String[] getServices(int club_id);
+    
+    public void deleteServices(int club_id);
 }

@@ -1067,5 +1067,46 @@ public class Communication implements CommunicationInterface {
 		
 	}
 
+	@Override
+	public String[] getServices(int club_id) {
+		ArrayList<String> outList = new ArrayList<String>();
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "GET");
+		    post.put("ClubID", ""+club_id);
+
+		    String data = httpPost("service.php", post);
+		    JSONArray ja = new JSONArray(data);
+
+		    for (int i = 0; i < ja.length(); i++) {
+		    	JSONObject jo = ja.getJSONObject(i);
+		    	outList.add(jo.getString("service_name"));
+		    }
+		    
+		    String[] ret = new String[outList.size()];
+		    for(int i =0;i<outList.size();i++){
+		    	ret[i]=outList.get(i);
+		    }
+		    return ret;
+		} catch (Exception e) {
+
+		}
+		return null;
+	}
+
+	@Override
+	public void deleteServices(int club_id) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DELETE");
+		    post.put("clubid", ""+club_id);
+
+		    String data = httpPost("service.php", post);
+		} catch (Exception e) {
+
+		}
+		
+	}
+
 
 }
