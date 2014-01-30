@@ -1110,5 +1110,18 @@ public class Communication implements CommunicationInterface {
 		
 	}
 
+	@Override
+	public void deleteImage(int imageId) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DELETE");
+		    post.put("imageid", ""+imageId);
+
+		    String data = httpPost("image.php", post);
+		} catch (Exception e) {
+
+		}
+	}
+
 
 }

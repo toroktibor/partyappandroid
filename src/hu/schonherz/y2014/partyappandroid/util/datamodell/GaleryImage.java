@@ -32,4 +32,8 @@ public class GaleryImage {
     public void downloadBitmap(){
 	this.bitmap = ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(this.id));
     }
+    
+    public int getId(){
+    	return this.id;
+    }
 }
