@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener, SetServicesCommunicator {
@@ -151,13 +152,13 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 			public void onClick(View v) {
 
 			    final EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
-			    final EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
+			    final Spinner type = (Spinner) d.findViewById(R.id.dialog_clubs_search_club_type_spinner);
 			    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
-
+			    final String newClubType = String.valueOf(type.getSelectedItem());
 			    Log.i(this.getClass().getName(), "Eddigi találatok száma: "
 				    + Session.getSearchViewClubs().size());
 			    Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["
-				    + type.getText().toString() + "] város:[" + city.getText().toString() + "]");
+				    + newClubType + "] város:[" + city.getText().toString() + "]");
 
 			    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 				    "Szórakozóhelyek keresése...", true, false);
@@ -172,7 +173,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 						Session.getInstance()
 							.getActualCommunicationInterface()
 							.searchClubs(name.getText().toString(),
-								city.getText().toString(), type.getText().toString(),
+								city.getText().toString(), newClubType,
 								selectedServices, 0, 0));
 				    } catch (Exception e) {
 
