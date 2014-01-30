@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/club_event_modify_edittext_description"
         android:layout_alignParentRight="true"
-        android:hint="@string/club_event_modify_edittext_name" >
+        android:hint="@string/club_event_modify_edittext_name" 
+        style="@style/CustomEditText">
 
         <requestFocus />
     </EditText>
-d
+
     <EditText
         android:id="@+id/club_event_modify_edittext_date"
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@ d
         android:layout_below="@+id/club_event_modify_edittext_name"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Esemény napja" />
+        android:hint="Esemény napja"
+        style="@style/CustomEditText" />
     
     <EditText
         android:id="@+id/club_event_modify_edittext_time"
@@ -37,7 +39,8 @@ d
         android:layout_below="@+id/club_event_modify_edittext_name"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Ideje" />
+        android:hint="Ideje"
+        style="@style/CustomEditText" />
 
     <EditText
         android:id="@+id/club_event_modify_edittext_description"
@@ -47,7 +50,8 @@ d
         android:layout_below="@+id/club_event_modify_edittext_date"
         android:gravity="top"
         android:hint="@string/club_event_modify_edittext_description"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        style="@style/CustomEditText" />
 
     <Button
         android:id="@+id/club_event_modify_button_modify"
@@ -64,6 +68,7 @@ d
         android:layout_above="@+id/club_event_modify_button_modify"
         android:layout_alignLeft="@+id/club_event_modify_button_modify"
         android:layout_alignParentRight="true"
-        android:entries="@array/event_music_type" />
+        android:entries="@array/event_music_type"
+        style="@style/CustomEditText" />
 
 </RelativeLayout>

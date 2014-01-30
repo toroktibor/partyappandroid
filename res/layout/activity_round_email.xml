@@ -7,43 +7,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/round_targy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/round_subject"
-        android:layout_alignParentTop="true"
-        android:text="Üzenet tárgya:" />
-
     <EditText
         android:id="@+id/round_subject"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/round_targy"
         android:ems="10" >
 
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/round_uzenet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/round_subject"
-        android:text="Üzenet:" />
-
     <EditText
         android:id="@+id/round_message"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/round_uzenet"
+        android:layout_above="@+id/min_title"
+        android:layout_below="@+id/round_subject"
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="8"
-        android:scrollHorizontally="false"
-        android:layout_above="@+id/min_title" />
+        android:scrollHorizontally="false" />
 
      <TextView
         android:id="@+id/min_title"

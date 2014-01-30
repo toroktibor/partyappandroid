@@ -18,7 +18,8 @@
         android:id="@+id/profile_modify_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        style="@style/CustomEditText"  >
 
         <requestFocus />
     </EditText>
@@ -33,7 +34,8 @@
         android:id="@+id/profile_modify_edittext_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10"
+        style="@style/CustomEditText"  />
 
     <TextView
         android:id="@+id/profile_modify_textview_dateofbirth"
@@ -48,7 +50,8 @@
         android:ems="10"
         android:onClick="onClickHandler"
         android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        style="@style/CustomEditText" />
 
     <TextView
         android:id="@+id/profile_modify_textview_sex"
@@ -60,7 +63,8 @@
         android:id="@+id/profile_modify_spinner_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:entries="@array/array_sex"/>
+        android:entries="@array/array_sex"
+        style="@style/CustomEditText" />
 
     <Button
         android:id="@+id/profile_modify_button_save"
@@ -68,6 +72,7 @@
         android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:text="Módosítások mentése"
         android:onClick="onClickHandler" 
-        style="@style/CustomPurpleButton"/>
+        style="@style/CustomPurpleButton"
+        android:layout_marginTop="10dp"/>
     
 </LinearLayout>
