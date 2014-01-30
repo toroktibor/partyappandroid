@@ -30,19 +30,6 @@ import android.widget.TextView;
 public class ClubInfoFragment extends Fragment {
 
 	private Club actualClub;
-	
-
-	Integer[] icons = { R.drawable.club_service_icon_64px_billiard,
-						R.drawable.club_service_icon_64px_bowling,
-						R.drawable.club_service_icon_64px_coctailbar,
-						R.drawable.club_service_icon_64px_dance,
-						R.drawable.club_service_icon_64px_darts,
-						R.drawable.club_service_icon_64px_dj,
-						R.drawable.club_service_icon_64px_fndcontrol,
-						R.drawable.club_service_icon_64px_livemusic,
-						R.drawable.club_service_icon_64px_menu,
-						R.drawable.club_service_icon_64px_sporttv,
-						R.drawable.club_service_icon_64px_wifi };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +75,7 @@ public class ClubInfoFragment extends Fragment {
 		LinearLayout servicesLayout = (LinearLayout) rootView.findViewById(R.id.club_info_fragment_linear_layout_for_services);
 		ImageButton call = (ImageButton) rootView.findViewById(R.id.phone_call);
 		ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
+		ImageButton showOnTheMap = (ImageButton) rootView.findViewById(R.id.showOnTheMap);
 
 		if (actualClub.phonenumber == null
 				|| actualClub.phonenumber.equals("null")) {
@@ -100,11 +88,20 @@ public class ClubInfoFragment extends Fragment {
 		if (actualClub.email == null || actualClub.email.equals("null")) {
 			// TODO:ikon csere
 			message.setEnabled(false);
+			call.setBackgroundColor(Color.TRANSPARENT);
 		} else {
 			message.setEnabled(true);
 			// TODO:ikon csere
 		}
 
+		if(actualClub.position == null || actualClub.position.equals("null")) {
+		    showOnTheMap.setEnabled(false);
+		    showOnTheMap.setBackgroundColor(Color.TRANSPARENT);
+		} else {
+		    showOnTheMap.setEnabled(true);
+		}
+		
+		
 		clubNameTextView.setText(actualClub.name);
 		clubAddressTextView.setText(actualClub.address);
 		clubDescriptionTextView.setText(actualClub.description);

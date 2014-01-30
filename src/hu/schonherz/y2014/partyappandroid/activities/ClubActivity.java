@@ -4,8 +4,6 @@ import hu.schonherz.y2014.partyappandroid.ClubActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +21,6 @@ public class ClubActivity extends ActionBarActivity {
     static public Intent intent;
     static public boolean isClubOfActualUser;
     public Club actualClub;
-
     public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 	public ScreenSlidePagerAdapter(FragmentManager fm) {
 	    super(fm);
@@ -70,16 +67,9 @@ public class ClubActivity extends ActionBarActivity {
 	// clubFullDownload(clubListPosition);
     }
 
-    @Override
-    protected void onResume() {
-	// TODO Auto-generated method stub
-	super.onResume();
-    }
-
     public void phoneCall(View v) {
 
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	clubFullDownload(clubListPosition);
 	Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 	String num = actualClub.phonenumber;
 	String number = "tel:" + num;
@@ -100,6 +90,14 @@ public class ClubActivity extends ActionBarActivity {
 
     }
 
+    public void showOnTheMap(View v) {
+	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	Session.getInstance().getSearchViewClubs().get(clubListPosition);
+
+	Intent showOnMapIntent = new Intent(getApplicationContext(), ClubLocationActivity.class);
+	startActivity(showOnMapIntent);
+    }
+    
     protected void clubFullDownload(int actualClubPosition) {
 	Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
 	Log.i("fulldownload", "kommunikáció előtt");
@@ -128,5 +126,4 @@ public class ClubActivity extends ActionBarActivity {
 	
 
     }
-
 }

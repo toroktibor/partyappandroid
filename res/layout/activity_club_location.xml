@@ -3,28 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClubLocationActivity" >
-
-    
-    
-    <LinearLayout
-        android:layout_alignParentBottom="true"
+    <fragment
+        android:id="@+id/mapClubFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        >
-        
-        <TextView 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Szórakozóhely neve"
-            android:textStyle="bold"/>
-        
-        <TextView 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Szórakozóhely pontos címe\nAkár több sorban"/>
-        
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:background="@android:color/transparent" />
+    
 </RelativeLayout>

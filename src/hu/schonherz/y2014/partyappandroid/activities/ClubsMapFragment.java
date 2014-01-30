@@ -140,29 +140,6 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
 	    }
 	});
-	/*
-	 * //Másik lehetséges megoldás.
-	 * 
-	 * try { this.googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
-	 * giveBoundsForMarkerlist(), 0)); } catch (IllegalStateException e) {
-	 * // layout not yet initialized final View mapView =
-	 * getFragmentManager().findFragmentById(R.id.mapFragment).getView(); if
-	 * (mapView.getViewTreeObserver().isAlive()) {
-	 * mapView.getViewTreeObserver().addOnGlobalLayoutListener(new
-	 * OnGlobalLayoutListener() {
-	 * 
-	 * @SuppressWarnings("deprecation")
-	 * 
-	 * @SuppressLint("NewApi") // We check which build version we are using.
-	 * 
-	 * @Override public void onGlobalLayout() { if (Build.VERSION.SDK_INT <
-	 * Build.VERSION_CODES.JELLY_BEAN) {
-	 * mapView.getViewTreeObserver().removeGlobalOnLayoutListener(this); }
-	 * else {
-	 * mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this); }
-	 * googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-	 * giveBoundsForMarkerlist(), 0)); } }); } }
-	 */
 	return view;
     }
 
@@ -211,13 +188,15 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
     @Override
     public void updateResults() {
-	// if(1<2)return;
-	Log.i("MAP", "REFRESH RESULTS ON THE MAP");
+	//Log.i("MAP", "REFRESH RESULTS ON THE MAP");
 	// Make markers from the searchViewClubs and set it to the MarkerList
 	// list.
-
-	makeMarkersFromSearchViewClubs();
-	// Adding the markers to the googleMap.
+	if (getActivity() instanceof ClubActivity) {
+	    makeMarkerFromActualClubPosition();
+	}
+	else if(getActivity() instanceof ClubsActivity) {
+	    makeMarkersFromSearchViewClubs(); 
+	}	// Adding the markers to the googleMap.
 	if (googleMap != null) {
 	    googleMap.clear();
 	    for (MarkerOptions actMarker : markerList) {
@@ -237,6 +216,17 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	    }
 	}
 
+    }
+
+    private void makeMarkerFromActualClubPosition() {
+	Club actClub = ((ClubActivity) getActivity()).actualClub;
+	markerList.add(new MarkerOptions()
+		.title(actClub.name)
+		.snippet(actClub.address)
+		.position(actClub.position))
+
+;
+	
     }
 
     private LatLngBounds giveBoundsForMarkerlist() {
@@ -271,54 +261,6 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 	    }
 	}
     }
-
-    /*
-     * private void showOnlyApprovedPlacesOnTheMap() { BitmapDescriptor bmd =
-     * BitmapDescriptorFactory
-     * .defaultMarker(BitmapDescriptorFactory.HUE_VIOLET); List<Address>
-     * addressList = new ArrayList<Address>(); Geocoder geocoder = new
-     * Geocoder(getActivity(), Locale.getDefault()); LatLng actualClubsLatLng;
-     * 
-     * for (int i = 0; i < Session.getSearchViewClubs().size(); ++i) { Club
-     * actualClub = Session.getSearchViewClubs().get(i); try { Log.e("MAP",
-     * actualClub.address); addressList =
-     * geocoder.getFromLocationName(actualClub.address, 1);
-     * Log.e("MAP LATITUDE", ((Double) (addressList.get(0)
-     * .getLatitude())).toString()); // Log.e("MAP ADDRESSLIST: ", //
-     * geocoder.getFromLocationName(actualClub.address, //
-     * 1).get(0).toString()); } catch (IOException e) { e.printStackTrace(); }
-     * if (addressList.size() > 0) { actualClubsLatLng = new LatLng(
-     * addressList.get(0).getLatitude(), addressList.get(0) .getLongitude()); if
-     * (actualClub.approved == 1) { markerList.add(new MarkerOptions()
-     * .position(actualClubsLatLng).title(actualClub.name)
-     * .snippet(actualClub.address).icon(bmd));
-     * googleMap.addMarker(markerList.get(markerList.size() - 1)); Log.e("MAP",
-     * "NEW CLUB APPEARED ON THE MAP"); } } else { Log.e("MAP",
-     * "SIZE OF ADDRESSLIST IS 0"); } }
-     * 
-     * if (markerList.size() > 0) { LatLngBounds.Builder builder = new
-     * LatLngBounds.Builder(); for (int i = 0; i < markerList.size(); ++i) {
-     * builder.include(markerList.get(i).getPosition()); } LatLngBounds bounds =
-     * builder.build(); int padding = 0; // offset from edges of the map in
-     * pixels CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,
-     * padding); googleMap.animateCamera(cu); } return; }
-     * 
-     * private void showEveryPlacesOnTheMap() { BitmapDescriptor bmd;
-     * List<Address> addressList = new ArrayList<Address>(); Geocoder geocoder =
-     * new Geocoder(getActivity()); LatLng actualClubsLatLng; for (Club
-     * actualClub : Session.getSearchViewClubs()) { try { addressList =
-     * geocoder.getFromLocationName(actualClub.address, 1); } catch (IOException
-     * e) { e.printStackTrace(); } actualClubsLatLng = new
-     * LatLng(addressList.get(0).getLatitude(),
-     * addressList.get(0).getLongitude()); if (actualClub.approved == 0) bmd =
-     * BitmapDescriptorFactory .defaultMarker(BitmapDescriptorFactory.HUE_RED);
-     * else bmd = BitmapDescriptorFactory
-     * .defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-     * 
-     * googleMap.addMarker(new MarkerOptions().position(actualClubsLatLng)
-     * .title(actualClub.name).snippet(actualClub.address) .icon(bmd)); }
-     * return; }
-     */
 
     @Override
     public void onResume() {
