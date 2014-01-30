@@ -25,11 +25,13 @@
         android:layout_height="wrap_content"
         android:text="Típus alapján"/>
     
-    <EditText 
-        android:id="@+id/dialog_clubs_search_edittext_type"
+    <Spinner
+        android:id="@+id/dialog_clubs_search_club_type_spinner"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/CustomEditText"/>
+        android:entries="@array/clubs_types"
+        android:prompt="@string/clubs_type_spinner_prompt" />
     
     <TextView 
         android:layout_width="wrap_content"
