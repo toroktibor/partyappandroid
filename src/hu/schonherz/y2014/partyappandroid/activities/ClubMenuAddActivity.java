@@ -65,7 +65,11 @@ public class ClubMenuAddActivity extends ActionBarActivity {
 
 	    @Override
 	    public void afterTextChanged(Editable s) {
-		actualPrice = Integer.parseInt(s.toString());
+	    if(s.toString().equals("") || s == null){
+		   	actualPrice = 0;
+		} else {
+		   	actualPrice = Integer.parseInt(s.toString());
+		}
 		float actualDiscount = (float) ((100 - actualDiscountInt) / 100.0);
 		int newPrice = (int) ((int) actualPrice * actualDiscount);
 		discountSummaryTextView.setText(actualDiscountInt + "%: " + actualPrice + actualCurrency + " helyett "

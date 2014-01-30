@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.android.gms.internal.ac;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfView;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsUpdateableFragment;
 import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
 import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
@@ -93,6 +94,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 	case R.id.actionbar_clubs_button_b:
 	    /* viewPager lapozása a lista nézetre */
+		ClubsActivity.sourceOfView=SourceOfView.LIST;
 	    activity.viewPager.setCurrentItem(0);
 	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(activity
 		    .getResources().getDrawable(R.drawable.ab_selected));
@@ -100,6 +102,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	    break;
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
+		ClubsActivity.sourceOfView=SourceOfView.MAP;
 	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
 		@Override
 		public void onResume() {
