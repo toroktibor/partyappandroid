@@ -116,7 +116,7 @@ public class ClubActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-	if (android.os.Build.VERSION.SDK_INT <= 10) {	    
+	if (Session.getInstance().oldPhone) {	    
 	    Intent newIntent = new Intent(this, ClubsActivity.class);
 	    startActivity(newIntent);
 	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
