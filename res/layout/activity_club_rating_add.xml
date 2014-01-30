@@ -44,7 +44,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/club_rating_add_comment_description"
-        android:ems="10" />
+        android:ems="10"
+        android:gravity="top"
+        style="@style/CustomEditText"  />
 
     <RatingBar
         android:id="@+id/club_rating_add_ratingbar"

@@ -10,34 +10,37 @@
 
     <EditText
         android:id="@+id/club_modify_activity_name_edittext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="Szórakozóhely neve">
+        android:hint="Szórakozóhely neve"
+        style="@style/CustomEditText">
 
         <requestFocus />
     </EditText>
 
     <EditText
         android:id="@+id/club_modify_activity_address_edittext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/club_modify_activity_name_edittext"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/club_modify_activity_name_edittext"
         android:ems="10"
-        android:hint="Szórakozóhely címe"/>
+        android:hint="Szórakozóhely címe"
+        style="@style/CustomEditText"/>
 
     <Spinner
         android:id="@+id/club_modify_activity_type_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/club_modify_activity_image_imageview"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/club_modify_activity_address_edittext"
-        android:entries="@array/clubs_types" />
+        android:layout_toLeftOf="@+id/club_modify_activity_name_edittext"
+        android:entries="@array/clubs_types"
+        style="@style/CustomEditText" />
 
     <EditText
         android:id="@+id/club_modify_activity_phonenumber_edittext"
@@ -48,7 +51,8 @@
         android:layout_below="@+id/club_modify_activity_type_spinner"
         android:ems="10"
         android:inputType="phone"
-        android:hint="Szórakozóhely telefonszáma"/>
+        android:hint="Szórakozóhely telefonszáma"
+        style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/club_modify_activity_email_edittext"
@@ -59,7 +63,8 @@
         android:layout_below="@+id/club_modify_activity_phonenumber_edittext"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="Szórakozóhely e-mail címe"/>
+        android:hint="Szórakozóhely e-mail címe"
+        style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/club_modify_activity_description_edittext"
@@ -71,17 +76,8 @@
         android:layout_below="@+id/club_modify_activity_email_edittext"
         android:ems="10"
         android:hint="Szórakozóhely leírása"
-        android:gravity="top" />
-
-    <ImageView
-        android:id="@+id/club_modify_activity_image_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/club_modify_activity_address_edittext"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/club_modify_activity_name_edittext"
-        android:layout_toLeftOf="@+id/club_modify_activity_name_edittext"
-        android:src="@drawable/ic_launcher" />
+        android:gravity="top"
+        style="@style/CustomEditText" />
 
     <Button
         android:id="@+id/club_modify_activity_modify_button"
