@@ -22,9 +22,13 @@ public class ClubsActivity extends ActionBarActivity {
     public enum SourceOfList {
 	LOCATION, SEARCH, OWNERSHIP, FAVORITES
     };
+    
+    public enum SourceOfView {
+    	LIST, MAP
+    };
 
     public static SourceOfList sourceOfList = SourceOfList.LOCATION;
-
+    public static SourceOfView sourceOfView = SourceOfView.LIST;
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 	public ScreenSlidePagerAdapter(FragmentManager fm) {

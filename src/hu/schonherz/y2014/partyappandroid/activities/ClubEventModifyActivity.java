@@ -39,6 +39,7 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 
 	int eventListPosition = getIntent().getExtras().getInt("eventsListPosition");
 	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	
 	actualEvent = Session.getSearchViewClubs().get(clubListPosition).events.get(eventListPosition);
 
 	nameEditText = (EditText) findViewById(R.id.club_event_modify_edittext_name);
@@ -50,9 +51,12 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 
 	int position = Event.getMusicTypePosition(actualEvent.music_type);
 	
+	String[] datetime = actualEvent.start_date.split(" ");
+	
 	musicTypeSpinner.setSelection(position);
 	nameEditText.setText(actualEvent.name);
-	dateEditText.setText(actualEvent.start_date);
+	dateEditText.setText(datetime[0]);
+	timeEditText.setText(datetime[1]);
 	descriptionEditText.setText(actualEvent.description);
 
 	
@@ -80,6 +84,7 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 	    public void onClick(View v) {
 		String name = nameEditText.getText().toString();
 		String date = dateEditText.getText().toString();
+		String time = timeEditText.getText().toString();
 		String description = descriptionEditText.getText().toString();
 		String musicType = musicTypeSpinner.getSelectedItem().toString();
 
@@ -92,6 +97,11 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 			    .show();
 		    return;
 		}
+		if (time.isEmpty()) {
+		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!", Toast.LENGTH_LONG)
+			    .show();
+		    return;
+		}
 		if (description.isEmpty()) {
 		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
 			    .show();
@@ -99,7 +109,7 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 		}
 		
 		actualEvent.name = name;
-		actualEvent.start_date = date;
+		actualEvent.start_date = date+" "+time;
 		actualEvent.description = description;
 		actualEvent.music_type = musicType;
 		

@@ -68,6 +68,7 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 	    public void onClick(View v) {
 		String name = nameEditText.getText().toString();
 		String date = dateEditText.getText().toString();
+		String time = timeEditText.getText().toString();
 		String description = descriptionEditText.getText().toString();
 		String musicType = musicTypeSpinner.getSelectedItem().toString();
 
@@ -80,13 +81,18 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 			    .show();
 		    return;
 		}
+		if (time.isEmpty()) {
+		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos idejét!", Toast.LENGTH_LONG)
+			    .show();
+		    return;
+		}
 		if (description.isEmpty()) {
 		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
 			    .show();
 		    return;
 		}
-		int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date, "", musicType);
-		Event newEvent = new Event(eventId, name, description, date, musicType, 1);
+		int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date+" "+time, "", musicType);
+		Event newEvent = new Event(eventId, name, description, date+" "+time, musicType, 1);
 		Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
 
 		finish();
