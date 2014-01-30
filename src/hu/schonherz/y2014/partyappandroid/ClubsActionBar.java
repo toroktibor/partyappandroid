@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,7 +43,12 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
     private static int numberOfSelectedServices = 0;
     private static List<String> selectedServices = new ArrayList<String>();
     private TextView textViewSelectedServicesNumber;
-
+    Integer[] icons = { R.id.checkBoxBilliard, R.id.checkBoxBowling, R.id.checkBoxCoctailBar, R.id.checkBoxDance,
+	    R.id.checkBoxDarts, R.id.checkBoxDJ, R.id.checkBoxFnDControl, R.id.checkBoxLiveMusic, R.id.checkBoxMenu,
+	    R.id.checkBoxSportTV, R.id.checkBoxWiFi };
+    List<CheckBox> checkBoxes = new ArrayList<CheckBox>();
+    
+    
     public ClubsActionBar(ClubsActivity activity) {
 	this.activity = activity;
     }
@@ -111,18 +117,25 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 		@Override
 		public void onResume() {
-		    // VAN HIBA VAGY NINCS HIBA!? :D
 		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
 		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 			    null);
 		    adb.setView(view);
 		   
-
 		    final Dialog d = adb.create();
 		    d.show();
 		    
 		    textViewSelectedServicesNumber = (TextView) d
 			    .findViewById(R.id.dialog_club_search_textview_number_of_selected_services);
+
+		    for(int i = 0; i < Session.getInstance().servicesTokenList.size(); ++i) {
+			checkBoxes.add((CheckBox) d.findViewById(icons[i]));
+		    }
+		    for(int i = 0; i < selectedServices.size(); ++i) {
+			if(Session.getInstance().servicesTokenList.contains(selectedServices.get(i)))
+			checkBoxes.get(Session.getInstance().servicesTokenList.
+				indexOf(selectedServices.get(i))).setChecked(true);
+		    }
 		    
 		    Button servicesButton = (Button) d.findViewById(R.id.dialog_club_search_button_set_services);
 

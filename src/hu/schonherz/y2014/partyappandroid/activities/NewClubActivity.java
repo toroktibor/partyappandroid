@@ -32,18 +32,15 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     List<String> services;
     int selectedServicesNumber;
     TextView selectedServicesTextView;
-    
+    private static List<Integer> checkBoxes = new ArrayList<Integer>();
+
     @Override
     // EBBEN A METÓDUSBAN KAPJUK MEG, HOGY MILYEN SZOLGÁLTATÁSOKAT ADOTT MEG A
     // FELHASZNÁLÓ A DIALOGFRAGMENT-BEN
     public void onServicesSetted(List<String> services) {
 	Log.e("NEWCLUBACTIVITY", "LIST OF SERVICES FROM DIALOG CATCHED");
 	this.services = services;
-	selectedServicesNumber = 0;
-	for (String actService : services ) {
-		if(Session.getInstance().servicesTokenList.contains(actService));
-			selectedServicesNumber++;
-	}
+	selectedServicesNumber = services.size();
 	selectedServicesTextView.setText(selectedServicesNumber + " szolgáltatás kiválasztva");
 	for (int i = 0; i < this.services.size(); ++i)
 	    Log.e("NEWCLUBACTIVITY", "CATCHED SERVICES: " + services.get(i));
@@ -53,7 +50,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
 	new SimpleActionBar(this, "Új klub hozzáadása").setLayout();
 
 	setContentView(R.layout.activity_new_club);
@@ -76,8 +73,8 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 		Boolean isOwner = newClubOwnerCheckBox.isChecked();
 
 		if (newClubName.isEmpty()) {
-		    Toast.makeText(thisContext, "Nem adtál meg nevet! Sürgősen szedd össze magad.",
-			    Toast.LENGTH_LONG).show();
+		    Toast.makeText(thisContext, "Nem adtál meg nevet! Sürgősen szedd össze magad.", Toast.LENGTH_LONG)
+			    .show();
 		    return;
 		}
 
@@ -102,8 +99,27 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 	    @Override
 	    public void onClick(View v) {
 		SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+		if (services != null) {
+		    for (String actServ : services) {
+			((CheckBox) serviceSetterFragment.getDialog().findViewById(
+				checkBoxes.get(Session.getInstance().servicesTokenList.indexOf(actServ))))
+				.setChecked(true);
+		    }
+		}
 		serviceSetterFragment.show(NewClubActivity.this, getSupportFragmentManager(), "SetServicesOfClub");
+
 	    }
 	});
+	checkBoxes.add(R.id.checkBoxBilliard);
+	checkBoxes.add(R.id.checkBoxBowling);
+	checkBoxes.add(R.id.checkBoxCoctailBar);
+	checkBoxes.add(R.id.checkBoxDance);
+	checkBoxes.add(R.id.checkBoxDarts);
+	checkBoxes.add(R.id.checkBoxDJ);
+	checkBoxes.add(R.id.checkBoxFnDControl);
+	checkBoxes.add(R.id.checkBoxLiveMusic);
+	checkBoxes.add(R.id.checkBoxMenu);
+	checkBoxes.add(R.id.checkBoxSportTV);
+	checkBoxes.add(R.id.checkBoxWiFi);
     }
 }
