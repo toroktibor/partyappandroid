@@ -52,6 +52,15 @@ public class PendingListActivity extends ActionBarActivity {
 			startActivity(i);			
 		}
 	});
+	
+	pendingImagesButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(getApplicationContext(), PendingImageActivity.class);
+			startActivity(i);	
+		}
+	});
     }
 
 

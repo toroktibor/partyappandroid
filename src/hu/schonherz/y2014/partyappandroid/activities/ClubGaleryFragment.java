@@ -36,10 +36,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -94,7 +99,10 @@ public class ClubGaleryFragment extends Fragment {
 	customGridAdapter = new GridViewAdapter(getActivity().getApplicationContext(), R.layout.row_grid,
 		getDataForGridView());
 	gridView.setAdapter(customGridAdapter);
-
+	
+	if(Session.getActualUser().getType()==0 || Session.getActualUser().isMine(actualClub.id)){
+		registerForContextMenu(gridView);
+	}
 	/**
 	 * On Click event for Single Gridview Item
 	 * */
@@ -311,5 +319,31 @@ public class ClubGaleryFragment extends Fragment {
 	    ().getActualCommunicationInterface().getEverythingFromClub(actualCLub.id));
 	}
     };
-
+    
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+    		ContextMenuInfo menuInfo) {
+    	// TODO Auto-generated method stub
+    	super.onCreateContextMenu(menu, v, menuInfo);
+    	
+    	MenuInflater inflater = getActivity().getMenuInflater();
+    	inflater.inflate(R.menu.club_galery_context_menu, menu);
+    }
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+    	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	int index = info.position;
+    	switch (item.getItemId()) {
+    	case R.id.delete_club_galery_item:
+    	    int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+    	    int imageid = Session.getSearchViewClubs().get(clubListPosition).images.get(index).getId();
+    	    Session.getInstance().getActualCommunicationInterface().deleteImage(imageid);
+    	    Session.getSearchViewClubs().get(clubListPosition).images.remove(index);
+    	    onResume();
+    	    return true;
+    	default:
+    	    return super.onContextItemSelected(item);
+    	}
+    }
 }

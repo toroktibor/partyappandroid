@@ -30,15 +30,15 @@
         android:theme="@style/CustomTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyADkuHEIKDZnlqQTMsAZHdMLOIEP3po1f4" />
+            android:value="AIzaSyCHtqUpvqTs1lZI8uxk4hSUF10T_6RiH7k" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.LoginActivity"
-            android:label="@string/login" >
+            android:label="@string/app_launcher_label"
+            android:screenOrientation="portrait" >
             <intent-filter android:label="@string/app_launcher_label" >
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,124 +46,124 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.RegisterActivity"
-            android:label="Regisztráció" >
+            android:label="Regisztráció"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsListFragment"
-            android:label="@string/title_activity_clubs_list" >
+            android:label="@string/title_activity_clubs_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsMapFragment"
-            android:label="@string/title_activity_clubs_map" >
+            android:label="@string/title_activity_clubs_map"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.MyClubsActivity"
-            android:label="@string/title_activity_my_clubs" >
+            android:label="@string/title_activity_my_clubs"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsSearchActivity"
-            android:label="@string/title_activity_clubs_search" >
+            android:label="@string/title_activity_clubs_search"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.NewClubActivity"
-            android:label="@string/title_activity_new_club" >
+            android:label="@string/title_activity_new_club"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoFragment"
-            android:label="@string/title_activity_club_info" >
+            android:label="@string/title_activity_club_info"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventsActivityntsActivity"
-            android:label="@string/title_activity_club_events" >
+            android:label="@string/title_activity_club_events"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.ClubGaleryActivity"
-            android:label="@string/title_activity_club_galery" >
+            android:label="@string/title_activity_club_galery"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventDetailsActivity"
-            android:label="@string/title_activity_club_event_details" >
+            android:label="@string/title_activity_club_event_details"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventModifyActivity"
-            android:label="@string/title_activity_club_event_modify" >
+            android:label="@string/title_activity_club_event_modify"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventNewActivity"
-            android:label="@string/title_activity_club_event_new" >
+            android:label="@string/title_activity_club_event_new"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.ClubLocationActivity"
-            android:label="@string/title_activity_club_location" >
+            android:label="@string/title_activity_club_location"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity"
-            android:label="@string/title_activity_club_menu" >
+            android:label="@string/title_activity_club_menu"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubReviewsActivity"
-            android:label="@string/title_activity_club_reviews" >
+            android:label="@string/title_activity_club_reviews"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMyReviewActivity"
-            android:label="@string/title_activity_club_my_review" >
+            android:label="@string/title_activity_club_my_review"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingListActivity"
-            android:label="@string/title_activity_pending_list" >
+            android:label="@string/title_activity_pending_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ProfileActivity"
-            android:label="@string/title_activity_profile" >
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ProfileModifyActivity"
-            android:label="@string/title_activity_profile_modify" >
+            android:label="@string/title_activity_profile_modify"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ProfilePasswordActivity"
-            android:label="@string/title_activity_profile_password" >
+            android:label="@string/title_activity_profile_password"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuAddActivity"
-            android:label="@string/title_activity_club_menu_add" >
+            android:label="@string/title_activity_club_menu_add"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubMenuModifyActivity"
-            android:label="@string/title_activity_club_menu_modify" >
+            android:label="@string/title_activity_club_menu_modify"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubsActivity"
-            android:label="@string/title_activity_clubs" >
+            android:label="@string/title_activity_clubs"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubActivity"
-            android:label="@string/title_activity_club" >
+            android:label="@string/title_activity_club"
+            android:screenOrientation="portrait" >
         </activity>
 
         <service
@@ -171,50 +171,56 @@
             android:enabled="true" />
 
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.VisitorEmail"
-            android:label="@string/title_activity_visitor_email" >
+            android:label="@string/title_activity_visitor_email"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.RoundEmail"
-            android:label="@string/title_activity_round_email" >
+            android:label="@string/title_activity_round_email"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait" android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser" >
+            android:name="hu.schonherz.y2014.partyappandroid.xls.FileChooser"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait" android:name="hu.schonherz.y2014.partyappandroid.activities.FullImageActivity" >
+            android:name="hu.schonherz.y2014.partyappandroid.activities.FullImageActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingClubsListActivity"
-            android:label="@string/title_activity_pending_clubs_list" >
+            android:label="@string/title_activity_pending_clubs_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingOwnerRequest"
-            android:label="@string/title_activity_pending_owner_request" >
+            android:label="@string/title_activity_pending_owner_request"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubRatingsActivity"
-            android:label="@string/title_activity_club_ratings" >
+            android:label="@string/title_activity_club_ratings"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubRatingAdd"
-            android:label="@string/title_activity_club_rating_add" >
+            android:label="@string/title_activity_club_rating_add"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingRatingsActivity"
-            android:label="@string/title_activity_pending_ratings" >
+            android:label="@string/title_activity_pending_ratings"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity"
-            android:label="@string/title_activity_club_info_modify" >
+            android:label="@string/title_activity_club_info_modify"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PendingImageActivity"
+            android:label="@string/title_activity_pending_image" >
         </activity>
     </application>
 

@@ -124,5 +124,6 @@
     <string name="title_activity_club_rating_add">ClubRatingAdd</string>
     <string name="title_activity_pending_ratings">PendingRatingsActivity</string>
     <string name="title_activity_club_info_modify">ClubInfoModifyActivity</string>
+    <string name="title_activity_pending_image">PendingImageActivity</string>
 
 </resources>
