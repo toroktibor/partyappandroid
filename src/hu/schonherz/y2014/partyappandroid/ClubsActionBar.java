@@ -124,6 +124,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 			    null);
 		    adb.setView(view);
+		    
 		   
 		    final Dialog d = adb.create();
 		    d.show();
@@ -383,9 +384,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
     }
 
     @Override
-    public void onServicesSetted(List<String> result) {
-	numberOfSelectedServices = result.size();
-	selectedServices = result;
+    public void onServicesSetted(String result) {
 	textViewSelectedServicesNumber.setText(numberOfSelectedServices + " szolgáltatás kiválasztva");
     }
 }
