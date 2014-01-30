@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubsActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class ClubsActivity extends ActionBarActivity {
@@ -81,4 +83,29 @@ public class ClubsActivity extends ActionBarActivity {
         }
     }
     
+    @Override
+    protected void onResume() {
+    	if(Session.getInstance().oldPhone){
+    		ImageView ib = (ImageView) findViewById(R.id.actionbar_clubs_button_a);	    
+    		if(sourceOfList.equals(SourceOfList.FAVORITES)){
+    			ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_favorites));
+    		} else if(sourceOfList.equals(SourceOfList.LOCATION)){
+    			ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_location));
+    		} else if(sourceOfList.equals(SourceOfList.OWNERSHIP)){
+    			ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_ownership));
+    		} else if(sourceOfList.equals(SourceOfList.SEARCH)){
+    			//ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_search)); // ilyen még nincs
+    		}
+    		if(sourceOfView.equals(SourceOfView.LIST)){
+    			viewPager.setCurrentItem(0);
+    			((ImageView) findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_selected));
+    			((ImageView) findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(null);
+    		} else {
+    			viewPager.setCurrentItem(1);
+    			((ImageView) findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_selected));
+    			((ImageView) findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
+    		}
+    	}
+    	super.onResume();
+    }
 }

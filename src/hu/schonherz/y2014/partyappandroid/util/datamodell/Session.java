@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
+import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.util.communication.Communication;
 import hu.schonherz.y2014.partyappandroid.util.communication.CommunicationInterface;
 import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil;
@@ -13,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
@@ -27,12 +30,15 @@ public class Session {
     User actualUser;
     List<Club> searchViewClubs;
     boolean isOnline;
+    //ha API level 10 vagy annál kisebb a teló akkor true
+    public boolean oldPhone = false;
 
     CommunicationInterface actualCommunicationInterface;
     LocalDatabaseUtil databaseConnecter;
 
     protected Session() {
-	actualCommunicationInterface = new Communication();
+	actualCommunicationInterface = new Communication();   
+	this.oldPhone = android.os.Build.VERSION.SDK_INT <= 10 ;
     }
 
     public void dismissProgressDialog(){
