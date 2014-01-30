@@ -197,7 +197,7 @@ public class Communication implements CommunicationInterface {
 	} catch (Exception e) {
 	    Log.e(this.getClass().getName(), "bajvan", e);
 	}
-
+	
 	return null;
     }
 

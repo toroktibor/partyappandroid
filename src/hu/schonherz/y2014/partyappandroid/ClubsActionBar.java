@@ -169,6 +169,14 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 				    Session.getSearchViewClubs().clear();
 				    try {
+					if(newClubType.equals("Bármelyik"))
+					    Session.getSearchViewClubs().addAll(
+							Session.getInstance()
+								.getActualCommunicationInterface()
+								.searchClubs(name.getText().toString(),
+									city.getText().toString(), "",
+									selectedServices, 0, 0));
+					else
 					Session.getSearchViewClubs().addAll(
 						Session.getInstance()
 							.getActualCommunicationInterface()

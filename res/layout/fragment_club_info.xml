@@ -70,18 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/club_info_ratingbar"
+        android:inputType="textMultiLine"
         android:text="Szolgáltatások" />
-
-    <LinearLayout
-        android:id="@+id/club_info_fragment_linear_layout_for_services"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewServices"
-        android:layout_alignRight="@+id/club_info_textview_description"
-        android:layout_below="@+id/textViewServices"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="18dp"
-        android:orientation="vertical" >
-    </LinearLayout>
 
 </RelativeLayout>

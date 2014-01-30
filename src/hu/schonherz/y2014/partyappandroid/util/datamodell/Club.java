@@ -120,7 +120,7 @@ public class Club {
 	this.approved = clubWithAllInfo.approved;
 	this.type = clubWithAllInfo.type;
 	this.highlite_expire = clubWithAllInfo.highlite_expire;
-
+	this.services = Session.getInstance().getActualCommunicationInterface().getServices(this.id);
 	this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
 	Log.i(getClass().getName(), "Klub eseményei: " + this.events.size());
 

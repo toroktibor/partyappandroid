@@ -89,6 +89,16 @@
         <item>Sport központ</item>
         <item>Disco</item>
     </string-array>
+        <string-array name="clubs_types_for_search">
+        <item>Bármelyik</item>
+        <item>Vegyes</item>
+        <item>Kocsma</item>
+        <item>Pub</item>
+        <item>Club</item>
+        <item>Étterem</item>
+        <item>Sport központ</item>
+        <item>Disco</item>
+    </string-array>
     <string-array name="menu_item_category">
         <item>Ital</item>
         <item>Étel</item>

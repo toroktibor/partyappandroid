@@ -30,7 +30,7 @@
         style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/clubs_types"
+        android:entries="@array/clubs_types_for_search"
         android:prompt="@string/clubs_type_spinner_prompt" />
     
     <TextView 

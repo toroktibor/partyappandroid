@@ -36,33 +36,15 @@ public class ClubInfoFragment extends Fragment {
 			Bundle savedInstanceState) {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(
 				R.layout.fragment_club_info, container, false);
-		/*if (actualClub.services.size() > 0) {
-			Log.e("CLUB INFO", "PICTURES WILL BE ADDED NOW");
-			LinearLayout servicesLayout = (LinearLayout) rootView.findViewById(R.id.club_info_fragment_linear_layout_for_services);
-			for (int i = 0; i < services.length; ++i) {
-				String actualService = services[i];
-				if (actualClub.services.contains(actualService)) {
-					
-					ImageView serviceIcon = new ImageView(getActivity());
-					Log.e("CLUB INFO","IMAGEVIEW INSTANTIATED");
-					serviceIcon.setImageResource(icons[i]);
-					Log.e("CLUB INFO", "RESOURSE FOUNDED");
-					servicesLayout.addView(serviceIcon, 25, 25);
-					Log.e("CLUB INFO", "PICTURE ADDED");
-				}
-			}
-		}
-		*/
+
 		int clubListPosition = ClubActivity.intent.getExtras().getInt(
 				"listPosition");
-		Log.i("átjött", String.valueOf(clubListPosition));
+		//Log.i("átjött", String.valueOf(clubListPosition));
 		actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
 		if (actualClub.isNotFullDownloaded()) {
 			actualClub.downloadEverything();
 		}
-
-		Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
 		RatingBar clubRatingBar = (RatingBar) rootView
 				.findViewById(R.id.club_info_ratingbar);
@@ -72,16 +54,20 @@ public class ClubInfoFragment extends Fragment {
 				.findViewById(R.id.club_info_textview_address);
 		TextView clubDescriptionTextView = (TextView) rootView
 				.findViewById(R.id.club_info_textview_description);
-		LinearLayout servicesLayout = (LinearLayout) rootView.findViewById(R.id.club_info_fragment_linear_layout_for_services);
+		TextView clubServicesTextView = (TextView) rootView
+				.findViewById(R.id.textViewServices);
 		ImageButton call = (ImageButton) rootView.findViewById(R.id.phone_call);
 		ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
 		ImageButton showOnTheMap = (ImageButton) rootView.findViewById(R.id.showOnTheMap);
+		
 
 		if (actualClub.phonenumber == null
 				|| actualClub.phonenumber.equals("null")) {
+		 // TODO:ikon csere
 			call.setEnabled(false);
 			call.setBackgroundColor(Color.TRANSPARENT);
 		} else {
+		 // TODO:ikon csere
 			call.setEnabled(true);
 		}
 
@@ -95,9 +81,11 @@ public class ClubInfoFragment extends Fragment {
 		}
 
 		if(actualClub.position == null || actualClub.position.equals("null")) {
+		    	// TODO: ikon csere
 		    showOnTheMap.setEnabled(false);
 		    showOnTheMap.setBackgroundColor(Color.TRANSPARENT);
 		} else {
+		    	// TODO: ikon csere
 		    showOnTheMap.setEnabled(true);
 		}
 		
@@ -105,14 +93,24 @@ public class ClubInfoFragment extends Fragment {
 		clubNameTextView.setText(actualClub.name);
 		clubAddressTextView.setText(actualClub.address);
 		clubDescriptionTextView.setText(actualClub.description);
-		for (String service : actualClub.services) {
-			if(Session.getInstance().servicesTokenList.contains(service)) {
-				TextView tw = new TextView(getActivity());
-				tw.setText(Session.getInstance().servicesNameList.get(Session.getInstance().servicesTokenList.indexOf(service)));
-				servicesLayout.addView(tw);
-			}
-		}
 		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Szolgáltatások");
+		String actServ = new String();
+		
+		Log.e("INFO", "NO. OF SERVICES" + actualClub.services.size() );
+		for (int i = 0; i < actualClub.services.size(); ++i) {
+		    actServ = actualClub.services.get(i);
+		    Log.e("INFO", actServ);
+		    sb.append(Session.getInstance().servicesNameList.get(
+			    		Session.getInstance().servicesTokenList.indexOf(actServ.toString())).toString());
+		    if(i != actualClub.services.size()-1)
+			sb.append(", ");
+		}
+		String serviceList = sb.toString();
+		Log.e("INFO", "SERVICES: " + serviceList);
+		clubServicesTextView.setText(serviceList);
+		Log.e("INFO", "SERVICES SETTED");
 		
 		clubRatingBar.setRating(actualClub.getAvarageRate());
 
