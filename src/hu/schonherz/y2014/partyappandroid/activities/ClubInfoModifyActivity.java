@@ -3,8 +3,12 @@ package hu.schonherz.y2014.partyappandroid.activities;
 import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
+import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -15,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubInfoModifyActivity extends ActionBarActivity {
+public class ClubInfoModifyActivity extends ActionBarActivity implements SetServicesCommunicator {
 	
 	Club actualClub;
 	EditText clubNameEditText;
@@ -26,6 +30,8 @@ public class ClubInfoModifyActivity extends ActionBarActivity {
 	EditText clubDescriptionEditText;
 	ImageView clubImageView;
 	Button clubModifyButton;
+	private EditText clubServicesEditText;
+	private ArrayList<String> selectedServices;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,20 @@ public class ClubInfoModifyActivity extends ActionBarActivity {
 		clubEmailEditText = (EditText) findViewById(R.id.club_modify_activity_email_edittext);
 		clubDescriptionEditText = (EditText) findViewById(R.id.club_modify_activity_description_edittext);
 		clubModifyButton = (Button) findViewById(R.id.club_modify_activity_modify_button);
+		clubServicesEditText = (EditText) findViewById(R.id.club_modify_set_services);
+		
+		selectedServices = new ArrayList<String>();
+		selectedServices.addAll(actualClub.services);
+		
+		clubServicesEditText.setOnClickListener(new OnClickListener() {
+		    
+		    @Override
+		    public void onClick(View v) {
+			SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+			serviceSetterFragment.show(ClubInfoModifyActivity.this, selectedServices, getSupportFragmentManager(),
+				"SetServicesWhenModify");
+		    }
+		});
 		
 		clubNameEditText.setText(actualClub.name);
 		clubAddressEditText.setText(actualClub.address);
@@ -93,6 +113,11 @@ public class ClubInfoModifyActivity extends ActionBarActivity {
 				finish();
 			}
 		});
+	}
+
+	@Override
+	public void onServicesSetted(String result) {
+	    clubServicesEditText.setText(result);
 	}
 
 }

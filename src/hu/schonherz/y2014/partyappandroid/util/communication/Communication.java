@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.util.communication;
 
+import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.AdminRating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
@@ -121,7 +122,7 @@ public class Communication implements CommunicationInterface {
     @Override
     public List<Club> getClubsFromCityName(String cityname) {
 	try {
-	    return searchClubs("", cityname, "", 0, 0);
+	    return searchClubs("", cityname, "",new ArrayList<String>(), 0, 0);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -241,7 +242,7 @@ public class Communication implements CommunicationInterface {
     }
 
     @Override
-    public List<Club> searchClubs(String name, String cityname, String type, int offset, int limit) throws Exception {
+    public List<Club> searchClubs(String name, String cityname, String type,List<String> selectedServices, int offset, int limit) throws Exception {
 
 	try {
 	    HashMap<String, String> post = new HashMap<String, String>();
@@ -249,6 +250,7 @@ public class Communication implements CommunicationInterface {
 	    post.put("name", name);
 	    post.put("cityname", cityname);
 	    post.put("type", type);
+	    post.put("services", SetServicesOfClubFragment.joinStrings(selectedServices, ","));
 	    post.put("offset", String.valueOf(offset));
 	    post.put("limit", String.valueOf(limit));
 

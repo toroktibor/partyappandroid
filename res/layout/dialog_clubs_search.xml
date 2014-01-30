@@ -42,17 +42,19 @@
         android:layout_height="wrap_content"
         style="@style/CustomEditText"/>
 
-    <Button
-        android:id="@+id/dialog_club_search_button_set_services"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Keresés szolgáltatások alapján" />
-
     <TextView
-        android:id="@+id/dialog_club_search_textview_number_of_selected_services"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 szolgáltatás kiválasztva" />
+        android:text="Szolgáltatások" />
+
+    <EditText
+        android:id="@+id/dialog_clubs_search_set_services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomEditText"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Szolgáltatások"/>
     
     <Button 
         android:layout_marginTop="10dp"

@@ -1,11 +1,7 @@
 package hu.schonherz.y2014.partyappandroid;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.android.gms.internal.ac;
-
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfList;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfView;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsUpdateableFragment;
 import hu.schonherz.y2014.partyappandroid.activities.LoginActivity;
@@ -13,15 +9,18 @@ import hu.schonherz.y2014.partyappandroid.activities.NewClubActivity;
 import hu.schonherz.y2014.partyappandroid.activities.PendingListActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ProfileActivity;
 import hu.schonherz.y2014.partyappandroid.activities.SetServicesCommunicator;
-import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfList;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnection;
 import hu.schonherz.y2014.partyappandroid.util.communication.InternetConnectionContinue;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.PopupMenu;
@@ -34,7 +33,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,8 +46,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	    R.id.checkBoxDarts, R.id.checkBoxDJ, R.id.checkBoxFnDControl, R.id.checkBoxLiveMusic, R.id.checkBoxMenu,
 	    R.id.checkBoxSportTV, R.id.checkBoxWiFi };
     List<CheckBox> checkBoxes = new ArrayList<CheckBox>();
-    
-    
+
     public ClubsActionBar(ClubsActivity activity) {
 	this.activity = activity;
     }
@@ -94,7 +91,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 	case R.id.actionbar_clubs_button_b:
 	    /* viewPager lapozása a lista nézetre */
-		ClubsActivity.sourceOfView=SourceOfView.LIST;
+	    ClubsActivity.sourceOfView = SourceOfView.LIST;
 	    activity.viewPager.setCurrentItem(0);
 	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(activity
 		    .getResources().getDrawable(R.drawable.ab_selected));
@@ -102,7 +99,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	    break;
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
-		ClubsActivity.sourceOfView=SourceOfView.MAP;
+	    ClubsActivity.sourceOfView = SourceOfView.MAP;
 	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
 		@Override
 		public void onResume() {
@@ -124,40 +121,37 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
 			    null);
 		    adb.setView(view);
-		    
-		   
+
 		    final Dialog d = adb.create();
 		    d.show();
-		    
-		    textViewSelectedServicesNumber = (TextView) d
-			    .findViewById(R.id.dialog_club_search_textview_number_of_selected_services);
 
-		    for(int i = 0; i < Session.getInstance().servicesTokenList.size(); ++i) {
-			checkBoxes.add((CheckBox) d.findViewById(icons[i]));
-		    }
-		    for(int i = 0; i < selectedServices.size(); ++i) {
-			if(Session.getInstance().servicesTokenList.contains(selectedServices.get(i)))
-			checkBoxes.get(Session.getInstance().servicesTokenList.
-				indexOf(selectedServices.get(i))).setChecked(true);
-		    }
-		    
-		    Button servicesButton = (Button) d.findViewById(R.id.dialog_club_search_button_set_services);
+		    final List<String> selectedServices = new ArrayList<String>();
+		    final EditText servicesEditText = (EditText) d.findViewById(R.id.dialog_clubs_search_set_services);
 
-		    servicesButton.setOnClickListener(new OnClickListener() {
+		    servicesEditText.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 			    SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
-			    serviceSetterFragment.show(ClubsActionBar.this, selectedServices, activity.getSupportFragmentManager(), "SetServicesOfClub");
+			    serviceSetterFragment.show(new SetServicesCommunicator() {
+
+				@Override
+				public void onServicesSetted(String result) {
+				    servicesEditText.setText(result);
+
+				}
+			    }, selectedServices, activity.getSupportFragmentManager(), "SetServicesForSearch");
+
 			}
 		    });
+
 		    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-			    EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
-			    EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
+			    final EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
+			    final EditText type = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_type);
 			    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
 
 			    Log.i(this.getClass().getName(), "Eddigi találatok száma: "
@@ -173,9 +167,16 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 				public void run() {
 
 				    Session.getSearchViewClubs().clear();
-				    Session.getSearchViewClubs().addAll(
-					    Session.getInstance().getActualCommunicationInterface()
-						    .getClubsFromCityName(city.getText().toString()));
+				    try {
+					Session.getSearchViewClubs().addAll(
+						Session.getInstance()
+							.getActualCommunicationInterface()
+							.searchClubs(name.getText().toString(),
+								city.getText().toString(), type.getText().toString(),
+								selectedServices, 0, 0));
+				    } catch (Exception e) {
+
+				    }
 				    // Geocoder send the latlng position of the
 				    // places.
 				    Session.getInstance().setPositions(activity);
@@ -190,7 +191,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 					    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
 					    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
 					    ClubsActivity.sourceOfList = SourceOfList.SEARCH;
-					    // Legszélső szűrő ikon beállítása keresésre.
+					    // Legszélső szűrő ikon beállítása
+					    // keresésre.
 					    d.cancel();
 					    Session.getInstance().dismissProgressDialog();
 
