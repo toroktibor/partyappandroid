@@ -10,10 +10,13 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+
+import android.widget.EditText;
 
 public interface CommunicationInterface {
     public User authenticationUser(String nickname, String password);
@@ -49,7 +52,7 @@ public interface CommunicationInterface {
      * @throws Exception
      *             sikertelen adatbázis kommunikációt jelző kivétel
      */
-    public List<Club> searchClubs(String name, String cityname, String type, int offset, int limit) throws Exception;
+    public List<Club> searchClubs(String name, String cityname, String type, List<String> selectedServices, int offset, int limit) throws Exception;
 
     /**
      * Megadott felhasználóhoz tartozó jelszó módosítása a távoli adatbázisban.
@@ -152,4 +155,5 @@ public interface CommunicationInterface {
     public String[] getServices(int club_id);
     
     public void deleteServices(int club_id);
+
 }

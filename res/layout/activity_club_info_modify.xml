@@ -41,6 +41,16 @@
         android:layout_toLeftOf="@+id/club_modify_activity_name_edittext"
         android:entries="@array/clubs_types"
         style="@style/CustomEditText" />
+    
+    <EditText
+        android:id="@+id/club_modify_set_services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/club_modify_activity_type_spinner"
+        style="@style/CustomEditText"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Szolgáltatások"/>
 
     <EditText
         android:id="@+id/club_modify_activity_phonenumber_edittext"
@@ -48,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/club_modify_activity_type_spinner"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/club_modify_activity_type_spinner"
+        android:layout_below="@+id/club_modify_set_services"
         android:ems="10"
         android:inputType="phone"
         android:hint="Szórakozóhely telefonszáma"

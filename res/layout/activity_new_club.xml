@@ -57,7 +57,6 @@
         android:id="@+id/new_club_button_set_services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="setServicesOfClub"
         style="@style/CustomEditText"
         android:focusable="false"
         android:focusableInTouchMode="false"
