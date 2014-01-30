@@ -7,14 +7,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/visitor_targy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/visitor_subject"
-        android:layout_alignParentTop="true"
-        android:text="Üzenet tárgya:" />
-
     <EditText
         android:id="@+id/visitor_subject"
         android:layout_width="match_parent"
@@ -22,36 +14,33 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/visitor_targy"
         android:ems="10"
-        style="@style/CustomPurpleButton">
+        style="@style/CustomEditText"
+        android:hint="ÜZenet tárgya" >
 
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/visitor_uzenet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/visitor_subject"
-        android:text="Üzenet:" />
 
     <EditText
         android:id="@+id/visitor_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/visitor_uzenet"
+        android:layout_below="@+id/visitor_subject"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="8"
         android:ems="10"
         android:layout_above="@+id/visitor_email_send"     
-        android:scrollHorizontally="false" />
+        android:scrollHorizontally="false" 
+        style="@style/CustomEditText"
+        android:hint="Üzenet szövege"/>
 
     <Button
         android:id="@+id/visitor_email_send"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Elküld" />
+        android:text="Elküld"
+        style="@style/CustomPurpleButton"  />
 
 </RelativeLayout>

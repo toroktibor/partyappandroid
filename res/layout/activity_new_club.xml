@@ -18,7 +18,8 @@
         android:id="@+id/new_club_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        style="@style/CustomEditText" >
     </EditText>
 
     <TextView
@@ -31,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPostalAddress" />
+        android:inputType="textPostalAddress"
+        
+        style="@style/CustomEditText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +46,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/clubs_types"
-        android:prompt="@string/clubs_type_spinner_prompt"/>
+        android:prompt="@string/clubs_type_spinner_prompt"
+        
+        style="@style/CustomEditText"/>
 
     <TextView
         android:layout_width="wrap_content"

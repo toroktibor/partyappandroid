@@ -47,7 +47,6 @@ public class ClubInfoModifyActivity extends ActionBarActivity {
 		clubPhonenumberEditText = (EditText) findViewById(R.id.club_modify_activity_phonenumber_edittext);
 		clubEmailEditText = (EditText) findViewById(R.id.club_modify_activity_email_edittext);
 		clubDescriptionEditText = (EditText) findViewById(R.id.club_modify_activity_description_edittext);
-		clubImageView = (ImageView) findViewById(R.id.club_modify_activity_image_imageview);
 		clubModifyButton = (Button) findViewById(R.id.club_modify_activity_modify_button);
 		
 		clubNameEditText.setText(actualClub.name);

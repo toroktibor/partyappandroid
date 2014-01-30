@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/club_event_new_edittext_description"
         android:layout_alignParentRight="true"
-        android:hint="@string/club_event_new_edittext_name" >
+        android:hint="@string/club_event_new_edittext_name"
+        style="@style/CustomEditText" >
 
         <requestFocus />
     </EditText>
@@ -26,7 +27,9 @@
         android:layout_below="@+id/club_event_new_edittext_name"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Esemény napja" />
+        android:hint="Esemény napja" 
+        style="@style/CustomEditText"
+        android:layout_marginRight="3dp"/>
     
     <EditText
         android:id="@+id/club_event_new_edittext_time"
@@ -37,7 +40,8 @@
         android:layout_below="@+id/club_event_new_edittext_name"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Ideje" />
+        android:hint="Ideje" 
+        style="@style/CustomEditText"/>
 
     <EditText
         android:id="@+id/club_event_new_edittext_description"
@@ -47,7 +51,8 @@
         android:layout_below="@+id/club_event_new_edittext_date"
         android:gravity="top"
         android:hint="@string/club_event_new_edittext_description"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        style="@style/CustomEditText" />
 
     <Button
         android:id="@+id/club_event_new_button_new"
@@ -55,7 +60,8 @@
         android:layout_height="@dimen/CustomPurpleButtonHeight"
         android:layout_alignParentBottom="true"
         android:text="@string/club_event_new_button_new"
-        style="@style/CustomPurpleButton" />
+        style="@style/CustomPurpleButton"
+         />
 
     <Spinner
         android:id="@+id/club_event_new_music_type_spinner"
@@ -64,6 +70,7 @@
         android:layout_above="@+id/club_event_new_button_new"
         android:layout_alignLeft="@+id/club_event_new_button_new"
         android:layout_alignParentRight="true"
-        android:entries="@array/event_music_type" />
+        android:entries="@array/event_music_type"
+        style="@style/CustomEditText" />
 
 </RelativeLayout>
