@@ -1123,5 +1123,29 @@ public class Communication implements CommunicationInterface {
 		}
 	}
 
+	@Override
+	public List<Integer> getNotApprovedImages() {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "GETNOTAPPROVEDIDS");
+
+		    String data = httpPost("image.php", post);
+
+		    JSONArray array = new JSONArray(data);
+		    for (int i = 0; i < array.length(); i++) {
+			JSONObject jsonObject = array.getJSONObject(i);
+			list.add(new Integer(jsonObject.getInt("imageid")));
+		    }
+		    for (int i = 0; i < list.size(); i++)
+			Log.e("log", list.get(i).toString());
+		    return list;
+		} catch (Exception e) {	    
+		    Log.e(getClass().getName(), "Hiba a képek listájának lekérésekor", e);
+		}
+
+		return null;
+	}
+
 
 }
