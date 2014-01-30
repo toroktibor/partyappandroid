@@ -36,9 +36,11 @@ public class ClubListAdapter extends ArrayAdapter<Club> {
 		if(!((Club) getItem(position)).highlite_expire.equals("null")){
 			Log.i("próba log", "itt van sárgítás");
 			Log.i("itt", ((Club) getItem(position)).highlite_expire+" "+((Club) getItem(position)).name+" "+position);
-			item.setBackgroundResource(R.drawable.club_item);
+			item.setBackgroundResource(R.drawable.high_club_item1);
+			item.setPadding(15, 7, 7, 7);
 		} else {
 			item.setBackgroundColor( getContext().getResources().getColor(R.color.applicationWindowBackground));
+			item.setPadding(7, 7, 7, 7);
 		}
 	}
 	
