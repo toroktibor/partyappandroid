@@ -199,6 +199,8 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 					public void run() {
 					    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
 					    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
+					    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
+					    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_search));
 					    ClubsActivity.sourceOfList = SourceOfList.SEARCH;
 					    // Legszélső szűrő ikon beállítása
 					    // keresésre.

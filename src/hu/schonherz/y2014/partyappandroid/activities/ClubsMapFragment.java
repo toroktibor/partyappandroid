@@ -96,7 +96,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 					activity.startActivity(i);
 					activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 					Session.getInstance().dismissProgressDialog();
-					if (android.os.Build.VERSION.SDK_INT <= 10) {
+					if (Session.getInstance().oldPhone) {
 					    getActivity().finish();
 					}
 				    }
@@ -107,7 +107,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 		    } else {
 			activity.startActivity(i);
 			activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
-			if (android.os.Build.VERSION.SDK_INT <= 10) {
+			if (Session.getInstance().oldPhone) {
 			    getActivity().finish();
 			}
 		    }
@@ -188,15 +188,14 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
     @Override
     public void updateResults() {
-	//Log.i("MAP", "REFRESH RESULTS ON THE MAP");
+	// Log.i("MAP", "REFRESH RESULTS ON THE MAP");
 	// Make markers from the searchViewClubs and set it to the MarkerList
 	// list.
 	if (getActivity() instanceof ClubActivity) {
 	    makeMarkerFromActualClubPosition();
-	}
-	else if(getActivity() instanceof ClubsActivity) {
-	    makeMarkersFromSearchViewClubs(); 
-	}	// Adding the markers to the googleMap.
+	} else if (getActivity() instanceof ClubsActivity) {
+	    makeMarkersFromSearchViewClubs();
+	} // Adding the markers to the googleMap.
 	if (googleMap != null) {
 	    googleMap.clear();
 	    for (MarkerOptions actMarker : markerList) {
@@ -220,13 +219,10 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
     private void makeMarkerFromActualClubPosition() {
 	Club actClub = ((ClubActivity) getActivity()).actualClub;
-	markerList.add(new MarkerOptions()
-		.title(actClub.name)
-		.snippet(actClub.address)
-		.position(actClub.position))
+	markerList.add(new MarkerOptions().title(actClub.name).snippet(actClub.address).position(actClub.position))
 
-;
-	
+	;
+
     }
 
     private LatLngBounds giveBoundsForMarkerlist() {

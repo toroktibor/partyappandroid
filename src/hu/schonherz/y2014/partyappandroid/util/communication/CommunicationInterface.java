@@ -155,5 +155,8 @@ public interface CommunicationInterface {
     public String[] getServices(int club_id);
     
     public void deleteServices(int club_id);
-
+    
+    public void deleteImage(int imageId);
+    
+    public List<Integer> getNotApprovedImages();
 }
