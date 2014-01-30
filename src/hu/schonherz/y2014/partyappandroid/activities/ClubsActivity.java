@@ -94,7 +94,7 @@ public class ClubsActivity extends ActionBarActivity {
     		} else if(sourceOfList.equals(SourceOfList.OWNERSHIP)){
     			ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_ownership));
     		} else if(sourceOfList.equals(SourceOfList.SEARCH)){
-    			//ib.setImageDrawable(getResources().getDrawable(R.drawable.ab_filter_search)); // ilyen még nincs
+    			ib.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher)); // ilyen még nincs
     		}
     		if(sourceOfView.equals(SourceOfView.LIST)){
     			viewPager.setCurrentItem(0);

@@ -86,7 +86,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 				    activity.startActivity(i);
 				    activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);				 
 				    Session.getInstance().dismissProgressDialog();
-				    if (android.os.Build.VERSION.SDK_INT <= 10) {
+				    if (Session.getInstance().oldPhone) {
 					getActivity().finish();
 				    }
 				    
@@ -97,7 +97,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 		} else {
 		    activity.startActivity(i);
 		    activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
-		    if (android.os.Build.VERSION.SDK_INT <= 10) {
+		    if (Session.getInstance().oldPhone) {
 			getActivity().finish();
 		    }
 		}
