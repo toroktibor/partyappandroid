@@ -30,7 +30,7 @@
         android:theme="@style/CustomTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCHtqUpvqTs1lZI8uxk4hSUF10T_6RiH7k" />
+            android:value="AIzaSyADkuHEIKDZnlqQTMsAZHdMLOIEP3po1f4" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -81,16 +81,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventsActivityntsActivity"
-            android:label="@string/title_activity_club_events"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="hu.schonherz.y2014.partyappandroid.ClubGaleryActivity"
-            android:label="@string/title_activity_club_galery"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="hu.schonherz.y2014.partyappandroid.activities.ClubEventDetailsActivity"
             android:label="@string/title_activity_club_event_details"
             android:screenOrientation="portrait" >
@@ -106,7 +96,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="hu.schonherz.y2014.partyappandroid.ClubLocationActivity"
+            android:name="hu.schonherz.y2014.partyappandroid.activities.ClubLocationActivity"
             android:label="@string/title_activity_club_location"
             android:screenOrientation="portrait" >
         </activity>
