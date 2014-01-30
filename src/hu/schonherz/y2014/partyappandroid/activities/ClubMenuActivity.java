@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.MenuActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.MenuItemsListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
@@ -19,12 +20,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class ClubMenuActivity extends ActionBarActivity {
 
-    Button addButton;
-    Button importButton;
 
     @Override
     public boolean onContextItemSelected(android.view.MenuItem item) {
@@ -62,19 +62,16 @@ public class ClubMenuActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	new MenuActionBar(this).setLayout();
+	
 	setContentView(R.layout.activity_club_menu);
 
-	// actoinbar begyalazasa
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
-	setContentView(R.layout.activity_club_menu);
-
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.club__menu_actoinbar);
-
+	
+	
 	// buttonok lekerese
-	addButton = (Button) findViewById(R.id.club_menu_item_actionbar_add_button);
-	importButton = (Button) findViewById(R.id.club_menu_item_actionbar_import_button);
+	ImageView addButton = (ImageView) findViewById(R.id.actionbar_menu_button_a);
+	ImageView importButton = (ImageView) findViewById(R.id.actionbar_menu_button_b);
 	addButton.setOnClickListener(new OnClickListener() {
 
 	    @Override
@@ -93,6 +90,7 @@ public class ClubMenuActivity extends ActionBarActivity {
 
 	    }
 	});
+
 
 	// tulajextra funkcioi
 	if (!ClubActivity.isClubOfActualUser &&  Session.getActualUser().getType()!=1) {
