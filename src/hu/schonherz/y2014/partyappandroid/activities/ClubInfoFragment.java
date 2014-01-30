@@ -1,15 +1,10 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,12 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -95,7 +85,7 @@ public class ClubInfoFragment extends Fragment {
 		clubDescriptionTextView.setText(actualClub.description);
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("Szolgáltatások");
+		sb.append("Szolgáltatások:\n");
 		String actServ = new String();
 		
 		Log.e("INFO", "NO. OF SERVICES" + actualClub.services.size() );

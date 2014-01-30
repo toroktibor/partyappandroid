@@ -152,7 +152,7 @@ public interface CommunicationInterface {
     
     public String setHighlightExpire(int clubId, int days);
     
-    public String[] getServices(int club_id);
+    public List<String> getServices(int club_id);
     
     public void deleteServices(int club_id);
     

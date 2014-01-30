@@ -1070,7 +1070,7 @@ public class Communication implements CommunicationInterface {
 	}
 
 	@Override
-	public String[] getServices(int club_id) {
+	public List<String> getServices(int club_id) {
 		ArrayList<String> outList = new ArrayList<String>();
 		try {
 		    HashMap<String, String> post = new HashMap<String, String>();
@@ -1084,12 +1084,8 @@ public class Communication implements CommunicationInterface {
 		    	JSONObject jo = ja.getJSONObject(i);
 		    	outList.add(jo.getString("service_name"));
 		    }
-		    
-		    String[] ret = new String[outList.size()];
-		    for(int i =0;i<outList.size();i++){
-		    	ret[i]=outList.get(i);
-		    }
-		    return ret;
+
+		    return outList;
 		} catch (Exception e) {
 
 		}
