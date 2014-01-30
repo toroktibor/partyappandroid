@@ -58,24 +58,28 @@ public class RegisterActivity extends ActionBarActivity implements
 				return;
 			}
 			if (userPassword.isEmpty()) {
-				new ErrorToast(this, "Nem adtál meg nevet!").show();
+				new ErrorToast(this, "Nem adtál meg jelszót!").show();
 				return;
 			}
 			if (!userPassword2.isEmpty()) {
 				if (!userPassword.equals(userPassword2)) {
-					new ErrorToast(this, "Nem adtál meg nevet!").show();
+					new ErrorToast(this, "Nem egyezik meg a két jelszó!").show();
 					return;
 				}
 			} else {
+				new ErrorToast(this, "Nem ismételted meg a jelszót!").show();
 				return;
 			}
 			if (userEmail.isEmpty()) {
+				new ErrorToast(this, "Nem adtad meg az e-mail címed!").show();
 				return;
 			}
 			if (userBirthday.isEmpty()) {
+				new ErrorToast(this, "Nem adtad meg a születési dátumod!").show();
 				return;
 			}
 			if (userSex.isEmpty()) {
+				new ErrorToast(this, "Nem nem adtad meg a nemed!").show();
 				return;
 			}
 			final int userSexInt = userSex.equals("Férfi") ? 0 : 1;
