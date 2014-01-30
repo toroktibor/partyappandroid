@@ -147,7 +147,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 			@Override
 			public void onClick(View v) {
 			    SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
-			    serviceSetterFragment.show(ClubsActionBar.this, activity.getSupportFragmentManager(), "SetServicesOfClub");
+			    serviceSetterFragment.show(ClubsActionBar.this, selectedServices, activity.getSupportFragmentManager(), "SetServicesOfClub");
 			}
 		    });
 		    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {

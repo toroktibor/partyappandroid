@@ -29,20 +29,30 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
     public static ClubsActionBar cab;
     Button done, cancel;
 
-    Integer[] icons = { R.id.checkBoxBilliard, R.id.checkBoxBowling, R.id.checkBoxCoctailBar, R.id.checkBoxDance,
+    static Integer[] checkBoxIDs = { R.id.checkBoxBilliard, R.id.checkBoxBowling, R.id.checkBoxCoctailBar, R.id.checkBoxDance,
 	    R.id.checkBoxDarts, R.id.checkBoxDJ, R.id.checkBoxFnDControl, R.id.checkBoxLiveMusic, R.id.checkBoxMenu,
 	    R.id.checkBoxSportTV, R.id.checkBoxWiFi };
-
-
-    List<CheckBox> checkboxes = new ArrayList<CheckBox>();
+    static List<CheckBox> checkboxes = new ArrayList<CheckBox>();
 
     
-    public void show(ClubsActionBar cab, FragmentManager manager, String tag) {
+    public void show(ClubsActionBar cab, List<String> servSelected, FragmentManager manager, String tag) {
+	if(servSelected != null) 
+	    for (String actServ : servSelected) {		
+		Log.e("SERVS COMPARE", "#"+actServ + "#==#" + Session.getInstance().servicesTokenList.
+			get((Session.getInstance().servicesTokenList.indexOf(actServ)))+"#");
+		(checkboxes.get(Session.getInstance().servicesTokenList.indexOf(actServ))).setChecked(true);
+	    }
 	communicator = (SetServicesCommunicator) cab;
         super.show(manager, tag);
     }
     
-    public void show(Activity activity ,FragmentManager manager, String tag) {
+    public void show(Activity activity , List<String> servSelected ,FragmentManager manager, String tag) {
+	if(servSelected != null) 
+	    for (String actServ : servSelected) {		
+		Log.e("SERVS COMPARE", "#"+actServ + "#==#" + Session.getInstance().servicesTokenList.
+			get((Session.getInstance().servicesTokenList.indexOf(actServ)))+"#");
+		(checkboxes.get(Session.getInstance().servicesTokenList.indexOf(actServ))).setChecked(true);
+	    }
 	communicator = (SetServicesCommunicator) activity;
         super.show(manager, tag);
     }
@@ -58,8 +68,8 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 	cancel = (Button) view.findViewById(R.id.button_club_services_cancel);
 	done.setOnClickListener(this);
 	cancel.setOnClickListener(this);
-	for (int i = 0; i < icons.length; ++i) {
-	    checkboxes.add((CheckBox) view.findViewById(icons[i]));
+	for (int i = 0; i < checkBoxIDs.length; ++i) {
+	    checkboxes.add((CheckBox) view.findViewById(checkBoxIDs[i]));
 	    checkboxes.get(i).setOnClickListener(this);
 	    checkboxes.get(i).setOnLongClickListener(new OnLongClickListener() {
 
@@ -67,8 +77,8 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 		public boolean onLongClick(View v) {
 		    Log.e("SETSERVICESFRAGMENT", "DIALOGFRAGMENT LONGONCLICKLISTENER CALLED");
 		    int j = 0;
-		    while (j < icons.length) {
-			if (v.getId() == icons[j]) {
+		    while (j < checkBoxIDs.length) {
+			if (v.getId() == checkBoxIDs[j]) {
 			    Toast.makeText(v.getContext(), v.getContentDescription(), Toast.LENGTH_LONG).show();
 			    break;
 			}
@@ -87,12 +97,12 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
     public void onClick(View v) {
 	Log.e("SETSERVICESFRAGMENT", "DIALOGFRAGMENT ONCLICKLISTENER CALLED");
 	int j = 0;
-	while (j < icons.length) {
-	    if (v.getId() == icons[j])
+	while (j < checkBoxIDs.length) {
+	    if (v.getId() == checkBoxIDs[j])
 		break;
 	    ++j;
 	}
-	if (j < icons.length) {
+	if (j < checkBoxIDs.length) {
 	    Log.e("SETSERVICESFRAGMENT", "ONE OF THE SERVICES ICON CLICKED...");
 	} else if (v.getId() == R.id.button_club_services_cancel) {
 	    Log.e("SETSERVICESFRAGMENT", "CANCEL BUTTON CLICKED");
@@ -101,7 +111,7 @@ public class SetServicesOfClubFragment extends DialogFragment implements OnClick
 
 	    Log.e("SETSERVICESFRAGMENT", "DONE BUTTON CLICKED");
 	    List<String> result = new ArrayList<String>();
-	    for (int i = 0; i < icons.length; ++i) {
+	    for (int i = 0; i < checkboxes.size(); ++i) {
 		if (checkboxes.get(i).isChecked()) {
 		    Log.e("SETSERVICESFRAGMENT", "SERVICES: " + Session.getInstance().servicesTokenList.get(i));
 		    result.add(Session.getInstance().servicesTokenList.get(i));
