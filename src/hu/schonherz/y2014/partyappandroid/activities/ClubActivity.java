@@ -91,10 +91,9 @@ public class ClubActivity extends ActionBarActivity {
     }
 
     public void showOnTheMap(View v) {
-	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	Session.getInstance().getSearchViewClubs().get(clubListPosition);
+	ClubLocationActivity.actualClub = actualClub;
 
-	Intent showOnMapIntent = new Intent(getApplicationContext(), ClubLocationActivity.class);
+	Intent showOnMapIntent = new Intent(getApplicationContext(), ClubLocationActivity.class);	
 	startActivity(showOnMapIntent);
     }
     

@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClubLocationActivity" >
+	>
     <fragment
-        android:id="@+id/mapClubFragment"
+        android:id="@+id/mapFragment2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment" />
@@ -13,5 +13,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
         android:background="@android:color/transparent" />
-    
 </RelativeLayout>
