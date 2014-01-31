@@ -42,22 +42,6 @@ public class LoginActivity extends ActionBarActivity {
     class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
 
         @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            /*
-             * Here you can call myLocationHelper.getLat() and
-             * myLocationHelper.getLong() to get the location data.
-             */
-            if (mGpsLocation.gotLocation() == true) {
-                Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
-                Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
-            }
-        }
-
-        @Override
         protected Boolean doInBackground(Boolean... params) {
 
             // while the location helper has not got a lock
@@ -66,6 +50,9 @@ public class LoginActivity extends ActionBarActivity {
                     break;
                 }
             }
+
+            Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
+            Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
 
             return true;
         }
