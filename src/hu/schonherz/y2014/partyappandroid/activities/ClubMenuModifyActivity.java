@@ -1,9 +1,11 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -134,8 +136,26 @@ public class ClubMenuModifyActivity extends ActionBarActivity {
 		actualMenuItem.currency = currency;
 		actualMenuItem.unit = unit;
 		actualMenuItem.discount = discount;
-		Session.getInstance().getActualCommunicationInterface().updateAMenuItem(actualMenuItem);
-		finish();
+		
+		Session.getInstance().progressDialog = ProgressDialog.show(ClubMenuModifyActivity.this, "Kérlek várj",
+                "Módosítás folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	Session.getInstance().getActualCommunicationInterface().updateAMenuItem(actualMenuItem);
+            	ClubMenuModifyActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(ClubMenuModifyActivity.this, "Sikeres módosítás!").show();
+                        finish();
+                    }
+                });
+            }
+        }).start();
 	    }
 	});
 
