@@ -101,120 +101,107 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
 	    ClubsActivity.sourceOfView = SourceOfView.MAP;
-	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
-		@Override
-		public void onResume() {
-		    activity.viewPager.setCurrentItem(1);
-		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(activity
-			    .getResources().getDrawable(R.drawable.ab_selected));
-		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
 
-		}
-	    });
+	    activity.viewPager.setCurrentItem(1);
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(activity
+		    .getResources().getDrawable(R.drawable.ab_selected));
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
+
 	    break;
 	case R.id.actionbar_clubs_button_d: // KERESÉS
 
-	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
+	    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
+	    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search, null);
+	    adb.setView(view);
+
+	    final Dialog d = adb.create();
+	    d.show();
+
+	    final List<String> selectedServices = new ArrayList<String>();
+	    final EditText servicesEditText = (EditText) d.findViewById(R.id.dialog_clubs_search_set_services);
+
+	    servicesEditText.setOnClickListener(new OnClickListener() {
 
 		@Override
-		public void onResume() {
-		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		    ViewGroup view = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.dialog_clubs_search,
-			    null);
-		    adb.setView(view);
-
-		    final Dialog d = adb.create();
-		    d.show();
-
-		    final List<String> selectedServices = new ArrayList<String>();
-		    final EditText servicesEditText = (EditText) d.findViewById(R.id.dialog_clubs_search_set_services);
-
-		    servicesEditText.setOnClickListener(new OnClickListener() {
+		public void onClick(View v) {
+		    SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
+		    serviceSetterFragment.show(new SetServicesCommunicator() {
 
 			@Override
-			public void onClick(View v) {
-			    SetServicesOfClubFragment serviceSetterFragment = new SetServicesOfClubFragment();
-			    serviceSetterFragment.show(new SetServicesCommunicator() {
-
-				@Override
-				public void onServicesSetted(String result) {
-				    servicesEditText.setText(result);
-
-				}
-			    }, selectedServices, activity.getSupportFragmentManager(), "SetServicesForSearch");
+			public void onServicesSetted(String result) {
+			    servicesEditText.setText(result);
 
 			}
-		    });
+		    }, selectedServices, activity.getSupportFragmentManager(), "SetServicesForSearch");
 
-		    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {
+		}
+	    });
+
+	    d.findViewById(R.id.dialog_clubs_search_button).setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+
+		    final EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
+		    final Spinner type = (Spinner) d.findViewById(R.id.dialog_clubs_search_club_type_spinner);
+		    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
+		    final String newClubType = String.valueOf(type.getSelectedItem());
+		    Log.i(this.getClass().getName(), "Eddigi találatok száma: " + Session.getSearchViewClubs().size());
+		    Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["
+			    + newClubType + "] város:[" + city.getText().toString() + "]");
+
+		    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
+			    "Szórakozóhelyek keresése...", true, false);
+		    new NetThread(activity, new Runnable() {
 
 			@Override
-			public void onClick(View v) {
+			public void run() {
 
-			    final EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
-			    final Spinner type = (Spinner) d.findViewById(R.id.dialog_clubs_search_club_type_spinner);
-			    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
-			    final String newClubType = String.valueOf(type.getSelectedItem());
-			    Log.i(this.getClass().getName(), "Eddigi találatok száma: "
+			    Session.getSearchViewClubs().clear();
+			    try {
+				if (newClubType.equals("Bármelyik"))
+				    Session.getSearchViewClubs().addAll(
+					    Session.getInstance()
+						    .getActualCommunicationInterface()
+						    .searchClubs(name.getText().toString(), city.getText().toString(),
+							    "", selectedServices, 0, 0));
+				else
+				    Session.getSearchViewClubs().addAll(
+					    Session.getInstance()
+						    .getActualCommunicationInterface()
+						    .searchClubs(name.getText().toString(), city.getText().toString(),
+							    newClubType, selectedServices, 0, 0));
+			    } catch (Exception e) {
+
+			    }
+			    // Geocoder send the latlng position of the
+			    // places.
+			    Session.getInstance().setPositions(activity);
+
+			    Log.i(this.getClass().getName(), "Keresési találatok száma: "
 				    + Session.getSearchViewClubs().size());
-			    Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["
-				    + newClubType + "] város:[" + city.getText().toString() + "]");
 
-			    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
-				    "Szórakozóhelyek keresése...", true, false);
-			    new NetThread(activity,new Runnable() {
+			    activity.runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
-
-				    Session.getSearchViewClubs().clear();
-				    try {
-					if(newClubType.equals("Bármelyik"))
-					    Session.getSearchViewClubs().addAll(
-							Session.getInstance()
-								.getActualCommunicationInterface()
-								.searchClubs(name.getText().toString(),
-									city.getText().toString(), "",
-									selectedServices, 0, 0));
-					else
-					Session.getSearchViewClubs().addAll(
-						Session.getInstance()
-							.getActualCommunicationInterface()
-							.searchClubs(name.getText().toString(),
-								city.getText().toString(), newClubType,
-								selectedServices, 0, 0));
-				    } catch (Exception e) {
-
-				    }
-				    // Geocoder send the latlng position of the
-				    // places.
-				    Session.getInstance().setPositions(activity);
-
-				    Log.i(this.getClass().getName(), "Keresési találatok száma: "
-					    + Session.getSearchViewClubs().size());
-
-				    activity.runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-					    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
-					    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
-					    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
-					    ib.setImageDrawable(activity.getResources().getDrawable(R.drawable.ab_filter_search));
-					    ClubsActivity.sourceOfList = SourceOfList.SEARCH;
-					    // Legszélső szűrő ikon beállítása
-					    // keresésre.
-					    d.cancel();
-					    Session.getInstance().dismissProgressDialog();
-
-					}
-				    });
+				    ((ClubsUpdateableFragment) activity.fragments[0]).updateResults();
+				    ((ClubsUpdateableFragment) activity.fragments[1]).updateResults();
+				    ImageView ib = (ImageView) activity.findViewById(R.id.actionbar_clubs_button_a);
+				    ib.setImageDrawable(activity.getResources()
+					    .getDrawable(R.drawable.ab_filter_search));
+				    ClubsActivity.sourceOfList = SourceOfList.SEARCH;
+				    // Legszélső szűrő ikon beállítása
+				    // keresésre.
+				    d.cancel();
+				    Session.getInstance().dismissProgressDialog();
 
 				}
-			    }).start();
+			    });
 
 			}
-		    });
+		    }).start();
+
 		}
 	    });
 
@@ -303,7 +290,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 		    "Közeli helyek keresése...", true, false);
-	    new NetThread(activity,new Runnable() {
+	    new NetThread(activity, new Runnable() {
 
 		@Override
 		public void run() {
@@ -334,19 +321,20 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case 2: // KEDVENCEK
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 		    "Kedvencek betöltése...", true, false);
-	    new NetThread(activity,new Runnable() {
+	    new NetThread(activity, new Runnable() {
 
 		@Override
 		public void run() {
-		    
+
 		    Session.getInstance().getSearchViewClubs().clear();
-		    Session.getInstance().getSearchViewClubs()
+		    Session.getInstance()
+			    .getSearchViewClubs()
 			    .addAll(
 
-			            Session.getInstance().getActualCommunicationInterface()
-	                                .getFavoriteClubsFromUserId(Session.getActualUser().getId())
-			            
-			            );
+			    Session.getInstance().getActualCommunicationInterface()
+				    .getFavoriteClubsFromUserId(Session.getActualUser().getId())
+
+			    );
 		    Session.getInstance().setPositions(activity);
 
 		    activity.runOnUiThread(new Runnable() {
@@ -370,17 +358,19 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case 3: // HELYEIM
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj", "Helyeid betöltése...",
 		    true, false);
-	    new NetThread(activity,new Runnable() {
+	    new NetThread(activity, new Runnable() {
 
 		@Override
 		public void run() {
 		    Session.getInstance().getSearchViewClubs().clear();
-		    Session.getInstance().getSearchViewClubs().addAll(
+		    Session.getInstance()
+			    .getSearchViewClubs()
+			    .addAll(
 
-		            Session.getInstance().getActualCommunicationInterface()
-                            .getOwnedClubsFromUserId(Session.getActualUser().getId())
-		            
-		            );
+			    Session.getInstance().getActualCommunicationInterface()
+				    .getOwnedClubsFromUserId(Session.getActualUser().getId())
+
+			    );
 		    Session.getInstance().setPositions(activity);
 		    activity.runOnUiThread(new Runnable() {
 
