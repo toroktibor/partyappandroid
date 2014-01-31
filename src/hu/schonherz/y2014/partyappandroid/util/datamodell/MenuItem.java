@@ -21,4 +21,14 @@ public class MenuItem {
 	this.menu_category = menu_category;
 	this.menu_sort = menu_sort;
     }
+    
+    public int getPositionCurrencySpinner(){
+    	if(this.currency.equals("HUF"))
+    		return 0;
+    	if(this.currency.equals("EUR"))
+    		return 1;
+    	if(this.currency.equals("USD"))
+    		return 2;
+    	return 0;
+    }
 }

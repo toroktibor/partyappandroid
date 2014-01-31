@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import java.sql.Date;
+
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -10,6 +12,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -91,6 +94,7 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 			    .show();
 		    return;
 		}
+		Log.e("EVENT", Date.valueOf(time) + "==" + (new java.util.Date()).toLocaleString() );
 		int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date+" "+time, "", musicType);
 		Event newEvent = new Event(eventId, name, description, date+" "+time, musicType, 1);
 		Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
