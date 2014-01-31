@@ -1,26 +1,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/club_info_textview_name"
+    <RelativeLayout
+        android:id="@+id/club_info_firstblock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Szórakozóhely neve"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginBottom="10dp"
+        android:background="@color/infoBlockBackground"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:id="@+id/club_info_textview_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Szórakozóhely neve"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/club_info_textview_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/club_info_textview_name"
+            android:layout_marginBottom="6dp"
+            android:text="Szórakozóhely pontos címe" />
+
+        <RatingBar
+            android:id="@+id/club_info_ratingbar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/club_info_textview_address"
+            android:layout_marginBottom="6dp"
+            android:onClick="onClickHandler"
+            android:rating="3" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/club_info_textview_address"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewServices"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/club_info_textview_name"
+        android:layout_below="@+id/club_info_firstblock"
         android:layout_marginBottom="6dp"
-        android:text="Szórakozóhely pontos címe" />
+        android:inputType="textMultiLine"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="8dp"
+        android:text="Szolgáltatások" />
 
     <TextView
         android:id="@+id/club_info_textview_description"
@@ -28,58 +59,45 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewServices"
         android:inputType="textMultiLine"
+        android:paddingBottom="0dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="0dp"
         android:text="Szórakozóhely leírása" />
 
-    <RatingBar
-        android:id="@+id/club_info_ratingbar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/club_info_textview_address"
-        android:onClick="onClickHandler"
-        android:layout_marginBottom="6dp"
-        android:rating="3" />
-    
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:weightSum="3">
-    
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:weightSum="3" >
 
-    <ImageButton
-        android:id="@+id/phone_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="phoneCall"
-        android:src="@drawable/ic_launcher"
-        android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/phone_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="phoneCall"
+            android:src="@drawable/ic_launcher" />
 
-    <ImageButton
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="message"
-        android:src="@drawable/ic_launcher"
-         android:layout_weight="1" />
-    
-    <ImageButton
-        android:id="@+id/showOnTheMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showOnTheMap"
-        android:src="@drawable/ic_launcher"
-         android:layout_weight="1"  />
-    
+        <ImageButton
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="message"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/showOnTheMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showOnTheMap"
+            android:src="@drawable/ic_launcher" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewServices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/club_info_ratingbar"
-        android:inputType="textMultiLine"
-        android:layout_marginBottom="6dp"
-        android:text="Szolgáltatások" />
 
 </RelativeLayout>
