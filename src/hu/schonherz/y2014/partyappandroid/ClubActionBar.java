@@ -85,8 +85,9 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             PopupMenu popupmenu = new PopupMenu(activity, v);
             MenuItem item;
 
-            //item = popupmenu.getMenu().add(0, 999, 0, "[debug] Adatok frissítése");
-            //item.setOnMenuItemClickListener(this);
+            // item = popupmenu.getMenu().add(0, 999, 0,
+            // "[debug] Adatok frissítése");
+            // item.setOnMenuItemClickListener(this);
 
             item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
             item.setOnMenuItemClickListener(this);
@@ -94,11 +95,10 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                 item = popupmenu.getMenu().add(0, 2, 0, "Képfeltöltés");
                 item.setOnMenuItemClickListener(this);
             }
-            
-            if(activity.viewPager.getCurrentItem() == 1)
-            {
+
+            if (activity.viewPager.getCurrentItem() == 1) {
                 item = popupmenu.getMenu().add(0, 8, 0, "Esemény létrehozása");
-                item.setOnMenuItemClickListener(this);                
+                item.setOnMenuItemClickListener(this);
             }
 
             int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
@@ -155,7 +155,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 3:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new NetThread(activity,new Runnable() {
+            new NetThread(activity, new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().setOwnerForClub(user_id, club_id);
@@ -176,7 +176,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 4:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new NetThread(activity,new Runnable() {
+            new NetThread(activity, new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().deleteFavoriteClubForUser(club_id, user_id);
@@ -196,7 +196,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 5:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new NetThread(activity,new Runnable() {
+            new NetThread(activity, new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().setFavoriteClubForUser(club_id, user_id);
@@ -261,16 +261,18 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
 
                         @Override
                         public void run() {
-                            String highExpire = Session.getInstance()
-                                    .getActualCommunicationInterface().setHighlightExpire(clubId, days);
-                            
+                            String highExpire = Session.getInstance().getActualCommunicationInterface()
+                                    .setHighlightExpire(clubId, days);
+
                             Session.getSearchViewClubs().get(clubListPosition).highlite_expire = highExpire;
-                            Club club1 = Session.getActualUser().searchInLocalList(clubId, Session.getActualUser().favoriteClubs);
-                            if( club1 != null ){
+                            Club club1 = Session.getActualUser().searchInLocalList(clubId,
+                                    Session.getActualUser().favoriteClubs);
+                            if (club1 != null) {
                                 club1.highlite_expire = highExpire;
                             }
-                            club1 = Session.getActualUser().searchInLocalList(clubId, Session.getActualUser().usersClubs);
-                            if( club1 != null ){
+                            club1 = Session.getActualUser().searchInLocalList(clubId,
+                                    Session.getActualUser().usersClubs);
+                            if (club1 != null) {
                                 club1.highlite_expire = highExpire;
                             }
 
