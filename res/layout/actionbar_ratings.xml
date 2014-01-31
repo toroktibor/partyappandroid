@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CustomActionBar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/actionbar_ratings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:text="Értékelések"
+        android:textColor="@color/actionBarTextColor"
+        android:textSize="19sp" />
+
+    <ImageView
+        android:id="@+id/actionbar_ratings_button_a"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="?attr/actionBarItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/menu_add"
+        android:text="Hozzáadás" />
+
+</RelativeLayout>

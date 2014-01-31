@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubRatingsActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfList;
 import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity.SourceOfView;
@@ -38,16 +39,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MenuActionBar{
+public class RatingsActionBar{
 
-    private final ClubMenuActivity activity;
+    private final ClubRatingsActivity activity;
 
-    public MenuActionBar(ClubMenuActivity activity) {
+    public RatingsActionBar(ClubRatingsActivity activity) {
 	this.activity = activity;
     }
 
     public void setLayout() {
-	ViewGroup actionBarLayout = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.actionbar_menu, null);
+	ViewGroup actionBarLayout = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.actionbar_ratings, null);
 	ActionBar ab = activity.getSupportActionBar();
 
 	ab.setDisplayShowHomeEnabled(false);
@@ -56,7 +57,6 @@ public class MenuActionBar{
 	ab.setCustomView(actionBarLayout);
 
     }
-
 
    
 }

@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.RatingsActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.RatingListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -14,31 +15,30 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class ClubRatingsActivity extends ActionBarActivity {
 
     List<Rating> ratingsList;
     ListView ratingsListView;
-    Button addButton;
+    ImageView addButton;
     int clubListPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
-	setContentView(R.layout.activity_club_ratings);
 
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.rating_list_actionbar);
+	new RatingsActionBar(this).setLayout();
+	
+	setContentView(R.layout.activity_club_ratings);
 
 	clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
 
 	ratingsListView = (ListView) findViewById(R.id.club_ratings_list);
 
-	addButton = (Button) findViewById(R.id.rating_list_actionbar_add_button);
+	addButton = (ImageView) findViewById(R.id.actionbar_ratings_button_a);
 	addButton.setOnClickListener(new OnClickListener() {
 
 	    @Override
@@ -52,7 +52,7 @@ public class ClubRatingsActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
-	addButton.setVisibility(View.VISIBLE);
+	//addButton.setVisibility(View.VISIBLE);
 	if (ratingsList == null) {
 
 	} else {
