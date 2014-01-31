@@ -27,7 +27,6 @@ import android.widget.ListView;
 public class ClubEventsFragment extends Fragment {
 
     ListView eventsListView;
-    Button addButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,13 +51,6 @@ public class ClubEventsFragment extends Fragment {
 
 
 	rootView.addView(eventsListView);
-
-	// tulajextra funkcioi
-	if (ClubActivity.isClubOfActualUser || Session.getActualUser().getType()==1) {
-	    registerForContextMenu(eventsListView);
-	} else {
-	    addButton.setVisibility(View.INVISIBLE);
-	}
 
 	return rootView;
     }
