@@ -155,7 +155,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 3:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new Thread(new Runnable() {
+            new NetThread(activity,new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().setOwnerForClub(user_id, club_id);
@@ -176,7 +176,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 4:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new Thread(new Runnable() {
+            new NetThread(activity,new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().deleteFavoriteClubForUser(club_id, user_id);
@@ -196,7 +196,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         case 5:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
                     "A művelet folyamatban van..");
-            new Thread(new Runnable() {
+            new NetThread(activity,new Runnable() {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().setFavoriteClubForUser(club_id, user_id);
@@ -257,7 +257,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                     Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
                             "Kiemelés folyamatban...", true, false);
 
-                    new Thread(new Runnable() {
+                    new NetThread(activity, new Runnable() {
 
                         @Override
                         public void run() {

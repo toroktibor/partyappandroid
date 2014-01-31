@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.services.GPSLocation;
@@ -240,7 +241,7 @@ final AutoCompleteTextView nameEditText = (AutoCompleteTextView) findViewById(R.
 
 			Session.getInstance().progressDialog = ProgressDialog.show(this,
 					"Kérlek várj", "Bejelentkezés folyamatban...", true, false);
-			new Thread(r).start();
+			new NetThread(this,r).start();
 
 			break;
 

@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.SetServicesOfClubFragment;
@@ -88,7 +89,7 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
 
 		Session.getInstance().progressDialog=ProgressDialog.show(NewClubActivity.this, "Kérlek várj", "Hozzáadás folyamatban...", true, false);
 		    
-		new Thread(new Runnable() {
+		new NetThread(NewClubActivity.this,new Runnable() {
 		    
 		    @Override
 		    public void run() {

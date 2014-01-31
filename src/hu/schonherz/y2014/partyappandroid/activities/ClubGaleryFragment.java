@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ImageUtils;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.GridViewAdapter;
 import hu.schonherz.y2014.partyappandroid.adapters.ImageItem;
@@ -8,17 +9,10 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.GaleryImage;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,22 +21,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -229,7 +219,7 @@ public class ClubGaleryFragment extends Fragment {
 
                 Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
                         "Kép feltöltése...", true, false);
-                new Thread(new Runnable() {
+                new NetThread(getActivity(),new Runnable() {
 
                     @Override
                     public void run() {
@@ -289,7 +279,7 @@ public class ClubGaleryFragment extends Fragment {
 
                 Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
                         "Kép feltöltése...", true, false);
-                new Thread(new Runnable() {
+                new NetThread(getActivity(),new Runnable() {
 
                     @Override
                     public void run() {
