@@ -13,6 +13,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -109,6 +110,7 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
                                 .getActualCommunicationInterface()
                                 .addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description,
                                         date + " " + time, "", musicType);
+                        Log.i("asdasd",date + " " + time);
                         Event newEvent = new Event(eventId, name, description, date + " " + time, musicType, 1);
                         Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
                         ClubEventNewActivity.this.runOnUiThread(new Runnable() {
