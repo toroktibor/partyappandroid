@@ -1,10 +1,12 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.GaleryImage;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -72,17 +74,57 @@ public class PedingFullImageActivity extends Activity {
     public void onClickHandler(View v) {
         switch (v.getId()) {
         case R.id.peding_full_image_button_accept:
-            Session.getInstance().getActualCommunicationInterface()
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Elfogadás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface()
                     .acceptImage(PendingImageActivity.images.get(currentImageID).getId());
-            PendingImageActivity.images.remove(currentImageID);
-            finish();
+                    PendingImageActivity.images.remove(currentImageID);
+
+                    PedingFullImageActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PedingFullImageActivity.this, "Sikeres elfogadás!").show();
+                            finish();
+                        }
+                    });
+                }
+            }).start();
+
             break;
 
         case R.id.peding_full_image_button_decline:
-            Session.getInstance().getActualCommunicationInterface()
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Visszautasítás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface()
                     .declineImage(PendingImageActivity.images.get(currentImageID).getId());
-            PendingImageActivity.images.remove(currentImageID);
-            finish();
+                    PendingImageActivity.images.remove(currentImageID);
+
+                    PedingFullImageActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PedingFullImageActivity.this, "Sikeres visszautasítás!").show();
+                            finish();
+                        }
+                    });
+                }
+            }).start();
+
             break;
 
         default:

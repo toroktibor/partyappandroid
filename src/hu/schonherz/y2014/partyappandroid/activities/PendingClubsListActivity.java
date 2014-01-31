@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.ClubListAdapter;
@@ -8,6 +10,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -30,7 +33,7 @@ public class PendingClubsListActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_pending_clubs_list);
 
-        newClubsList = Session.getInstance().getActualCommunicationInterface().getNotApprovedClubs();
+        newClubsList = PendingListActivity.newClubsList;
 
         newClubsListView = (ListView) findViewById(R.id.pending_clubs_listview);
         registerForContextMenu(newClubsListView);
@@ -39,18 +42,56 @@ public class PendingClubsListActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(android.view.MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
-        int club_id = newClubsList.get(index).id;
+        final int index = info.position;
+        final int club_id = newClubsList.get(index).id;
         switch (item.getItemId()) {
         case R.id.accept_something:
-            Session.getInstance().getActualCommunicationInterface().approveClub(club_id);
-            newClubsList.remove(index);
-            onResume();
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Elfogadás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().approveClub(club_id);
+                    newClubsList.remove(index);
+
+                    PendingClubsListActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingClubsListActivity.this, "Sikeres elfogadás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
+  
             return true;
         case R.id.decline_something:
-            Session.getInstance().getActualCommunicationInterface().declineNewClub(club_id);
-            newClubsList.remove(index);
-            onResume();
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Visszautasítás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().declineNewClub(club_id);
+                    newClubsList.remove(index);
+
+                    PendingClubsListActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingClubsListActivity.this, "Sikeres visszautasítás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
             return true;
         default:
             return super.onContextItemSelected(item);

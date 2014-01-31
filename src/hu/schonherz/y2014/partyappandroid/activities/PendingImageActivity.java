@@ -1,6 +1,8 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.ImageUtils;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.GridViewAdapter;
@@ -10,6 +12,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -37,13 +40,7 @@ public class PendingImageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_pending_image);
 
         images.clear();
-        ArrayList<Integer> imageIDList = (ArrayList<Integer>) Session.getInstance().getActualCommunicationInterface()
-                .getNotApprovedImages();
-        Log.i("asd", "" + imageIDList.size());
-        for (int i = 0; i < imageIDList.size(); i++) {
-            images.add(new GaleryImage(imageIDList.get(i), (ImageUtils.StringToBitMap(Session.getInstance()
-                    .getActualCommunicationInterface().DownLoadAnImageThumbnail(imageIDList.get(i))))));
-        }
+        images = PendingListActivity.images;
 
         new SimpleActionBar(this, "Jóváhagyandó képek").setLayout();
 
@@ -93,18 +90,58 @@ public class PendingImageActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(android.view.MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
-        int imageid = images.get(index).getId();
+        final int index = info.position;
+        final int imageid = images.get(index).getId();
         switch (item.getItemId()) {
         case R.id.accept_something:
-            Session.getInstance().getActualCommunicationInterface().acceptImage(imageid);
-            images.remove(index);
-            onResume();
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Elfogadás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().acceptImage(imageid);
+                    images.remove(index);
+
+                    PendingImageActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingImageActivity.this, "Sikeres elfogadás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
+
             return true;
         case R.id.decline_something:
-            Session.getInstance().getActualCommunicationInterface().declineImage(imageid);
-            images.remove(index);
-            onResume();
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Visszautasítás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().declineImage(imageid);
+                    images.remove(index);
+
+                    PendingImageActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingImageActivity.this, "Sikeres visszautasítás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
+
             return true;
         default:
             return super.onContextItemSelected(item);

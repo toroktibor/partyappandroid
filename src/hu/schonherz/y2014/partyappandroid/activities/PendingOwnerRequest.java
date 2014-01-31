@@ -1,5 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.adapters.OwnerRequestListAdapter;
@@ -8,6 +10,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -31,7 +34,7 @@ public class PendingOwnerRequest extends ActionBarActivity {
 
         setContentView(R.layout.activity_pending_owner_request);
 
-        ownerRequestList = Session.getInstance().getActualCommunicationInterface().getNotApprovedOwnerRequest();
+        ownerRequestList = PendingListActivity.ownerRequestList;
 
         ownerRequestListView = (ListView) findViewById(R.id.pending_owner_reguest_listview);
         registerForContextMenu(ownerRequestListView);
@@ -40,19 +43,58 @@ public class PendingOwnerRequest extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
-        int club_id = ownerRequestList.get(index).getClub().id;
-        int user_id = ownerRequestList.get(index).getUser().getId();
+        final int index = info.position;
+        final int club_id = ownerRequestList.get(index).getClub().id;
+        final int user_id = ownerRequestList.get(index).getUser().getId();
         switch (item.getItemId()) {
         case R.id.accept_something:
-            Session.getInstance().getActualCommunicationInterface().acceptOwnerRequest(club_id, user_id);
-            ownerRequestList.remove(index);
-            onResume();
+            
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Elfogadás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().acceptOwnerRequest(club_id, user_id);
+                    ownerRequestList.remove(index);
+
+                    PendingOwnerRequest.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingOwnerRequest.this, "Sikeres elfogadás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
+
             return true;
         case R.id.decline_something:
-            Session.getInstance().getActualCommunicationInterface().declineOwnerRequest(club_id, user_id);
-            ownerRequestList.remove(index);
-            onResume();
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                    "Visszautasítás folyamatban...", true, false);
+
+            new NetThread(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    Session.getInstance().getActualCommunicationInterface().declineOwnerRequest(club_id, user_id);
+                    ownerRequestList.remove(index);
+
+                    PendingOwnerRequest.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance().dismissProgressDialog();
+                            new DoneToast(PendingOwnerRequest.this, "Sikeres visszautasítás!").show();
+                            onResume();
+                        }
+                    });
+                }
+            }).start();
+
             return true;
         default:
             return super.onContextItemSelected(item);
