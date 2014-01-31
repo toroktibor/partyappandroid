@@ -37,33 +37,39 @@
         android:layout_below="@+id/club_info_textview_address"
         android:onClick="onClickHandler"
         android:rating="3" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3">
+    
 
     <ImageButton
         android:id="@+id/phone_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:onClick="phoneCall"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:layout_weight="1" />
 
     <ImageButton
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/phone_call"
-        android:layout_toRightOf="@+id/phone_call"
         android:onClick="message"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+         android:layout_weight="1" />
     
     <ImageButton
         android:id="@+id/showOnTheMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/phone_call"
-        android:layout_toRightOf="@+id/message"
         android:onClick="showOnTheMap"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+         android:layout_weight="1"  />
+    
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewServices"
