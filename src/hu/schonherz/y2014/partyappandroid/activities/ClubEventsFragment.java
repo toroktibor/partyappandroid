@@ -49,7 +49,10 @@ public class ClubEventsFragment extends Fragment {
 
 	});
 
-
+	if(Session.getActualUser().getType()==1 || Session.getActualUser().isMine(Session.getSearchViewClubs().get(clubListPosition).id)){
+		registerForContextMenu(eventsListView);
+	}
+	
 	rootView.addView(eventsListView);
 
 	return rootView;

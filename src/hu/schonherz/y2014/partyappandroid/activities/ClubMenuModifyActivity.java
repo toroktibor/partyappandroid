@@ -63,6 +63,7 @@ public class ClubMenuModifyActivity extends ActionBarActivity {
 	priceEditText.setText((new Integer(actualMenuItem.price)).toString());
 	quantityEditText.setText(actualMenuItem.unit);
 	discountSeekBar.setProgress(actualMenuItem.discount);
+	currencySpinner.setSelection(actualMenuItem.getPositionCurrencySpinner());
 
 	float actualDiscount = (float) ((100 - actualDiscountInt) / 100.0);
 	int newPrice = (int) ((int) actualPrice * actualDiscount);
