@@ -12,7 +12,11 @@ public class Event {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.start_date = start_date.substring(0, start_date.length() - 3);
+        if( start_date.split(":").length == 3 ){
+            this.start_date = start_date.substring(0, start_date.length() - 3);       
+        }else{
+            this.start_date = start_date;
+        }
         this.music_type = music_type;
         this.approved = approved;
     }
