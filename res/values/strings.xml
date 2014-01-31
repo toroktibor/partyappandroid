@@ -80,6 +80,13 @@
     <string name="club_service_face_and_dress_control">Face and Dress Control</string>
     <string name="club_service_wifi">WiFi</string>
 
+    <string-array name="logged_users_names">
+        <item>a</item>
+        <item>admin</item>
+        <item>lamfalusy</item>
+        <item>kapi.zoli</item>
+        <item>Tibi</item>
+    </string-array>
     <string-array name="clubs_types">
         <item>Vegyes</item>
         <item>Kocsma</item>
