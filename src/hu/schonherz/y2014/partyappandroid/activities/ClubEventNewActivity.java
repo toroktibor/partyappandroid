@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import java.sql.Date;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -10,6 +11,7 @@ import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerCommunicator;
 import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -69,11 +71,11 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 
 	    @Override
 	    public void onClick(View v) {
-		String name = nameEditText.getText().toString();
-		String date = dateEditText.getText().toString();
-		String time = timeEditText.getText().toString();
-		String description = descriptionEditText.getText().toString();
-		String musicType = musicTypeSpinner.getSelectedItem().toString();
+		final String name = nameEditText.getText().toString();
+		final String date = dateEditText.getText().toString();
+		final String time = timeEditText.getText().toString();
+		final String description = descriptionEditText.getText().toString();
+		final String musicType = musicTypeSpinner.getSelectedItem().toString();
 
 		if (name.isEmpty()) {
 		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
@@ -94,12 +96,30 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 			    .show();
 		    return;
 		}
-		Log.e("EVENT", Date.valueOf(time) + "==" + (new java.util.Date()).toLocaleString() );
-		int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date+" "+time, "", musicType);
-		Event newEvent = new Event(eventId, name, description, date+" "+time, musicType, 1);
-		Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
+		//Log.e("EVENT", Date.valueOf(time) + "==" + (new java.util.Date()).toLocaleString() );
+		
 
-		finish();
+		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventNewActivity.this, "Kérlek várj",
+                "Hozzáadás folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date+" "+time, "", musicType);
+        		Event newEvent = new Event(eventId, name, description, date+" "+time, musicType, 1);
+        		Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
+        		ClubEventNewActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(ClubEventNewActivity.this, "Sikeres hozzáadás!").show();
+                        finish();
+                    }
+                });
+            }
+        }).start();
 	    }
 	});
 

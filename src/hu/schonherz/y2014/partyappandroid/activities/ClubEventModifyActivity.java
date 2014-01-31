@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -9,6 +10,7 @@ import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -113,8 +115,25 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 		actualEvent.description = description;
 		actualEvent.music_type = musicType;
 		
-		Session.getInstance().getActualCommunicationInterface().updateEvent(actualEvent.id, actualEvent.name, actualEvent.description, actualEvent.start_date, "", actualEvent.music_type);
-		finish();
+		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventModifyActivity.this, "Kérlek várj",
+                "Módosítás folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	Session.getInstance().getActualCommunicationInterface().updateEvent(actualEvent.id, actualEvent.name, actualEvent.description, actualEvent.start_date, "", actualEvent.music_type);
+        		ClubEventModifyActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(ClubEventModifyActivity.this, "Sikeres módosítás!").show();
+                        finish();
+                    }
+                });
+            }
+        }).start();
 	    }
 	});
 

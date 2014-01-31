@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.EventsListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
@@ -8,6 +9,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -91,10 +93,28 @@ public class ClubEventsFragment extends Fragment {
 	switch (item.getItemId()) {
 	case R.id.delete_event_menu_item:
 	    int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	    int eventId = Session.getSearchViewClubs().get(clubListPosition).events.get(index).id;
+	    final int eventId = Session.getSearchViewClubs().get(clubListPosition).events.get(index).id;
 	    Session.getSearchViewClubs().get(clubListPosition).events.remove(index);
-	    Session.getInstance().getActualCommunicationInterface().deleteEvent(eventId);
-	    onResume();
+	    
+	    Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
+                "Törlés folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	Session.getInstance().getActualCommunicationInterface().deleteEvent(eventId);
+            	getActivity().runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(getActivity(), "Sikeres törlés!").show();
+                        onResume();
+                    }
+                });
+            }
+        }).start();	    
 	    return true;
 	case R.id.modify_event_menu_item:
 	    Activity activity = getActivity();
