@@ -9,7 +9,6 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class PendingOwnerRequest extends ActionBarActivity {
 
@@ -27,66 +25,65 @@ public class PendingOwnerRequest extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	new SimpleActionBar(this, "Jóváhagyandó tulajdonosok").setLayout();
-	
-	setContentView(R.layout.activity_pending_owner_request);
+        new SimpleActionBar(this, "Jóváhagyandó tulajdonosok").setLayout();
 
+        setContentView(R.layout.activity_pending_owner_request);
 
-	ownerRequestList = Session.getInstance().getActualCommunicationInterface().getNotApprovedOwnerRequest();
+        ownerRequestList = Session.getInstance().getActualCommunicationInterface().getNotApprovedOwnerRequest();
 
-	ownerRequestListView = (ListView) findViewById(R.id.pending_owner_reguest_listview);
-	registerForContextMenu(ownerRequestListView);
+        ownerRequestListView = (ListView) findViewById(R.id.pending_owner_reguest_listview);
+        registerForContextMenu(ownerRequestListView);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	int index = info.position;
-	int club_id = ownerRequestList.get(index).getClub().id;
-	int user_id = ownerRequestList.get(index).getUser().getId();
-	switch (item.getItemId()) {
-	case R.id.accept_something:
-	    Session.getInstance().getActualCommunicationInterface().acceptOwnerRequest(club_id, user_id);
-	    ownerRequestList.remove(index);
-	    onResume();
-	    return true;
-	case R.id.decline_something:
-	    Session.getInstance().getActualCommunicationInterface().declineOwnerRequest(club_id, user_id);
-	    ownerRequestList.remove(index);
-	    onResume();
-	    return true;
-	default:
-	    return super.onContextItemSelected(item);
-	}
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+        int club_id = ownerRequestList.get(index).getClub().id;
+        int user_id = ownerRequestList.get(index).getUser().getId();
+        switch (item.getItemId()) {
+        case R.id.accept_something:
+            Session.getInstance().getActualCommunicationInterface().acceptOwnerRequest(club_id, user_id);
+            ownerRequestList.remove(index);
+            onResume();
+            return true;
+        case R.id.decline_something:
+            Session.getInstance().getActualCommunicationInterface().declineOwnerRequest(club_id, user_id);
+            ownerRequestList.remove(index);
+            onResume();
+            return true;
+        default:
+            return super.onContextItemSelected(item);
+        }
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-	super.onCreateContextMenu(menu, v, menuInfo);
+        super.onCreateContextMenu(menu, v, menuInfo);
 
-	MenuInflater inflater = getMenuInflater();
-	inflater.inflate(R.menu.pending_something_list_context_menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.pending_something_list_context_menu, menu);
     }
 
     @Override
     protected void onResume() {
-	if (ownerRequestList == null) {
+        if (ownerRequestList == null) {
 
-	} else {
-	    ownerRequestListView.setAdapter(new OwnerRequestListAdapter(this,
-		    getOwnerRequestArrayFromList(ownerRequestList)));
-	}
-	super.onResume();
+        } else {
+            ownerRequestListView.setAdapter(new OwnerRequestListAdapter(this,
+                    getOwnerRequestArrayFromList(ownerRequestList)));
+        }
+        super.onResume();
     }
 
     private OwnerRequest[] getOwnerRequestArrayFromList(List<OwnerRequest> ownerRequestList) {
-	OwnerRequest[] ownerRequestArray = new OwnerRequest[ownerRequestList.size()];
-	for (int i = 0; i < ownerRequestList.size(); ++i) {
-	    ownerRequestArray[i] = ownerRequestList.get(i);
-	}
-	return ownerRequestArray;
+        OwnerRequest[] ownerRequestArray = new OwnerRequest[ownerRequestList.size()];
+        for (int i = 0; i < ownerRequestList.size(); ++i) {
+            ownerRequestArray[i] = ownerRequestList.get(i);
+        }
+        return ownerRequestArray;
     }
 
 }

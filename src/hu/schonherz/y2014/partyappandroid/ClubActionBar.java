@@ -7,7 +7,6 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;

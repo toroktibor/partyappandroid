@@ -6,17 +6,17 @@ import android.content.Context;
 
 public class NetThread extends Thread {
     public Context context;
-    
-    public NetThread(Context context, Runnable r){
-	super(r);
-	this.context=context;
+
+    public NetThread(Context context, Runnable r) {
+        super(r);
+        this.context = context;
     }
-    
+
     @Override
     public synchronized void start() {
-        if( !InternetConnection.isOnline(context)){
+        if (!InternetConnection.isOnline(context)) {
             Session.getInstance().dismissProgressDialog();
-            new ErrorToast(context,"Nincs internetkapcsolat!").show();
+            new ErrorToast(context, "Nincs internetkapcsolat!").show();
             return;
         }
         super.start();

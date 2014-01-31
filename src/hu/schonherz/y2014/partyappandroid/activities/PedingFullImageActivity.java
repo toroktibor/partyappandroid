@@ -24,71 +24,72 @@ public class PedingFullImageActivity extends Activity {
     int currentImageID;
 
     private void loadImage(final int imageid) {
-	final Button acceptButton = (Button) findViewById(R.id.peding_full_image_button_accept);
-	final Button declineButton = (Button) findViewById(R.id.peding_full_image_button_decline);
-	//acceptButton.setEnabled(false);
-	//declineButton.setEnabled(false);
-	
-	this.currentImageID=imageid;
-	final ImageView iv = (ImageView) findViewById(R.id.peding_full_image_view);	
-	final TextView loadingTextView = (TextView) findViewById(R.id.peding_full_image_textview_loading);
-	
+        final Button acceptButton = (Button) findViewById(R.id.peding_full_image_button_accept);
+        final Button declineButton = (Button) findViewById(R.id.peding_full_image_button_decline);
+        // acceptButton.setEnabled(false);
+        // declineButton.setEnabled(false);
 
-	iv.setVisibility(View.INVISIBLE);
-	loadingTextView.setVisibility(View.VISIBLE);
-	new NetThread(this,new Runnable() {
+        this.currentImageID = imageid;
+        final ImageView iv = (ImageView) findViewById(R.id.peding_full_image_view);
+        final TextView loadingTextView = (TextView) findViewById(R.id.peding_full_image_textview_loading);
 
-	    @Override
-	    public void run() {
-		final GaleryImage img = PendingImageActivity.images.get(imageid);
-		if (img.getBitmap() == null) {
-		    img.downloadBitmap();
-		}
-		PedingFullImageActivity.this.runOnUiThread(new Runnable() {
+        iv.setVisibility(View.INVISIBLE);
+        loadingTextView.setVisibility(View.VISIBLE);
+        new NetThread(this, new Runnable() {
 
-		    @Override
-		    public void run() {
-			iv.setImageBitmap(img.getBitmap());
-			loadingTextView.setVisibility(View.INVISIBLE);
-			iv.setVisibility(View.VISIBLE);			
-			
-		    }
-		});
+            @Override
+            public void run() {
+                final GaleryImage img = PendingImageActivity.images.get(imageid);
+                if (img.getBitmap() == null) {
+                    img.downloadBitmap();
+                }
+                PedingFullImageActivity.this.runOnUiThread(new Runnable() {
 
-	    }
-	}).start();
+                    @Override
+                    public void run() {
+                        iv.setImageBitmap(img.getBitmap());
+                        loadingTextView.setVisibility(View.INVISIBLE);
+                        iv.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+            }
+        }).start();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_peding_full_image);
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_peding_full_image);
 
-	final int imageid = getIntent().getIntExtra("imageid", 0);
+        final int imageid = getIntent().getIntExtra("imageid", 0);
 
-	loadImage(imageid);
+        loadImage(imageid);
     }
 
     public void onClickHandler(View v) {
-	switch (v.getId()) {
-	case R.id.peding_full_image_button_accept:
-		Session.getInstance().getActualCommunicationInterface().acceptImage(PendingImageActivity.images.get(currentImageID).getId());
-	    PendingImageActivity.images.remove(currentImageID);
-	    finish();
-	    break;
+        switch (v.getId()) {
+        case R.id.peding_full_image_button_accept:
+            Session.getInstance().getActualCommunicationInterface()
+                    .acceptImage(PendingImageActivity.images.get(currentImageID).getId());
+            PendingImageActivity.images.remove(currentImageID);
+            finish();
+            break;
 
-	case R.id.peding_full_image_button_decline:
-		Session.getInstance().getActualCommunicationInterface().declineImage(PendingImageActivity.images.get(currentImageID).getId());
-	    PendingImageActivity.images.remove(currentImageID);
-	    finish();
-	    break;
+        case R.id.peding_full_image_button_decline:
+            Session.getInstance().getActualCommunicationInterface()
+                    .declineImage(PendingImageActivity.images.get(currentImageID).getId());
+            PendingImageActivity.images.remove(currentImageID);
+            finish();
+            break;
 
-	default:
-	    break;
-	}
+        default:
+            break;
+        }
     }
-    
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

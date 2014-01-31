@@ -10,11 +10,9 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -27,47 +25,47 @@ public class ClubRatingsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	new RatingsActionBar(this).setLayout();
-	
-	setContentView(R.layout.activity_club_ratings);
+        new RatingsActionBar(this).setLayout();
 
-	clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
+        setContentView(R.layout.activity_club_ratings);
 
-	ratingsListView = (ListView) findViewById(R.id.club_ratings_list);
+        clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+        ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
 
-	addButton = (ImageView) findViewById(R.id.actionbar_ratings_button_a);
-	addButton.setOnClickListener(new OnClickListener() {
+        ratingsListView = (ListView) findViewById(R.id.club_ratings_list);
 
-	    @Override
-	    public void onClick(View v) {
-		Intent i = new Intent(getApplicationContext(), ClubRatingAdd.class);
-		startActivity(i);
-	    }
-	});
+        addButton = (ImageView) findViewById(R.id.actionbar_ratings_button_a);
+        addButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ClubRatingAdd.class);
+                startActivity(i);
+            }
+        });
 
     }
 
     @Override
     protected void onResume() {
-	//addButton.setVisibility(View.VISIBLE);
-	if (ratingsList == null) {
+        // addButton.setVisibility(View.VISIBLE);
+        if (ratingsList == null) {
 
-	} else {
-	    ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
-	    ratingsListView.setAdapter(new RatingListAdapter(this, getRatingArrayFromList(ratingsList)));
-	}
-	super.onResume();
+        } else {
+            ratingsList = Session.getSearchViewClubs().get(clubListPosition).ratings;
+            ratingsListView.setAdapter(new RatingListAdapter(this, getRatingArrayFromList(ratingsList)));
+        }
+        super.onResume();
     }
 
     private Rating[] getRatingArrayFromList(List<Rating> ratingList) {
-	Rating[] ratingArray = new Rating[ratingList.size()];
-	for (int i = 0; i < ratingList.size(); ++i) {
-	    ratingArray[i] = ratingList.get(i);
-	}
-	return ratingArray;
+        Rating[] ratingArray = new Rating[ratingList.size()];
+        for (int i = 0; i < ratingList.size(); ++i) {
+            ratingArray[i] = ratingList.get(i);
+        }
+        return ratingArray;
     }
 
 }

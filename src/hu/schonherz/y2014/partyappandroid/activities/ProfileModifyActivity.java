@@ -70,7 +70,7 @@ public class ProfileModifyActivity extends ActionBarActivity implements DatePick
 
             Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj", "Adatok módosítása...",
                     true, false);
-            new NetThread(this,new Runnable() {
+            new NetThread(this, new Runnable() {
 
                 @Override
                 public void run() {

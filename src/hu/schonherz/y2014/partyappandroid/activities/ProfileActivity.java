@@ -16,51 +16,51 @@ public class ProfileActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	new SimpleActionBar(this, "Profilom").setLayout();
+        new SimpleActionBar(this, "Profilom").setLayout();
 
-	setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile);
 
-	user = Session.getActualUser();
+        user = Session.getActualUser();
     }
 
     @Override
     protected void onResume() {
 
-	TextView te;
+        TextView te;
 
-	te = (TextView) findViewById(R.id.profile_textview_name_value);
-	te.setText(user.getNickname());
+        te = (TextView) findViewById(R.id.profile_textview_name_value);
+        te.setText(user.getNickname());
 
-	te = (TextView) findViewById(R.id.profile_textview_email_value);
-	te.setText(user.getEmail());
+        te = (TextView) findViewById(R.id.profile_textview_email_value);
+        te.setText(user.getEmail());
 
-	te = (TextView) findViewById(R.id.profile_textview_dateofbirth_value);
-	te.setText(user.getBirthday());
+        te = (TextView) findViewById(R.id.profile_textview_dateofbirth_value);
+        te.setText(user.getBirthday());
 
-	te = (TextView) findViewById(R.id.profile_textview_sex_value);
-	te.setText(String.valueOf(user.getSex() == 0 ? "Férfi" : "Nő"));
+        te = (TextView) findViewById(R.id.profile_textview_sex_value);
+        te.setText(String.valueOf(user.getSex() == 0 ? "Férfi" : "Nő"));
 
-	super.onResume();
+        super.onResume();
     }
 
     public void onClickHandler(View v) {
-	Intent i;
-	switch (v.getId()) {
-	case R.id.profile_button_modify:
-	    i = new Intent(this, ProfileModifyActivity.class);
-	    startActivity(i);
-	    break;
+        Intent i;
+        switch (v.getId()) {
+        case R.id.profile_button_modify:
+            i = new Intent(this, ProfileModifyActivity.class);
+            startActivity(i);
+            break;
 
-	case R.id.profile_button_password:
-	    i = new Intent(this, ProfilePasswordActivity.class);
-	    startActivity(i);
-	    break;
+        case R.id.profile_button_password:
+            i = new Intent(this, ProfilePasswordActivity.class);
+            startActivity(i);
+            break;
 
-	default:
-	    break;
-	}
+        default:
+            break;
+        }
     }
 
 }

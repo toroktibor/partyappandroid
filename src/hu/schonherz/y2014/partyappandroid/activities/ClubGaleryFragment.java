@@ -219,7 +219,7 @@ public class ClubGaleryFragment extends Fragment {
 
                 Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
                         "Kép feltöltése...", true, false);
-                new NetThread(getActivity(),new Runnable() {
+                new NetThread(getActivity(), new Runnable() {
 
                     @Override
                     public void run() {
@@ -279,7 +279,7 @@ public class ClubGaleryFragment extends Fragment {
 
                 Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
                         "Kép feltöltése...", true, false);
-                new NetThread(getActivity(),new Runnable() {
+                new NetThread(getActivity(), new Runnable() {
 
                     @Override
                     public void run() {
@@ -301,13 +301,13 @@ public class ClubGaleryFragment extends Fragment {
                                         R.layout.row_grid, getDataForGridView());
                                 gridView.setAdapter(customGridAdapter);
                                 gridView.invalidate();
-                                
-                                if( customGridAdapter.getCount() == 0 ){
+
+                                if (customGridAdapter.getCount() == 0) {
                                     emptyMessage.setVisibility(View.VISIBLE);
-                                }else{
-                                    emptyMessage.setVisibility(View.GONE); 
+                                } else {
+                                    emptyMessage.setVisibility(View.GONE);
                                 }
-                                
+
                                 Session.getInstance().dismissProgressDialog();
 
                             }

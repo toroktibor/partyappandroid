@@ -12,28 +12,28 @@ import android.widget.TextView;
 
 public class OwnerRequestListAdapter extends ArrayAdapter<OwnerRequest> {
     public OwnerRequestListAdapter(Context context, OwnerRequest[] objects) {
-	super(context, R.layout.owner_request_list_item, objects);
+        super(context, R.layout.owner_request_list_item, objects);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-	View item = convertView;
-	if (item == null) {
-	    LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
-	    item = inflater.inflate(R.layout.owner_request_list_item, parent, false);
-	}
+        View item = convertView;
+        if (item == null) {
+            LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+            item = inflater.inflate(R.layout.owner_request_list_item, parent, false);
+        }
 
-	OwnerRequest actualOwnerRequest = (OwnerRequest) getItem(position);
-	((TextView) item.findViewById(R.id.peding_owner_request_club_name_textview)).setText(actualOwnerRequest
-		.getClub().name);
-	((TextView) item.findViewById(R.id.peding_owner_request_club_address_textview)).setText(actualOwnerRequest
-		.getClub().address);
-	((TextView) item.findViewById(R.id.peding_owner_request_user_name_textview)).setText(actualOwnerRequest
-		.getUser().getNickname());
-	((TextView) item.findViewById(R.id.peding_owner_request_user_email_textview)).setText(actualOwnerRequest
-		.getUser().getEmail());
+        OwnerRequest actualOwnerRequest = (OwnerRequest) getItem(position);
+        ((TextView) item.findViewById(R.id.peding_owner_request_club_name_textview)).setText(actualOwnerRequest
+                .getClub().name);
+        ((TextView) item.findViewById(R.id.peding_owner_request_club_address_textview)).setText(actualOwnerRequest
+                .getClub().address);
+        ((TextView) item.findViewById(R.id.peding_owner_request_user_name_textview)).setText(actualOwnerRequest
+                .getUser().getNickname());
+        ((TextView) item.findViewById(R.id.peding_owner_request_user_email_textview)).setText(actualOwnerRequest
+                .getUser().getEmail());
 
-	item.setTag((OwnerRequest) getItem(position));
-	return item;
+        item.setTag((OwnerRequest) getItem(position));
+        return item;
     }
 }

@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubEventNewActivity extends ActionBarActivity implements DatePickerCommunicator,TimePickerCommunicator {
+public class ClubEventNewActivity extends ActionBarActivity implements DatePickerCommunicator, TimePickerCommunicator {
 
     EditText nameEditText;
     EditText dateEditText;
@@ -32,106 +32,110 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	
-	new SimpleActionBar(this, "Új esemény").setLayout();
-	
-	setContentView(R.layout.activity_club_event_new);
+        super.onCreate(savedInstanceState);
 
-	clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+        new SimpleActionBar(this, "Új esemény").setLayout();
 
-	nameEditText = (EditText) findViewById(R.id.club_event_new_edittext_name);
-	dateEditText = (EditText) findViewById(R.id.club_event_new_edittext_date);
-	timeEditText = (EditText) findViewById(R.id.club_event_new_edittext_time);
-	descriptionEditText = (EditText) findViewById(R.id.club_event_new_edittext_description);
-	addButton = (Button) findViewById(R.id.club_event_new_button_new);
-	musicTypeSpinner = (Spinner) findViewById(R.id.club_event_new_music_type_spinner);
+        setContentView(R.layout.activity_club_event_new);
 
-	dateEditText.setOnClickListener(new OnClickListener() {
-	    
-	    @Override
-	    public void onClick(View v) {
-		new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
-		
-	    }
-	});
-	
-	timeEditText.setOnClickListener(new OnClickListener() {
-	    
-	    @Override
-	    public void onClick(View v) {
-		new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
-		
-	    }
-	});
-	
-	addButton.setOnClickListener(new OnClickListener() {
+        clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 
-	    @Override
-	    public void onClick(View v) {
-		final String name = nameEditText.getText().toString();
-		final String date = dateEditText.getText().toString();
-		final String time = timeEditText.getText().toString();
-		final String description = descriptionEditText.getText().toString();
-		final String musicType = musicTypeSpinner.getSelectedItem().toString();
+        nameEditText = (EditText) findViewById(R.id.club_event_new_edittext_name);
+        dateEditText = (EditText) findViewById(R.id.club_event_new_edittext_date);
+        timeEditText = (EditText) findViewById(R.id.club_event_new_edittext_time);
+        descriptionEditText = (EditText) findViewById(R.id.club_event_new_edittext_description);
+        addButton = (Button) findViewById(R.id.club_event_new_button_new);
+        musicTypeSpinner = (Spinner) findViewById(R.id.club_event_new_music_type_spinner);
 
-		if (name.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
-		    return;
-		}
-		if (date.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		if (time.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos idejét!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		if (description.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		//Log.e("EVENT", Date.valueOf(time) + "==" + (new java.util.Date()).toLocaleString() );
-		
-
-		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventNewActivity.this, "Kérlek várj",
-                "Hozzáadás folyamatban...", true, false);
-		
-		new NetThread(ClubEventNewActivity.this,new Runnable() {
+        dateEditText.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void run() {
-            	int eventId = Session.getInstance().getActualCommunicationInterface().addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description, date+" "+time, "", musicType);
-        		Event newEvent = new Event(eventId, name, description, date+" "+time, musicType, 1);
-        		Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
-        		ClubEventNewActivity.this.runOnUiThread(new Runnable() {
+            public void onClick(View v) {
+                new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
+
+            }
+        });
+
+        timeEditText.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
+
+            }
+        });
+
+        addButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final String name = nameEditText.getText().toString();
+                final String date = dateEditText.getText().toString();
+                final String time = timeEditText.getText().toString();
+                final String description = descriptionEditText.getText().toString();
+                final String musicType = musicTypeSpinner.getSelectedItem().toString();
+
+                if (name.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (date.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                if (time.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos idejét!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                if (description.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                // Log.e("EVENT", Date.valueOf(time) + "==" + (new
+                // java.util.Date()).toLocaleString() );
+
+                Session.getInstance().progressDialog = ProgressDialog.show(ClubEventNewActivity.this, "Kérlek várj",
+                        "Hozzáadás folyamatban...", true, false);
+
+                new NetThread(ClubEventNewActivity.this, new Runnable() {
 
                     @Override
                     public void run() {
-                        Session.getInstance().dismissProgressDialog();
-                        new DoneToast(ClubEventNewActivity.this, "Sikeres hozzáadás!").show();
-                        finish();
+                        int eventId = Session
+                                .getInstance()
+                                .getActualCommunicationInterface()
+                                .addEvent(Session.getSearchViewClubs().get(clubListPosition).id, name, description,
+                                        date + " " + time, "", musicType);
+                        Event newEvent = new Event(eventId, name, description, date + " " + time, musicType, 1);
+                        Session.getSearchViewClubs().get(clubListPosition).events.add(newEvent);
+                        ClubEventNewActivity.this.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                Session.getInstance().dismissProgressDialog();
+                                new DoneToast(ClubEventNewActivity.this, "Sikeres hozzáadás!").show();
+                                finish();
+                            }
+                        });
                     }
-                });
+                }).start();
             }
-        }).start();
-	    }
-	});
+        });
 
     }
 
     @Override
     public void onDatePicked(String date) {
-	dateEditText.setText(date);	
+        dateEditText.setText(date);
     }
 
     @Override
     public void onTimePicked(String time) {
-	timeEditText.setText(time);
-	
+        timeEditText.setText(time);
+
     }
 
 }

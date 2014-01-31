@@ -6,15 +6,15 @@ public class OwnerRequest {
     User user;
 
     public OwnerRequest(Club club, User user) {
-	this.club = club;
-	this.user = user;
+        this.club = club;
+        this.user = user;
     }
 
     public Club getClub() {
-	return club;
+        return club;
     }
 
     public User getUser() {
-	return user;
+        return user;
     }
 }

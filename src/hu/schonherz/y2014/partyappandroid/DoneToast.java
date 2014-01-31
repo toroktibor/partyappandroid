@@ -14,27 +14,27 @@ public class DoneToast {
     private String message;
 
     public DoneToast(Activity activity) {
-	this.activity = activity;
+        this.activity = activity;
     }
 
     public DoneToast(Activity activity, String message) {
-	this(activity);
-	this.message = message;
+        this(activity);
+        this.message = message;
     }
 
     public void show() {
-	Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-	vibrator.vibrate(new long[] { 0, 50 }, -1); // egy rövid
+        Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[] { 0, 50 }, -1); // egy rövid
 
-	LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
-	View toastView = inflater.inflate(R.layout.toast_done, null);
-	TextView tv = (TextView) toastView.findViewById(R.id.toast_done_textview);
-	tv.setText(this.message);
+        LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
+        View toastView = inflater.inflate(R.layout.toast_done, null);
+        TextView tv = (TextView) toastView.findViewById(R.id.toast_done_textview);
+        tv.setText(this.message);
 
-	Toast t = new Toast(activity);
-	t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
-	t.setDuration(Toast.LENGTH_SHORT);
-	t.setView(toastView);
-	t.show();
+        Toast t = new Toast(activity);
+        t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
+        t.setDuration(Toast.LENGTH_SHORT);
+        t.setView(toastView);
+        t.show();
     }
 }

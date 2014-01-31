@@ -15,32 +15,32 @@ public class SimpleActionBar implements OnClickListener {
     String title;
 
     public SimpleActionBar(ActionBarActivity activity, String title) {
-	this.activity = activity;
-	this.title = title;
+        this.activity = activity;
+        this.title = title;
     }
 
     public void setLayout() {
-	ViewGroup actionBarLayout = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.actionbar_simple, null);
+        ViewGroup actionBarLayout = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.actionbar_simple, null);
 
-	ActionBar ab = activity.getSupportActionBar();
-	ab.setDisplayShowHomeEnabled(false);
-	ab.setDisplayShowTitleEnabled(false);
-	ab.setDisplayShowCustomEnabled(true);
-	ab.setCustomView(actionBarLayout);
+        ActionBar ab = activity.getSupportActionBar();
+        ab.setDisplayShowHomeEnabled(false);
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayShowCustomEnabled(true);
+        ab.setCustomView(actionBarLayout);
 
-	TextView tv = (TextView) activity.findViewById(R.id.actionbar_simple_textview_title);
-	tv.setText(title);
+        TextView tv = (TextView) activity.findViewById(R.id.actionbar_simple_textview_title);
+        tv.setText(title);
 
     }
 
     @Override
     public void onClick(View v) {
-	Intent i;
-	switch (v.getId()) {
-	default:
-	    Log.e(this.getClass().getName(), "Nem kezelt onClick view");
-	    break;
-	}
+        Intent i;
+        switch (v.getId()) {
+        default:
+            Log.e(this.getClass().getName(), "Nem kezelt onClick view");
+            break;
+        }
 
     }
 }

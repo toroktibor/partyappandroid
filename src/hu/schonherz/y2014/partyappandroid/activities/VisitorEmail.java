@@ -19,61 +19,61 @@ public class VisitorEmail extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_visitor_email);
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_visitor_email);
 
-	Button send = (Button) findViewById(R.id.visitor_email_send);
-	send.setOnClickListener(new OnClickListener() {
+        Button send = (Button) findViewById(R.id.visitor_email_send);
+        send.setOnClickListener(new OnClickListener() {
 
-	    @Override
-	    public void onClick(View v) {
-		// TODO Auto-generated method stub
-		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-		clubFullDownload(clubListPosition);
-		Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+                clubFullDownload(clubListPosition);
+                Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
-		String email = actualClub.email;
+                String email = actualClub.email;
 
-		EditText et_subject = (EditText) findViewById(R.id.visitor_subject);
-		String subject = et_subject.getText().toString().trim();
+                EditText et_subject = (EditText) findViewById(R.id.visitor_subject);
+                String subject = et_subject.getText().toString().trim();
 
-		EditText et_body = (EditText) findViewById(R.id.visitor_message);
-		String body = et_body.getText().toString().trim();
+                EditText et_body = (EditText) findViewById(R.id.visitor_message);
+                String body = et_body.getText().toString().trim();
 
-		Log.e("email", "cím: " + email);
-		Log.e("email", "tárgy: " + subject);
-		Log.e("email", "üzenet: " + body);
+                Log.e("email", "cím: " + email);
+                Log.e("email", "tárgy: " + subject);
+                Log.e("email", "üzenet: " + body);
 
-		Intent emailIntent = new Intent(Intent.ACTION_SEND);
-		emailIntent.setType("message/rfc822");
-		emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
-		emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-		try {
-		    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-		} catch (android.content.ActivityNotFoundException ex) {
-		    Toast.makeText(VisitorEmail.this, "There are no email clients installed.", Toast.LENGTH_SHORT)
-			    .show();
-		}
-	    }
-	});
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(VisitorEmail.this, "There are no email clients installed.", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+        });
     }
 
     protected void clubFullDownload(int actualClubPosition) {
-	Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
-	if (actualCLub.isNotFullDownloaded()) {
-	    Session.getSearchViewClubs().set(actualClubPosition, Session.getInstance
+        Club actualCLub = Session.getSearchViewClubs().get(actualClubPosition);
+        if (actualCLub.isNotFullDownloaded()) {
+            Session.getSearchViewClubs().set(actualClubPosition, Session.getInstance
 
-	    ().getActualCommunicationInterface().getEverythingFromClub(actualCLub.id));
-	}
+            ().getActualCommunicationInterface().getEverythingFromClub(actualCLub.id));
+        }
     };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.visitor_email, menu);
-	return true;
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.visitor_email, menu);
+        return true;
     }
 
 }

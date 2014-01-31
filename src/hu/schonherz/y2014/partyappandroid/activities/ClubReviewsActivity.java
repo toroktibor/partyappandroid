@@ -12,23 +12,23 @@ public class ClubReviewsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_club_reviews);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_club_reviews);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	MenuInflater inflater = getMenuInflater();
-	inflater.inflate(R.menu.club_reviews, menu);
-	return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.club_reviews, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	if (item.getItemId() == R.id.club_review_menu_my_review) {
-	    startActivity(new Intent(this, RegisterActivity.class));
-	}
-	return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.club_review_menu_my_review) {
+            startActivity(new Intent(this, RegisterActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

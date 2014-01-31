@@ -9,31 +9,32 @@ public class GaleryImage {
     private int id;
 
     public GaleryImage(int id, Bitmap bitmap_thumbnail) {
-	this.id = id;
-	this.bitmap_thumbnail = bitmap_thumbnail;
+        this.id = id;
+        this.bitmap_thumbnail = bitmap_thumbnail;
     }
 
     public Bitmap getBitmap() {
-	return bitmap;
+        return bitmap;
     }
 
     public void setBitmap(Bitmap bitmap) {
-	this.bitmap = bitmap;
+        this.bitmap = bitmap;
     }
 
     public Bitmap getBitmap_thumbnail() {
-	return bitmap_thumbnail;
+        return bitmap_thumbnail;
     }
 
     public void setBitmap_thumbnail(Bitmap bitmap_thumbnail) {
-	this.bitmap_thumbnail = bitmap_thumbnail;
+        this.bitmap_thumbnail = bitmap_thumbnail;
     }
-    
-    public void downloadBitmap(){
-	this.bitmap = ImageUtils.StringToBitMap( Session.getInstance().getActualCommunicationInterface().DownLoadAnImage(this.id));
+
+    public void downloadBitmap() {
+        this.bitmap = ImageUtils.StringToBitMap(Session.getInstance().getActualCommunicationInterface()
+                .DownLoadAnImage(this.id));
     }
-    
-    public int getId(){
-    	return this.id;
+
+    public int getId() {
+        return this.id;
     }
 }

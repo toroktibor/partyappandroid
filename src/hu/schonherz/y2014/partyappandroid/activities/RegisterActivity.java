@@ -101,7 +101,7 @@ public class RegisterActivity extends ActionBarActivity implements
 
             Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
                     "Regisztráció folyamatban...", true, false);
-            new NetThread(this,new Runnable() {
+            new NetThread(this, new Runnable() {
 
                 @Override
                 public void run() {

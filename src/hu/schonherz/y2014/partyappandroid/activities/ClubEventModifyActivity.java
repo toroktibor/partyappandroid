@@ -20,7 +20,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ClubEventModifyActivity extends ActionBarActivity implements DatePickerCommunicator,TimePickerCommunicator{
+public class ClubEventModifyActivity extends ActionBarActivity implements DatePickerCommunicator,
+        TimePickerCommunicator {
 
     EditText nameEditText;
     EditText dateEditText;
@@ -32,121 +33,123 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	
-	new SimpleActionBar(this, "Esemény módosítása").setLayout();
-	
-	setContentView(R.layout.activity_club_event_modify);
+        super.onCreate(savedInstanceState);
 
-	int eventListPosition = getIntent().getExtras().getInt("eventsListPosition");
-	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	
-	actualEvent = Session.getSearchViewClubs().get(clubListPosition).events.get(eventListPosition);
+        new SimpleActionBar(this, "Esemény módosítása").setLayout();
 
-	nameEditText = (EditText) findViewById(R.id.club_event_modify_edittext_name);
-	dateEditText = (EditText) findViewById(R.id.club_event_modify_edittext_date);
-	timeEditText = (EditText) findViewById(R.id.club_event_modify_edittext_time);
-	descriptionEditText = (EditText) findViewById(R.id.club_event_modify_edittext_description);
-	modifyButton = (Button) findViewById(R.id.club_event_modify_button_modify);
-	musicTypeSpinner = (Spinner) findViewById(R.id.club_event_modify_music_type_spinner);
+        setContentView(R.layout.activity_club_event_modify);
 
-	int position = Event.getMusicTypePosition(actualEvent.music_type);
-	
-	String[] datetime = actualEvent.start_date.split(" ");
-	
-	musicTypeSpinner.setSelection(position);
-	nameEditText.setText(actualEvent.name);
-	dateEditText.setText(datetime[0]);
-	timeEditText.setText(datetime[1]);
-	descriptionEditText.setText(actualEvent.description);
+        int eventListPosition = getIntent().getExtras().getInt("eventsListPosition");
+        int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 
-	
-	dateEditText.setOnClickListener(new OnClickListener() {
-	    
-	    @Override
-	    public void onClick(View v) {
-		new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
-		
-	    }
-	});
-	
-	timeEditText.setOnClickListener(new OnClickListener() {
-	    
-	    @Override
-	    public void onClick(View v) {
-		new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
-		
-	    }
-	});
-	
-	modifyButton.setOnClickListener(new OnClickListener() {
+        actualEvent = Session.getSearchViewClubs().get(clubListPosition).events.get(eventListPosition);
 
-	    @Override
-	    public void onClick(View v) {
-		String name = nameEditText.getText().toString();
-		String date = dateEditText.getText().toString();
-		String time = timeEditText.getText().toString();
-		String description = descriptionEditText.getText().toString();
-		String musicType = musicTypeSpinner.getSelectedItem().toString();
+        nameEditText = (EditText) findViewById(R.id.club_event_modify_edittext_name);
+        dateEditText = (EditText) findViewById(R.id.club_event_modify_edittext_date);
+        timeEditText = (EditText) findViewById(R.id.club_event_modify_edittext_time);
+        descriptionEditText = (EditText) findViewById(R.id.club_event_modify_edittext_description);
+        modifyButton = (Button) findViewById(R.id.club_event_modify_button_modify);
+        musicTypeSpinner = (Spinner) findViewById(R.id.club_event_modify_music_type_spinner);
 
-		if (name.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
-		    return;
-		}
-		if (date.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		if (time.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		if (description.isEmpty()) {
-		    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
-			    .show();
-		    return;
-		}
-		
-		actualEvent.name = name;
-		actualEvent.start_date = date+" "+time;
-		actualEvent.description = description;
-		actualEvent.music_type = musicType;
-		
-		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventModifyActivity.this, "Kérlek várj",
-                "Módosítás folyamatban...", true, false);
-		
-		new NetThread(ClubEventModifyActivity.this,new Runnable() {
+        int position = Event.getMusicTypePosition(actualEvent.music_type);
+
+        String[] datetime = actualEvent.start_date.split(" ");
+
+        musicTypeSpinner.setSelection(position);
+        nameEditText.setText(actualEvent.name);
+        dateEditText.setText(datetime[0]);
+        timeEditText.setText(datetime[1]);
+        descriptionEditText.setText(actualEvent.description);
+
+        dateEditText.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void run() {
-            	Session.getInstance().getActualCommunicationInterface().updateEvent(actualEvent.id, actualEvent.name, actualEvent.description, actualEvent.start_date, "", actualEvent.music_type);
-        		ClubEventModifyActivity.this.runOnUiThread(new Runnable() {
+            public void onClick(View v) {
+                new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
+
+            }
+        });
+
+        timeEditText.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
+
+            }
+        });
+
+        modifyButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString();
+                String date = dateEditText.getText().toString();
+                String time = timeEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
+                String musicType = musicTypeSpinner.getSelectedItem().toString();
+
+                if (name.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (date.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                if (time.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (description.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+
+                actualEvent.name = name;
+                actualEvent.start_date = date + " " + time;
+                actualEvent.description = description;
+                actualEvent.music_type = musicType;
+
+                Session.getInstance().progressDialog = ProgressDialog.show(ClubEventModifyActivity.this, "Kérlek várj",
+                        "Módosítás folyamatban...", true, false);
+
+                new NetThread(ClubEventModifyActivity.this, new Runnable() {
 
                     @Override
                     public void run() {
-                        Session.getInstance().dismissProgressDialog();
-                        new DoneToast(ClubEventModifyActivity.this, "Sikeres módosítás!").show();
-                        finish();
+                        Session.getInstance()
+                                .getActualCommunicationInterface()
+                                .updateEvent(actualEvent.id, actualEvent.name, actualEvent.description,
+                                        actualEvent.start_date, "", actualEvent.music_type);
+                        ClubEventModifyActivity.this.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                Session.getInstance().dismissProgressDialog();
+                                new DoneToast(ClubEventModifyActivity.this, "Sikeres módosítás!").show();
+                                finish();
+                            }
+                        });
                     }
-                });
+                }).start();
             }
-        }).start();
-	    }
-	});
+        });
 
     }
-    
+
     @Override
     public void onDatePicked(String date) {
-	dateEditText.setText(date);	
+        dateEditText.setText(date);
     }
 
     @Override
     public void onTimePicked(String time) {
-	timeEditText.setText(time);
-	
+        timeEditText.setText(time);
+
     }
 
 }

@@ -1,6 +1,5 @@
 package hu.schonherz.y2014.partyappandroid;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
 import android.view.Gravity;
@@ -14,28 +13,29 @@ public class ErrorToast {
     private String message;
 
     public ErrorToast(Context activity) {
-	this.activity = activity;
+        this.activity = activity;
     }
 
     public ErrorToast(Context activity, String message) {
-	this(activity);
-	this.message = message;
+        this(activity);
+        this.message = message;
     }
 
     public void show() {
-	Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-	vibrator.vibrate(new long[] { 0, 50, 50, 50 }, -1); // két rövid
+        Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[] { 0, 50, 50, 50 }, -1); // két rövid
 
-	LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	//LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
-	View toastView = inflater.inflate(R.layout.toast_error, null);
-	TextView tv = (TextView) toastView.findViewById(R.id.toast_error_textview);
-	tv.setText(this.message);
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // LayoutInflater inflater = (LayoutInflater)
+        // activity.getLayoutInflater();
+        View toastView = inflater.inflate(R.layout.toast_error, null);
+        TextView tv = (TextView) toastView.findViewById(R.id.toast_error_textview);
+        tv.setText(this.message);
 
-	Toast t = new Toast(activity);
-	t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
-	t.setDuration(Toast.LENGTH_SHORT);
-	t.setView(toastView);
-	t.show();
+        Toast t = new Toast(activity);
+        t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
+        t.setDuration(Toast.LENGTH_SHORT);
+        t.setView(toastView);
+        t.show();
     }
 }

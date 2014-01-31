@@ -9,28 +9,28 @@ public class ImageItem {
     private String title;
 
     public ImageItem(Context c) {
-	mContext = c;
+        mContext = c;
     }
 
     public ImageItem(Bitmap image, String title) {
-	super();
-	this.image = image;
-	this.title = title;
+        super();
+        this.image = image;
+        this.title = title;
     }
 
     public Bitmap getImage() {
-	return image;
+        return image;
     }
 
     public void setImage(Bitmap image) {
-	this.image = image;
+        this.image = image;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public void setTitle(String title) {
-	this.title = title;
+        this.title = title;
     }
 }

@@ -4,10 +4,8 @@ import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,17 +28,18 @@ public class ClubInfoFragment extends Fragment {
         // Log.i("átjött", String.valueOf(clubListPosition));
         actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
-        /*if (actualClub.isNotFullDownloaded()) {
-            actualClub.downloadEverything();
-        }*/
+        /*
+         * if (actualClub.isNotFullDownloaded()) {
+         * actualClub.downloadEverything(); }
+         */
 
         return rootView;
     }
 
     @Override
     public void onStart() {
-	super.onStart();
-	
+        super.onStart();
+
         RatingBar clubRatingBar = (RatingBar) rootView.findViewById(R.id.club_info_ratingbar);
         TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
         TextView clubAddressTextView = (TextView) rootView.findViewById(R.id.club_info_textview_address);
@@ -71,22 +70,24 @@ public class ClubInfoFragment extends Fragment {
             message.setEnabled(true);
             message.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
         }
-        
-        if( Session.getActualUser().isMine( actualClub.id) ){
+
+        if (Session.getActualUser().isMine(actualClub.id)) {
             call.setImageDrawable(getResources().getDrawable(R.drawable.club_call2));
             call.setEnabled(false);
             call.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
-	    if ( Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id).equals("") ||
-		    Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id).equals(null)){
-		message.setImageDrawable(getResources().getDrawable(R.drawable.club_message2));
-	            message.setEnabled(false);
-	            message.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
-	    } else {
-		 message.setImageDrawable(getResources().getDrawable(R.drawable.club_message));
-	            message.setEnabled(true);
-	            message.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
-	    }
-	} 
+            if (Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id)
+                    .equals("")
+                    || Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id)
+                            .equals(null)) {
+                message.setImageDrawable(getResources().getDrawable(R.drawable.club_message2));
+                message.setEnabled(false);
+                message.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
+            } else {
+                message.setImageDrawable(getResources().getDrawable(R.drawable.club_message));
+                message.setEnabled(true);
+                message.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
+            }
+        }
 
         if (actualClub.position == null || actualClub.position.equals("null")) {
             showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map2));
@@ -125,8 +126,8 @@ public class ClubInfoFragment extends Fragment {
         // Log.e("INFO", "SERVICES SETTED");
 
         clubRatingBar.setRating(actualClub.getAvarageRate());
-        reviewCounter.setText("("+actualClub.ratings.size()+" értékelés)");
-        
+        reviewCounter.setText("(" + actualClub.ratings.size() + " értékelés)");
+
         OnTouchListener ratingListener = new OnTouchListener() {
 
             @Override
@@ -136,12 +137,12 @@ public class ClubInfoFragment extends Fragment {
                 return false;
             }
         };
-        
+
         rootView.findViewById(R.id.club_info_firstblock).setOnTouchListener(ratingListener);
-        
-        //clubRatingBar.setOnTouchListener(ratingListener);
-        //reviewCounter.setOnTouchListener(ratingListener);
-        
+
+        // clubRatingBar.setOnTouchListener(ratingListener);
+        // reviewCounter.setOnTouchListener(ratingListener);
+
     }
 
 }

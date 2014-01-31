@@ -11,73 +11,73 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_USER = "user";
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + " (" + "id integer  NOT NULL,"
-	    + "nick_name varchar2(255)  NOT NULL," + "password varchar2(50)  NOT NULL,"
-	    + "email varchar2(255)  NOT NULL," + "sex smallint  NOT NULL," + "birthday date  NOT NULL,"
-	    + "type smallint NOT NULL," + "last_update datetime NOT NULL," + "PRIMARY KEY (id)" + ") ;";
+            + "nick_name varchar2(255)  NOT NULL," + "password varchar2(50)  NOT NULL,"
+            + "email varchar2(255)  NOT NULL," + "sex smallint  NOT NULL," + "birthday date  NOT NULL,"
+            + "type smallint NOT NULL," + "last_update datetime NOT NULL," + "PRIMARY KEY (id)" + ") ;";
 
     private static final String TABLE_OWNER = "owner";
     private static final String CREATE_TABLE_OWNER = "CREATE TABLE " + TABLE_OWNER + " (" + "club_id integer NOT NULL,"
-	    + "user_id integer NOT NULL," + "approved smallint NOT NULL," + "PRIMARY KEY (club_id,user_id)" + ");";
+            + "user_id integer NOT NULL," + "approved smallint NOT NULL," + "PRIMARY KEY (club_id,user_id)" + ");";
 
     private static final String TABLE_CLUB = "club";
     private static final String CREATE_TABLE_CLUB = "CREATE TABLE " + TABLE_CLUB + " (" + "id integer  NOT NULL,"
-	    + "name varchar2(255)  NOT NULL," + "type  varchar2(50)  NOT NULL," + "description varchar2(255)  NULL,"
-	    + "address varchar2(50)  NOT NULL," + "phonenumber varchar2(50) NULL," + "email varchar2(255) NULL,"
-	    + "highlight_expire date  NULL," + "PRIMARY KEY (id)" + ") ;";
+            + "name varchar2(255)  NOT NULL," + "type  varchar2(50)  NOT NULL," + "description varchar2(255)  NULL,"
+            + "address varchar2(50)  NOT NULL," + "phonenumber varchar2(50) NULL," + "email varchar2(255) NULL,"
+            + "highlight_expire date  NULL," + "PRIMARY KEY (id)" + ") ;";
 
     private static final String TABLE_FAVORITE = "favorite";
     private static final String CREATE_TABLE_FAVORITE = "CREATE TABLE " + TABLE_FAVORITE + " ("
-	    + "id integer  NOT NULL," + "user_id integer  NOT NULL," + "club_id integer  NOT NULL,"
-	    + "FOREIGN KEY(user_id) REFERENCES user(id)," + "FOREIGN KEY(club_id) REFERENCES club(id),"
-	    + "PRIMARY KEY (id)" + ") ;";
+            + "id integer  NOT NULL," + "user_id integer  NOT NULL," + "club_id integer  NOT NULL,"
+            + "FOREIGN KEY(user_id) REFERENCES user(id)," + "FOREIGN KEY(club_id) REFERENCES club(id),"
+            + "PRIMARY KEY (id)" + ") ;";
 
     private static final String TABLE_MENUITEM = "menu_item";
     private static final String CREATE_TABLE_MENUITEM = "CREATE TABLE " + TABLE_MENUITEM + " ("
-	    + "id integer  NOT NULL," + "club_id integer  NOT NULL," + "name varchar2(255)  NOT NULL,"
-	    + "price integer  NOT NULL," + "discount integer  NOT NULL," + "menu_category varchar2(255)  NOT NULL,"
-	    + "menu_sort smallint  NOT NULL," + "currency varchar2(30)  NOT NULL," + "unit varchar2(30)  NOT NULL,"
-	    + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
+            + "id integer  NOT NULL," + "club_id integer  NOT NULL," + "name varchar2(255)  NOT NULL,"
+            + "price integer  NOT NULL," + "discount integer  NOT NULL," + "menu_category varchar2(255)  NOT NULL,"
+            + "menu_sort smallint  NOT NULL," + "currency varchar2(30)  NOT NULL," + "unit varchar2(30)  NOT NULL,"
+            + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
 
     private static final String TABLE_EVENT = "event";
     private static final String CREATE_TABLE_EVENT = "CREATE TABLE " + TABLE_EVENT + " (" + "id integer  NOT NULL,"
-	    + "club_id integer  NOT NULL," + "name varchar2(255)  NOT NULL," + "description varchar2(255)  NOT NULL,"
-	    + "start_date datetime  NOT NULL," + "music_type varchar2(50)  NOT NULL," + "row_image blob NULL,"
-	    + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
+            + "club_id integer  NOT NULL," + "name varchar2(255)  NOT NULL," + "description varchar2(255)  NOT NULL,"
+            + "start_date datetime  NOT NULL," + "music_type varchar2(50)  NOT NULL," + "row_image blob NULL,"
+            + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
 
     private static final String TABLE_SERVICE = "service";
     private static final String CREATE_TABLE_SERVICE = "CREATE TABLE " + TABLE_SERVICE + " (" + "id integer  NOT NULL,"
-	    + "club_id integer  NOT NULL," + "service_name varchar2(20)  NOT NULL,"
-	    + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
+            + "club_id integer  NOT NULL," + "service_name varchar2(20)  NOT NULL,"
+            + "FOREIGN KEY(club_id) REFERENCES club(id)," + "PRIMARY KEY (id)" + ") ;";
 
     public LocalDatabaseOpenHelper(Context context) {
-	super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-	db.execSQL(CREATE_TABLE_USER);
-	db.execSQL(CREATE_TABLE_OWNER);
-	db.execSQL(CREATE_TABLE_CLUB);
-	db.execSQL(CREATE_TABLE_FAVORITE);
-	db.execSQL(CREATE_TABLE_MENUITEM);
-	db.execSQL(CREATE_TABLE_EVENT);
-	db.execSQL(CREATE_TABLE_SERVICE);
+        db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_TABLE_OWNER);
+        db.execSQL(CREATE_TABLE_CLUB);
+        db.execSQL(CREATE_TABLE_FAVORITE);
+        db.execSQL(CREATE_TABLE_MENUITEM);
+        db.execSQL(CREATE_TABLE_EVENT);
+        db.execSQL(CREATE_TABLE_SERVICE);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_USER);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_OWNER);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_CLUB);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_FAVORITE);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_MENUITEM);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_EVENT);
-	db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_SERVICE);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_OWNER);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_CLUB);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_FAVORITE);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_MENUITEM);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_EVENT);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_SERVICE);
 
-	onCreate(db);
+        onCreate(db);
 
     }
 

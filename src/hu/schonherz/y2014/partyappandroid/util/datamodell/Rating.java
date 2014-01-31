@@ -8,10 +8,10 @@ public class Rating {
     public int approved;
 
     public Rating(int userId, String userName, float value, String comment, int approved) {
-	this.userId = userId;
-	this.userName = userName;
-	this.value = value;
-	this.comment = comment;
-	this.approved = approved;
+        this.userId = userId;
+        this.userName = userName;
+        this.value = value;
+        this.comment = comment;
+        this.approved = approved;
     }
 }

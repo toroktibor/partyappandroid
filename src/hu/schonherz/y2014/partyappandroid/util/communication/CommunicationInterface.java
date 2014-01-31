@@ -10,13 +10,10 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
-
-import android.widget.EditText;
 
 public interface CommunicationInterface {
     public User authenticationUser(String nickname, String password);
@@ -52,7 +49,8 @@ public interface CommunicationInterface {
      * @throws Exception
      *             sikertelen adatbázis kommunikációt jelző kivétel
      */
-    public List<Club> searchClubs(String name, String cityname, String type, List<String> selectedServices, int offset, int limit) throws Exception;
+    public List<Club> searchClubs(String name, String cityname, String type, List<String> selectedServices, int offset,
+            int limit) throws Exception;
 
     /**
      * Megadott felhasználóhoz tartozó jelszó módosítása a távoli adatbázisban.
@@ -95,7 +93,7 @@ public interface CommunicationInterface {
     public void deleteFavoriteClubForUser(int club_id, int user_id);
 
     public void sendANewClubRequest(String newClubName, String newClubAddress, String newClubType, int owner_user_id,
-	    List<String> services);
+            List<String> services);
 
     public List<Club> getNotApprovedClubs();
 
@@ -126,43 +124,45 @@ public interface CommunicationInterface {
     public List<Event> getEventsOfClub(int id);
 
     String DownLoadAnImageThumbnail(int imageid);
-    
-        
-    public int addEvent(int clubid, String name, String description, String start_date, String row_image, String music_type);
-    
-    public void updateEvent(int eventid, String name, String description, String start_date, String row_image, String music_type);
-    
+
+    public int addEvent(int clubid, String name, String description, String start_date, String row_image,
+            String music_type);
+
+    public void updateEvent(int eventid, String name, String description, String start_date, String row_image,
+            String music_type);
+
     public void deleteEvent(int eventId);
-    
+
     public int addRating(int clubId, int userId, float value, String comment);
-    
+
     public void updateRating(int clubId, int userId, float value, String comment);
-    
+
     public List<Rating> getRatings(int clubId);
-    
+
     public List<AdminRating> getNotApprovedRatings();
-    
+
     public void declineRating(int userId, int clubId);
-    
+
     public void acceptRating(int userId, int clubId);
-    
+
     public void deleteClub(int clubId);
-    
-    public void updateClubInfo(int clubId, String name, String type, String description, String address, String phonenumber, String email);
-    
+
+    public void updateClubInfo(int clubId, String name, String type, String description, String address,
+            String phonenumber, String email);
+
     public String setHighlightExpire(int clubId, int days);
-    
+
     public List<String> getServices(int club_id);
-    
+
     public void deleteServices(int club_id);
-    
+
     public void deleteImage(int imageId);
-    
+
     public List<Integer> getNotApprovedImages();
-    
+
     public void declineImage(int imageid);
-    
+
     public void acceptImage(int imageid);
-    
+
     public String getUsersFromFavoriteClub(int clubId);
 }
