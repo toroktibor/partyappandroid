@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.MenuActionBar;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.MenuItemsListAdapter;
@@ -9,6 +10,7 @@ import hu.schonherz.y2014.partyappandroid.xls.FileChooser;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -30,14 +32,32 @@ public class ClubMenuActivity extends ActionBarActivity {
     public boolean onContextItemSelected(android.view.MenuItem item) {
 	// TODO Auto-generated method stub
 	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	int index = info.position;
+	final int index = info.position;
 	switch (item.getItemId()) {
 	case R.id.delete_club_menu_item:
-	    int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-	    int menuid = Session.getSearchViewClubs().get(clubListPosition).menuItems.get(index).id;
-	    Session.getInstance().getActualCommunicationInterface().removeEMenuItem(menuid);
-	    Session.getSearchViewClubs().get(clubListPosition).menuItems.remove(index);
-	    onResume();
+	    final int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+	    final int menuid = Session.getSearchViewClubs().get(clubListPosition).menuItems.get(index).id;
+	    
+		Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
+                "Törlés folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	Session.getInstance().getActualCommunicationInterface().removeEMenuItem(menuid);
+        	    Session.getSearchViewClubs().get(clubListPosition).menuItems.remove(index);
+            	ClubMenuActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(ClubMenuActivity.this, "Sikeres törlés!").show();
+                        onResume();
+                    }
+                });
+            }
+        }).start();	    
 	    return true;
 	case R.id.modify_club_menu_item:
 	    Intent i = new Intent(getApplicationContext(), ClubMenuModifyActivity.class);

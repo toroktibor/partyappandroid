@@ -1,9 +1,11 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -161,16 +163,32 @@ public class ClubMenuAddActivity extends ActionBarActivity {
 		}
 
 		// Uzenet a servernek h uj menuitem van
-		int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-		int clubId = Session.getSearchViewClubs().get(clubListPosition).id;
-		MenuItem newMenuItem = new MenuItem(0, name, price, currency, unit, discount, category, 1);
-		int menuItemId = Session.getInstance().getActualCommunicationInterface()
-			.addANewMenuItem(clubId, newMenuItem);
-		newMenuItem.id = menuItemId;
+		final int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+		final int clubId = Session.getSearchViewClubs().get(clubListPosition).id;
+		final MenuItem newMenuItem = new MenuItem(0, name, price, currency, unit, discount, category, 1);
+		
+		Session.getInstance().progressDialog = ProgressDialog.show(ClubMenuAddActivity.this, "Kérlek várj",
+                "Hozzáadás folyamatban...", true, false);
+		
+		new Thread(new Runnable() {
 
-		Session.getSearchViewClubs().get(clubListPosition).menuItems.add(newMenuItem);
+            @Override
+            public void run() {
+            	int menuItemId = Session.getInstance().getActualCommunicationInterface().addANewMenuItem(clubId, newMenuItem);
+        		newMenuItem.id = menuItemId;
 
-		finish();
+        		Session.getSearchViewClubs().get(clubListPosition).menuItems.add(newMenuItem);
+            	ClubMenuAddActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Session.getInstance().dismissProgressDialog();
+                        new DoneToast(ClubMenuAddActivity.this, "Sikeres hozzáadás!").show();
+                        finish();
+                    }
+                });
+            }
+        }).start();
 	    }
 	});
     }
