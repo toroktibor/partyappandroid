@@ -49,6 +49,12 @@ public class LoginActivity extends ActionBarActivity {
                 if (mGpsLocation.gotLocation() == true) {
                     break;
                 }
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
 
             Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
