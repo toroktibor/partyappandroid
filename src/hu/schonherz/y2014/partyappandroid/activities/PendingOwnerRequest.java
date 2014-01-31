@@ -127,5 +127,10 @@ public class PendingOwnerRequest extends ActionBarActivity {
         }
         return ownerRequestArray;
     }
-
+    
+    @Override
+    public void onBackPressed() {
+        PendingListActivity.updateButtonText();
+        super.onBackPressed();
+    }
 }

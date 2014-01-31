@@ -122,5 +122,10 @@ public class PendingRatingsActivity extends ActionBarActivity {
         }
         return ratingArray;
     }
-
+        
+    @Override
+    public void onBackPressed() {
+        PendingListActivity.updateButtonText();
+        super.onBackPressed();
+    }
 }

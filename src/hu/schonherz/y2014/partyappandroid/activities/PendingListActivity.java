@@ -29,6 +29,11 @@ public class PendingListActivity extends ActionBarActivity {
     static ArrayList<GaleryImage> images = new ArrayList<GaleryImage>();
     static List<Club> newClubsList;
     
+    static Button pendingClubsButton;
+    static Button pendingRatingsButton;
+    static Button pendingImagesButton;
+    static Button pendingOwnersButton;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +42,10 @@ public class PendingListActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_pending_list);
         
-        final Button pendingClubsButton = (Button) findViewById(R.id.pendings_new_clubs_button);
-        final Button pendingRatingsButton = (Button) findViewById(R.id.pendings_new_rating_button);
-        final Button pendingImagesButton = (Button) findViewById(R.id.pendings_new_image_button);
-        final Button pendingOwnersButton = (Button) findViewById(R.id.pendings_owner_please_button);
+        pendingClubsButton = (Button) findViewById(R.id.pendings_new_clubs_button);
+        pendingRatingsButton = (Button) findViewById(R.id.pendings_new_rating_button);
+        pendingImagesButton = (Button) findViewById(R.id.pendings_new_image_button);
+        pendingOwnersButton = (Button) findViewById(R.id.pendings_owner_please_button);
 
         pendingClubsButton.setOnClickListener(new OnClickListener() {
 
@@ -102,14 +107,18 @@ public class PendingListActivity extends ActionBarActivity {
                     @Override
                     public void run() {
                         Session.getInstance().dismissProgressDialog();
-                        pendingClubsButton.setText("Szórakozóhelyek ("+newClubsList.size()+")");
-                        pendingOwnersButton.setText("Tulajdonosi kérelmek ("+ownerRequestList.size()+")");
-                        pendingImagesButton.setText("Képek ("+images.size()+")");
-                        pendingRatingsButton.setText("Vélemények ("+ratings.size()+")");
+                        updateButtonText();
                     }
                 });
             }
         }).start();
     }
-
+    
+    static void updateButtonText(){
+        pendingClubsButton.setText("Szórakozóhelyek ("+((newClubsList==null)?"0":newClubsList.size())+")");
+        pendingOwnersButton.setText("Tulajdonosi kérelmek ("+((ownerRequestList==null)?"0":ownerRequestList.size())+")");
+        pendingImagesButton.setText("Képek ("+((images==null)?"0":images.size())+")");
+        pendingRatingsButton.setText("Vélemények ("+((ratings==null)?"0":ratings.size())+")");
+    }
+    
 }

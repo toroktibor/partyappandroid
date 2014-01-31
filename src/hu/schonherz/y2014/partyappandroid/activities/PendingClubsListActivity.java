@@ -122,5 +122,11 @@ public class PendingClubsListActivity extends ActionBarActivity {
         }
         return clubArray;
     }
-
+    
+    @Override
+    public void onBackPressed() {
+        PendingListActivity.updateButtonText();
+        super.onBackPressed();
+    }
+    
 }

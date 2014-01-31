@@ -49,8 +49,8 @@ public class Communication implements CommunicationInterface {
 
     public String httpPost(String file, HashMap<String, String> post) throws ClientProtocolException, IOException {
         /* Ideiglenes megoldás - vtms */
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        /*StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);*/
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 

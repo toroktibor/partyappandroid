@@ -154,4 +154,10 @@ public class PendingImageActivity extends ActionBarActivity {
         customGridAdapter = new GridViewAdapter(getApplicationContext(), R.layout.row_grid, getDataForGridView());
         gridView.setAdapter(customGridAdapter);
     }
+    
+    @Override
+    public void onBackPressed() {
+        PendingListActivity.updateButtonText();
+        super.onBackPressed();
+    }
 }
