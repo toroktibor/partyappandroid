@@ -8,40 +8,40 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/login_edittext_name"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:text="a"        
-        style="@style/CustomEditText"/>
-
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@+id/login_edittext_password"
+        android:singleLine="true"/>
+    
     <EditText
         android:id="@+id/login_edittext_password"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:focusable="true"
         android:hint="@string/password"
-        android:text="a"
-        style="@style/CustomEditText">
-
-        <requestFocus />
-    </EditText>
+        android:imeOptions="actionDone"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/login_button_login"
+        style="@style/CustomPurpleButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:text="@string/login" 
         android:onClick="onClickHandler"
-        style="@style/CustomPurpleButton"/>
-    
-   <Button
+        android:text="@string/login" />
+
+    <Button
         android:id="@+id/login_button_register"
+        style="@style/CustomPurpleButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:text="@string/register" 
         android:onClick="onClickHandler"
-        style="@style/CustomPurpleButton"/>
+        android:text="@string/register" />
 
 </LinearLayout>

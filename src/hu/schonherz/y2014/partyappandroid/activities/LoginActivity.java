@@ -14,13 +14,22 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Path.Direction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Layout.Directions;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -80,6 +89,47 @@ public class LoginActivity extends ActionBarActivity {
 	// Session.getInstance().getDatabaseConnecter().testMethod();
 	// gyors teszt vege
 
+final AutoCompleteTextView nameEditText = (AutoCompleteTextView) findViewById(R.id.login_edittext_name);
+	
+	final Button loginButton = (Button) findViewById(R.id.login_button_login);
+	
+	// TODO: CSERÉLNI AZ R.ARRAY-T A FÁJLBÓL OLVASOTT STRING TÖMBRE!!!!
+	String[] alreadyLoggedUsersName = getResources().getStringArray(R.array.logged_users_names); 
+	
+	ArrayAdapter<String> adapter = 
+	        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alreadyLoggedUsersName);
+	
+	nameEditText.setAdapter(adapter);
+	
+	nameEditText.setOnEditorActionListener(new OnEditorActionListener() {
+		
+		@Override
+		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+			 boolean handled = false;
+		        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+		            EditText pwdText = (EditText) nameEditText.focusSearch(View.FOCUS_DOWN);
+		            nameEditText.clearFocus();
+		            pwdText.requestFocus();
+		            handled = true;
+		        }
+		        return handled;
+		}
+	});
+	final EditText passwordEditText = (EditText) findViewById(R.id.login_edittext_password);
+	passwordEditText.setOnEditorActionListener(new OnEditorActionListener() {
+		
+		@Override
+		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+			 boolean handled = false;
+		        if (actionId == EditorInfo.IME_ACTION_DONE) {
+		            loginButton.performClick();
+		            handled = true;
+		        }
+		        return handled;
+		}
+	});
+	
+	
 	if (Session.getInstance().getActualUser() != null) {
 	    loginSynchronize(Session.getInstance().getActualUser(), getApplicationContext());
 	    Intent newIntent = new Intent(this, ClubsActivity.class);
@@ -93,6 +143,8 @@ public class LoginActivity extends ActionBarActivity {
     protected void onStart() {
 	super.onStart();
 	Intent mIntent = new Intent(this, GPSLocation.class);
+	
+	
 	bindService(mIntent, mConnection, BIND_AUTO_CREATE);
     };
 
