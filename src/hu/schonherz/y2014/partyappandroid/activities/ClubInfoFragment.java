@@ -74,7 +74,8 @@ public class ClubInfoFragment extends Fragment {
             call.setImageDrawable(getResources().getDrawable(R.drawable.club_call2));
             call.setEnabled(false);
             call.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
-	    if ( Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id).equals("") ){
+	    if ( Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id).equals("") ||
+		    Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id).equals(null)){
 		message.setImageDrawable(getResources().getDrawable(R.drawable.club_message2));
 	            message.setEnabled(false);
 	            message.setBackgroundColor(getResources().getColor(R.color.editTextBackground));

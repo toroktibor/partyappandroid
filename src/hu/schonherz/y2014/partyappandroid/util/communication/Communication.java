@@ -1209,10 +1209,10 @@ public class Communication implements CommunicationInterface {
 		    }
 		    return list;
 		} catch (Exception e) {	    
-		    Log.e(getClass().getName(), "Hiba", e);
+		    
 		}
 
-		return null;
+		return "";
 	}
 
 }
