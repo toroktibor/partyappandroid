@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.R;
+import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.os.Bundle;
@@ -24,19 +25,16 @@ public class ClubRatingAdd extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
+
+	new SimpleActionBar(this, "Értékelésed").setLayout();
+	
 	setContentView(R.layout.activity_club_rating_add);
 
-	actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-	actionBar.setCustomView(R.layout.rating_list_actionbar);
 
 	clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
 	actualRating = Session.getSearchViewClubs().get(clubListPosition)
 		.isRatingThisUser(Session.getActualUser().getId());
 
-	Button actionbarAddButton = (Button) findViewById(R.id.rating_list_actionbar_add_button);
-	actionbarAddButton.setVisibility(View.INVISIBLE);
 
 	ratingBar = (RatingBar) findViewById(R.id.club_rating_add_ratingbar);
 	commentEditText = (EditText) findViewById(R.id.club_rating_add_user_comment_edittext);

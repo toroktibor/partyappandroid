@@ -36,8 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/club_info_textview_address"
             android:layout_marginBottom="6dp"
-            android:onClick="onClickHandler"
             android:rating="3" />
+
+        <TextView
+            android:id="@+id/club_info_reviewcounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/club_info_ratingbar"
+            android:layout_toRightOf="@+id/club_info_ratingbar"
+            android:paddingLeft="4dp"
+            android:text="(0 értékelés)" />
     </RelativeLayout>
 
     <TextView
@@ -79,30 +87,30 @@
             android:id="@+id/phone_call"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/CustomPurpleButtonHeight"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
-            android:onClick="phoneCall"
-            android:src="@drawable/club_call"
             android:background="@color/purpleButtonBackground"
-            android:layout_marginRight="3dp" />
+            android:onClick="phoneCall"
+            android:src="@drawable/club_call" />
 
         <ImageButton
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/CustomPurpleButtonHeight"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
-            android:onClick="message"
-            android:src="@drawable/club_message"
             android:background="@color/purpleButtonBackground"
-            android:layout_marginRight="3dp" />
+            android:onClick="message"
+            android:src="@drawable/club_message" />
 
         <ImageButton
             android:id="@+id/showOnTheMap"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/CustomPurpleButtonHeight"
             android:layout_weight="1"
+            android:background="@color/purpleButtonBackground"
             android:onClick="showOnTheMap"
-            android:src="@drawable/club_map"
-            android:background="@color/purpleButtonBackground" />
+            android:src="@drawable/club_map" />
     </LinearLayout>
 
 </RelativeLayout>
