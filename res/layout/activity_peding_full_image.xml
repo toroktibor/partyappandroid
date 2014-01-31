@@ -10,7 +10,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:background="@android:color/black"
-            android:layout_above="@+id/full_image_buttons"
+            android:layout_above="@+id/peding_full_image_buttons"
             android:visibility="invisible"/>
     
     
@@ -54,7 +54,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"            
-            android:layout_above="@+id/full_image_buttons"
+            android:layout_above="@+id/peding_full_image_buttons"
             android:text="Kép betöltése..."
             android:visibility="invisible"
 	    />    

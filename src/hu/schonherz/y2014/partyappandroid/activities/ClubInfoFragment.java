@@ -56,7 +56,7 @@ public class ClubInfoFragment extends Fragment {
         } else {
             call.setImageDrawable(getResources().getDrawable(R.drawable.club_call));
             call.setEnabled(true);
-            showOnTheMap.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );  
+            call.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );  
         }
 
         if (actualClub.email == null || actualClub.email.equals("null") || actualClub.email.equals("") ) {
@@ -66,7 +66,7 @@ public class ClubInfoFragment extends Fragment {
         } else {
             message.setImageDrawable(getResources().getDrawable(R.drawable.club_message));
             message.setEnabled(true);
-            showOnTheMap.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );    
+            message.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );    
         }
 
         if (actualClub.position == null || actualClub.position.equals("null")) {
