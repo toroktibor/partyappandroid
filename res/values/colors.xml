@@ -18,5 +18,7 @@
     
     
     <color name="profileTitle">#888888</color>
+    
+    <color name="infoBlockBackground">#202229</color>
 
 </resources>
