@@ -1,14 +1,12 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.ClubListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
-import hu.schonherz.y2014.partyappandroid.util.datamodell.ClubsList;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.List;
-
-import com.google.android.gms.internal.ac;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,13 +16,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -74,7 +72,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
 
 		    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 			    "Adatok betöltése...", true, false);
-		    new Thread(new Runnable() {
+		    new NetThread(getActivity(), new Runnable() {
 
 			@Override
 			public void run() {

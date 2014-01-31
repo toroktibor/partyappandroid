@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.ErrorToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -69,7 +70,7 @@ public class ProfileModifyActivity extends ActionBarActivity implements DatePick
 
             Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj", "Adatok módosítása...",
                     true, false);
-            new Thread(new Runnable() {
+            new NetThread(this,new Runnable() {
 
                 @Override
                 public void run() {

@@ -1,21 +1,16 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +19,6 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -84,7 +78,7 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
 
 			Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 				"Adatok betöltése...", true, false);
-			new Thread(new Runnable() {
+			new NetThread(getActivity(),new Runnable() {
 
 			    @Override
 			    public void run() {

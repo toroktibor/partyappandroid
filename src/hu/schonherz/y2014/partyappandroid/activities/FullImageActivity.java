@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.GaleryImage;
 import android.annotation.SuppressLint;
@@ -32,10 +33,10 @@ public class FullImageActivity extends Activity {
     static final int ZOOM = 2;
     int mode = NONE;
     int currentImageID;
+    private Button bNext;
+    private Button bPrev;
 
     private void loadImage(final int imageid) {
-	final Button bNext = (Button) findViewById(R.id.full_image_button_next);
-	final Button bPrev = (Button) findViewById(R.id.full_image_button_prev);
 	bPrev.setEnabled(false);
 	bNext.setEnabled(false);
 	
@@ -51,7 +52,7 @@ public class FullImageActivity extends Activity {
 
 	iv.setVisibility(View.INVISIBLE);
 	loadingTextView.setVisibility(View.VISIBLE);
-	new Thread(new Runnable() {
+	new NetThread(this,new Runnable() {
 
 	    @Override
 	    public void run() {
@@ -67,7 +68,18 @@ public class FullImageActivity extends Activity {
 			loadingTextView.setVisibility(View.INVISIBLE);
 			iv.setVisibility(View.VISIBLE);
 			bPrev.setEnabled(imageid!=0);
+			if(bPrev.isEnabled()){
+			    bPrev.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.purpleButtonBackground) );
+			}else{
+			    bPrev.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.editTextBackground) );
+			}
 			bNext.setEnabled(imageid != ClubGaleryFragment.actualClub.images.size()-1);
+			if(bNext.isEnabled()){
+			    bNext.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.purpleButtonBackground) );
+			}else{
+			    bNext.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.editTextBackground) );
+			}
+			
 			
 			
 		    }
@@ -83,6 +95,14 @@ public class FullImageActivity extends Activity {
 	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setContentView(R.layout.activity_full_image);
 
+	bNext = (Button) findViewById(R.id.full_image_button_next);
+	bPrev = (Button) findViewById(R.id.full_image_button_prev);
+	
+	bPrev.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.editTextBackground) );
+	bNext.setEnabled(false);
+	bNext.setBackgroundColor( FullImageActivity.this.getResources().getColor(R.color.editTextBackground) );
+	bNext.setEnabled(false);
+	
 	final int imageid = getIntent().getIntExtra("imageid", 0);
 
 	loadImage(imageid);

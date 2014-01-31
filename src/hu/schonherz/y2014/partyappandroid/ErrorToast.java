@@ -10,14 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ErrorToast {
-    private Activity activity;
+    private Context activity;
     private String message;
 
-    public ErrorToast(Activity activity) {
+    public ErrorToast(Context activity) {
 	this.activity = activity;
     }
 
-    public ErrorToast(Activity activity, String message) {
+    public ErrorToast(Context activity, String message) {
 	this(activity);
 	this.message = message;
     }
@@ -26,7 +26,8 @@ public class ErrorToast {
 	Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 	vibrator.vibrate(new long[] { 0, 50, 50, 50 }, -1); // két rövid
 
-	LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
+	LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	//LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
 	View toastView = inflater.inflate(R.layout.toast_error, null);
 	TextView tv = (TextView) toastView.findViewById(R.id.toast_error_textview);
 	tv.setText(this.message);

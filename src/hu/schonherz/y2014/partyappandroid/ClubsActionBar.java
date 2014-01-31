@@ -162,7 +162,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 			    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 				    "Szórakozóhelyek keresése...", true, false);
-			    new Thread(new Runnable() {
+			    new NetThread(activity,new Runnable() {
 
 				@Override
 				public void run() {
@@ -303,7 +303,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 		    "Közeli helyek keresése...", true, false);
-	    new Thread(new Runnable() {
+	    new NetThread(activity,new Runnable() {
 
 		@Override
 		public void run() {
@@ -334,7 +334,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case 2: // KEDVENCEK
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj",
 		    "Kedvencek betöltése...", true, false);
-	    new Thread(new Runnable() {
+	    new NetThread(activity,new Runnable() {
 
 		@Override
 		public void run() {
@@ -370,7 +370,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case 3: // HELYEIM
 	    Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj", "Helyeid betöltése...",
 		    true, false);
-	    new Thread(new Runnable() {
+	    new NetThread(activity,new Runnable() {
 
 		@Override
 		public void run() {

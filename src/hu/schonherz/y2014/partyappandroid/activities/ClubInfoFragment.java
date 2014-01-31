@@ -30,15 +30,17 @@ public class ClubInfoFragment extends Fragment {
         // Log.i("átjött", String.valueOf(clubListPosition));
         actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
-        if (actualClub.isNotFullDownloaded()) {
+        /*if (actualClub.isNotFullDownloaded()) {
             actualClub.downloadEverything();
-        }
+        }*/
 
         return rootView;
     }
 
     @Override
     public void onStart() {
+	super.onStart();
+	
         RatingBar clubRatingBar = (RatingBar) rootView.findViewById(R.id.club_info_ratingbar);
         TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
         TextView clubAddressTextView = (TextView) rootView.findViewById(R.id.club_info_textview_address);
@@ -139,7 +141,7 @@ public class ClubInfoFragment extends Fragment {
         
         //clubRatingBar.setOnTouchListener(ratingListener);
         //reviewCounter.setOnTouchListener(ratingListener);
-        super.onStart();
+        
     }
 
 }

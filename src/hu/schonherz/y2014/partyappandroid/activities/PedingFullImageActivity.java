@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.GaleryImage;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -35,7 +36,7 @@ public class PedingFullImageActivity extends Activity {
 
 	iv.setVisibility(View.INVISIBLE);
 	loadingTextView.setVisibility(View.VISIBLE);
-	new Thread(new Runnable() {
+	new NetThread(this,new Runnable() {
 
 	    @Override
 	    public void run() {
