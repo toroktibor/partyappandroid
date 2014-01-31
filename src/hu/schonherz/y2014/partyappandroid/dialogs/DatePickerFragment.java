@@ -14,6 +14,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
@@ -40,6 +41,14 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
         // Create a new instance of DatePickerDialog and return it
         DatePickerDialog datepicker = new DatePickerDialog(getActivity(), this, year, month, day);
+        
+        datepicker.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", datepicker);
+        datepicker.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégsem", datepicker);
+        
+        
+        /*b = datepicker.getButton(Dialog.BUTTON_POSITIVE);
+        b.setText("Beállít");*/
+      
 
         if (android.os.Build.VERSION.SDK_INT < 11)
             return datepicker;

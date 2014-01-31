@@ -3,6 +3,7 @@ package hu.schonherz.y2014.partyappandroid.dialogs;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -30,7 +31,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
+        TimePickerDialog tpd = new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
+        
+        tpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", tpd);
+        tpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégsem", tpd);
+        
+        return tpd;
     }
 
     @Override
