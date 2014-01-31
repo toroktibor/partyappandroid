@@ -37,6 +37,7 @@
         android:layout_below="@+id/club_my_review_textview_review"
         android:layout_above="@+id/club_my_review_button_save"
         android:gravity="top"
+
         style="@style/CustomEditText">
     </EditText>
 
