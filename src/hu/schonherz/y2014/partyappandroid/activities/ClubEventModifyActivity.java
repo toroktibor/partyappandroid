@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -9,7 +10,6 @@ import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerCommunicator;
 import hu.schonherz.y2014.partyappandroid.dialogs.TimePickerFragment;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -118,7 +117,7 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
 		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventModifyActivity.this, "Kérlek várj",
                 "Módosítás folyamatban...", true, false);
 		
-		new Thread(new Runnable() {
+		new NetThread(ClubEventModifyActivity.this,new Runnable() {
 
             @Override
             public void run() {

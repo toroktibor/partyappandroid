@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.EventsListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Event;
@@ -18,12 +19,10 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class ClubEventsFragment extends Fragment {
@@ -99,7 +98,7 @@ public class ClubEventsFragment extends Fragment {
 	    Session.getInstance().progressDialog = ProgressDialog.show(getActivity(), "Kérlek várj",
                 "Törlés folyamatban...", true, false);
 		
-		new Thread(new Runnable() {
+		new NetThread(getActivity(),new Runnable() {
 
             @Override
             public void run() {

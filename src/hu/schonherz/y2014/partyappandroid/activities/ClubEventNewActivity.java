@@ -1,8 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
-import java.sql.Date;
-
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.dialogs.DatePickerCommunicator;
@@ -14,7 +13,6 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -102,7 +100,7 @@ public class ClubEventNewActivity extends ActionBarActivity implements DatePicke
 		Session.getInstance().progressDialog = ProgressDialog.show(ClubEventNewActivity.this, "Kérlek várj",
                 "Hozzáadás folyamatban...", true, false);
 		
-		new Thread(new Runnable() {
+		new NetThread(ClubEventNewActivity.this,new Runnable() {
 
             @Override
             public void run() {

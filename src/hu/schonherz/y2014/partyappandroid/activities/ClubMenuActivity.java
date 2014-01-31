@@ -2,6 +2,7 @@ package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
 import hu.schonherz.y2014.partyappandroid.MenuActionBar;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.adapters.MenuItemsListAdapter;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
@@ -13,7 +14,6 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -21,7 +21,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -41,7 +40,7 @@ public class ClubMenuActivity extends ActionBarActivity {
 		Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj",
                 "Törlés folyamatban...", true, false);
 		
-		new Thread(new Runnable() {
+		new NetThread(this,new Runnable() {
 
             @Override
             public void run() {

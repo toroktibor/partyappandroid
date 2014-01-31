@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.MenuItem;
@@ -140,7 +141,7 @@ public class ClubMenuModifyActivity extends ActionBarActivity {
 		Session.getInstance().progressDialog = ProgressDialog.show(ClubMenuModifyActivity.this, "Kérlek várj",
                 "Módosítás folyamatban...", true, false);
 		
-		new Thread(new Runnable() {
+		new NetThread(ClubMenuModifyActivity.this,new Runnable() {
 
             @Override
             public void run() {
