@@ -49,31 +49,34 @@ public class ClubInfoFragment extends Fragment {
         ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
         ImageButton showOnTheMap = (ImageButton) rootView.findViewById(R.id.showOnTheMap);
 
-        if (actualClub.phonenumber == null || actualClub.phonenumber.equals("null")) {
-            // TODO:ikon csere
+        if (actualClub.phonenumber == null || actualClub.phonenumber.equals("null") || actualClub.phonenumber.equals("") ) {
+            call.setImageDrawable(getResources().getDrawable(R.drawable.club_call2));
             call.setEnabled(false);
-            call.setBackgroundColor(Color.TRANSPARENT);
+            call.setBackgroundColor( getResources().getColor(R.color.editTextBackground) );
         } else {
-            // TODO:ikon csere
+            call.setImageDrawable(getResources().getDrawable(R.drawable.club_call));
             call.setEnabled(true);
+            showOnTheMap.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );  
         }
 
-        if (actualClub.email == null || actualClub.email.equals("null")) {
-            // TODO:ikon csere
+        if (actualClub.email == null || actualClub.email.equals("null") || actualClub.email.equals("") ) {
+            message.setImageDrawable(getResources().getDrawable(R.drawable.club_message2));
             message.setEnabled(false);
-            call.setBackgroundColor(Color.TRANSPARENT);
+            message.setBackgroundColor( getResources().getColor(R.color.editTextBackground) );
         } else {
+            message.setImageDrawable(getResources().getDrawable(R.drawable.club_message));
             message.setEnabled(true);
-            // TODO:ikon csere
+            showOnTheMap.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );    
         }
 
         if (actualClub.position == null || actualClub.position.equals("null")) {
-            // TODO: ikon csere
+            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map2));
             showOnTheMap.setEnabled(false);
-            showOnTheMap.setBackgroundColor(Color.TRANSPARENT);
+            showOnTheMap.setBackgroundColor( getResources().getColor(R.color.editTextBackground) );
         } else {
-            // TODO: ikon csere
+            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map));
             showOnTheMap.setEnabled(true);
+            showOnTheMap.setBackgroundDrawable( getResources().getDrawable(R.drawable.purple_button) );  
         }
 
         clubNameTextView.setText(actualClub.name);

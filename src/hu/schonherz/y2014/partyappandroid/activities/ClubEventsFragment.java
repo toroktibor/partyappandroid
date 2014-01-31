@@ -37,7 +37,6 @@ public class ClubEventsFragment extends Fragment {
 	eventsListView = new ListView(getActivity().getApplicationContext());
 	Event[] eventArray = getEventArrayFromList(Session.getSearchViewClubs().get(clubListPosition).events);
 	eventsListView.setAdapter(new EventsListAdapter(getActivity(), eventArray));
-	addButton = (Button) rootView.findViewById(R.id.club_events_add_button);
 
 	eventsListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -51,17 +50,6 @@ public class ClubEventsFragment extends Fragment {
 
 	});
 
-	addButton.setOnClickListener(new OnClickListener() {
-
-	    @Override
-	    public void onClick(View v) {
-
-		Activity activity = getActivity();
-		Intent i = new Intent(activity, ClubEventNewActivity.class);
-		activity.startActivity(i);
-
-	    }
-	});
 
 	rootView.addView(eventsListView);
 

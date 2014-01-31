@@ -1,11 +1,13 @@
 package hu.schonherz.y2014.partyappandroid;
 
 import hu.schonherz.y2014.partyappandroid.activities.ClubActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubEventNewActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -83,14 +85,20 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             PopupMenu popupmenu = new PopupMenu(activity, v);
             MenuItem item;
 
-            item = popupmenu.getMenu().add(0, 999, 0, "[debug] Adatok frissítése");
-            item.setOnMenuItemClickListener(this);
+            //item = popupmenu.getMenu().add(0, 999, 0, "[debug] Adatok frissítése");
+            //item.setOnMenuItemClickListener(this);
 
             item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
             item.setOnMenuItemClickListener(this);
             if (activity.viewPager.getCurrentItem() == 2) {
                 item = popupmenu.getMenu().add(0, 2, 0, "Képfeltöltés");
                 item.setOnMenuItemClickListener(this);
+            }
+            
+            if(activity.viewPager.getCurrentItem() == 1)
+            {
+                item = popupmenu.getMenu().add(0, 8, 0, "Esemény létrehozása");
+                item.setOnMenuItemClickListener(this);                
             }
 
             int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
@@ -293,6 +301,10 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             final AlertDialog dialog = builder.create();
 
             dialog.show();
+            break;
+        case 8:
+            i = new Intent(activity, ClubEventNewActivity.class);
+            activity.startActivity(i);
             break;
         case 999:
             activity.actualClub.downloadEverything();

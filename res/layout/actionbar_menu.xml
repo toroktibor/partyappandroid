@@ -17,7 +17,7 @@
        
     
         <ImageView
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/menu_add"
         android:background="?attr/actionBarItemBackground"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
         android:text="Hozzáadás" />
         
        <ImageView
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/menu_xls"
         android:background="?attr/actionBarItemBackground"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="match_parent"
