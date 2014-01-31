@@ -1143,5 +1143,41 @@ public class Communication implements CommunicationInterface {
 		return null;
 	}
 
+	@Override
+	public void declineImage(int imageid) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "DECLINEIMAGE");
+		    post.put("imageid", String.valueOf(imageid));
+
+		    String data = httpPost("image.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+	@Override
+	public void acceptImage(int imageid) {
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "ACCEPTIMAGE");
+		    post.put("imageid", String.valueOf(imageid));
+
+		    String data = httpPost("image.php", post);
+		    JSONObject jsonObject = new JSONObject(data);
+		    return;
+
+		} catch (Exception e) {
+
+		}
+
+		return;
+		
+	}
+
 
 }

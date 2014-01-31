@@ -89,7 +89,7 @@
         <item>Sport központ</item>
         <item>Disco</item>
     </string-array>
-        <string-array name="clubs_types_for_search">
+    <string-array name="clubs_types_for_search">
         <item>Bármelyik</item>
         <item>Vegyes</item>
         <item>Kocsma</item>
@@ -135,5 +135,6 @@
     <string name="title_activity_pending_ratings">PendingRatingsActivity</string>
     <string name="title_activity_club_info_modify">ClubInfoModifyActivity</string>
     <string name="title_activity_pending_image">PendingImageActivity</string>
+    <string name="title_activity_peding_full_image">PedingFullImageActivity</string>
 
 </resources>

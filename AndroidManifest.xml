@@ -212,6 +212,10 @@
             android:name="hu.schonherz.y2014.partyappandroid.activities.PendingImageActivity"
             android:label="@string/title_activity_pending_image" >
         </activity>
+        <activity
+            android:name="hu.schonherz.y2014.partyappandroid.activities.PedingFullImageActivity"
+            android:label="@string/title_activity_peding_full_image" >
+        </activity>
     </application>
 
 </manifest>

@@ -159,4 +159,8 @@ public interface CommunicationInterface {
     public void deleteImage(int imageId);
     
     public List<Integer> getNotApprovedImages();
+    
+    public void declineImage(int imageid);
+    
+    public void acceptImage(int imageid);
 }
