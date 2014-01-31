@@ -1,9 +1,12 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Rating;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -59,21 +62,61 @@ public class ClubRatingAdd extends ActionBarActivity {
                 if (actualRating == null) {
                     actualRating = new Rating(Session.getActualUser().getId(), Session.getActualUser().getNickname(),
                             value, comment, 0);
-                    Session.getInstance()
+                    Session.getSearchViewClubs().get(clubListPosition).ratings.add(actualRating);
+                    
+                    Session.getInstance().progressDialog = ProgressDialog.show(ClubRatingAdd.this, "Kérlek várj",
+                            "Hozzáadás folyamatban...", true, false);
+
+                    new NetThread(ClubRatingAdd.this, new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance()
                             .getActualCommunicationInterface()
                             .addRating(Session.getInstance().getSearchViewClubs().get(clubListPosition).id,
                                     actualRating.userId, actualRating.value, actualRating.comment);
-                    Session.getSearchViewClubs().get(clubListPosition).ratings.add(actualRating);
+
+                            ClubRatingAdd.this.runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Session.getInstance().dismissProgressDialog();
+                                    new DoneToast(ClubRatingAdd.this, "Sikeres hozzáadás!").show();
+                                    finish();
+                                }
+                            });
+                        }
+                    }).start();
+                    
                 } else {
                     actualRating.value = value;
                     actualRating.comment = comment;
-                    Session.getInstance()
+                    
+                    Session.getInstance().progressDialog = ProgressDialog.show(ClubRatingAdd.this, "Kérlek várj",
+                            "Módosítás folyamatban...", true, false);
+
+                    new NetThread(ClubRatingAdd.this, new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Session.getInstance()
                             .getActualCommunicationInterface()
                             .updateRating(Session.getInstance().getSearchViewClubs().get(clubListPosition).id,
                                     actualRating.userId, actualRating.value, actualRating.comment);
-                }
 
-                finish();
+                            ClubRatingAdd.this.runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Session.getInstance().dismissProgressDialog();
+                                    new DoneToast(ClubRatingAdd.this, "Sikeres módosítás!").show();
+                                    finish();
+                                }
+                            });
+                        }
+                    }).start();
+                                       
+                }
             }
         });
     }
