@@ -15,7 +15,8 @@
         android:layout_below="@+id/visitor_targy"
         android:ems="10"
         style="@style/CustomEditText"
-        android:hint="ÜZenet tárgya" >
+        android:hint="ÜZenet tárgya"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>

@@ -338,9 +338,15 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
 		@Override
 		public void run() {
+		    
 		    Session.getInstance().getSearchViewClubs().clear();
 		    Session.getInstance().getSearchViewClubs()
-			    .addAll(Session.getInstance().getActualUser().favoriteClubs);
+			    .addAll(
+
+			            Session.getInstance().getActualCommunicationInterface()
+	                                .getFavoriteClubsFromUserId(Session.getActualUser().getId())
+			            
+			            );
 		    Session.getInstance().setPositions(activity);
 
 		    activity.runOnUiThread(new Runnable() {
@@ -369,7 +375,12 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 		@Override
 		public void run() {
 		    Session.getInstance().getSearchViewClubs().clear();
-		    Session.getInstance().getSearchViewClubs().addAll(Session.getInstance().getActualUser().usersClubs);
+		    Session.getInstance().getSearchViewClubs().addAll(
+
+		            Session.getInstance().getActualCommunicationInterface()
+                            .getOwnedClubsFromUserId(Session.getActualUser().getId())
+		            
+		            );
 		    Session.getInstance().setPositions(activity);
 		    activity.runOnUiThread(new Runnable() {
 

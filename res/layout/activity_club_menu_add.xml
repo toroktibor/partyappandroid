@@ -25,14 +25,16 @@
         android:id="@+id/club_menu_add_textview_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/club_menu_add_textview_name" />
+        android:text="@string/club_menu_add_textview_name"
+        />
 
     <EditText
         android:id="@+id/club_menu_add_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        style="@style/CustomEditText"  >
+        style="@style/CustomEditText"
+        android:singleLine="true"  >
 
         <requestFocus />
     </EditText>
@@ -41,7 +43,8 @@
         android:id="@+id/club_menu_add_textview_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/club_menu_add_textview_price" />
+        android:text="@string/club_menu_add_textview_price"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +58,8 @@
             android:ems="10"
             android:inputType="numberDecimal"
             style="@style/CustomEditText"
-            android:layout_marginRight="3dp"  />
+            android:layout_marginRight="3dp" 
+            android:singleLine="true" />
 
         <Spinner
             android:id="@+id/club_menu_add_spinner_currency"
@@ -78,7 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        style="@style/CustomEditText"  />
+        style="@style/CustomEditText" 
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/club_menu_add_textview_discount"

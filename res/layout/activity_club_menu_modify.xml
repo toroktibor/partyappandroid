@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" 
-        style="@style/CustomEditText" >
+        style="@style/CustomEditText"
+        android:singleLine="true">
 
         <requestFocus />
     </EditText>
@@ -55,7 +56,8 @@
             android:ems="10"
             android:inputType="numberDecimal"
             style="@style/CustomEditText"
-            android:layout_marginRight="3dp"  />
+            android:layout_marginRight="3dp"
+            android:singleLine="true"  />
 
         <Spinner
             android:id="@+id/club_menu_modify_spinner_currency"
@@ -78,7 +80,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        style="@style/CustomEditText"  />
+        style="@style/CustomEditText"
+        android:singleLine="true"  />
 
     <TextView
         android:id="@+id/club_menu_modify_textview_discount"

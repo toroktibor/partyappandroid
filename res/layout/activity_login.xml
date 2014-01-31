@@ -10,38 +10,40 @@
 
     <EditText
         android:id="@+id/login_edittext_name"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:text="a"        
-        style="@style/CustomEditText"/>
+        android:singleLine="true"
+        android:text="a" />
 
     <EditText
         android:id="@+id/login_edittext_password"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:hint="@string/password"
-        android:text="a"
-        style="@style/CustomEditText">
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:text="a" >
 
         <requestFocus />
     </EditText>
 
     <Button
         android:id="@+id/login_button_login"
+        style="@style/CustomPurpleButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:text="@string/login" 
         android:onClick="onClickHandler"
-        style="@style/CustomPurpleButton"/>
-    
-   <Button
+        android:text="@string/login" />
+
+    <Button
         android:id="@+id/login_button_register"
+        style="@style/CustomPurpleButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:text="@string/register" 
         android:onClick="onClickHandler"
-        style="@style/CustomPurpleButton"/>
+        android:text="@string/register" />
 
 </LinearLayout>

@@ -26,76 +26,92 @@ public class ProfileModifyActivity extends ActionBarActivity implements DatePick
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	new SimpleActionBar(this, "Adatok szerkesztése").setLayout();
+        new SimpleActionBar(this, "Adatok szerkesztése").setLayout();
 
-	setContentView(R.layout.activity_profile_modify);
+        setContentView(R.layout.activity_profile_modify);
 
-	user = Session.getActualUser();
+        user = Session.getActualUser();
 
-	editTextName = (EditText) findViewById(R.id.profile_modify_edittext_name);
-	editTextName.setText(user.getNickname());
+        editTextName = (EditText) findViewById(R.id.profile_modify_edittext_name);
+        editTextName.setText(user.getNickname());
 
-	editTextEmail = (EditText) findViewById(R.id.profile_modify_edittext_email);
-	editTextEmail.setText(user.getEmail());
+        editTextEmail = (EditText) findViewById(R.id.profile_modify_edittext_email);
+        editTextEmail.setText(user.getEmail());
 
-	editTextDateOfBirth = (EditText) findViewById(R.id.profile_modify_edittext_dateofbirth);
-	editTextDateOfBirth.setText(user.getBirthday());
+        editTextDateOfBirth = (EditText) findViewById(R.id.profile_modify_edittext_dateofbirth);
+        editTextDateOfBirth.setText(user.getBirthday());
 
-	spinnerSex = (Spinner) findViewById(R.id.profile_modify_spinner_sex);
-	spinnerSex.setSelection(user.getSex());
+        spinnerSex = (Spinner) findViewById(R.id.profile_modify_spinner_sex);
+        spinnerSex.setSelection(user.getSex());
     }
 
     public void onClickHandler(View v) {
-	switch (v.getId()) {
-	case R.id.profile_modify_button_save:
+        switch (v.getId()) {
+        case R.id.profile_modify_button_save:
 
-	    
-	    Session.getInstance().progressDialog=ProgressDialog.show(this, "Kérlek várj", "Adatok módosítása...", true, false);
-	    new Thread(new Runnable() {
-	        
-	        @Override
-	        public void run() {
-	            try {
-			user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText().toString(),
-				spinnerSex.getSelectedItemPosition());
-		    } catch (Exception e) {
-			ProfileModifyActivity.this.runOnUiThread(new Runnable() {
-			    
-			    @Override
-			    public void run() {
-				new ErrorToast(ProfileModifyActivity.this, "Az adatok módosítása nem sikerült!").show();				
-			    }
-			});			
-			return;
-		    }
-	            ProfileModifyActivity.this.runOnUiThread(new Runnable() {
-		        
-		        @Override
-		        public void run() {
-		            new DoneToast(ProfileModifyActivity.this, "Adatok sikeresen módosítva").show();		    	
-		        }
-		    });
-	            
-		    finish();
-	    	
-	        }
-	    }).start();
-	    
-	    break;
+            if (editTextName.getText().toString().isEmpty() || editTextEmail.getText().toString().isEmpty()
+                    || editTextDateOfBirth.getText().toString().isEmpty()) {
+                new ErrorToast(this, "Minden mező kitöltése kötelező").show();
+                return;
+            }
 
-	case R.id.profile_modify_edittext_dateofbirth:
-	    DialogFragment datepicker = new DatePickerFragment();
-	    datepicker.show(getSupportFragmentManager(), "timePicker");
+            if (!RegisterActivity.isEmailValid(editTextEmail.getText().toString())) {
+                new ErrorToast(this, "Érvénytelen email címet adtál meg").show();
+                return;
+            }
 
-	    break;
-	}
+            if (editTextName.getText().toString().length() < 3) {
+                new ErrorToast(this, "Túl rövid nevet adtál meg").show();
+                return;
+            }
+
+            Session.getInstance().progressDialog = ProgressDialog.show(this, "Kérlek várj", "Adatok módosítása...",
+                    true, false);
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        user.modifyUserData(editTextEmail.getText().toString(), editTextDateOfBirth.getText()
+                                .toString(), spinnerSex.getSelectedItemPosition());
+                    } catch (Exception e) {
+                        ProfileModifyActivity.this.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                new ErrorToast(ProfileModifyActivity.this, "Az adatok módosítása nem sikerült!").show();
+                            }
+                        });
+                        return;
+                    }
+                    ProfileModifyActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            new DoneToast(ProfileModifyActivity.this, "Adatok sikeresen módosítva").show();
+                        }
+                    });
+
+                    finish();
+
+                }
+            }).start();
+
+            break;
+
+        case R.id.profile_modify_edittext_dateofbirth:
+            DialogFragment datepicker = new DatePickerFragment();
+            datepicker.show(getSupportFragmentManager(), "timePicker");
+
+            break;
+        }
     }
 
     @Override
     public void onDatePicked(String date) {
-	editTextDateOfBirth.setText(date);
+        editTextDateOfBirth.setText(date);
     }
 
 }

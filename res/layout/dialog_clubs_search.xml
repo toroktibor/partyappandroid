@@ -18,7 +18,8 @@
         android:id="@+id/dialog_clubs_search_edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/CustomEditText"/>
+        style="@style/CustomEditText"
+        android:singleLine="true"/>
     
     <TextView 
         android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
         android:id="@+id/dialog_clubs_search_edittext_cityname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/CustomEditText"/>
+        style="@style/CustomEditText"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
