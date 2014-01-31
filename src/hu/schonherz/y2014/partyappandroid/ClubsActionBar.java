@@ -101,16 +101,12 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 	case R.id.actionbar_clubs_button_c:
 	    /* viewPager lapozása a térkép nézetre */
 	    ClubsActivity.sourceOfView = SourceOfView.MAP;
-	    InternetConnection.checkConnection(activity, new InternetConnectionContinue() {
-		@Override
-		public void onResume() {
-		    activity.viewPager.setCurrentItem(1);
-		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(activity
-			    .getResources().getDrawable(R.drawable.ab_selected));
-		    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
 
-		}
-	    });
+	    activity.viewPager.setCurrentItem(1);
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_c)).setBackgroundDrawable(activity
+		    .getResources().getDrawable(R.drawable.ab_selected));
+	    ((ImageView) activity.findViewById(R.id.actionbar_clubs_button_b)).setBackgroundDrawable(null);
+
 	    break;
 	case R.id.actionbar_clubs_button_d: // KERESÉS
 
