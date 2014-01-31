@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 public class RoundEmail extends Activity {
 
-    SeekBar emailSeekbar;
-    TextView minRating;
     float rating;
 
     @Override
@@ -30,37 +28,7 @@ public class RoundEmail extends Activity {
 	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setContentView(R.layout.activity_round_email);
 
-	emailSeekbar = (SeekBar) findViewById(R.id.email_seekBar);
-	minRating = (TextView) findViewById(R.id.min_number);
-
-	emailSeekbar.setProgress(0);
-	minRating.setText("0.0");
 	rating = 0.0f;
-	emailSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-	    @Override
-	    public void onStopTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		rating = (float) Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-		minRating.setText(Float.toString(rating));
-
-	    }
-
-	    @Override
-	    public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		rating = (float) Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-		minRating.setText(Float.toString(rating));
-	    }
-
-	    @Override
-	    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		// TODO Auto-generated method stub
-		rating = (float) Math.round((seekBar.getProgress() / 20.0) * 10) / 10;
-		minRating.setText(Float.toString(rating));
-	    }
-	});
-
 	Button send = (Button) findViewById(R.id.round_email_send);
 	send.setOnClickListener(new OnClickListener() {
 

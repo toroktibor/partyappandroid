@@ -69,20 +69,23 @@ public class FileChooser extends ListActivity {
     }
 
     private void onFileClick(Option o) {
-	Toast.makeText(this, "File Clicked: " + o.getName(), Toast.LENGTH_SHORT).show();
 	// TODO: xls beolvasása
-	Log.e("menuItem", "fálj kiválasztva " + o.getPath().toString());
-	ReadExcel re = new ReadExcel();
-	re.setInputFile(o.getPath());
-	try {
-	    Log.e("menuItem", "olvasás eleje");
-	    re.read();
-	    Log.e("menuItem", "olvasás vége");
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	Intent i = new Intent(getApplicationContext(), ClubMenuActivity.class);
-	startActivity(i);
+	if (o.getName().endsWith(".xls")) {
+	    Log.e("menuItem", "Fájl kiválasztva " + o.getPath().toString());
+	    ReadExcel re = new ReadExcel();
+	    re.setInputFile(o.getPath());
+	    try {
+		Log.e("menuItem", "Olvasás eleje");
+		re.read();
+		Log.e("menuItem", "Olvasás vége");
+	    } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		Toast.makeText(this, "Nem megfelelő adatok!", Toast.LENGTH_SHORT).show();
+	    }
+	    Intent i = new Intent(getApplicationContext(), ClubMenuActivity.class);
+	    startActivity(i);
+
+	} else Toast.makeText(this, "Nem támogatott formátum (xls)!", Toast.LENGTH_SHORT).show();
     }
 }

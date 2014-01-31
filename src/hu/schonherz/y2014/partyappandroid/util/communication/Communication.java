@@ -1191,6 +1191,28 @@ public class Communication implements CommunicationInterface {
 		return;
 		
 	}
+	
+	public String getUsersFromFavoriteClub(int clubId){
+	    String list = "";
+		try {
+		    HashMap<String, String> post = new HashMap<String, String>();
+		    post.put("action", "GETUSERS");
+		    post.put("clubid", ""+clubId);
 
+		    String data = httpPost("favorite.php", post);
+
+		    JSONArray array = new JSONArray(data);
+		    for (int i = 0; i < array.length(); i++) {
+			JSONObject jsonObject = array.getJSONObject(i);
+			if (!list.equals("")) list += ","; 
+			list +=  (jsonObject.getString("email"));
+		    }
+		    return list;
+		} catch (Exception e) {	    
+		    Log.e(getClass().getName(), "Hiba", e);
+		}
+
+		return null;
+	}
 
 }

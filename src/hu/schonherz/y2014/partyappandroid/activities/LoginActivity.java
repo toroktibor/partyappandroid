@@ -164,15 +164,16 @@ final AutoCompleteTextView nameEditText = (AutoCompleteTextView) findViewById(R.
 		}
 	};
 
-	@Override
-	protected void onStop() {
+	    @Override
+	    protected void onStop() {
 		super.onStop();
 		if (mBounded) {
-			unbindService(mConnection);
-			mBounded = false;
+		    unbindService(mConnection);
+		    mBounded = false;
 		}
-
-	};
+		mGpsLocation.onDestroy();
+		locationTask.cancel(true);
+	    };
 
 	public void onClickHandler(View v) {
 		switch (v.getId()) {

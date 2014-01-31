@@ -163,4 +163,6 @@ public interface CommunicationInterface {
     public void declineImage(int imageid);
     
     public void acceptImage(int imageid);
+    
+    public String getUsersFromFavoriteClub(int clubId);
 }
