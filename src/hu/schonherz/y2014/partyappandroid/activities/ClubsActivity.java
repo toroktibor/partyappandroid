@@ -50,6 +50,11 @@ public class ClubsActivity extends ActionBarActivity {
 	    return 2;
 	}
     }
+    @Override
+    protected void onRestart() {
+        ((ClubsListFragment)fragments[0]).updateResults();
+        super.onRestart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

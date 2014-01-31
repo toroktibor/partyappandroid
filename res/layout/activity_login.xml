@@ -1,47 +1,64 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:orientation="vertical" >
 
-    <AutoCompleteTextView
-        android:id="@+id/login_edittext_name"
-        style="@style/CustomEditText"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
+        android:src="@drawable/login_logo" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:imeOptions="actionNext"
-        android:nextFocusDown="@+id/login_edittext_password"
-        android:singleLine="true"/>
-    
-    <EditText
-        android:id="@+id/login_edittext_password"
-        style="@style/CustomEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:hint="@string/password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="110dp"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <Button
-        android:id="@+id/login_button_login"
-        style="@style/CustomPurpleButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:onClick="onClickHandler"
-        android:text="@string/login" />
+        <AutoCompleteTextView
+            android:id="@+id/login_edittext_name"
+            style="@style/CustomEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/login_edittext_password"
+            android:singleLine="true" />
 
-    <Button
-        android:id="@+id/login_button_register"
-        style="@style/CustomPurpleButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/CustomPurpleButtonHeight"
-        android:onClick="onClickHandler"
-        android:text="@string/register" />
+        <EditText
+            android:id="@+id/login_edittext_password"
+            style="@style/CustomEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:singleLine="true" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/login_button_login"
+            style="@style/CustomPurpleButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/CustomPurpleButtonHeight"
+            android:layout_gravity="center"
+            android:onClick="onClickHandler"
+            android:text="@string/login" />
+
+        <Button
+            android:id="@+id/login_button_register"
+            style="@style/CustomPurpleButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/CustomPurpleButtonHeight"
+            android:layout_gravity="center"
+            android:onClick="onClickHandler"
+            android:text="@string/register" />
+    </LinearLayout>
+
+</RelativeLayout>

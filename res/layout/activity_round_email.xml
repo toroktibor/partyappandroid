@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:ems="10" >
+        android:ems="10"
+        android:singleLine="true"
+        android:hint="Üzenet tárgya" >
 
         <requestFocus />
     </EditText>
@@ -29,7 +31,8 @@
         android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="8"
-        android:scrollHorizontally="false" />
+        android:scrollHorizontally="false"
+        android:hint="Üzenet szövege" />
 
      <TextView
         android:id="@+id/min_title"

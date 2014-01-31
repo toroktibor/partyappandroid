@@ -1,22 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/club_gallery"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClubGaleryFragment"
-    android:id="@+id/club_gallery" >
-    
+    tools:context=".ClubGaleryFragment" >
+
+    <TextView
+        android:id="@+id/club_galery_textview_emptymessage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="120dp"
+        android:visibility="gone"
+        android:text="Még nincs kép a galériában, tölts fel egyet!"/>
+
     <GridView
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:columnWidth="100dp"
+        android:drawSelectorOnTop="true"
         android:gravity="center"
         android:numColumns="auto_fit"
-        android:verticalSpacing="5dp"
-        android:drawSelectorOnTop="true"
-        android:stretchMode="columnWidth" >
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp" >
     </GridView>
-       
-    
+
 </RelativeLayout>

@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:ems="10"
         android:hint="Szórakozóhely neve"
-        style="@style/CustomEditText">
+        style="@style/CustomEditText"
+        android:singleLine="true">
 
         <requestFocus />
     </EditText>
@@ -30,7 +31,8 @@
         android:layout_below="@+id/club_modify_activity_name_edittext"
         android:ems="10"
         android:hint="Szórakozóhely címe"
-        style="@style/CustomEditText"/>
+        style="@style/CustomEditText"
+        android:singleLine="true"/>
 
     <Spinner
         android:id="@+id/club_modify_activity_type_spinner"
@@ -51,7 +53,8 @@
         style="@style/CustomEditText"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Szolgáltatások"/>
+        android:hint="Szolgáltatások"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/club_modify_activity_phonenumber_edittext"
@@ -63,7 +66,8 @@
         android:layout_below="@+id/club_modify_set_services"
         android:ems="10"
         android:hint="Szórakozóhely telefonszáma"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/club_modify_activity_email_edittext"
@@ -75,7 +79,8 @@
         android:layout_below="@+id/club_modify_activity_phonenumber_edittext"
         android:ems="10"
         android:hint="Szórakozóhely e-mail címe"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/club_modify_activity_description_edittext"

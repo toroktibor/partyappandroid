@@ -335,6 +335,19 @@ public class Communication implements CommunicationInterface {
 
     @Override
     public void setServices(int club_id, List<String> services) {
+        try{
+            HashMap<String, String> post = new HashMap<String, String>();
+            post.put("action", "DELETE");
+            post.put("clubid", String.valueOf(club_id));
+
+
+            String data = httpPost("service.php", post);
+        }catch(Exception e){
+            
+        }
+
+        
+        
 	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
 	for (String actualService : services) {

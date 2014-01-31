@@ -19,6 +19,15 @@ public class User {
 
     public List<Club> favoriteClubs;
     public List<Club> usersClubs;
+    
+    public static Club searchInLocalList(int club_id, List<Club> clubs){
+        for(int i=0;i<clubs.size(); i++){
+            if( clubs.get(i).id == club_id ){
+                return clubs.get(i);
+            }
+        }
+        return null;        
+    }
 
     public User(int id, String nickname, String password, String email, int sex, String birthday, int type) {
 	this.id = id;

@@ -38,8 +38,14 @@ public class MenuItemsListAdapter extends ArrayAdapter {
 	    int newPrice = (int) ((int) actualPrice * actualDiscount);
 	    discountDetector.setText((new Integer(((MenuItem) getItem(position)).discount)).toString() + "%-os "
 		    + "AKCIÓ!");
-	    item.setBackgroundColor(Color.YELLOW);
+	    //item.setBackgroundColor(Color.YELLOW);
 	    ((TextView) item.findViewById(R.id.menuitem_list_item_price)).setText((new Integer(newPrice)).toString());
+	    
+	    item.setBackgroundResource(R.drawable.high_club_item1);
+            item.setPadding(15, 7, 7, 7);
+	}else{
+            item.setBackgroundColor( getContext().getResources().getColor(R.color.applicationWindowBackground));
+            item.setPadding(7, 7, 7, 7);
 	}
 
 	item.setTag((MenuItem) getItem(position));

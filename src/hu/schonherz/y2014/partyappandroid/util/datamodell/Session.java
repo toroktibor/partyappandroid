@@ -48,6 +48,30 @@ public class Session {
 	}
     }
     
+    public void setPosition(Context context, int idInSearchViewClubs) {
+        List<Address> addressList = new ArrayList<Address>();
+                Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+                Club actualClub;
+    
+                        try {
+                            actualClub = searchViewClubs.get(idInSearchViewClubs);
+                                Log.e("SESSION", actualClub.address);
+                                addressList = geocoder.getFromLocationName(actualClub.address, 1);
+                                if( addressList.size() < 1 ){
+                                    Log.e("MAP","Ez a cím nincs megtalálva: "+actualClub.address);
+                                    actualClub.position=null;
+                                    return;
+                                }
+                                actualClub.position = new LatLng(addressList.get(0).getLatitude(), 
+                                                                                                addressList.get(0).getLongitude());
+                                Log.e("SESSION - CLUBS LATLNG=", ((Double) (addressList.get(0).getLatitude())).toString() + "/" +
+                                                ((Double) (addressList.get(0).getLongitude())).toString());
+                                Log.e("SESSION ADDRESSLIST: ",geocoder.getFromLocationName(actualClub.address, 1).get(0).toString());
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+    }
+    
     public void setPositions(Context context) {
     	List<Address> addressList = new ArrayList<Address>();
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
@@ -99,7 +123,7 @@ public class Session {
 	servicesNameList.add("táncparkett");
 	servicesNameList.add("darts");
 	servicesNameList.add("dj");
-	servicesNameList.add("face & dress contol");
+	servicesNameList.add("face & dress control");
 	servicesNameList.add("élőzene");
 	servicesNameList.add("étkezés");
 	servicesNameList.add("sport közvetítés");

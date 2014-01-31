@@ -9,6 +9,7 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ClubInfoModifyActivity extends ActionBarActivity implements SetServ
 	Button clubModifyButton;
 	private EditText clubServicesEditText;
 	private ArrayList<String> selectedServices;
+    private int position;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class ClubInfoModifyActivity extends ActionBarActivity implements SetServ
 		
 		setContentView(R.layout.activity_club_info_modify);
 		
-		int position = getIntent().getExtras().getInt("listPosition");
+		position = getIntent().getExtras().getInt("listPosition");
 		actualClub = Session.getSearchViewClubs().get(position);
 		
 		if(actualClub.isNotFullDownloaded()){
@@ -58,6 +60,8 @@ public class ClubInfoModifyActivity extends ActionBarActivity implements SetServ
 		
 		selectedServices = new ArrayList<String>();
 		selectedServices.addAll(actualClub.services);
+		
+		clubServicesEditText.setText(SetServicesOfClubFragment.joinStrings( SetServicesOfClubFragment.tokenToName(selectedServices), ", "));
 		
 		clubServicesEditText.setOnClickListener(new OnClickListener() {
 		    
@@ -108,9 +112,31 @@ public class ClubInfoModifyActivity extends ActionBarActivity implements SetServ
 				actualClub.email=clubEmail;
 				actualClub.description = clubDescription;
 				
-				Session.getInstance().getActualCommunicationInterface().updateClubInfo(actualClub.id, actualClub.name, actualClub.type, actualClub.description, actualClub.address, actualClub.phonenumber, actualClub.email);
-				new DoneToast(ClubInfoModifyActivity.this,"Szórakozóhely adatai módosítva lettek!").show();
-				finish();
+				Session.getInstance().progressDialog=ProgressDialog.show(ClubInfoModifyActivity.this, "Kérlek várj", "Módosítás folyamatban...", true, false);
+				new Thread(new Runnable() {
+                                    
+                                    @Override
+                                    public void run() {
+                                        Session.getInstance().setPosition(ClubInfoModifyActivity.this, position);                                        
+                                        Session.getInstance().getActualCommunicationInterface().updateClubInfo(actualClub.id, actualClub.name, actualClub.type, actualClub.description, actualClub.address, actualClub.phonenumber, actualClub.email);
+                                        Session.getInstance().getActualCommunicationInterface().setServices(actualClub.id, selectedServices);
+                                        actualClub.downloadBasicInfo();
+                                        
+                                        ClubInfoModifyActivity.this.runOnUiThread(new Runnable() {
+                                            
+                                            @Override
+                                            public void run() {
+                                                
+                                                new DoneToast(ClubInfoModifyActivity.this,"Szórakozóhely adatai módosítva lettek!").show();
+                                                Session.getInstance().dismissProgressDialog();
+                                                finish();
+                                                
+                                            }
+                                        });
+                                        
+                                    }
+                                }).start();
+
 			}
 		});
 	}

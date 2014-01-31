@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 public class ClubsListFragment extends Fragment implements ClubsUpdateableFragment {
 
-    private ListView clubsListView;
+    public ListView clubsListView;
     private static ViewGroup rootView;
     
     @Override

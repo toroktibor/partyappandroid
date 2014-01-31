@@ -108,20 +108,24 @@ public class Club {
     public boolean isNotFullDownloaded() {
 	return !fullDownloaded;
     }
+    
+    public void downloadBasicInfo(){
+        Club clubWithAllInfo = Session.getInstance().getActualCommunicationInterface().getEverythingFromClub(this.id);
+        this.email = clubWithAllInfo.email;
+        this.date = clubWithAllInfo.date;
+        this.description = clubWithAllInfo.description;
+        this.phonenumber = clubWithAllInfo.phonenumber;
+        this.approved = clubWithAllInfo.approved;
+        this.type = clubWithAllInfo.type;
+        this.highlite_expire = clubWithAllInfo.highlite_expire;
+        this.services = Session.getInstance().getActualCommunicationInterface().getServices(this.id);
+        this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
+    }
 
     public void downloadEverything() {
 	Log.i(this.getClass().getName(), "Minden infó lekérése a klubról ( " + id + " )");
+	downloadBasicInfo();
 
-	Club clubWithAllInfo = Session.getInstance().getActualCommunicationInterface().getEverythingFromClub(this.id);
-	this.email = clubWithAllInfo.email;
-	this.date = clubWithAllInfo.date;
-	this.description = clubWithAllInfo.description;
-	this.phonenumber = clubWithAllInfo.phonenumber;
-	this.approved = clubWithAllInfo.approved;
-	this.type = clubWithAllInfo.type;
-	this.highlite_expire = clubWithAllInfo.highlite_expire;
-	this.services = Session.getInstance().getActualCommunicationInterface().getServices(this.id);
-	this.events = Session.getInstance().getActualCommunicationInterface().getEventsOfClub(this.id);
 	Log.i(getClass().getName(), "Klub eseményei: " + this.events.size());
 
 	this.menuItems = Session.getInstance().getActualCommunicationInterface().getMenuItemsForClub(this.id);

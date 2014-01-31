@@ -19,6 +19,7 @@
         style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:ems="10" >
     </EditText>
 
@@ -33,7 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPostalAddress" />
+        android:inputType="textPostalAddress"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,7 +62,8 @@
         style="@style/CustomEditText"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Szolgáltatások"/>
+        android:hint="Szolgáltatások"
+        />
 
     <CheckBox
         android:id="@+id/new_club_checkbox_add"

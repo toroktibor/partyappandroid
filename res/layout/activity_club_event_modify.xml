@@ -14,6 +14,7 @@
         android:layout_alignLeft="@+id/club_event_modify_edittext_description"
         android:layout_alignParentRight="true"
         android:hint="@string/club_event_modify_edittext_name" 
+        android:singleLine="true"
         style="@style/CustomEditText">
 
         <requestFocus />
