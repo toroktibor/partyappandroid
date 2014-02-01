@@ -122,13 +122,13 @@ public class Communication implements CommunicationInterface {
     // kész
     @Override
     public List<Club> getClubsFromCityName(String cityname) {
-        try {
+	try {
             return searchClubs("", cityname, "", new ArrayList<String>(), 0, 0);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return null;
+        return new LinkedList<Club>();
     }
 
     @Override
@@ -245,7 +245,7 @@ public class Communication implements CommunicationInterface {
     @Override
     public List<Club> searchClubs(String name, String cityname, String type, List<String> selectedServices, int offset,
             int limit) throws Exception {
-
+	List<Club> ret = new LinkedList<Club>();
         try {
             HashMap<String, String> post = new HashMap<String, String>();
             post.put("action", "SEARCH");
@@ -256,7 +256,7 @@ public class Communication implements CommunicationInterface {
             post.put("offset", String.valueOf(offset));
             post.put("limit", String.valueOf(limit));
 
-            List<Club> ret = new LinkedList<Club>();
+            
             String data = httpPost("club.php", post);
             Log.i("itt", data);
             JSONArray jsonArray = new JSONArray(data);
@@ -270,7 +270,7 @@ public class Communication implements CommunicationInterface {
 
         }
 
-        return null;
+        return ret;
 
     }
 

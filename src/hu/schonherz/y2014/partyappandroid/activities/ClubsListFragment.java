@@ -44,6 +44,12 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
         }
         try {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_clubs_list, container, false);
+            
+            TextView tv = (TextView) rootView.findViewById(R.id.clubs_list_textview_message);
+            if (Session.getSearchViewClubs().size() == 0){
+                tv.setText("Sajnos nincs találat :(");
+                tv.setVisibility(View.VISIBLE);
+            }
         } catch (InflateException e) {
             /* map is already there, just return view as it is */
         }
@@ -54,6 +60,7 @@ public class ClubsListFragment extends Fragment implements ClubsUpdateableFragme
         clubsListView.setAdapter(new ClubListAdapter(getActivity(), clubArray));
         clubsListView.setCacheColorHint(Color.TRANSPARENT);
         // clubsListView.setClickable(true);
+        
         clubsListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
