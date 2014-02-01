@@ -112,6 +112,11 @@ public class ClubInfoFragment extends Fragment {
             routePlanning.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
             routePlanning.setEnabled(true);
         }
+        
+        showOnTheMap.invalidate();
+        routePlanning.invalidate();
+        call.invalidate();
+        message.invalidate();
 
         clubNameTextView.setText(actualClub.name);
         clubAddressTextView.setText(actualClub.address);
