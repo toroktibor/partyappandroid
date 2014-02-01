@@ -88,6 +88,8 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             // "[debug] Adatok frissítése");
             // item.setOnMenuItemClickListener(this);
 
+            int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+            int club_id = Session.getSearchViewClubs().get(clubListPosition).id;
             item = popupmenu.getMenu().add(0, 1, 0, "Árlista");
             item.setOnMenuItemClickListener(this);
             if (activity.viewPager.getCurrentItem() == 2) {
@@ -96,17 +98,19 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             }
 
             if (activity.viewPager.getCurrentItem() == 1) {
-                item = popupmenu.getMenu().add(0, 8, 0, "Esemény létrehozása");
-                item.setOnMenuItemClickListener(this);
+                if(Session.getActualUser().getType() == 1 || Session.getActualUser().isMine(club_id)){
+                    item = popupmenu.getMenu().add(0, 8, 0, "Esemény létrehozása");
+                    item.setOnMenuItemClickListener(this);
+                }
             }
 
-            int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-            int club_id = Session.getSearchViewClubs().get(clubListPosition).id;
             if (!Session.getActualUser().isMine(club_id)) {
                 item = popupmenu.getMenu().add(0, 3, 0, "Én vagyok a tulaj");
                 item.setOnMenuItemClickListener(this);
                 if (Session.getActualUser().getType() == 1) {
                     item = popupmenu.getMenu().add(0, 6, 0, "Hely szerkesztése");
+                    item.setOnMenuItemClickListener(this);
+                    item = popupmenu.getMenu().add(0, 7, 0, "Kiemelés igénylése");
                     item.setOnMenuItemClickListener(this);
                 }
             } else {

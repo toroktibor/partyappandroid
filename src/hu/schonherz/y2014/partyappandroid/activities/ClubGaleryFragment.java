@@ -92,7 +92,7 @@ public class ClubGaleryFragment extends Fragment {
                 getDataForGridView());
         gridView.setAdapter(customGridAdapter);
 
-        if (Session.getActualUser().getType() == 0 || Session.getActualUser().isMine(actualClub.id)) {
+        if (Session.getActualUser().getType() == 1 || Session.getActualUser().isMine(actualClub.id)) {
             registerForContextMenu(gridView);
         }
 
