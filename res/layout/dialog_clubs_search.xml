@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="Város alapján"/>
     
-    <EditText 
+    <AutoCompleteTextView 
         android:id="@+id/dialog_clubs_search_edittext_cityname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -27,6 +27,8 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -113,6 +115,56 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
             final Dialog d = adb.create();
             d.show();
 
+            final AutoCompleteTextView city = (AutoCompleteTextView) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
+            
+            List<String> cityArray = new ArrayList<String>();
+            cityArray.add("Budapest");
+            cityArray.add("Debrecen");
+            cityArray.add("Miskolc");
+            cityArray.add("Nyíregyháza");
+            cityArray.add("Szeged");
+            cityArray.add("Siófok");
+            cityArray.add("Hajdúszoboszló");
+            cityArray.add("Hajdúsámson");
+            cityArray.add("Eger");
+            cityArray.add("Pécs");
+            cityArray.add("Győr");
+            cityArray.add("Kecskemét");
+            cityArray.add("Székesfehérvár");
+            cityArray.add("Szombathely");
+            cityArray.add("Szolnok");
+            cityArray.add("Tatabánya");
+            cityArray.add("Kaposvár");
+            cityArray.add("Érd");
+            cityArray.add("Békéscsaba");
+            cityArray.add("Veszprém");
+            cityArray.add("Zalaegerszeg");
+            cityArray.add("Sopron");
+            cityArray.add("Nagykanizsa");
+            cityArray.add("Dunaújváros");
+            cityArray.add("Hódmezővásárhely");
+            cityArray.add("Dunakeszi");
+            cityArray.add("Cegléd");
+            cityArray.add("Baja");
+            cityArray.add("Salgótarján");
+            cityArray.add("Szigetszentmiklós");
+            cityArray.add("Vác");
+            cityArray.add("Gödöllő");
+            cityArray.add("Ózd");
+            cityArray.add("Szekszárd");
+            cityArray.add("Mosonmagyaróvár");
+            cityArray.add("Gyöngyös");
+            cityArray.add("Pápa");
+            cityArray.add("Gyula");
+            cityArray.add("Hajdúböszörmény");
+            cityArray.add("Esztergom");
+            cityArray.add("Kiskunfélegyháza");
+
+            
+            ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(activity,android.R.layout.simple_list_item_1,cityArray);
+            
+            city.setAdapter(cityAdapter);
+            
             final List<String> selectedServices = new ArrayList<String>();
             final EditText servicesEditText = (EditText) d.findViewById(R.id.dialog_clubs_search_set_services);
 
@@ -140,7 +192,7 @@ public class ClubsActionBar implements OnClickListener, OnMenuItemClickListener,
 
                     final EditText name = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_name);
                     final Spinner type = (Spinner) d.findViewById(R.id.dialog_clubs_search_club_type_spinner);
-                    final EditText city = (EditText) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
+                    final AutoCompleteTextView city = (AutoCompleteTextView) d.findViewById(R.id.dialog_clubs_search_edittext_cityname);
                     final String newClubType = String.valueOf(type.getSelectedItem());
                     Log.i(this.getClass().getName(), "Eddigi találatok száma: " + Session.getSearchViewClubs().size());
                     Log.i(this.getClass().getName(), "Keresés: név:[" + name.getText().toString() + "] típus:["

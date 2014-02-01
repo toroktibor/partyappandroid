@@ -87,7 +87,7 @@ public class LoginActivity extends ActionBarActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 alreadyLoggedUsersName);
 
-        nameEditText.setAdapter(adapter);
+        //nameEditText.setAdapter(adapter);
 
         nameEditText.setOnEditorActionListener(new OnEditorActionListener() {
 
