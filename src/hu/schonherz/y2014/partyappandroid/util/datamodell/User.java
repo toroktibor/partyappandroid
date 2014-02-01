@@ -2,6 +2,8 @@ package hu.schonherz.y2014.partyappandroid.util.datamodell;
 
 import java.util.List;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class User {
     private int id;
     private String nickname;
@@ -16,7 +18,9 @@ public class User {
      * A 0 = vendég vagy tulaj 1 = admin
      */
     private int type;
-
+    public double lat = 0.0;
+    public double lon = 0.0;
+    
     public List<Club> favoriteClubs;
     public List<Club> usersClubs;
 

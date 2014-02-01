@@ -38,6 +38,7 @@ public class LoginActivity extends ActionBarActivity {
     // create new async task for fetching location and execute it
     public static LoginActivity instance = null;
     LocationWorker locationTask = new LocationWorker();
+    static double latitude; static double longitude;
 
     class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
 
@@ -60,6 +61,10 @@ public class LoginActivity extends ActionBarActivity {
             Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
             Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
 
+            if (mGpsLocation.gotLocation() == true) {
+        	latitude = mGpsLocation.getLatitude();
+        	longitude = mGpsLocation.getLongitude();
+            }
             return true;
         }
     }
@@ -248,6 +253,10 @@ public class LoginActivity extends ActionBarActivity {
         Session.getActualUser().usersClubs = Session.getInstance().getActualCommunicationInterface()
                 .getOwnedClubsFromUserId(actualUser.getId());
         Log.e("LOGIN SYNCHRONIZE", "USER'S OWN CLUBS CATCHED");
+        Session.getActualUser().lat = latitude;
+        Log.i("kz", String.valueOf(Session.getActualUser().lat));
+        Session.getActualUser().lon = longitude;
+        Log.i("kz", String.valueOf(Session.getActualUser().lon));
     }
 
     User loginOnline(Context context, User actualUser) {

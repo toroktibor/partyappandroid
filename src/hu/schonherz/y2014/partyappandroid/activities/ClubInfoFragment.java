@@ -1,19 +1,23 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClubInfoFragment extends Fragment {
 
@@ -25,7 +29,7 @@ public class ClubInfoFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_info, container, false);
 
         int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-        // Log.i("átjött", String.valueOf(clubListPosition));
+        // Log.i("ĂˇtjĂ¶tt", String.valueOf(clubListPosition));
         actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
         /*
@@ -102,14 +106,33 @@ public class ClubInfoFragment extends Fragment {
         clubNameTextView.setText(actualClub.name);
         clubAddressTextView.setText(actualClub.address);
         clubDescriptionTextView.setText(actualClub.description);
+        
+        clubDescriptionTextView.setOnClickListener(new OnClickListener() {
+	    
+	    @Override
+	    public void onClick(View v) {
+		try{
+		String uri = "http://maps.google.com/maps?saddr=" + Session.getActualUser().lat+","+Session.getActualUser().lon+"&daddr="+actualClub.position.latitude+","+actualClub.position.longitude;
+	        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+	        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+	        startActivity(intent);
+		}catch (Exception e){
+		    new ErrorToast(getActivity(),
+                            "Nem elérhető a helymeghatározás!")
+                            .show();
+		}
+		
+	    }
+	});
+        
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Szolgáltatások:\n");
+        sb.append("SzolgĂˇltatĂˇsok:\n");
         String actServ = new String();
 
         // Log.e("INFO", "NO. OF SERVICES" + actualClub.services.size());
         if (actualClub.services.size() == 0) {
-            sb.append("Nincs megjelölt szolgáltatás.");
+            sb.append("Nincs megjelĂ¶lt szolgĂˇltatĂˇs.");
         } else {
             for (int i = 0; i < actualClub.services.size(); ++i) {
                 actServ = actualClub.services.get(i);
@@ -126,7 +149,7 @@ public class ClubInfoFragment extends Fragment {
         // Log.e("INFO", "SERVICES SETTED");
 
         clubRatingBar.setRating(actualClub.getAvarageRate());
-        reviewCounter.setText("(" + actualClub.ratings.size() + " értékelés)");
+        reviewCounter.setText("(" + actualClub.ratings.size() + " Ă©rtĂ©kelĂ©s)");
 
         OnTouchListener ratingListener = new OnTouchListener() {
 
