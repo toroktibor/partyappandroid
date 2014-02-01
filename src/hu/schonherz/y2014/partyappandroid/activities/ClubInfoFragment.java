@@ -127,12 +127,12 @@ public class ClubInfoFragment extends Fragment {
         
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SzolgĂˇltatĂˇsok:\n");
+        sb.append("Szolgáltatások:\n");
         String actServ = new String();
 
         // Log.e("INFO", "NO. OF SERVICES" + actualClub.services.size());
         if (actualClub.services.size() == 0) {
-            sb.append("Nincs megjelĂ¶lt szolgĂˇltatĂˇs.");
+            sb.append("Nincs megjelelölt szolgáltatás");
         } else {
             for (int i = 0; i < actualClub.services.size(); ++i) {
                 actServ = actualClub.services.get(i);
@@ -149,7 +149,7 @@ public class ClubInfoFragment extends Fragment {
         // Log.e("INFO", "SERVICES SETTED");
 
         clubRatingBar.setRating(actualClub.getAvarageRate());
-        reviewCounter.setText("(" + actualClub.ratings.size() + " Ă©rtĂ©kelĂ©s)");
+        reviewCounter.setText("(" + actualClub.ratings.size() + " értékelés)");
 
         OnTouchListener ratingListener = new OnTouchListener() {
 
