@@ -71,9 +71,18 @@ public class LoginActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);        
 
         instance = this;
+        
+        /* Ha már be van jelentkezve */
+        if (Session.getInstance().getActualUser() != null) {
+            //loginSynchronize(Session.getInstance().getActualUser(), getApplicationContext());
+            Intent newIntent = new Intent(this, ClubsActivity.class);
+            startActivity(newIntent);
+            finish();
+            return;
+        }
 
         new SimpleActionBar(this, "Bejelentkezés").setLayout();
 
@@ -122,12 +131,7 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-        if (Session.getInstance().getActualUser() != null) {
-            loginSynchronize(Session.getInstance().getActualUser(), getApplicationContext());
-            Intent newIntent = new Intent(this, ClubsActivity.class);
-            startActivity(newIntent);
-            finish();
-        }
+
     }
 
     @Override
