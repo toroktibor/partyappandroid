@@ -46,6 +46,7 @@
         android:layout_below="@+id/club_rating_add_comment_description"
         android:ems="10"
         android:gravity="top"
+        android:maxLength="255"
         style="@style/CustomEditText"  />
 
     <RatingBar
@@ -55,5 +56,13 @@
         android:layout_below="@+id/club_rating_add_rating_description"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/letter_count_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/club_rating_add_user_comment_edittext"
+        android:layout_alignTop="@+id/club_rating_add_comment_description"
+        android:text="TextView" />
 
 </RelativeLayout>

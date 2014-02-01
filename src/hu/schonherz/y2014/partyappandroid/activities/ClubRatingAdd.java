@@ -9,11 +9,16 @@ import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class ClubRatingAdd extends ActionBarActivity {
@@ -23,6 +28,7 @@ public class ClubRatingAdd extends ActionBarActivity {
     RatingBar ratingBar;
     EditText commentEditText;
     int clubListPosition;
+    TextView lettersCountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,34 @@ public class ClubRatingAdd extends ActionBarActivity {
 
         ratingBar = (RatingBar) findViewById(R.id.club_rating_add_ratingbar);
         commentEditText = (EditText) findViewById(R.id.club_rating_add_user_comment_edittext);
+        lettersCountTextView = (TextView) findViewById(R.id.letter_count_textview);
+        lettersCountTextView.setText("0/255");
+        
+        commentEditText.addTextChangedListener(new TextWatcher() {
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                lettersCountTextView.setText(s.length()+"/255");
+                
+            }
+            
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
 
         if (actualRating != null) {
             ratingBar.setRating(actualRating.value);
             commentEditText.setText(actualRating.comment);
+            lettersCountTextView.setText(actualRating.comment.length()+"/255");
         }
 
         Button sendRating = (Button) findViewById(R.id.club_rating_add_rating_button);
