@@ -29,7 +29,7 @@ public class ClubInfoFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_club_info, container, false);
 
         int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-        // Log.i("ĂˇtjĂ¶tt", String.valueOf(clubListPosition));
+        // Log.i("Átjött", String.valueOf(clubListPosition));
         actualClub = Session.getSearchViewClubs().get(clubListPosition);
 
         /*
@@ -94,36 +94,18 @@ public class ClubInfoFragment extends Fragment {
         }
 
         if (actualClub.position == null || actualClub.position.equals("null")) {
-            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map2));
-            showOnTheMap.setEnabled(false);
+            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map2));            
             showOnTheMap.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
+            showOnTheMap.setEnabled(false);
         } else {
-            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map));
-            showOnTheMap.setEnabled(true);
+            showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map));            
             showOnTheMap.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
+            showOnTheMap.setEnabled(true);
         }
 
         clubNameTextView.setText(actualClub.name);
         clubAddressTextView.setText(actualClub.address);
         clubDescriptionTextView.setText(actualClub.description);
-        
-        clubDescriptionTextView.setOnClickListener(new OnClickListener() {
-	    
-	    @Override
-	    public void onClick(View v) {
-		try{
-		String uri = "http://maps.google.com/maps?saddr=" + Session.getActualUser().lat+","+Session.getActualUser().lon+"&daddr="+actualClub.position.latitude+","+actualClub.position.longitude;
-	        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-	        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-	        startActivity(intent);
-		}catch (Exception e){
-		    new ErrorToast(getActivity(),
-                            "Nem elérhető a helymeghatározás!")
-                            .show();
-		}
-		
-	    }
-	});
         
 
         StringBuilder sb = new StringBuilder();

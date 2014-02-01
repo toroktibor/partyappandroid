@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubActionBar;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -97,6 +98,23 @@ public class ClubActivity extends ActionBarActivity {
 
         Intent showOnMapIntent = new Intent(getApplicationContext(), ClubLocationActivity.class);
         startActivity(showOnMapIntent);
+    }
+
+    public void routePlanning(View v) {
+        try {
+            String uri = "http://maps.google.com/maps?t=m&saddr=" + Session.getActualUser().lat + ","
+                    + Session.getActualUser().lon + "&daddr=" + actualClub.position.latitude + ","
+                    + actualClub.position.longitude;
+            if (Session.getActualUser().lat == 0.0) {
+                uri = "http://maps.google.com/maps?t=m&daddr=" + actualClub.position.latitude + ","
+                        + actualClub.position.longitude;
+            }
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            startActivity(intent);
+        } catch (Exception e) {
+            new ErrorToast(this, "Nem elérhető a helymeghatározás!").show();
+        }
     }
 
     protected void clubFullDownload(int actualClubPosition) {
