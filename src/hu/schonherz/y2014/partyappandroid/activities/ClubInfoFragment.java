@@ -42,7 +42,7 @@ public class ClubInfoFragment extends Fragment {
 
     @Override
     public void onStart() {
-        super.onStart();
+        
 
         RatingBar clubRatingBar = (RatingBar) rootView.findViewById(R.id.club_info_ratingbar);
         TextView clubNameTextView = (TextView) rootView.findViewById(R.id.club_info_textview_name);
@@ -53,6 +53,8 @@ public class ClubInfoFragment extends Fragment {
         ImageButton call = (ImageButton) rootView.findViewById(R.id.phone_call);
         ImageButton message = (ImageButton) rootView.findViewById(R.id.message);
         ImageButton showOnTheMap = (ImageButton) rootView.findViewById(R.id.showOnTheMap);
+        ImageButton routePlanning = (ImageButton) rootView.findViewById(R.id.routePlanning);
+
 
         if (actualClub.phonenumber == null || actualClub.phonenumber.equals("null")
                 || actualClub.phonenumber.equals("")) {
@@ -97,10 +99,18 @@ public class ClubInfoFragment extends Fragment {
             showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map2));            
             showOnTheMap.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
             showOnTheMap.setEnabled(false);
+            
+            routePlanning.setImageDrawable(getResources().getDrawable(R.drawable.club_route2));            
+            routePlanning.setBackgroundColor(getResources().getColor(R.color.editTextBackground));
+            routePlanning.setEnabled(false);
         } else {
             showOnTheMap.setImageDrawable(getResources().getDrawable(R.drawable.club_map));            
             showOnTheMap.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
             showOnTheMap.setEnabled(true);
+            
+            routePlanning.setImageDrawable(getResources().getDrawable(R.drawable.club_route));            
+            routePlanning.setBackgroundDrawable(getResources().getDrawable(R.drawable.purple_button));
+            routePlanning.setEnabled(true);
         }
 
         clubNameTextView.setText(actualClub.name);
@@ -148,6 +158,8 @@ public class ClubInfoFragment extends Fragment {
         // clubRatingBar.setOnTouchListener(ratingListener);
         // reviewCounter.setOnTouchListener(ratingListener);
 
+        
+        super.onStart();
     }
 
 }
