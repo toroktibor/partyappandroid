@@ -34,7 +34,11 @@ public class ClubLocationActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_club_location);
 
-        initilizeMap();
+        try{
+            initilizeMap();            
+        }catch(Exception e){
+            return;
+        }
 
         BitmapDescriptor bmd = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
 

@@ -57,7 +57,13 @@ public class ClubsMapFragment extends Fragment implements ClubsUpdateableFragmen
         } catch (InflateException e) {
             /* map is already there, just return view as it is */
         }
-        initilizeMap();
+        
+        try{
+            initilizeMap();            
+        }catch(Exception e){
+            return view;
+        }
+        
         updateResults();
         googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
