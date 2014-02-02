@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
@@ -116,18 +117,21 @@ public class ClubMenuModifyActivity extends ActionBarActivity {
                 int discount = discountSeekBar.getProgress();
 
                 if (name.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg a termék nevét!", Toast.LENGTH_LONG).show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg a termék nevét!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg a termék nevét!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (price == 0) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg a termék árát!", Toast.LENGTH_LONG).show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg a termék árát!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg a termék árát!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (unit.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg a termék egységét!", Toast.LENGTH_LONG)
-                            .show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg a termék egységét!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg a termék egységét!", Toast.LENGTH_LONG)
+                    //        .show();
                     return;
                 }
                 // itt kuldunk egy uzenetet a szervernek a valtoztatasokrol
