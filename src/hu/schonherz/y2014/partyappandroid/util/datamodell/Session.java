@@ -14,6 +14,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -29,6 +30,8 @@ public class Session {
     boolean isOnline;
     // ha API level 10 vagy annál kisebb a teló akkor true
     public boolean oldPhone = false;
+    
+    public static Toast lastToast = null;
 
     CommunicationInterface actualCommunicationInterface;
     LocalDatabaseUtil databaseConnecter;
