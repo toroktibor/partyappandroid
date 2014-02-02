@@ -7,6 +7,8 @@ import hu.schonherz.y2014.partyappandroid.activities.RegisterActivity;
 
 import java.util.Calendar;
 
+import com.google.android.gms.internal.da;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -60,7 +62,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
             }
 
             if (communicator instanceof ClubEventNewActivity || communicator instanceof ClubEventModifyActivity) {
-                Log.i("asdasd", "Igen");
                 datepicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000 * 1);
             }
         } catch (Exception e) {
@@ -73,8 +74,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        String result = ((Integer) year).toString() + "-" + ((Integer) (monthOfYear + 1)).toString() + "-"
-                + ((Integer) dayOfMonth).toString();
+        //String result = ((Integer) year).toString() + "-" + ((Integer) (monthOfYear + 1)).toString() + "-"
+        //        + ((Integer) dayOfMonth).toString();
+        String result = String.format("%04d-%02d-%02d", year, monthOfYear+1, dayOfMonth);
         communicator.onDatePicked(result);
     }
 }

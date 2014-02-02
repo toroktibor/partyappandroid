@@ -41,7 +41,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
-        String result = String.valueOf(arg1) + ":" + String.valueOf(arg2);
+        //String result = String.valueOf(arg1) + ":" + String.valueOf(arg2);
+        String result = String.format("%02d:%02d", arg1, arg2);
         communicator.onTimePicked(result);
     }
 
