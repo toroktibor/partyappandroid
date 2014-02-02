@@ -187,8 +187,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                     Session.getInstance().getActualCommunicationInterface().deleteFavoriteClubForUser(club_id, user_id);
                     Session.getActualUser().favoriteClubs.remove(clubListPosition);
                     if(ClubsActivity.sourceOfList.equals(ClubsActivity.SourceOfList.FAVORITES)){
-                        Session.getSearchViewClubs().remove(clubListPosition);
-                       
+                        Session.getSearchViewClubs().remove(clubListPosition);              
                     }
                     activity.runOnUiThread(new Runnable() {
 
@@ -196,11 +195,14 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                         public void run() {
                             Session.getInstance().dismissProgressDialog();
                             new DoneToast(activity, "A szórakozóhely kikerült a kedvenceidből!").show();
+                            if(ClubsActivity.sourceOfList.equals(ClubsActivity.SourceOfList.FAVORITES)){
+                                ClubActivity.activityClub.onBackPressed();
+                            }
                         }
                     });
                 }
             }).start();
-            ClubActivity.activityClub.onBackPressed();
+            
             break;
         case 5:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
