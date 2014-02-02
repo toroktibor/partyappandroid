@@ -6,6 +6,7 @@ import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -29,6 +31,8 @@ public class Session {
     boolean isOnline;
     // ha API level 10 vagy annál kisebb a teló akkor true
     public boolean oldPhone = false;
+    
+    public static Toast lastToast = null;
 
     CommunicationInterface actualCommunicationInterface;
     LocalDatabaseUtil databaseConnecter;
@@ -135,6 +139,9 @@ public class Session {
     }
 
     public static List<Club> getSearchViewClubs() {
+        if(instance.searchViewClubs==null){
+            return new LinkedList<Club>();
+        }
         return instance.searchViewClubs;
     }
 

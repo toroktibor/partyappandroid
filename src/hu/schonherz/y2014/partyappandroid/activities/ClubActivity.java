@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class ClubActivity extends ActionBarActivity {
     static public Intent intent;
     static public boolean isClubOfActualUser;
     public Club actualClub;
+    public static Activity activityClub;
 
     public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -61,6 +63,7 @@ public class ClubActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club);
         intent = getIntent();
+        activityClub = this;
         int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
         actualClub = Session.getSearchViewClubs().get(clubListPosition);
         isClubOfActualUser = Session.getActualUser().isMine(Session.getSearchViewClubs().get(clubListPosition).id);

@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.ClubsActionBar;
+import hu.schonherz.y2014.partyappandroid.InfoToast;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Context;
@@ -75,13 +76,14 @@ public class ClubsActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-
-        if (backToast == null || backToast.getView().getWindowToken() == null) {
+        if (InfoToast.t == null || InfoToast.t.getView().getWindowToken() == null) {
             Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(new long[] { 0, 50 }, -1); // egy rövid
-            backToast = Toast.makeText(this, "A kilépéshez nyomd meg a vissza gombot!", Toast.LENGTH_SHORT);
-            backToast.show();
+            new InfoToast(this,"A kilépéshez nyomd meg a vissza gombot!").show();
         } else {
+            if (InfoToast.t != null ){
+                InfoToast.t.cancel();
+            }
             super.onBackPressed();
         }
     }

@@ -246,6 +246,8 @@ public class Communication implements CommunicationInterface {
     public List<Club> searchClubs(String name, String cityname, String type, List<String> selectedServices, int offset,
             int limit) throws Exception {
 	List<Club> ret = new LinkedList<Club>();
+	//"", cityname, "", new ArrayList<String>(), 0, 0
+	Log.i("searchClubs", name+" "+cityname+" "+type+" "+selectedServices.size()+" "+offset+" "+limit);
         try {
             HashMap<String, String> post = new HashMap<String, String>();
             post.put("action", "SEARCH");

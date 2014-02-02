@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
@@ -83,9 +84,10 @@ public class ClubRatingAdd extends ActionBarActivity {
                 Float value = ratingBar.getRating();
 
                 if (comment.isEmpty()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Nem véleményezted a helyet!",
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    new ErrorToast(getApplicationContext(), "Nem véleményezted a helyet!").show();
+                    //Toast toast = Toast.makeText(getApplicationContext(), "Nem véleményezted a helyet!",
+                    //        Toast.LENGTH_LONG);
+                    //toast.show();
                     return;
                 }
 

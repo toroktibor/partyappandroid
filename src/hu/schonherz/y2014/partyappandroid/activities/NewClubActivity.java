@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
@@ -70,14 +71,16 @@ public class NewClubActivity extends ActionBarActivity implements SetServicesCom
                 Boolean isOwner = newClubOwnerCheckBox.isChecked();
 
                 if (newClubName.isEmpty()) {
-                    Toast.makeText(thisContext, "Nem adtál meg nevet! Sürgősen szedd össze magad.", Toast.LENGTH_LONG)
-                            .show();
+                    new ErrorToast(thisContext, "Nem adtál meg nevet!").show();
+                    //Toast.makeText(thisContext, "Nem adtál meg nevet!", Toast.LENGTH_LONG)
+                    //        .show();
                     return;
                 }
 
                 if (newClubAddress.isEmpty()) {
-                    Toast.makeText(thisContext, "Már arra se emlékszel hol b@sztál be tegnap? Szép vagy...",
-                            Toast.LENGTH_LONG).show();
+                    new ErrorToast(thisContext, "Nem adtál meg címet!").show();
+                    //Toast.makeText(thisContext, "Nem adtál meg címet!",
+                    //        Toast.LENGTH_LONG).show();
                     return;
                 }
 

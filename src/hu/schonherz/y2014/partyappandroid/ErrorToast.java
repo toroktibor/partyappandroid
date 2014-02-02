@@ -1,5 +1,6 @@
 package hu.schonherz.y2014.partyappandroid;
 
+import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.content.Context;
 import android.os.Vibrator;
 import android.view.Gravity;
@@ -22,6 +23,10 @@ public class ErrorToast {
     }
 
     public void show() {
+        if( Session.lastToast != null ){
+            Session.lastToast.cancel();            
+        }
+        
         Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(new long[] { 0, 50, 50, 50 }, -1); // két rövid
 
@@ -33,6 +38,7 @@ public class ErrorToast {
         tv.setText(this.message);
 
         Toast t = new Toast(activity);
+        Session.lastToast=t;
         t.setGravity(Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 0, 0);
         t.setDuration(Toast.LENGTH_SHORT);
         t.setView(toastView);

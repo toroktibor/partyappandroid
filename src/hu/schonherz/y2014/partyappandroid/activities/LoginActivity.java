@@ -59,10 +59,9 @@ public class LoginActivity extends ActionBarActivity {
                 }
             }
 
-            Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
-            Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
-
             if (mGpsLocation.gotLocation() == true) {
+                Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
+                Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
         	latitude = mGpsLocation.getLatitude();
         	longitude = mGpsLocation.getLongitude();
             }
@@ -89,8 +88,8 @@ public class LoginActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_login);
 
-        Session.getInstance().makeLocalDatabaseConnection(getApplicationContext());
-        Session.getInstance().getDatabaseConnecter().open();
+        //Session.getInstance().makeLocalDatabaseConnection(getApplicationContext());
+        //Session.getInstance().getDatabaseConnecter().open();
 
         final AutoCompleteTextView nameEditText = (AutoCompleteTextView) findViewById(R.id.login_edittext_name);
 
