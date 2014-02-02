@@ -59,10 +59,9 @@ public class LoginActivity extends ActionBarActivity {
                 }
             }
 
-            Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
-            Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
-
             if (mGpsLocation.gotLocation() == true) {
+                Session.getInstance().citynameFromGPS = mGpsLocation.getCityName();
+                Log.e("async", "lekérdezett város : " + mGpsLocation.getCityName());
         	latitude = mGpsLocation.getLatitude();
         	longitude = mGpsLocation.getLongitude();
             }

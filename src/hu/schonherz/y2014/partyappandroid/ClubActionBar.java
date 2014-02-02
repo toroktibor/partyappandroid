@@ -5,6 +5,7 @@ import hu.schonherz.y2014.partyappandroid.activities.ClubEventNewActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubGaleryFragment;
 import hu.schonherz.y2014.partyappandroid.activities.ClubInfoModifyActivity;
 import hu.schonherz.y2014.partyappandroid.activities.ClubMenuActivity;
+import hu.schonherz.y2014.partyappandroid.activities.ClubsActivity;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
 import android.app.AlertDialog;
@@ -124,7 +125,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                 item = popupmenu.getMenu().add(0, 4, 0, "Nem kedvencem");
                 item.setOnMenuItemClickListener(this);
             } else {
-                item = popupmenu.getMenu().add(0, 5, 0, "Kedvencek közzé");
+                item = popupmenu.getMenu().add(0, 5, 0, "Kedvencek közé");
                 item.setOnMenuItemClickListener(this);
             }
 
@@ -184,7 +185,11 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                 @Override
                 public void run() {
                     Session.getInstance().getActualCommunicationInterface().deleteFavoriteClubForUser(club_id, user_id);
-                    Session.getActualUser().favoriteClubs.remove(Session.getSearchViewClubs().remove(clubListPosition));
+                    Session.getActualUser().favoriteClubs.remove(clubListPosition);
+                    if(ClubsActivity.sourceOfList.equals(ClubsActivity.SourceOfList.FAVORITES)){
+                        Session.getSearchViewClubs().remove(clubListPosition);
+                       
+                    }
                     activity.runOnUiThread(new Runnable() {
 
                         @Override
@@ -195,7 +200,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
                     });
                 }
             }).start();
-
+            ClubActivity.activityClub.onBackPressed();
             break;
         case 5:
             Session.getInstance().progressDialog = ProgressDialog.show(activity, "Kérlek várj!",
@@ -203,7 +208,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
             new NetThread(activity, new Runnable() {
                 @Override
                 public void run() {
-                    Session.getInstance().getActualCommunicationInterface().setFavoriteClubForUser(club_id, user_id);
+                    Session.getInstance().getActualCommunicationInterface().setFavoriteClubForUser(user_id, club_id);
                     Session.getActualUser().favoriteClubs.add(Session.getSearchViewClubs().get(clubListPosition));
                     activity.runOnUiThread(new Runnable() {
 
