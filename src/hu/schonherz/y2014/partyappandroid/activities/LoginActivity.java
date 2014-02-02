@@ -88,8 +88,8 @@ public class LoginActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_login);
 
-        Session.getInstance().makeLocalDatabaseConnection(getApplicationContext());
-        Session.getInstance().getDatabaseConnecter().open();
+        //Session.getInstance().makeLocalDatabaseConnection(getApplicationContext());
+        //Session.getInstance().getDatabaseConnecter().open();
 
         final AutoCompleteTextView nameEditText = (AutoCompleteTextView) findViewById(R.id.login_edittext_name);
 

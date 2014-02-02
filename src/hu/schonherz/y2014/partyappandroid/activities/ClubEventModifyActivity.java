@@ -1,6 +1,7 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
 import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.ErrorToast;
 import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.SimpleActionBar;
@@ -90,22 +91,26 @@ public class ClubEventModifyActivity extends ActionBarActivity implements DatePi
                 String musicType = musicTypeSpinner.getSelectedItem().toString();
 
                 if (name.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg az esemény nevét!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg az esemény nevét!", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (date.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
-                            .show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg az esemény dátumát!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg az esemény dátumát!", Toast.LENGTH_LONG)
+                    //        .show();
                     return;
                 }
                 if (time.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!",
-                            Toast.LENGTH_LONG).show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg az esemény pontos időpontot!",
+                    //        Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (description.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
-                            .show();
+                    new ErrorToast(getApplicationContext(), "Nem adta meg az esemény leírását!").show();
+                    //Toast.makeText(getApplicationContext(), "Nem adta meg az esemény leírását!", Toast.LENGTH_LONG)
+                    //        .show();
                     return;
                 }
 
