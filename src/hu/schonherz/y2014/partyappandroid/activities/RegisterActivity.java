@@ -107,18 +107,29 @@ public class RegisterActivity extends ActionBarActivity implements
                 public void run() {
                     final User newUser = Session.getInstance().getActualCommunicationInterface()
                             .registerANewUser(userName, userPassword, userEmail, userSexInt, userBirthday);
-                    RegisterActivity.this.runOnUiThread(new Runnable() {
-
+                    
+                    
+                    if (newUser == null) {
+                        RegisterActivity.this.runOnUiThread(new Runnable() {
+                            
+                            @Override
+                            public void run() {
+                                new ErrorToast(getApplicationContext(),
+                                        "Ez a felhasználó név már foglalt! Kérlek válasz másikat!")
+                                        .show();
+                                Session.getInstance().progressDialog.dismiss(); 
+                            }
+                        });
+                        return;
+                    }
+                    
+                    LoginActivity.loginSynchronize(newUser, getApplicationContext());
+                    
+                    RegisterActivity.this.runOnUiThread(new Runnable() {                 
                         @Override
                         public void run() {
-                            if (newUser == null) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ez a felhasználó név már foglalt! Kérlek válasz másikat!", Toast.LENGTH_LONG)
-                                        .show();
-                                Session.getInstance().progressDialog.dismiss();
-                                return;
-                            }
-                            LoginActivity.loginSynchronize(newUser, getApplicationContext());
+                            
+                            
                             Intent newIntent = new Intent(RegisterActivity.this, ClubsActivity.class);
                             Session.getInstance().dismissProgressDialog();
                             if (LoginActivity.instance != null) {
