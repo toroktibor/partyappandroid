@@ -1,5 +1,9 @@
 package hu.schonherz.y2014.partyappandroid.activities;
 
+import java.util.List;
+
+import hu.schonherz.y2014.partyappandroid.DoneToast;
+import hu.schonherz.y2014.partyappandroid.NetThread;
 import hu.schonherz.y2014.partyappandroid.R;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Club;
 import hu.schonherz.y2014.partyappandroid.util.datamodell.Session;
@@ -32,36 +36,39 @@ public class RoundEmail extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
-                clubFullDownload(clubListPosition);
-                Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+                new NetThread(RoundEmail.this, new Runnable() {
 
-                // TODO:a min értékeléssel rendelkező értékelők email-címeinek
-                // kiszedése
-                String email = actualClub.email;
+                    @Override
+                    public void run() {
+                	int clubListPosition = ClubActivity.intent.getExtras().getInt("listPosition");
+                        clubFullDownload(clubListPosition);
+                        Club actualClub = Session.getSearchViewClubs().get(clubListPosition);
+                	String email = actualClub.email;
+                	
+                	String emails = Session.getInstance().getActualCommunicationInterface().getUsersFromFavoriteClub(actualClub.id);
+                	EditText et_subject = (EditText) findViewById(R.id.round_subject);
+                        String subject = et_subject.getText().toString().trim();
 
-                EditText et_subject = (EditText) findViewById(R.id.round_subject);
-                String subject = et_subject.getText().toString().trim();
+                        EditText et_body = (EditText) findViewById(R.id.round_message);
+                        String body = et_body.getText().toString().trim();
+                        
+                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                        emailIntent.setType("message/rfc822");
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { emails });
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(RoundEmail.this, "There are no email clients installed.",
 
-                EditText et_body = (EditText) findViewById(R.id.round_message);
-                String body = et_body.getText().toString().trim();
+                            Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).start();
+                
 
-                Log.e("email", "cím: " + email);
-                Log.e("email", "tárgy: " + subject);
-                Log.e("email", "üzenet: " + body);
-
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setType("message/rfc822");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                try {
-                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(RoundEmail.this, "There are no email clients installed.",
-
-                    Toast.LENGTH_SHORT).show();
-                }
+                
             }
         });
     }
