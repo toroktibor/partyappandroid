@@ -1198,9 +1198,7 @@ public class Communication implements CommunicationInterface {
             HashMap<String, String> post = new HashMap<String, String>();
             post.put("action", "GETUSERS");
             post.put("clubid", "" + clubId);
-
             String data = httpPost("favorite.php", post);
-
             JSONArray array = new JSONArray(data);
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
@@ -1210,7 +1208,6 @@ public class Communication implements CommunicationInterface {
             }
             return list;
         } catch (Exception e) {
-
         }
 
         return "";
