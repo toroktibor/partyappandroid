@@ -140,6 +140,7 @@ public class Session {
 
     public static List<Club> getSearchViewClubs() {
         if(instance.searchViewClubs==null){
+            //Ez nem tudom, lehet nem segit
             return new LinkedList<Club>();
         }
         return instance.searchViewClubs;
