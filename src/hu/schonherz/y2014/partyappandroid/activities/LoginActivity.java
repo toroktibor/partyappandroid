@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -124,6 +125,9 @@ public class LoginActivity extends ActionBarActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(
+                	      Context.INPUT_METHOD_SERVICE);
+                	imm.hideSoftInputFromWindow(passwordEditText.getWindowToken(), 0);
                     loginButton.performClick();
                     handled = true;
                 }
@@ -175,7 +179,7 @@ public class LoginActivity extends ActionBarActivity {
 
     public void onClickHandler(View v) {
         switch (v.getId()) {
-        case R.id.login_button_login:
+        case R.id.login_button_login:            
             final String usernameFromEditText = ((EditText) findViewById(R.id.login_edittext_name)).getEditableText()
                     .toString();
 

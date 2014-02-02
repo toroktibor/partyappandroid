@@ -47,6 +47,14 @@ public class ClubActivity extends ActionBarActivity {
             return 3;
         }
     }
+    
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+
+    }
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

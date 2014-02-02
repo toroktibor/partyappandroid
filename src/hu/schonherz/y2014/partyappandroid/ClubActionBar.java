@@ -147,6 +147,7 @@ public class ClubActionBar implements OnClickListener, OnMenuItemClickListener {
         switch (arg0.getItemId()) {
         case 1:
             i = new Intent(activity, ClubMenuActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             activity.startActivity(i);
             break;
         case 2:

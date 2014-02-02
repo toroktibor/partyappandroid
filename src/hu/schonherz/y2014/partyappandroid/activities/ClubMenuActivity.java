@@ -102,6 +102,7 @@ public class ClubMenuActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // Excel fájl beolvasása
                 Intent i = new Intent(getApplicationContext(), FileChooser.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(i);
 
             }
