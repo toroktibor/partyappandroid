@@ -6,6 +6,7 @@ import hu.schonherz.y2014.partyappandroid.util.offlinedatabase.LocalDatabaseUtil
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -138,6 +139,9 @@ public class Session {
     }
 
     public static List<Club> getSearchViewClubs() {
+        if(instance.searchViewClubs==null){
+            return new LinkedList<Club>();
+        }
         return instance.searchViewClubs;
     }
 
